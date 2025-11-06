@@ -89,7 +89,7 @@ export default function App() {
 
           {/* Tools */}
               <div className="p-6 sm:p-7">
-                <h4 className="text-base font-semibold text-gray-900 mb-2">AI‑tools</h4>
+                <h3 className="text-xl font-semibold text-gray-900">AI-tools</h3>
                 <p className="text-gray-700 mb-3">Snelle toegang tot handige toepassingen voor in de klas.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   <Button as="a" href="https://chatgpt.com/" variant="secondary">ChatGPT</Button>

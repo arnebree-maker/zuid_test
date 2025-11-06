@@ -86,6 +86,22 @@ export default function App() {
                 <p className="text-gray-700 mt-1">Dien snel een ticket in via ons officiële ondersteuningsportaal.</p>
                 <div className="mt-4"><Button as="a" href="https://sint-rembert.topdesk.net/" variant="secondary">Naar Topdesk <ChevronRight className="h-4 w-4" /></Button></div>
               </div>
+
+          {/* Tools */}
+              <div className="p-6 sm:p-7">
+                <h4 className="text-base font-semibold text-gray-900 mb-2">AI‑tools</h4>
+                <p className="text-gray-700 mb-3">Snelle toegang tot handige toepassingen voor in de klas.</p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <Button as="a" href="https://chatgpt.com/" variant="secondary">ChatGPT</Button>
+                  <Button as="a" href="https://gemini.google.com/" variant="secondary">Google Gemini</Button>
+                  <Button as="a" href="https://www.genial.ly/" variant="secondary">Genially</Button>
+                  <Button as="a" href="https://notebooklm.google.com/" variant="secondary">NotebookLM</Button>
+                  <Button as="a" href="https://gamma.app/" variant="secondary">Gamma</Button>
+                  <Button as="a" href="https://lovable.dev/" variant="secondary">Lovable</Button>
+                  <Button as="a" href="https://aistudio.google.com/" variant="secondary">Google AI Studio</Button>
+                </div>
+              </div>
+                
             </div>
           </Card>
 
@@ -126,20 +142,7 @@ export default function App() {
                 <div className="mt-4"><Button as="a" href="https://toetsrevolutie.nl/tijd-besparen-met-ai-formatief-handelen-in-de-praktijk/?utm_source=teachertapp&utm_medium=app" variant="secondary">Lees meer over formatief handelen <ChevronRight className="h-4 w-4" /></Button></div>
               </div>
 
-              {/* Tools */}
-              <div className="p-6 sm:p-7">
-                <h4 className="text-base font-semibold text-gray-900 mb-2">AI‑tools</h4>
-                <p className="text-gray-700 mb-3">Snelle toegang tot handige toepassingen voor in de klas.</p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <Button as="a" href="https://chatgpt.com/" variant="secondary">ChatGPT</Button>
-                  <Button as="a" href="https://gemini.google.com/" variant="secondary">Google Gemini</Button>
-                  <Button as="a" href="https://www.genial.ly/" variant="secondary">Genially</Button>
-                  <Button as="a" href="https://notebooklm.google.com/" variant="secondary">NotebookLM</Button>
-                  <Button as="a" href="https://gamma.app/" variant="secondary">Gamma</Button>
-                  <Button as="a" href="https://lovable.dev/" variant="secondary">Lovable</Button>
-                  <Button as="a" href="https://aistudio.google.com/" variant="secondary">Google AI Studio</Button>
-                </div>
-              </div>
+          
             </div>
           </Card>
         </div>

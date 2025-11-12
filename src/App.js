@@ -140,6 +140,20 @@ export default function App() {
                   <Button as="a" href="https://aistudio.google.com/" variant="secondary">Google AI Studio</Button>
                 </div>
               </div>
+		<div className="p-6 sm:p-7">
+  <Button
+    as="a"
+    href="https://zuid-test.vercel.app/examples"
+    target="_blank"
+    rel="noopener noreferrer"
+    variant="primary"
+    className="w-full justify-center"
+  >
+    Bekijk voorbeelden van AI in actie <ChevronRight className="h-4 w-4" />
+  </Button>
+</div>
+
+
             </div>
           </Card>
         </div>

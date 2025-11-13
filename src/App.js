@@ -40,8 +40,8 @@ export default function App() {
         {/* Hero cover (teruggeplaatst) */}
         <div className="mb-8 rounded-2xl overflow-hidden shadow-sm border border-gray-200/70">
           <img
-            src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=1600&auto=format&fit=crop&q=80"
-            alt="ICT‑sfeerbeeld: technologie en samenwerking"
+            src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
+            alt="Team samenwerking en enthousiasme"
             className="w-full h-64 sm:h-72 md:h-80 object-cover"
           />
         </div>

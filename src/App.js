@@ -1,5 +1,5 @@
-import React from "react";
-import { ChevronRight, Link as LinkIcon, HelpCircle, Home, Lightbulb } from "lucide-react";
+import React, { useState } from "react";
+import { ChevronRight, Link as LinkIcon, HelpCircle, Home, Lightbulb, BookOpen, X } from "lucide-react";
 
 // --- Primitives ---
 const Button = ({ children, onClick, as: Tag = "button", href, variant = "primary", className = "", ...rest }) => {
@@ -21,6 +21,8 @@ const Card = ({ children, className = "" }) => (
 );
 
 export default function App() {
+  const [showExamples, setShowExamples] = useState(false);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-50 via-indigo-50 to-emerald-50">
       {/* Topbar */}
@@ -100,6 +102,11 @@ export default function App() {
                   <Button as="a" href="https://lovable.dev/" variant="secondary">Lovable</Button>
                   <Button as="a" href="https://aistudio.google.com/" variant="secondary">Google AI Studio</Button>
                 </div>
+                <div className="mt-4">
+                  <Button onClick={() => setShowExamples(true)} variant="primary" className="w-full">
+                    <BookOpen className="h-4 w-4" /> Bekijk voorbeelden
+                  </Button>
+                </div>
               </div>
                 
             </div>
@@ -149,6 +156,96 @@ export default function App() {
 
         <p className="mt-10 text-center text-xs text-gray-500">© {new Date().getFullYear()} Scholengroep Sint‑Rembert · Digitale Didactiek</p>
       </main>
+
+      {showExamples && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-gray-900">AI Voorbeelden voor het Middelbaar</h2>
+              <button onClick={() => setShowExamples(false)} className="p-2 hover:bg-gray-100 rounded-xl transition">
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-8">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="rounded-xl p-2.5 bg-emerald-600 text-white shadow-sm">
+                    <BookOpen className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900">NotebookLM Voorbeelden</h3>
+                </div>
+                <p className="text-gray-700 mb-4">NotebookLM helpt leerlingen samenvattingen te maken, bronnen te analyseren en diepgaande vragen te stellen over hun leerstof.</p>
+                <div className="space-y-3">
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Geschiedenis: Tweede Wereldoorlog Analyse</h4>
+                    <p className="text-sm text-gray-700 mb-2">Upload hoofdstukken uit het geschiedenishandboek en laat NotebookLM een interactieve samenvatting maken met tijdlijn en kernconcepten.</p>
+                    <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="text-xs">Probeer NotebookLM <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Wetenschappen: Onderzoeksrapporten Samenvatten</h4>
+                    <p className="text-sm text-gray-700 mb-2">Leerlingen uploaden wetenschappelijke artikelen en NotebookLM extraheert de belangrijkste bevindingen, methodologie en conclusies.</p>
+                    <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="text-xs">Probeer NotebookLM <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Talen: Literatuuranalyse</h4>
+                    <p className="text-sm text-gray-700 mb-2">Upload een boek of gedicht en laat NotebookLM thema's, personages en literaire technieken analyseren voor diepere tekstbegrip.</p>
+                    <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="text-xs">Probeer NotebookLM <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Examens: Studiemateriaal Omzetten naar Podcast</h4>
+                    <p className="text-sm text-gray-700 mb-2">Upload notities en laat NotebookLM een audio-discussie genereren tussen twee sprekers die de leerstof uitleggen - perfect voor auditieve leerlingen.</p>
+                    <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="text-xs">Probeer NotebookLM <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="rounded-xl p-2.5 bg-blue-600 text-white shadow-sm">
+                    <Lightbulb className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900">Lovable Voorbeelden</h3>
+                </div>
+                <p className="text-gray-700 mb-4">Lovable helpt leerlingen en leerkrachten eenvoudig interactieve webapplicaties te bouwen zonder programmeerkennis.</p>
+                <div className="space-y-3">
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Project: Interactieve Quiz App</h4>
+                    <p className="text-sm text-gray-700 mb-2">Leerlingen maken een quiz-app voor hun klasgenoten over hun vakinhoudsonderwerp - ideaal voor STEM-vakken of talen.</p>
+                    <Button as="a" href="https://lovable.dev/" variant="secondary" className="text-xs">Probeer Lovable <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Creatief Project: Digitaal Portfolio</h4>
+                    <p className="text-sm text-gray-700 mb-2">Bouw een persoonlijk portfolio website voor eindwerk, kunstprojecten of reflecties zonder code te hoeven schrijven.</p>
+                    <Button as="a" href="https://lovable.dev/" variant="secondary" className="text-xs">Probeer Lovable <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Leerkracht Tool: Lesplanner App</h4>
+                    <p className="text-sm text-gray-700 mb-2">Maak een gepersonaliseerde lesplanning tool met agenda, to-do lijsten en leermiddelen - volledig aangepast aan jouw behoeften.</p>
+                    <Button as="a" href="https://lovable.dev/" variant="secondary" className="text-xs">Probeer Lovable <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                  <div className="border border-gray-200 rounded-xl p-4 hover:shadow-md transition">
+                    <h4 className="font-semibold text-gray-900 mb-1">Digitale Vaardigheden: Eigen Website Bouwen</h4>
+                    <p className="text-sm text-gray-700 mb-2">Leer leerlingen basis webdesign concepten door hun eigen website te laten maken - van simpele landingspagina tot interactieve app.</p>
+                    <Button as="a" href="https://lovable.dev/" variant="secondary" className="text-xs">Probeer Lovable <ChevronRight className="h-3 w-3" /></Button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+                <h4 className="font-semibold text-gray-900 mb-2">Tips voor gebruik in de klas:</h4>
+                <ul className="list-disc list-inside text-sm text-gray-700 space-y-1">
+                  <li>Begin met een demo voor de hele klas voordat leerlingen zelfstandig aan de slag gaan</li>
+                  <li>Laat leerlingen in tweetallen werken om elkaar te ondersteunen</li>
+                  <li>Geef duidelijke instructies over wat wel en niet gedeeld mag worden</li>
+                  <li>Moedig kritisch denken aan: AI is een hulpmiddel, geen vervanging voor eigen werk</li>
+                  <li>Bespreek ethiek en privacy bij het gebruik van AI-tools</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

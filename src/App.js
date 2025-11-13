@@ -102,13 +102,17 @@ export default function App() {
                   <Button as="a" href="https://lovable.dev/" variant="secondary">Lovable</Button>
                   <Button as="a" href="https://aistudio.google.com/" variant="secondary">Google AI Studio</Button>
                 </div>
-                <div className="mt-4 space-y-2">
+                <div className="mt-4 space-y-3">
                   <Button onClick={() => setShowExamples(true)} variant="primary" className="w-full">
                     <BookOpen className="h-4 w-4" /> Hoe toepassen in je les?
                   </Button>
-                  <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" variant="secondary" className="w-full">
-                    <LinkIcon className="h-4 w-4" /> Drop je eigen ideeën hier
-                  </Button>
+                  <div className="bg-orange-50 border-2 border-orange-300 rounded-xl p-4">
+                    <p className="text-xs font-semibold text-orange-900 mb-2">COLLECTIEVE INSPIRATIE!</p>
+                    <p className="text-sm text-orange-900 mb-3">Bekijk wat je collega's hebben gemaakt en voeg jouw beste ideeën toe!</p>
+                    <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" className="w-full bg-orange-500 hover:bg-orange-600 text-white">
+                      <LinkIcon className="h-4 w-4" /> Drop je eigen ideeën hier
+                    </Button>
+                  </div>
                 </div>
               </div>
                 

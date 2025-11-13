@@ -42,7 +42,7 @@ export default function App() {
           <img
             src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
             alt="Team samenwerking en enthousiasme"
-            className="w-full h-64 sm:h-72 md:h-80 object-cover"
+            className="w-full h-64 sm:h-72 md:h-96 object-cover object-left"
           />
         </div>
         {/* Intro */}
@@ -102,9 +102,12 @@ export default function App() {
                   <Button as="a" href="https://lovable.dev/" variant="secondary">Lovable</Button>
                   <Button as="a" href="https://aistudio.google.com/" variant="secondary">Google AI Studio</Button>
                 </div>
-                <div className="mt-4">
+                <div className="mt-4 space-y-2">
                   <Button onClick={() => setShowExamples(true)} variant="primary" className="w-full">
-                    <BookOpen className="h-4 w-4" /> Bekijk voorbeelden
+                    <BookOpen className="h-4 w-4" /> Hoe toepassen in je les?
+                  </Button>
+                  <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" variant="secondary" className="w-full">
+                    <LinkIcon className="h-4 w-4" /> Drop je eigen ideeën hier
                   </Button>
                 </div>
               </div>
@@ -161,7 +164,7 @@ export default function App() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
           <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-900">AI Voorbeelden voor het Middelbaar</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Hoe toepassen in je les?</h2>
               <button onClick={() => setShowExamples(false)} className="p-2 hover:bg-gray-100 rounded-xl transition">
                 <X className="h-5 w-5" />
               </button>
@@ -241,6 +244,14 @@ export default function App() {
                   <li>Moedig kritisch denken aan: AI is een hulpmiddel, geen vervanging voor eigen werk</li>
                   <li>Bespreek ethiek en privacy bij het gebruik van AI-tools</li>
                 </ul>
+              </div>
+
+              <div className="bg-blue-50 rounded-xl p-5 border border-blue-200">
+                <h4 className="font-semibold text-gray-900 mb-2">Deel je ervaring!</h4>
+                <p className="text-sm text-gray-700 mb-3">Heb je zelf interessante projecten of toepassingen in je les? Deel je ideeën en ervaringen met de hele werkgroep. Dit helpt iedereen om van elkaar te leren!</p>
+                <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" variant="secondary" className="w-full">
+                  <LinkIcon className="h-4 w-4" /> Drop je projectjes in de Google Drive
+                </Button>
               </div>
             </div>
           </div>

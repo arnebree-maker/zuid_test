@@ -445,70 +445,65 @@ export default function App() {
         </section>
 
         {/* AI in je les: aparte blok, met voorbeelden & Drive-link */}
-        <section className="mb-10">
-          <Card className="p-6">
-            <div className="flex items-start justify-between gap-3 mb-4">
-              <div>
-                <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
-                  Praktijk
-                </p>
-                <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-                  AI in je les: voorbeelden &amp; Google Forms
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                  Concrete voorbeelden om AI en digitale tools (zoals{" "}
-                  <span className="font-semibold">Google Forms</span>) in te zetten in je lessen.
-                </p>
-              </div>
-              <span className="hidden sm:inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700 border border-blue-100">
-                Aanrader om mee te starten
-              </span>
-            </div>
+       <section className="mb-10">
+  <Card className="p-6">
+    <div className="flex items-start justify-between gap-3 mb-4">
+      <div>
+        <p className="text-[12px] font-medium text-blue-600 uppercase tracking-wide">
+          Praktijkvoorbeelden
+        </p>
+        <h3 className="text-base sm:text-lg font-semibold text-slate-900">
+          AI in je les: uitgewerkte scenario’s & inspiratie
+        </h3>
+        <p className="text-sm text-slate-600 mt-1">
+          Een groeiende verzameling voorbeelden, oefeningen, tools, AI-prompts en ideeën
+          gedeeld door collega’s binnen de scholengroep.
+        </p>
+      </div>
 
-            <div className="grid gap-4 sm:grid-cols-2 text-sm">
-              <div className="space-y-2">
-                <ul className="list-disc pl-5 space-y-1 text-slate-700">
-                  <li>AI laten meehelpen bij het maken van vragen in Google Forms.</li>
-                  <li>Reflectieformulieren genereren na een toets of project.</li>
-                  <li>Resultaten uit Forms samenvatten met AI (sterktes/zwaktes van de klas).</li>
-                  <li>Kleine opdrachten waarbij leerlingen AI als hulplijn gebruiken.</li>
-                </ul>
-              </div>
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-slate-500 uppercase">
-                  Direct aan de slag
-                </p>
-                <div className="flex flex-col gap-2">
-                  <Button
-                    as="a"
-                    href={DRIVE_EXAMPLES_URL}
-                    variant="primary"
-                    className="justify-center"
-                  >
-                    📂 Open map met voorbeelden (Drive)
-                  </Button>
-                  <Button
-                    as="a"
-                    href="https://forms.google.com"
-                    variant="secondary"
-                    className="justify-center text-xs"
-                  >
-                    <LinkIcon className="h-3 w-3" />
-                    Open Google Forms
-                  </Button>
-                  <Button
-                    onClick={() => setShowExamples(true)}
-                    variant="ghost"
-                    className="justify-center text-xs"
-                  >
-                    <BookOpen className="h-3 w-3" />
-                    Bekijk uitgewerkte scenario&apos;s
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </section>
+      <span className="hidden sm:inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700 border border-blue-100">
+        Community driven
+      </span>
+    </div>
+
+    <div className="grid gap-4 sm:grid-cols-2 text-sm leading-relaxed">
+      <div className="space-y-3">
+        <p className="font-semibold text-slate-800">Wat vind je in deze map?</p>
+        <ul className="list-disc pl-5 space-y-1.5 text-slate-700">
+          <li>Kant-en-klare lesvoorbeelden met AI-tools.</li>
+          <li>Voorbeelden van collega’s uit verschillende vakken.</li>
+          <li>Prompts die effectief werken in de klas.</li>
+          <li>Voorbeelden voor Genially, NotebookLM, Lovable enz.</li>
+          <li>Digitale oefeningen, stappenplannen en mini-apps.</li>
+        </ul>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-semibold text-slate-500 uppercase">
+          Direct gebruiken of zelf bijdragen
+        </p>
+
+        <Button
+          as="a"
+          href={DRIVE_EXAMPLES_URL}
+          variant="primary"
+          className="justify-center font-semibold"
+        >
+          📁 Open de map met alle voorbeelden
+        </Button>
+
+        <Button
+          onClick={() => setShowExamples(true)}
+          variant="ghost"
+          className="justify-center text-xs"
+        >
+          <BookOpen className="h-3 w-3" />
+          Bekijk uitgewerkte scenario’s
+        </Button>
+      </div>
+    </div>
+  </Card>
+</section>
 
         {/* AI uitleg sectie – uitvouwbaar, met formatief-handelen link */}
         <section className="mt-2">
@@ -612,78 +607,91 @@ export default function App() {
         </span>
       </button>
 
-      {/* Modal: Voorbeelden / scenario's (incl. Google Forms) */}
-      {showExamples && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-          <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
-              <h2 className="text-sm sm:text-base font-semibold text-slate-900">
-                Voorbeelden: AI in je les (incl. Google Forms)
-              </h2>
-              <button
-                onClick={() => setShowExamples(false)}
-                className="p-1.5 rounded-full hover:bg-slate-200 text-slate-600"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
+{showExamples && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+    <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto font-inter text-[15px] leading-relaxed">
+      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
+        <h2 className="text-lg font-semibold text-slate-900">
+          Uitgewerkte scenario’s & inspiratievoorbeelden
+        </h2>
+        <button
+          onClick={() => setShowExamples(false)}
+          className="p-1.5 rounded-full hover:bg-slate-200 text-slate-600"
+        >
+          <X className="h-4 w-4" />
+        </button>
+      </div>
 
-            <div className="p-5 space-y-6 text-sm text-slate-700">
-              <div>
-                <h3 className="text-sm font-semibold text-slate-900 mb-2">
-                  NotebookLM – werken met leerstof
-                </h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Hoofdstukken uit handboeken laten samenvatten voor leerlingen.</li>
-                  <li>Belangrijke begrippen laten uitlichten met voorbeelden.</li>
-                  <li>Vragen laten genereren als voorbereiding op een toets.</li>
-                </ul>
-              </div>
+      <div className="p-6 space-y-8">
 
-              {/* Google Forms blok – opvallend */}
-              <div className="border border-blue-200 bg-blue-50 rounded-xl p-4">
-                <p className="text-[11px] font-semibold text-blue-700 uppercase tracking-wide mb-1">
-                  Voorbeelden met Google Forms
-                </p>
-                <h3 className="text-sm font-semibold text-slate-900 mb-2">
-                  Google Forms + AI – toetsen &amp; bevragingen
-                </h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>
-                    Laat een AI-tool (bv. ChatGPT/Gemini) meerkeuzevragen genereren op basis van je cursus, en
-                    plak ze in een Google Form.
-                  </li>
-                  <li>
-                    Vraag AI om verbeterde feedbackzinnen te maken voor juiste/foute antwoorden in het formulier.
-                  </li>
-                  <li>
-                    Gebruik AI om samenvattingen van de resultaten te maken (sterktes/zwaktes van de klas) op basis van de
-                    Google Forms-export naar Sheets.
-                  </li>
-                  <li>
-                    Bouw met AI een korte reflectievragenlijst (Google Form) na een toets of project.
-                  </li>
-                </ul>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <Button
-                    as="a"
-                    href="https://forms.google.com"
-                    variant="secondary"
-                    className="text-xs"
-                  >
-                    <LinkIcon className="h-3 w-3" />
-                    <span className="ml-1">Open Google Forms</span>
-                  </Button>
-                  <Button
-                    as="a"
-                    href={DRIVE_EXAMPLES_URL}
-                    variant="ghost"
-                    className="text-xs"
-                  >
-                    📂 Map met voorbeelden (Drive)
-                  </Button>
-                </div>
-              </div>
+        {/* NotebookLM */}
+        <div>
+          <h3 className="text-base font-semibold text-slate-900 mb-2">
+            NotebookLM – werken met leerstof
+          </h3>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>Hoofdstukken automatisch laten samenvatten.</li>
+            <li>Belangrijkste kernconcepten en begrippen laten uitlichten.</li>
+            <li>Vragen genereren om leerstof te verdiepen.</li>
+            <li>Audio-uitleg laten maken voor leerlingen die auditief leren.</li>
+          </ul>
+        </div>
+
+        {/* Genially */}
+        <div>
+          <h3 className="text-base font-semibold text-slate-900 mb-2">
+            Genially – interactieve presentaties
+          </h3>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>AI gebruiken om interactieve quizzen op te bouwen.</li>
+            <li>Snel visuele uitlegpagina’s genereren vanuit AI-content.</li>
+            <li>Leerlingen interactieve mindmaps laten maken.</li>
+          </ul>
+        </div>
+
+        {/* Lovable */}
+        <div>
+          <h3 className="text-base font-semibold text-slate-900 mb-2">
+            Lovable – mini-websites & AI-tools
+          </h3>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>Een AI-gestuurd opdrachtenportaal bouwen.</li>
+            <li>Klaswebsites voor projecten, excursies of thema’s.</li>
+            <li>Mini-apps voor oefenreeksen met eigen prompts.</li>
+          </ul>
+        </div>
+
+        {/* Meer */}
+        <div>
+          <h3 className="text-base font-semibold text-slate-900 mb-2">
+            Andere inspirerende toepassingen
+          </h3>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>AI-gegenereerde dialogen voor taallessen.</li>
+            <li>Korte reflectievragen creëren voor na een toets.</li>
+            <li>Snelle differentiatie: makkelijke/moeilijke versies laten maken.</li>
+            <li>Automatische mindmaps en overzichtstabellen.</li>
+          </ul>
+        </div>
+
+        <div className="pt-4 border-t border-slate-200">
+          <p className="text-sm text-slate-600 mb-2">
+            Alles terug te vinden in de gezamenlijke Drive-map:
+          </p>
+          <Button
+            as="a"
+            href={DRIVE_EXAMPLES_URL}
+            variant="primary"
+            className="font-semibold"
+          >
+            📁 Open voorbeeldenmap
+          </Button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
 
               <div>
                 <h3 className="text-sm font-semibold text-slate-900 mb-2">

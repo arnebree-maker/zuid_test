@@ -236,7 +236,7 @@ export default function App() {
                 </div>
                 <Button
                   as="a"
-                  href="https://chatgpt.com/g/g-68ee3d6afa348191a579bac4aa7c14da-ict-zuid"
+                  href="https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing"
                   variant="primary"
                 >
                   Open Chatbot <ChevronRight className="h-4 w-4" />

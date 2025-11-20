@@ -101,7 +101,7 @@ function CountdownTimer({ targetDate }) {
 
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
-  const [showAiWhy, setShowAiWhy] = useState(true);
+  const [showAiWhy, setShowAiWhy] = useState(false); // start dichtgeklapt
 
   const openGeminiChat = () => {
     if (typeof window !== "undefined") {
@@ -112,7 +112,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900">
+    <div className="min-h-screen bg-slate-100 text-slate-900">
       {/* Top bar */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between">
@@ -140,29 +140,33 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 pb-16">
-        {/* Hero */}
-        <section className="mt-6 mb-10">
+        {/* Hero – groter, zoals vroeger */}
+        <section className="mt-6 mb-12">
           <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
-            <img
-              src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
-              alt="Team samenwerking en enthousiasme"
-              className="w-full h-[220px] sm:h-[260px] md:h-[320px] object-cover opacity-80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent" />
-            <div className="absolute inset-0 flex items-center">
-              <div className="px-6 sm:px-8 md:px-10 max-w-xl space-y-3">
-                <p className="text-xs font-semibold tracking-wide text-blue-300 uppercase">
-                  Portaal Digitale Didactiek
-                </p>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white leading-tight">
-                  ICT &amp; AI-ondersteuning
-                  <span className="block text-slate-200 text-base sm:text-lg font-normal mt-1">
-                    voor leerkrachten binnen Sint-Rembert.
-                  </span>
-                </h2>
-                <p className="text-sm sm:text-base text-slate-200">
-                  Vind snel AI-tools, hulpkanalen en bijscholingen rond digitale didactiek.
-                </p>
+            <div className="relative h-[55vh] sm:h-[60vh] md:h-[65vh]">
+              <img
+                src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
+                alt="Team samenwerking en enthousiasme"
+                className="w-full h-full object-cover opacity-80"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/55 to-transparent" />
+              <div className="absolute inset-0 flex items-center">
+                <div className="px-6 sm:px-10 max-w-2xl space-y-4">
+                  <p className="text-xs font-semibold tracking-wide text-blue-300 uppercase">
+                    Portaal Digitale Didactiek
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-white leading-tight">
+                    ICT &amp; AI-ondersteuning
+                    <span className="block text-slate-200 text-base sm:text-lg font-normal mt-2">
+                      Alles wat je nodig hebt voor digitale lessen binnen Sint-Rembert.
+                    </span>
+                  </h2>
+                  <p className="text-sm sm:text-base text-slate-200 max-w-xl">
+                    Vind AI-tools, voorbeelden (o.a. met{" "}
+                    <span className="font-semibold">Google Forms</span>) en duidelijke
+                    hulpkanalen voor ICT-vragen.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -183,7 +187,7 @@ export default function App() {
               </div>
 
               <div className="space-y-3 text-sm">
-                <div className="border border-slate-200 rounded-xl p-3">
+                <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
                   <p className="font-semibold text-slate-800 text-sm">Technisch team</p>
                   <p className="text-xs text-slate-600">
                     Mieke Verbeerst<br />
@@ -191,7 +195,7 @@ export default function App() {
                     Arne Breemeersch
                   </p>
                 </div>
-                <div className="border border-slate-200 rounded-xl p-3">
+                <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
                   <p className="font-semibold text-slate-800 text-sm">Pedagogisch team</p>
                   <p className="text-xs text-slate-600">
                     Jasper Gerits<br />
@@ -201,7 +205,10 @@ export default function App() {
               </div>
 
               <p className="text-xs text-slate-600">
-                Liever offline? <span className="font-semibold text-slate-800">Spreek ons gerust aan op school.</span>
+                Liever offline?{" "}
+                <span className="font-semibold text-slate-800">
+                  Spreek ons gerust aan op school.
+                </span>
               </p>
             </div>
           </Card>
@@ -218,8 +225,8 @@ export default function App() {
                   Lovable · AI-website bouwen
                 </h3>
                 <p className="text-sm text-slate-600 mt-2">
-                  In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span> een eenvoudige
-                  AI-gestuurde website maakt voor je eigen lespraktijk.
+                  In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span> een
+                  eenvoudige AI-gestuurde website maakt voor je eigen lespraktijk.
                 </p>
               </div>
             </div>
@@ -257,7 +264,7 @@ export default function App() {
                 </p>
                 <ul className="text-sm text-slate-700 space-y-1.5">
                   <li>• Basis van Lovable in onderwijscontext</li>
-                  <li>• Eenvoudige les- of projectsite opzetten</li>
+                  <li>• Een eenvoudige les- of projectsite opzetten</li>
                   <li>• Voorbeelden van collega’s bekijken</li>
                 </ul>
               </div>
@@ -332,6 +339,14 @@ export default function App() {
                 </Button>
                 <Button
                   as="a"
+                  href="https://forms.google.com"
+                  variant="secondary"
+                  className="justify-center sm:col-span-2"
+                >
+                  Google Forms
+                </Button>
+                <Button
+                  as="a"
                   href="https://aistudio.google.com/"
                   variant="secondary"
                   className="justify-center sm:col-span-2"
@@ -346,7 +361,7 @@ export default function App() {
                 className="w-full justify-center"
               >
                 <BookOpen className="h-4 w-4" />
-                Voorbeelden: hoe gebruiken in je les?
+                Voorbeelden (incl. Google Forms) in je les
               </Button>
             </div>
           </Card>
@@ -414,24 +429,24 @@ export default function App() {
           </Card>
         </section>
 
-        {/* AI uitleg sectie */}
+        {/* AI uitleg sectie – uitvouwbaar */}
         <section className="mt-10">
           <Card className="overflow-hidden">
             <button
               type="button"
               onClick={() => setShowAiWhy(!showAiWhy)}
-              className="w-full flex items-center justify-between px-5 py-4 bg-slate-50 border-b border-slate-200"
+              className="w-full flex items-center justify-between px-5 py-4 bg-slate-50 border-b border-slate-200 text-left"
             >
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
                   <Lightbulb className="h-4 w-4" />
                 </div>
-                <div className="text-left">
+                <div>
                   <h3 className="text-sm font-semibold text-slate-900">
                     Waarom AI gebruiken in het onderwijs?
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Korte samenvatting van de meerwaarde van AI voor jou en je leerlingen.
+                    Klik om deze uitleg {showAiWhy ? "te verbergen" : "uit te vouwen"}.
                   </p>
                 </div>
               </div>
@@ -501,13 +516,13 @@ export default function App() {
         <span className="sr-only">Chat met Bot Zuid (Gemini)</span>
       </button>
 
-      {/* Modal: Hoe toepassen in je les? */}
+      {/* Modal: Hoe toepassen in je les? (incl. Google Forms voorbeelden) */}
       {showExamples && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
           <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
               <h2 className="text-sm sm:text-base font-semibold text-slate-900">
-                Hoe AI-tools toepassen in je les?
+                Hoe AI-tools toepassen in je les? (met o.a. Google Forms)
               </h2>
               <button
                 onClick={() => setShowExamples(false)}
@@ -527,6 +542,43 @@ export default function App() {
                   <li>Belangrijke begrippen laten uitlichten met voorbeelden.</li>
                   <li>Vragen laten genereren als voorbereiding op een toets.</li>
                 </ul>
+              </div>
+
+              {/* BELANGRIJK: Google Forms blok, visueel opvallend */}
+              <div className="border border-blue-200 bg-blue-50 rounded-xl p-4">
+                <p className="text-[11px] font-semibold text-blue-700 uppercase tracking-wide mb-1">
+                  Voorbeelden met Google Forms (aanrader)
+                </p>
+                <h3 className="text-sm font-semibold text-slate-900 mb-2">
+                  Google Forms + AI – toetsen &amp; bevragingen
+                </h3>
+                <ul className="list-disc pl-5 space-y-1">
+                  <li>
+                    Laat een AI-tool (bv. ChatGPT/Gemini) meerkeuzevragen genereren op basis van je cursus, en
+                    plak ze in een Google Form.
+                  </li>
+                  <li>
+                    Vraag AI om verbeterde feedbackzinnen te maken voor juiste/foute antwoorden in het formulier.
+                  </li>
+                  <li>
+                    Gebruik AI om samenvattingen van de resultaten te maken (sterktes/zwaktes van de klas) op basis van de
+                    Google Forms-export naar Sheets.
+                  </li>
+                  <li>
+                    Bouw met AI een korte reflectievragenlijst (Google Form) na een toets of project.
+                  </li>
+                </ul>
+                <div className="mt-3">
+                  <Button
+                    as="a"
+                    href="https://forms.google.com"
+                    variant="secondary"
+                    className="text-xs"
+                  >
+                    <LinkIcon className="h-3 w-3" />
+                    <span className="ml-1">Open Google Forms</span>
+                  </Button>
+                </div>
               </div>
 
               <div>

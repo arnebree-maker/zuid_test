@@ -297,6 +297,33 @@ export default function App() {
             </div>
           </Card>
         </section>
+{/* Tussenbanner: digitale innovatie */}
+<section className="mb-10">
+  <Card className="px-5 py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-100 border-0 shadow-md">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 rounded-xl bg-blue-500/20 flex items-center justify-center">
+          <Sparkles className="h-5 w-5 text-blue-300" />
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold tracking-wide text-blue-200 uppercase">
+            Digitale innovatie
+          </p>
+          <h3 className="text-sm sm:text-base font-semibold">
+            AI &amp; ICT binnen Scholengroep Sint-Rembert
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-200/90 mt-1">
+            Hier bundelen we tools, bijscholingen en voorbeelden om AI veilig en
+            praktisch in te zetten in je les.
+          </p>
+        </div>
+      </div>
+      <p className="text-[11px] sm:text-xs text-slate-300">
+        Scroll verder voor tools, bijscholing &amp; uitgewerkte scenario&apos;s.
+      </p>
+    </div>
+  </Card>
+</section>
 
         {/* Rij 2: AI-tools + Lovable bijscholing */}
         <section className="mb-10 grid gap-5 md:grid-cols-2">

@@ -8,7 +8,12 @@ import {
   Lightbulb,
   BookOpen,
   X,
+  Calendar,
+  MapPin,
+  Clock,
+  Sparkles,
 } from "lucide-react";
+
 
 const GEMINI_URL =
   "https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing";
@@ -63,10 +68,10 @@ function CountdownTimer({ targetDate }) {
     const interval = setInterval(() => {
       const now = new Date();
       const event = new Date(targetDate);
-      const diff = event - now;
+      const diff = event.getTime() - now.getTime();
 
       if (diff <= 0) {
-        setTimeLeft("De bijscholing is gestart!");
+        setTimeLeft("De bijscholing is gestart! 🎉");
         clearInterval(interval);
         return;
       }
@@ -82,8 +87,18 @@ function CountdownTimer({ targetDate }) {
     return () => clearInterval(interval);
   }, [targetDate]);
 
-  return <p className="font-mono text-lg font-semibold text-fuchsia-700">{timeLeft}</p>;
+  return (
+    <div className="flex flex-col gap-1">
+      <p className="font-mono text-lg font-semibold text-fuchsia-700">
+        {timeLeft}
+      </p>
+      <p className="text-[11px] text-gray-500">
+        Beperkt aantal plaatsen – schrijf tijdig in.
+      </p>
+    </div>
+  );
 }
+
 
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
@@ -144,7 +159,6 @@ export default function App() {
 
 {/* Werkgroep + Lovable opleiding naast elkaar */}
 <div className="grid md:grid-cols-2 gap-6 mb-12">
-
   {/* Team kaart */}
   <Card className="p-8 sm:p-10 shadow-xl border-0 bg-white">
     <div className="text-center max-w-3xl mx-auto">
@@ -170,35 +184,92 @@ export default function App() {
     </div>
   </Card>
 
-      {/* NIEUW BLOK – Lovable Bijscholing */}
-      <Card className="p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-purple-50 to-fuchsia-100">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">Bijscholing: <span className="text-fuchsia-700">Lovable</span></h3>
-    
-        <p className="text-gray-700 mb-2">
-          <strong>Datum:</strong> 15 december 2025
-        </p>
-        <p className="text-gray-700 mb-2">
-          <strong>Locatie:</strong> Lokaal Z314
-        </p>
-    
-        {/* Countdown timer */}
-        <div className="mt-6 p-4 bg-white rounded-2xl shadow-inner border border-fuchsia-200">
-          <p className="text-sm text-gray-600 mb-1">⏳ Tijd tot start</p>
-          <CountdownTimer targetDate="2025-12-15T09:00:00" />
-        </div>
-    
-        {/* Inschrijven knop */}
-        <Button
-          as="a"
-          href="#"
-          variant="primary"
-          className="w-full justify-center mt-6 bg-fuchsia-600 hover:bg-fuchsia-700"
-        >
-          Inschrijven voor Lovable
-        </Button>
-      </Card>
-    
+  {/* NIEUW BLOK – Lovable Bijscholing (gepimpt) */}
+  <Card className="p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-blue-50 via-fuchsia-50 to-fuchsia-100 hover:-translate-y-1 hover:shadow-2xl transition-transform duration-200">
+    {/* Badge */}
+    <div className="inline-flex items-center gap-2 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 rounded-full text-xs font-semibold mb-4">
+      <span className="w-1.5 h-1.5 bg-fuchsia-600 rounded-full" />
+      🔥 Nieuw in december
     </div>
+
+    {/* Titel + icoon */}
+    <div className="flex items-center gap-2 mb-3">
+      <div className="p-2 rounded-xl bg-fuchsia-600 text-white shadow-md">
+        <Sparkles className="h-5 w-5" />
+      </div>
+      <h3 className="text-2xl font-bold text-gray-900">
+        Bijscholing: <span className="text-fuchsia-700">Lovable</span>
+      </h3>
+    </div>
+
+    {/* Korte beschrijving */}
+    <p className="text-gray-700 text-sm mb-4">
+      Maak in 1 uur een eigen AI-website met <strong>Lovable</strong>. Ideaal om
+      snel een portaal, projectsite of oefenapp voor je leerlingen te bouwen.
+    </p>
+
+    {/* Bullets */}
+    <ul className="text-sm text-gray-800 space-y-1.5 mb-4">
+      <li>✅ Basis van Lovable in onderwijscontext</li>
+      <li>✅ Voorbeelden van sites van collega’s</li>
+      <li>✅ Tijd om zelf iets te bouwen</li>
+    </ul>
+
+    {/* Meta: datum, lokaal, doelgroep */}
+    <div className="mt-2 space-y-2 text-sm text-gray-700">
+      <div className="flex items-center gap-2">
+        <Calendar className="h-4 w-4 text-fuchsia-700" />
+        <span>
+          <strong>Datum:</strong> 15 december 2025
+        </span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Clock className="h-4 w-4 text-fuchsia-700" />
+        <span>
+          <strong>Startuur:</strong> bv. 16u00 (pas gerust aan)
+        </span>
+      </div>
+      <div className="flex items-center gap-2">
+        <MapPin className="h-4 w-4 text-fuchsia-700" />
+        <span>
+          <strong>Locatie:</strong> Lokaal Z314
+        </span>
+      </div>
+      <div className="flex items-center gap-2">
+        <span className="text-xs px-2 py-1 rounded-full bg-fuchsia-700/10 text-fuchsia-800 font-semibold">
+          Doelgroep: alle leerkrachten · beginners welkom
+        </span>
+      </div>
+    </div>
+
+    {/* Countdown timer blok */}
+    <div className="mt-6 p-4 bg-white/80 rounded-2xl shadow-inner border border-fuchsia-200">
+      <p className="text-xs text-gray-600 mb-1">⏳ Tijd tot start</p>
+      <CountdownTimer targetDate="2025-12-15T16:00:00" />
+    </div>
+
+    {/* Inschrijven knop + extra link */}
+    <div className="mt-6 space-y-2">
+      <Button
+        as="a"
+        href="#"
+        // TODO: vervang "#" door je echte inschrijfformulier (bv. Google Form)
+        variant="primary"
+        className="w-full justify-center bg-fuchsia-600 hover:bg-fuchsia-700"
+      >
+        📥 Schrijf je in
+      </Button>
+      <button
+        type="button"
+        className="w-full text-xs text-fuchsia-800 underline flex items-center justify-center gap-1"
+      >
+        <LinkIcon className="h-3 w-3" />
+        🤖 Bekijk voorbeelden van Lovable-projecten
+      </button>
+    </div>
+  </Card>
+</div>
+
 
 
         {/* Twee hoofdcards naast elkaar */}

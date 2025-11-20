@@ -56,6 +56,35 @@ const Card = ({ children, className = "" }) => (
   </div>
 );
 
+function CountdownTimer({ targetDate }) {
+  const [timeLeft, setTimeLeft] = React.useState("");
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const event = new Date(targetDate);
+      const diff = event - now;
+
+      if (diff <= 0) {
+        setTimeLeft("De bijscholing is gestart!");
+        clearInterval(interval);
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      setTimeLeft(`${d} dagen · ${h}u ${m}m ${s}s`);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  return <p className="font-mono text-lg font-semibold text-fuchsia-700">{timeLeft}</p>;
+}
+
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
   const [showAiWhy, setShowAiWhy] = useState(true);
@@ -113,30 +142,64 @@ export default function App() {
           </div>
         </div>
 
-        {/* Werkgroep-card */}
-        <Card className="p-8 sm:p-10 mb-12 shadow-xl border-0 bg-white">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-semibold mb-6">
-              <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-              Werkgroep Digitale Didactiek
-            </div>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
-              <div className="grid sm:grid-cols-2 gap-6 mt-8 text-left">
-                <div className="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
-                  <p className="font-semibold text-gray-900 mb-2">Technisch team</p>
-                  <p className="text-sm">Mieke Verbeerst, Barbara Van Hecke, Arne Breemeersch</p>
-                </div>
-                <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
-                  <p className="font-semibold text-gray-900 mb-2">Pedagogisch team</p>
-                  <p className="text-sm">Jasper Gerits, Glenn Van de Voorde</p>
-                </div>
-              </div>
-              <p className="mt-6 text-base">
-                Is iets onduidelijk? <strong className="text-blue-700">Spreek ons gerust aan.</strong>
-              </p>
-            </div>
+{/* Werkgroep + Lovable opleiding naast elkaar */}
+<div className="grid md:grid-cols-2 gap-6 mb-12">
+
+  {/* Team kaart */}
+  <Card className="p-8 sm:p-10 shadow-xl border-0 bg-white">
+    <div className="text-center max-w-3xl mx-auto">
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-semibold mb-6">
+        <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+        Werkgroep Digitale Didactiek
+      </div>
+      <div className="space-y-4 text-gray-700 leading-relaxed">
+        <div className="grid sm:grid-cols-2 gap-6 mt-8 text-left">
+          <div className="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
+            <p className="font-semibold text-gray-900 mb-2">Technisch team</p>
+            <p className="text-sm">Mieke Verbeerst, Barbara Van Hecke, Arne Breemeersch</p>
           </div>
-        </Card>
+          <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
+            <p className="font-semibold text-gray-900 mb-2">Pedagogisch team</p>
+            <p className="text-sm">Jasper Gerits, Glenn Van de Voorde</p>
+          </div>
+        </div>
+        <p className="mt-6 text-base">
+          Is iets onduidelijk? <strong className="text-blue-700">Spreek ons gerust aan.</strong>
+        </p>
+      </div>
+    </div>
+  </Card>
+
+      {/* NIEUW BLOK – Lovable Bijscholing */}
+      <Card className="p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-purple-50 to-fuchsia-100">
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">Bijscholing: <span className="text-fuchsia-700">Lovable</span></h3>
+    
+        <p className="text-gray-700 mb-2">
+          <strong>Datum:</strong> 15 december 2025
+        </p>
+        <p className="text-gray-700 mb-2">
+          <strong>Locatie:</strong> Lokaal Z314
+        </p>
+    
+        {/* Countdown timer */}
+        <div className="mt-6 p-4 bg-white rounded-2xl shadow-inner border border-fuchsia-200">
+          <p className="text-sm text-gray-600 mb-1">⏳ Tijd tot start</p>
+          <CountdownTimer targetDate="2025-12-15T09:00:00" />
+        </div>
+    
+        {/* Inschrijven knop */}
+        <Button
+          as="a"
+          href="#"
+          variant="primary"
+          className="w-full justify-center mt-6 bg-fuchsia-600 hover:bg-fuchsia-700"
+        >
+          Inschrijven voor Lovable
+        </Button>
+      </Card>
+    
+    </div>
+
 
         {/* Twee hoofdcards naast elkaar */}
         <div className="grid gap-6 md:grid-cols-2">

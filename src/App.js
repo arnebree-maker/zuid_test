@@ -184,8 +184,36 @@ export default function App() {
     </div>
   </Card>
 
-  {/* NIEUW BLOK – Lovable Bijscholing (gepimpt) */}
-  <Card className="p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-blue-50 via-fuchsia-50 to-fuchsia-100 hover:-translate-y-1 hover:shadow-2xl transition-transform duration-200">
+{/* Werkgroep + Lovable opleiding in 1/3 – 2/3 layout */}
+<div className="mb-12 flex flex-col md:flex-row md:items-stretch md:gap-6">
+  {/* Team kaart – 1/3 breed op desktop */}
+  <Card className="p-8 sm:p-10 shadow-xl border-0 bg-white md:w-1/3 md:flex-none">
+    <div className="max-w-md mx-auto">
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-semibold mb-6">
+        <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+        Werkgroep Digitale Didactiek
+      </div>
+      <div className="space-y-4 text-gray-700 leading-relaxed">
+        <div className="space-y-3 text-left">
+          <div className="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
+            <p className="font-semibold text-gray-900 mb-1">Technisch team</p>
+            <p className="text-sm">Mieke Verbeerst, Barbara Van Hecke, Arne Breemeersch</p>
+          </div>
+          <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
+            <p className="font-semibold text-gray-900 mb-1">Pedagogisch team</p>
+            <p className="text-sm">Jasper Gerits, Glenn Van de Voorde</p>
+          </div>
+        </div>
+        <p className="pt-2 text-sm">
+          Is iets onduidelijk?{" "}
+          <strong className="text-blue-700">Spreek ons gerust aan.</strong>
+        </p>
+      </div>
+    </div>
+  </Card>
+
+  {/* Lovable Bijscholing – 2/3 breed op desktop */}
+  <Card className="mt-6 md:mt-0 p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-blue-50 via-fuchsia-50 to-fuchsia-100 hover:-translate-y-1 hover:shadow-2xl transition-transform duration-200 md:w-2/3 md:flex-none">
     {/* Badge */}
     <div className="inline-flex items-center gap-2 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 rounded-full text-xs font-semibold mb-4">
       <span className="w-1.5 h-1.5 bg-fuchsia-600 rounded-full" />
@@ -204,8 +232,8 @@ export default function App() {
 
     {/* Korte beschrijving */}
     <p className="text-gray-700 text-sm mb-4">
-      Maak in 1 uur een eigen AI-website met <strong>Lovable</strong>. Ideaal om
-      snel een portaal, projectsite of oefenapp voor je leerlingen te bouwen.
+      Maak in 1 uur een eigen AI-website met <strong>Lovable</strong>. Ideaal om snel
+      een portaal, projectsite of oefenapp voor je leerlingen te bouwen.
     </p>
 
     {/* Bullets */}
@@ -259,16 +287,17 @@ export default function App() {
       >
         📥 Schrijf je in
       </Button>
-      <button
-        type="button"
+      <a
+        href="#"
         className="w-full text-xs text-fuchsia-800 underline flex items-center justify-center gap-1"
       >
         <LinkIcon className="h-3 w-3" />
-        🤖 Bekijk voorbeelden van Lovable-projecten
-      </button>
+        📑 Bekijk voorbeelden van Lovable-projecten
+      </a>
     </div>
   </Card>
 </div>
+
 
 
 

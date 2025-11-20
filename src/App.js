@@ -211,7 +211,7 @@ export default function App() {
             </div>
           </Card>
 
-          {/* Vragen kaart (rechts) */}
+          {/* Vragen kaart (rechts) – MET INGEBOUWDE GEMINI CHATBOT */}
           <Card className="p-0 overflow-hidden group">
             <div className="p-6 sm:p-7 flex items-start gap-3 border-b border-gray-200/50 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600">
               <div className="rounded-xl p-2.5 bg-white/20 backdrop-blur text-white shadow-lg">
@@ -219,30 +219,52 @@ export default function App() {
               </div>
               <div>
                 <h3 className="text-xl font-bold text-white">Vragen</h3>
-                <p className="text-white/90">Snelle ICT-hulp via Chatbot Zuid en ons ticketsysteem.</p>
+                <p className="text-white/90">Snelle ICT-hulp via Bot Zuid (Gemini) en ons ticketsysteem.</p>
               </div>
             </div>
 
             <div className="divide-y divide-gray-200/50 bg-white">
-              <div className="p-6 sm:p-7 flex items-center justify-between gap-4 hover:bg-blue-50/50 transition-colors">
-                <div className="flex items-center gap-3">
+              {/* Ingebouwde chatbot */}
+              <div className="p-6 sm:p-7">
+                <div className="flex items-center gap-3 mb-3">
                   <div className="rounded-xl p-3 bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-md">
                     <LinkIcon className="h-4 w-4" />
                   </div>
                   <div>
                     <p className="text-xs text-gray-600 font-medium">Chatbot</p>
-                    <p className="font-bold text-gray-900">Bot Zuid – ICT</p>
+                    <p className="font-bold text-gray-900">Bot Zuid – ICT (Gemini)</p>
                   </div>
                 </div>
-                <Button
-                  as="a"
-                  href="https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing"
-                  variant="primary"
-                >
-                  Open Chatbot <ChevronRight className="h-4 w-4" />
-                </Button>
+
+                <p className="text-sm text-gray-700 mb-3">
+                  Stel hier meteen je vraag over ICT of AI in de klas. De chatbot is gebouwd met{" "}
+                  <strong>Google Gemini</strong>.
+                </p>
+
+                <div className="border border-gray-200 rounded-2xl overflow-hidden shadow-inner bg-gray-50 h-96">
+                  <iframe
+                    src="https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing"
+                    title="Bot Zuid – Gemini chatbot"
+                    className="w-full h-full border-0"
+                    allow="microphone; clipboard-read; clipboard-write"
+                  />
+                </div>
+
+                <p className="mt-2 text-[11px] text-gray-500">
+                  Werkt de chat hier niet (bijv. geblokkeerd door de browser)?{" "}
+                  <a
+                    href="https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-blue-600"
+                  >
+                    Open Bot Zuid in een nieuw tabblad
+                  </a>
+                  .
+                </p>
               </div>
 
+              {/* Ticket-systeem blijft hetzelfde */}
               <div className="p-6 sm:p-7 hover:bg-blue-50/50 transition-colors">
                 <h4 className="text-base font-bold text-gray-900">Problemen met ICT-materiaal?</h4>
                 <p className="text-gray-700 mt-1">

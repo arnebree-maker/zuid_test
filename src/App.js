@@ -127,9 +127,15 @@ export default function App() {
                   <div className="bg-gradient-to-br from-orange-400 to-amber-500 text-white rounded-2xl p-5 shadow-lg transform hover:scale-105 transition-transform">
                     <p className="text-xs font-bold mb-2 tracking-wide">COLLECTIEVE INSPIRATIE!</p>
                     <p className="text-sm mb-4">Bekijk wat je collega's hebben gemaakt en voeg jouw beste ideeën toe!</p>
-                    <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" className="w-full bg-white text-orange-600 hover:bg-orange-50 shadow-md">
-                      <LinkIcon className="h-4 w-4 text-black" /> Drop je eigen ideeën hier
-                    </Button>
+                  <Button
+                    as="a"
+                    href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link"
+                    variant="secondary"
+                    className="w-full bg-white text-black hover:bg-orange-50 shadow-md"
+                  >
+                    <LinkIcon className="h-4 w-4" />
+                    Drop je eigen ideeën hier
+                  </Button>
                   </div>
                 </div>
               </div>
@@ -275,9 +281,16 @@ export default function App() {
               <div className="bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-2xl p-6 shadow-xl">
                 <h4 className="font-bold text-white mb-3 text-lg">Deel je ervaring!</h4>
                 <p className="text-sm text-white/95 mb-4">Heb je zelf interessante projecten of toepassingen in je les? Deel je ideeën en ervaringen met de hele werkgroep. Dit helpt iedereen om van elkaar te leren!</p>
-                <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" className="w-full bg-black text-blue-700 hover:bg-blue-50 shadow-lg">
-                  <LinkIcon className="h-4 w-4 text-black" /> Drop je projectjes in de Google Drive
-                </Button>
+              <Button
+                as="a"
+                href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link"
+                variant="secondary"
+                className="w-full bg-white text-black hover:bg-blue-50 shadow-lg"
+              >
+                <LinkIcon className="h-4 w-4" />
+                Drop je projectjes in de Google Drive
+              </Button>
+
               </div>
             </div>
           </div>

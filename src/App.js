@@ -10,6 +10,9 @@ import {
   X,
 } from "lucide-react";
 
+const GEMINI_URL =
+  "https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing";
+
 const Button = ({
   children,
   onClick,
@@ -56,6 +59,14 @@ const Card = ({ children, className = "" }) => (
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
   const [showAiWhy, setShowAiWhy] = useState(true);
+
+  const openGeminiChat = () => {
+    if (typeof window !== "undefined") {
+      const features =
+        "width=500,height=750,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes";
+      window.open(GEMINI_URL, "BotZuidICT", features);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-cyan-50">
@@ -211,7 +222,7 @@ export default function App() {
             </div>
           </Card>
 
-          {/* Vragen kaart (rechts) – MET INGEBOUWDE GEMINI CHATBOT */}
+          {/* Vragen kaart (rechts) – ZONDER iframe, met knop naar popup */}
           <Card className="p-0 overflow-hidden group">
             <div className="p-6 sm:p-7 flex items-start gap-3 border-b border-gray-200/50 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600">
               <div className="rounded-xl p-2.5 bg-white/20 backdrop-blur text-white shadow-lg">
@@ -224,7 +235,6 @@ export default function App() {
             </div>
 
             <div className="divide-y divide-gray-200/50 bg-white">
-              {/* Ingebouwde chatbot */}
               <div className="p-6 sm:p-7">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="rounded-xl p-3 bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-md">
@@ -236,35 +246,21 @@ export default function App() {
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-700 mb-3">
-                  Stel hier meteen je vraag over ICT of AI in de klas. De chatbot is gebouwd met{" "}
+                <p className="text-sm text-gray-700 mb-4">
+                  Stel je vraag over ICT of AI in de klas. De chatbot is gebouwd met{" "}
                   <strong>Google Gemini</strong>.
                 </p>
 
-                <div className="border border-gray-200 rounded-2xl overflow-hidden shadow-inner bg-gray-50 h-96">
-                  <iframe
-                    src="https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing"
-                    title="Bot Zuid – Gemini chatbot"
-                    className="w-full h-full border-0"
-                    allow="microphone; clipboard-read; clipboard-write"
-                  />
+                <div className="flex flex-col gap-2">
+                  <Button variant="primary" className="justify-center" onClick={openGeminiChat}>
+                    Open Chatbot <ChevronRight className="h-4 w-4" />
+                  </Button>
+                  <Button as="a" href={GEMINI_URL} variant="secondary" className="justify-center">
+                    Open in nieuw tabblad
+                  </Button>
                 </div>
-
-                <p className="mt-2 text-[11px] text-gray-500">
-                  Werkt de chat hier niet (bijv. geblokkeerd door de browser)?{" "}
-                  <a
-                    href="https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-blue-600"
-                  >
-                    Open Bot Zuid in een nieuw tabblad
-                  </a>
-                  .
-                </p>
               </div>
 
-              {/* Ticket-systeem blijft hetzelfde */}
               <div className="p-6 sm:p-7 hover:bg-blue-50/50 transition-colors">
                 <h4 className="text-base font-bold text-gray-900">Problemen met ICT-materiaal?</h4>
                 <p className="text-gray-700 mt-1">
@@ -417,6 +413,16 @@ export default function App() {
           </div>
         </div>
       </main>
+
+      {/* Floating chat bubble rechtsonder */}
+      <button
+        type="button"
+        onClick={openGeminiChat}
+        className="fixed bottom-4 right-4 z-50 flex items-center justify-center rounded-full shadow-xl bg-blue-600 text-white h-14 w-14 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-400"
+      >
+        <HelpCircle className="h-6 w-6" />
+        <span className="sr-only">Chat met Bot Zuid (Gemini)</span>
+      </button>
 
       {/* Modal: Hoe toepassen in je les? */}
       {showExamples && (

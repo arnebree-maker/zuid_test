@@ -30,7 +30,7 @@ const Button = ({
   ...rest
 }) => {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-60 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.02] active:scale-[0.97]";
 
   const variants = {
     primary:
@@ -58,7 +58,7 @@ const Button = ({
 
 const Card = ({ children, className = "" }) => (
   <div
-    className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}
+    className={`rounded-2xl border border-slate-200 bg-white shadow-sm transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-md ${className}`}
   >
     {children}
   </div>
@@ -105,12 +105,117 @@ function CountdownTimer({ targetDate }) {
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
   const [showAiWhy, setShowAiWhy] = useState(false); // start dicht
+  const [showToolBuilder, setShowToolBuilder] = useState(false);
+  const [toolTemplate, setToolTemplate] = useState("taalchatbot");
 
   const openGeminiChat = () => {
     if (typeof window !== "undefined") {
       const features =
         "width=500,height=750,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=yes";
       window.open(GEMINI_URL, "BotZuidICT", features);
+    }
+  };
+
+  function getToolTitle() {
+    if (toolTemplate === "taalchatbot") return "Taalchatbot voor leerlingen";
+    if (toolTemplate === "vragengenerator") return "Vragengenerator voor je les";
+    return "Oefeningentool voor leerlingen";
+  }
+
+  function getToolDescription() {
+    if (toolTemplate === "taalchatbot") {
+      return "Gebruik deze prompt in Gemini of ChatGPT om een taalchatbot te maken die leerlingen helpt oefenen. Je kan zelf het vak, niveau en onderwerp invullen.";
+    }
+    if (toolTemplate === "vragengenerator") {
+      return "Gebruik deze prompt in Gemini of ChatGPT om snel goede toets- of oefenvragen te genereren op maat van jouw leerstof.";
+    }
+    return "Gebruik deze prompt in Gemini of ChatGPT om automatisch oefenreeksen te laten maken met uitleg en feedback voor jouw leerlingen.";
+  }
+
+  function getPromptForTemplate() {
+    if (toolTemplate === "taalchatbot") {
+      return (
+`Je bent een vriendelijke en geduldige taalchatbot voor leerlingen.
+
+Context:
+- Doelgroep: leerlingen van [graad / richting invullen]
+- Vak: [bv. Frans / Engels / Nederlands als tweede taal]
+- Onderwerp: [bv. werkwoordstijden, woordenschat rond reizen, …]
+- Niveau: [basis / gevorderd]
+
+Je taken:
+1. Voer korte gesprekjes met leerlingen in de doeltaal.
+2. Verbeter hun zinnen op een positieve manier.
+3. Geef altijd eerst een compliment, dan de verbeterde zin, en eventueel een korte uitleg.
+4. Stel vervolgvragen zodat het gesprek natuurlijk verderloopt.
+5. Gebruik eenvoudige, duidelijke taal en vermijd lange theoretische uitleg.
+
+Belangrijk:
+- Spreek de leerling altijd in de doeltaal aan, tenzij de leerkracht anders vraagt.
+- Pas je taalniveau aan: eenvoudig voor zwakkere leerlingen, uitdagender voor sterkere leerlingen.
+- Vraag regelmatig of de leerling nog mee is.
+
+Start nu met:
+“Hallo! Ik ben je taalbuddy. Over welk onderwerp wil je vandaag oefenen?”`
+      );
+    }
+
+    if (toolTemplate === "vragengenerator") {
+      return (
+`Je bent een AI-assistent die leerkrachten helpt om goede oefen- en toetsvragen te maken.
+
+Context:
+- Vak: [bv. geschiedenis, wiskunde, economie, biologie, …]
+- Onderwerp: [kort beschrijven]
+- Doelgroep: [bv. 3de jaar aso, 5de jaar tso, …]
+- Type vragen: meerkeuze, open vragen, juist/fout, invuloefeningen (leerkracht kiest)
+
+Je taken:
+1. Maak 5 basisvragen om te controleren of leerlingen de kernbegrippen kennen.
+2. Maak 5 verdiepende vragen die inzicht en redeneren vragen.
+3. Maak 3 reflectievragen waarmee leerlingen nadenken over hun leerproces.
+4. Geef bij elke vraag een kort modelantwoord.
+5. Duid bij elke vraag aan of ze “basis”, “verdiepend” of “reflectie” is.
+
+Belangrijk:
+- Gebruik duidelijke, leerlingvriendelijke taal.
+- Varieer in vraagvormen.
+- Zorg dat de vragen echt aansluiten bij het beschreven onderwerp.
+
+Begin met het overzicht:
+- Kernbegrippen:
+- Belangrijke inzichten:
+- Mogelijke misconcepties van leerlingen:`
+      );
+    }
+
+    return (
+`Je bent een AI-assistent die leerkrachten helpt om oefenreeksen voor leerlingen te maken.
+
+Context:
+- Vak: [bv. wiskunde, fysica, taal, …]
+- Onderwerp: [bv. procenten, vergelijkingen, ontleden van zinnen, …]
+- Doelgroep: [bv. 2de jaar bso, 4de jaar aso, …]
+- Niveau: basis / gemengd / verdiepend
+
+Je taken:
+1. Maak 10 oefenvragen rond het gekozen onderwerp, in oplopende moeilijkheidsgraad.
+2. Geef bij elk antwoord een duidelijke stap-voor-stap uitleg.
+3. Benoem bij elke vraag welk deel van de leerstof geoefend wordt.
+4. Maak aan het einde een korte samenvatting met tips voor veelgemaakte fouten.
+5. Formatteer alles overzichtelijk met genummerde lijsten.
+
+Belangrijk:
+- Leg eenvoudig uit, zonder lange theoretische blokken.
+- Schrijf in duidelijk leesbare taal voor leerlingen.
+- Zorg dat de leerkracht dit makkelijk kan kopiëren naar een werkblad of digitale tool.`
+    );
+  }
+
+  const handleCopyPrompt = () => {
+    const text = getPromptForTemplate();
+    if (typeof navigator !== "undefined" && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {});
     }
   };
 
@@ -297,33 +402,34 @@ export default function App() {
             </div>
           </Card>
         </section>
-{/* Tussenbanner: digitale innovatie */}
-<section className="mb-10">
-  <Card className="px-5 py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-100 border-0 shadow-md">
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-      <div className="flex items-center gap-3">
-        <div className="h-9 w-9 rounded-xl bg-blue-500/20 flex items-center justify-center">
-          <Sparkles className="h-5 w-5 text-blue-300" />
-        </div>
-        <div>
-          <p className="text-[11px] font-semibold tracking-wide text-blue-200 uppercase">
-            Digitale innovatie
-          </p>
-          <h3 className="text-sm sm:text-base font-semibold">
-            AI &amp; ICT binnen Scholengroep Sint-Rembert
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-200/90 mt-1">
-            Hier bundelen we tools, bijscholingen en voorbeelden om AI veilig en
-            praktisch in te zetten in je les.
-          </p>
-        </div>
-      </div>
-      <p className="text-[11px] sm:text-xs text-slate-300">
-        Scroll verder voor tools, bijscholing &amp; uitgewerkte scenario&apos;s.
-      </p>
-    </div>
-  </Card>
-</section>
+
+        {/* Tussenbanner: digitale innovatie */}
+        <section className="mb-10">
+          <Card className="px-5 py-4 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-100 border-0 shadow-md">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="h-9 w-9 rounded-xl bg-blue-500/20 flex items-center justify-center">
+                  <Sparkles className="h-5 w-5 text-blue-300" />
+                </div>
+                <div>
+                  <p className="text-[11px] font-semibold tracking-wide text-blue-200 uppercase">
+                    Digitale innovatie
+                  </p>
+                  <h3 className="text-sm sm:text-base font-semibold">
+                    AI &amp; ICT binnen Scholengroep Sint-Rembert
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-200/90 mt-1">
+                    Hier bundelen we tools, bijscholingen en voorbeelden om AI veilig en
+                    praktisch in te zetten in je les.
+                  </p>
+                </div>
+              </div>
+              <p className="text-[11px] sm:text-xs text-slate-300">
+                Scroll verder voor tools, bijscholing &amp; uitgewerkte scenario&apos;s.
+              </p>
+            </div>
+          </Card>
+        </section>
 
         {/* Rij 2: AI-tools + Lovable bijscholing */}
         <section className="mb-10 grid gap-5 md:grid-cols-2">
@@ -347,32 +453,74 @@ export default function App() {
 
             <div className="p-5 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <Button as="a" href="https://chatgpt.com/" variant="secondary" className="justify-center">
-                  ChatGPT
-                </Button>
-                <Button as="a" href="https://gemini.google.com/" variant="secondary" className="justify-center">
-                  Google Gemini
-                </Button>
-                <Button as="a" href="https://www.genial.ly/" variant="secondary" className="justify-center">
-                  Genially
-                </Button>
-                <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="justify-center">
-                  NotebookLM
-                </Button>
-                <Button as="a" href="https://gamma.app/" variant="secondary" className="justify-center">
-                  Gamma
-                </Button>
-                <Button as="a" href="https://lovable.dev/" variant="secondary" className="justify-center">
-                  Lovable
-                </Button>
-                <Button
-                  as="a"
-                  href="https://aistudio.google.com/"
-                  variant="secondary"
-                  className="justify-center sm:col-span-2"
-                >
-                  Google AI Studio
-                </Button>
+                {/* Tool + tooltip wrappers */}
+                <div className="relative group">
+                  <Button as="a" href="https://chatgpt.com/" variant="secondary" className="justify-center w-full">
+                    ChatGPT
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    Chatbot voor tekst, uitleg en ideeën.
+                  </div>
+                </div>
+
+                <div className="relative group">
+                  <Button as="a" href="https://gemini.google.com/" variant="secondary" className="justify-center w-full">
+                    Google Gemini
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    AI-assistent van Google, goed voor onderwijs en integratie.
+                  </div>
+                </div>
+
+                <div className="relative group">
+                  <Button as="a" href="https://www.genial.ly/" variant="secondary" className="justify-center w-full">
+                    Genially
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    Interactieve presentaties, spelletjes en escape rooms.
+                  </div>
+                </div>
+
+                <div className="relative group">
+                  <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="justify-center w-full">
+                    NotebookLM
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    AI die samenvattingen en vragen maakt op basis van jouw documenten.
+                  </div>
+                </div>
+
+                <div className="relative group">
+                  <Button as="a" href="https://gamma.app/" variant="secondary" className="justify-center w-full">
+                    Gamma
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    Presentaties en documenten automatisch mooi opgemaakt.
+                  </div>
+                </div>
+
+                <div className="relative group">
+                  <Button as="a" href="https://lovable.dev/" variant="secondary" className="justify-center w-full">
+                    Lovable
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    Websites en kleine apps bouwen met behulp van AI.
+                  </div>
+                </div>
+
+                <div className="relative group sm:col-span-2">
+                  <Button
+                    as="a"
+                    href="https://aistudio.google.com/"
+                    variant="secondary"
+                    className="justify-center w-full"
+                  >
+                    Google AI Studio
+                  </Button>
+                  <div className="pointer-events-none absolute left-1/2 top-full z-10 hidden -translate-x-1/2 mt-2 rounded-md bg-slate-900 px-2 py-1 text-[10px] text-white shadow-md group-hover:block whitespace-nowrap">
+                    Voor gevorderden: eigen AI-modellen en chatbots maken.
+                  </div>
+                </div>
               </div>
 
               <div className="border border-dashed border-slate-300 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-600 bg-slate-50 leading-relaxed">
@@ -468,6 +616,64 @@ export default function App() {
                 </Button>
               </div>
             </div>
+          </Card>
+        </section>
+
+        {/* Nieuwe kaart: Maak een tool voor je leerlingen */}
+        <section className="mb-10">
+          <Card className="p-6">
+            <div className="flex items-start justify-between gap-3 mb-4">
+              <div>
+                <p className="text-[12px] font-medium text-blue-600 uppercase tracking-wide">
+                  Voor je leerlingen
+                </p>
+                <h3 className="text-base sm:text-lg font-semibold text-slate-900">
+                  🧠 Maak een tool voor je leerlingen
+                </h3>
+                <p className="text-sm text-slate-600 mt-1 leading-relaxed">
+                  Bouw in enkele seconden een oefentool, chatbot of vragenreeks voor je klas.
+                  Je krijgt een kant-en-klare prompt die je kan plakken in Gemini of ChatGPT.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-3 text-sm">
+              <Button
+                variant="secondary"
+                className="justify-center"
+                onClick={() => {
+                  setToolTemplate("taalchatbot");
+                  setShowToolBuilder(true);
+                }}
+              >
+                💬 Taalchatbot
+              </Button>
+              <Button
+                variant="secondary"
+                className="justify-center"
+                onClick={() => {
+                  setToolTemplate("vragengenerator");
+                  setShowToolBuilder(true);
+                }}
+              >
+                ❓ Vragengenerator
+              </Button>
+              <Button
+                variant="secondary"
+                className="justify-center"
+                onClick={() => {
+                  setToolTemplate("oefeningen");
+                  setShowToolBuilder(true);
+                }}
+              >
+                📚 Oefeningentool
+              </Button>
+            </div>
+
+            <p className="mt-3 text-xs text-slate-500">
+              Tip: eens je een goede prompt hebt, kan je die hergebruiken voor verschillende klassen
+              of thema&apos;s.
+            </p>
           </Card>
         </section>
 
@@ -713,6 +919,52 @@ export default function App() {
                 >
                   📁 Open de map met voorbeelden (Drive)
                 </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal: Toolbuilder voor leerlingen-tools (taalchatbot / vragen / oefeningen) */}
+      {showToolBuilder && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
+              <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+                {getToolTitle()}
+              </h2>
+              <button
+                onClick={() => setShowToolBuilder(false)}
+                className="p-1.5 rounded-full hover:bg-slate-200 text-slate-600"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            <div className="p-6 space-y-4 text-sm leading-relaxed text-slate-700">
+              <p>{getToolDescription()}</p>
+              <p className="text-xs text-slate-500">
+                Kopieer onderstaande prompt en plak hem in Gemini of ChatGPT. Vul de stukjes tussen
+                [vierkante haakjes] in met jouw eigen context (vak, jaar, onderwerp…).
+              </p>
+
+              <textarea
+                readOnly
+                value={getPromptForTemplate()}
+                className="w-full h-64 text-xs sm:text-sm font-mono bg-slate-50 border border-slate-200 rounded-lg p-3 resize-none"
+              />
+
+              <div className="flex items-center justify-between gap-3 mt-2">
+                <Button
+                  variant="primary"
+                  onClick={handleCopyPrompt}
+                  className="justify-center"
+                >
+                  Prompt kopiëren
+                </Button>
+                <p className="text-[11px] text-slate-500">
+                  Tip: bewaar goede prompts in je eigen map of deel ze met collega&apos;s via de Drive.
+                </p>
               </div>
             </div>
           </div>

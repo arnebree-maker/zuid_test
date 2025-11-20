@@ -115,7 +115,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
+    <div className="min-h-screen bg-slate-100 text-slate-900 font-sans">
       {/* Top bar */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-3 flex items-center justify-between">
@@ -124,7 +124,7 @@ export default function App() {
               SR
             </span>
             <div>
-              <h1 className="text-sm sm:text-base font-semibold">
+              <h1 className="text-sm sm:text-base font-semibold tracking-tight">
                 Scholengroep Sint-Rembert · SiVi &amp; VLTI
               </h1>
               <p className="text-xs text-slate-500">
@@ -143,7 +143,7 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 sm:px-6 pb-16">
-        {/* Hero – groot zoals vroeger */}
+        {/* Hero – groot */}
         <section className="mt-6 mb-12">
           <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
             <div className="relative h-[55vh] sm:h-[60vh] md:h-[65vh]">
@@ -165,8 +165,7 @@ export default function App() {
                     </span>
                   </h2>
                   <p className="text-sm sm:text-base text-slate-200 max-w-xl">
-                    Vind AI-tools, voorbeelden (o.a. met{" "}
-                    <span className="font-semibold">Google Forms</span>) en duidelijke
+                    Vind AI-tools, voorbeelden van collega&apos;s en duidelijke
                     hulpkanalen voor ICT-vragen.
                   </p>
                 </div>
@@ -181,10 +180,10 @@ export default function App() {
           <Card className="p-6">
             <div className="space-y-4">
               <div>
-                <h3 className="text-sm font-semibold text-slate-800">
+                <h3 className="text-sm sm:text-base font-semibold text-slate-800">
                   Werkgroep Digitale Didactiek
                 </h3>
-                <p className="text-xs text-slate-500">
+                <p className="text-xs sm:text-sm text-slate-500 mt-1">
                   Aanspreekpunt voor vragen over ICT &amp; AI in je les.
                 </p>
               </div>
@@ -192,7 +191,7 @@ export default function App() {
               <div className="space-y-3 text-sm">
                 <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
                   <p className="font-semibold text-slate-800 text-sm">Technisch team</p>
-                  <p className="text-xs text-slate-600">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     Mieke Verbeerst<br />
                     Barbara Van Hecke<br />
                     Arne Breemeersch
@@ -200,14 +199,14 @@ export default function App() {
                 </div>
                 <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
                   <p className="font-semibold text-slate-800 text-sm">Pedagogisch team</p>
-                  <p className="text-xs text-slate-600">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     Jasper Gerits<br />
                     Glenn Van de Voorde
                   </p>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-600">
+              <p className="text-xs sm:text-sm text-slate-600">
                 Liever offline?{" "}
                 <span className="font-semibold text-slate-800">
                   Spreek ons gerust aan op school.
@@ -226,7 +225,7 @@ export default function App() {
                 <p className="text-[11px] uppercase tracking-wide text-slate-500 font-semibold">
                   Vragen &amp; ondersteuning
                 </p>
-                <h3 className="text-sm font-semibold text-slate-900 mt-1">
+                <h3 className="text-sm sm:text-base font-semibold text-slate-900 mt-1">
                   Snelle hulp bij ICT en AI
                 </h3>
               </div>
@@ -250,9 +249,9 @@ export default function App() {
                   </p>
                 </div>
               </div>
-              <p className="text-xs text-slate-700">
+              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                 Stel je vraag over Smartschool, hardware, software of AI in de klas. De
-                chatbot is getraind op de context van onze scholengroep.
+                chatbot is gebouwd met Google Gemini en afgestemd op onze scholengroep.
               </p>
               <div className="flex flex-col sm:flex-row gap-2">
                 <Button
@@ -282,7 +281,7 @@ export default function App() {
               <h4 className="text-sm font-semibold text-slate-900">
                 Problemen met ICT-materiaal?
               </h4>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs sm:text-sm text-slate-500 mt-1">
                 Gebruik ons officiële ticketsysteem voor storingen, defecten en aanvragen.
               </p>
               <div className="mt-3">
@@ -309,8 +308,10 @@ export default function App() {
                   <Lightbulb className="h-4 w-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-900">AI-tools</h3>
-                  <p className="text-xs text-slate-500">
+                  <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+                    AI-tools
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-500">
                     Overzicht van tools die je in de klas kan gebruiken.
                   </p>
                 </div>
@@ -347,13 +348,12 @@ export default function App() {
                 </Button>
               </div>
 
-              <div className="border border-dashed border-slate-300 rounded-lg px-3 py-2 text-xs text-slate-600 bg-slate-50">
-                Meer weten over concrete lesvoorbeelden (incl. Google Forms)? Zie het
-                blok{" "}
+              <div className="border border-dashed border-slate-300 rounded-lg px-3 py-2 text-xs sm:text-sm text-slate-600 bg-slate-50 leading-relaxed">
+                Op zoek naar kant-en-klare voorbeelden en prompts? Bekijk de{" "}
                 <span className="font-semibold">
-                  &ldquo;AI in je les: voorbeelden&rdquo;
+                  voorbeeldenmap en scenario&apos;s
                 </span>{" "}
-                hieronder.
+                verder op deze pagina.
               </div>
             </div>
           </Card>
@@ -369,7 +369,7 @@ export default function App() {
                   <Sparkles className="h-4 w-4 text-blue-500" />
                   Lovable · AI-website bouwen
                 </h3>
-                <p className="text-sm text-slate-600 mt-2">
+                <p className="text-sm sm:text-[15px] text-slate-600 mt-2 leading-relaxed">
                   In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span> een
                   eenvoudige AI-gestuurde website maakt voor je eigen lespraktijk.
                 </p>
@@ -444,66 +444,66 @@ export default function App() {
           </Card>
         </section>
 
-        {/* AI in je les: aparte blok, met voorbeelden & Drive-link */}
-       <section className="mb-10">
-  <Card className="p-6">
-    <div className="flex items-start justify-between gap-3 mb-4">
-      <div>
-        <p className="text-[12px] font-medium text-blue-600 uppercase tracking-wide">
-          Praktijkvoorbeelden
-        </p>
-        <h3 className="text-base sm:text-lg font-semibold text-slate-900">
-          AI in je les: uitgewerkte scenario’s & inspiratie
-        </h3>
-        <p className="text-sm text-slate-600 mt-1">
-          Een groeiende verzameling voorbeelden, oefeningen, tools, AI-prompts en ideeën
-          gedeeld door collega’s binnen de scholengroep.
-        </p>
-      </div>
+        {/* AI in je les: uitgewerkte scenario’s & Drive */}
+        <section className="mb-10">
+          <Card className="p-6">
+            <div className="flex items-start justify-between gap-3 mb-4">
+              <div>
+                <p className="text-[12px] font-medium text-blue-600 uppercase tracking-wide">
+                  Praktijkvoorbeelden
+                </p>
+                <h3 className="text-base sm:text-lg font-semibold text-slate-900">
+                  AI in je les: uitgewerkte scenario’s &amp; inspiratie
+                </h3>
+                <p className="text-sm text-slate-600 mt-1 leading-relaxed">
+                  Een groeiende verzameling voorbeelden, oefeningen, tools, AI-prompts en ideeën
+                  gedeeld door collega’s binnen de scholengroep.
+                </p>
+              </div>
 
-      <span className="hidden sm:inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700 border border-blue-100">
-        Community driven
-      </span>
-    </div>
+              <span className="hidden sm:inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[11px] font-semibold text-blue-700 border border-blue-100">
+                Community driven
+              </span>
+            </div>
 
-    <div className="grid gap-4 sm:grid-cols-2 text-sm leading-relaxed">
-      <div className="space-y-3">
-        <p className="font-semibold text-slate-800">Wat vind je in deze map?</p>
-        <ul className="list-disc pl-5 space-y-1.5 text-slate-700">
-          <li>Kant-en-klare lesvoorbeelden met AI-tools.</li>
-          <li>Voorbeelden van collega’s uit verschillende vakken.</li>
-          <li>Prompts die effectief werken in de klas.</li>
-          <li>Voorbeelden voor Genially, NotebookLM, Lovable enz.</li>
-          <li>Digitale oefeningen, stappenplannen en mini-apps.</li>
-        </ul>
-      </div>
+            <div className="grid gap-4 sm:grid-cols-2 text-sm leading-relaxed">
+              <div className="space-y-3">
+                <p className="font-semibold text-slate-800">Wat vind je in deze map?</p>
+                <ul className="list-disc pl-5 space-y-1.5 text-slate-700">
+                  <li>Kant-en-klare lesvoorbeelden met AI-tools.</li>
+                  <li>Voorbeelden van collega’s uit verschillende vakken.</li>
+                  <li>Prompts die effectief werken in de klas.</li>
+                  <li>Voorbeelden voor Genially, NotebookLM, Lovable enz.</li>
+                  <li>Digitale oefeningen, stappenplannen en mini-apps.</li>
+                </ul>
+              </div>
 
-      <div className="space-y-4">
-        <p className="text-xs font-semibold text-slate-500 uppercase">
-          Direct gebruiken of zelf bijdragen
-        </p>
+              <div className="space-y-4">
+                <p className="text-xs font-semibold text-slate-500 uppercase">
+                  Direct gebruiken of zelf bijdragen
+                </p>
 
-        <Button
-          as="a"
-          href={DRIVE_EXAMPLES_URL}
-          variant="primary"
-          className="justify-center font-semibold"
-        >
-          📁 Open de map met alle voorbeelden
-        </Button>
+                <Button
+                  as="a"
+                  href={DRIVE_EXAMPLES_URL}
+                  variant="primary"
+                  className="justify-center font-semibold"
+                >
+                  📁 Open de map met alle voorbeelden
+                </Button>
 
-        <Button
-          onClick={() => setShowExamples(true)}
-          variant="ghost"
-          className="justify-center text-xs"
-        >
-          <BookOpen className="h-3 w-3" />
-          Bekijk uitgewerkte scenario’s
-        </Button>
-      </div>
-    </div>
-  </Card>
-</section>
+                <Button
+                  onClick={() => setShowExamples(true)}
+                  variant="ghost"
+                  className="justify-center text-xs"
+                >
+                  <BookOpen className="h-3 w-3" />
+                  Bekijk uitgewerkte scenario’s
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </section>
 
         {/* AI uitleg sectie – uitvouwbaar, met formatief-handelen link */}
         <section className="mt-2">
@@ -518,7 +518,7 @@ export default function App() {
                   <Lightbulb className="h-4 w-4" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-900">
+                  <h3 className="text-sm sm:text-base font-semibold text-slate-900">
                     Waarom AI gebruiken in het onderwijs?
                   </h3>
                   <p className="text-xs text-slate-500">
@@ -536,7 +536,7 @@ export default function App() {
             {showAiWhy && (
               <div className="divide-y divide-slate-200">
                 <div className="px-5 py-4">
-                  <ul className="text-sm text-slate-700 space-y-2">
+                  <ul className="text-sm text-slate-700 space-y-2 leading-relaxed">
                     <li>• Persoonlijke feedback en gerichte oefening voor leerlingen.</li>
                     <li>• Sneller materiaal maken: toetsen, rubrics, voorbeeldopdrachten.</li>
                     <li>• Ondersteuning bij differentiatie en remediëring.</li>
@@ -607,113 +607,85 @@ export default function App() {
         </span>
       </button>
 
-{showExamples && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
-    <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto font-inter text-[15px] leading-relaxed">
-      <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
-        <h2 className="text-lg font-semibold text-slate-900">
-          Uitgewerkte scenario’s & inspiratievoorbeelden
-        </h2>
-        <button
-          onClick={() => setShowExamples(false)}
-          className="p-1.5 rounded-full hover:bg-slate-200 text-slate-600"
-        >
-          <X className="h-4 w-4" />
-        </button>
-      </div>
+      {/* Modal: Uitgewerkte scenario's (Forms-vrij, Drive centraal) */}
+      {showExamples && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50">
+              <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+                Uitgewerkte scenario’s &amp; inspiratievoorbeelden
+              </h2>
+              <button
+                onClick={() => setShowExamples(false)}
+                className="p-1.5 rounded-full hover:bg-slate-200 text-slate-600"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
 
-      <div className="p-6 space-y-8">
-
-        {/* NotebookLM */}
-        <div>
-          <h3 className="text-base font-semibold text-slate-900 mb-2">
-            NotebookLM – werken met leerstof
-          </h3>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>Hoofdstukken automatisch laten samenvatten.</li>
-            <li>Belangrijkste kernconcepten en begrippen laten uitlichten.</li>
-            <li>Vragen genereren om leerstof te verdiepen.</li>
-            <li>Audio-uitleg laten maken voor leerlingen die auditief leren.</li>
-          </ul>
-        </div>
-
-        {/* Genially */}
-        <div>
-          <h3 className="text-base font-semibold text-slate-900 mb-2">
-            Genially – interactieve presentaties
-          </h3>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>AI gebruiken om interactieve quizzen op te bouwen.</li>
-            <li>Snel visuele uitlegpagina’s genereren vanuit AI-content.</li>
-            <li>Leerlingen interactieve mindmaps laten maken.</li>
-          </ul>
-        </div>
-
-        {/* Lovable */}
-        <div>
-          <h3 className="text-base font-semibold text-slate-900 mb-2">
-            Lovable – mini-websites & AI-tools
-          </h3>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>Een AI-gestuurd opdrachtenportaal bouwen.</li>
-            <li>Klaswebsites voor projecten, excursies of thema’s.</li>
-            <li>Mini-apps voor oefenreeksen met eigen prompts.</li>
-          </ul>
-        </div>
-
-        {/* Meer */}
-        <div>
-          <h3 className="text-base font-semibold text-slate-900 mb-2">
-            Andere inspirerende toepassingen
-          </h3>
-          <ul className="list-disc pl-5 space-y-1.5">
-            <li>AI-gegenereerde dialogen voor taallessen.</li>
-            <li>Korte reflectievragen creëren voor na een toets.</li>
-            <li>Snelle differentiatie: makkelijke/moeilijke versies laten maken.</li>
-            <li>Automatische mindmaps en overzichtstabellen.</li>
-          </ul>
-        </div>
-
-        <div className="pt-4 border-t border-slate-200">
-          <p className="text-sm text-slate-600 mb-2">
-            Alles terug te vinden in de gezamenlijke Drive-map:
-          </p>
-          <Button
-            as="a"
-            href={DRIVE_EXAMPLES_URL}
-            variant="primary"
-            className="font-semibold"
-          >
-            📁 Open voorbeeldenmap
-          </Button>
-        </div>
-      </div>
-    </div>
-  </div>
-)}
-
-
+            <div className="p-6 space-y-8 text-sm leading-relaxed text-slate-700">
+              {/* NotebookLM */}
               <div>
-                <h3 className="text-sm font-semibold text-slate-900 mb-2">
-                  Lovable – kleine webapps en portals
+                <h3 className="text-base font-semibold text-slate-900 mb-2">
+                  NotebookLM – werken met leerstof
                 </h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Een eenvoudige klas- of projectwebsite maken.</li>
-                  <li>Een oefenplatform rond één thema (bv. examens, hoofdstuk).</li>
-                  <li>Leerlingen zelf een mini-site laten bouwen als opdracht.</li>
+                <ul className="list-disc pl-5 space-y-1.5">
+                  <li>Hoofdstukken automatisch laten samenvatten.</li>
+                  <li>Belangrijke kernconcepten en begrippen laten uitlichten.</li>
+                  <li>Vragen genereren om leerstof te verdiepen.</li>
+                  <li>Audio-uitleg laten maken voor leerlingen die auditief leren.</li>
                 </ul>
               </div>
 
+              {/* Genially */}
               <div>
-                <h3 className="text-sm font-semibold text-slate-900 mb-2">
-                  Praktische tips
+                <h3 className="text-base font-semibold text-slate-900 mb-2">
+                  Genially – interactieve presentaties
                 </h3>
-                <ul className="list-disc pl-5 space-y-1">
-                  <li>Begin met een korte klassikale demo voor je leerlingen aan de slag laat gaan.</li>
-                  <li>Werk bij voorkeur in duo’s: zo helpen ze elkaar.</li>
-                  <li>Maak duidelijke afspraken rond privacy en wat ze wel/niet mogen ingeven.</li>
-                  <li>Laat leerlingen steeds kritisch blijven: AI is een hulpmiddel, geen einddoel.</li>
+                <ul className="list-disc pl-5 space-y-1.5">
+                  <li>Interactieve quizzen en escape rooms bouwen.</li>
+                  <li>Visuele uitlegpagina’s genereren vanuit AI-content.</li>
+                  <li>Leerlingen interactieve mindmaps en infographics laten maken.</li>
                 </ul>
+              </div>
+
+              {/* Lovable */}
+              <div>
+                <h3 className="text-base font-semibold text-slate-900 mb-2">
+                  Lovable – mini-websites &amp; AI-tools
+                </h3>
+                <ul className="list-disc pl-5 space-y-1.5">
+                  <li>Een AI-gestuurd opdrachtenportaal bouwen.</li>
+                  <li>Klaswebsites voor projecten, excursies of thema’s.</li>
+                  <li>Mini-apps voor oefenreeksen met eigen prompts.</li>
+                </ul>
+              </div>
+
+              {/* Andere ideeën */}
+              <div>
+                <h3 className="text-base font-semibold text-slate-900 mb-2">
+                  Andere inspirerende toepassingen
+                </h3>
+                <ul className="list-disc pl-5 space-y-1.5">
+                  <li>AI-gegenereerde dialogen voor taallessen.</li>
+                  <li>Korte reflectievragen creëren voor na een toets.</li>
+                  <li>Snelle differentiatie: makkelijke/moeilijke versies laten maken.</li>
+                  <li>Automatische mindmaps en overzichtstabellen voor moeilijke hoofdstukken.</li>
+                </ul>
+              </div>
+
+              <div className="pt-4 border-t border-slate-200">
+                <p className="text-sm text-slate-600 mb-2">
+                  Alle uitgewerkte voorbeelden en bestanden vind je terug in de gezamenlijke Drive-map:
+                </p>
+                <Button
+                  as="a"
+                  href={DRIVE_EXAMPLES_URL}
+                  variant="primary"
+                  className="font-semibold"
+                >
+                  📁 Open de map met voorbeelden (Drive)
+                </Button>
               </div>
             </div>
           </div>

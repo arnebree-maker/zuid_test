@@ -637,6 +637,7 @@ Belangrijk:
               </div>
             </div>
 
+            {/* 3 knoppen voor prompts */}
             <div className="grid gap-3 sm:grid-cols-3 text-sm">
               <Button
                 variant="secondary"
@@ -670,12 +671,73 @@ Belangrijk:
               </Button>
             </div>
 
+            {/* Voorbeelden eronder */}
+            <div className="mt-5 space-y-3 text-sm">
+              <p className="text-xs font-semibold text-slate-500 uppercase">
+                Voorbeelden
+              </p>
+
+              <div className="space-y-2">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border border-slate-200 rounded-lg px-3 py-2 bg-slate-50">
+                  <div>
+                    <a
+                      href="https://ai.studio/apps/drive/1RRONQ0-FBWov-L_9SZIYg5VAjFlXeBh3"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
+                    >
+                      <LinkIcon className="h-3 w-3" />
+                      AI-taalbuddy (Gemini-app)
+                    </a>
+                    <p className="text-xs text-slate-600">
+                      Interactieve chatbot die leerlingen helpt bij taal en vakinhoud.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border border-slate-200 rounded-lg px-3 py-2 bg-slate-50">
+                  <div>
+                    <a
+                      href="https://rekenenindelogistiek.lovable.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
+                    >
+                      <LinkIcon className="h-3 w-3" />
+                      Rekenen in de logistiek (Lovable-site)
+                    </a>
+                    <p className="text-xs text-slate-600">
+                      Eenvoudige oefenwebsite met realistische rekenoefeningen rond logistiek.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1.5 border border-slate-200 rounded-lg px-3 py-2 bg-slate-50">
+                  <div>
+                    <a
+                      href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-blue-600 hover:text-blue-700 font-medium text-sm"
+                    >
+                      <LinkIcon className="h-3 w-3" />
+                      NotebookLM-dossier (AI-samenvattingen)
+                    </a>
+                    <p className="text-xs text-slate-600">
+                      NotebookLM-voorbeeld met samenvattingen en vragen op basis van leerstof.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <p className="mt-3 text-xs text-slate-500">
-              Tip: eens je een goede prompt hebt, kan je die hergebruiken voor verschillende klassen
-              of thema&apos;s.
+              Tip: eens je een goede prompt of tool hebt, kan je die hergebruiken voor verschillende
+              klassen of thema&apos;s.
             </p>
           </Card>
         </section>
+
 
         {/* AI in je les: uitgewerkte scenario’s & Drive */}
         <section className="mb-10">

@@ -275,7 +275,7 @@ export default function App() {
               <div className="bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-2xl p-6 shadow-xl">
                 <h4 className="font-bold text-white mb-3 text-lg">Deel je ervaring!</h4>
                 <p className="text-sm text-white/95 mb-4">Heb je zelf interessante projecten of toepassingen in je les? Deel je ideeën en ervaringen met de hele werkgroep. Dit helpt iedereen om van elkaar te leren!</p>
-                <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" className="w-full bg-white text-blue-700 hover:bg-blue-50 shadow-lg">
+                <Button as="a" href="https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=drive_link" className="w-full bg-black text-blue-700 hover:bg-blue-50 shadow-lg">
                   <LinkIcon className="h-4 w-4" /> Drop je projectjes in de Google Drive
                 </Button>
               </div>

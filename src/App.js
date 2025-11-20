@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ChevronRight,
   ChevronDown,
@@ -13,7 +13,6 @@ import {
   Clock,
   Sparkles,
 } from "lucide-react";
-
 
 const GEMINI_URL =
   "https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing";
@@ -62,9 +61,9 @@ const Card = ({ children, className = "" }) => (
 );
 
 function CountdownTimer({ targetDate }) {
-  const [timeLeft, setTimeLeft] = React.useState("");
+  const [timeLeft, setTimeLeft] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
       const event = new Date(targetDate);
@@ -89,16 +88,13 @@ function CountdownTimer({ targetDate }) {
 
   return (
     <div className="flex flex-col gap-1">
-      <p className="font-mono text-lg font-semibold text-fuchsia-700">
-        {timeLeft}
-      </p>
+      <p className="font-mono text-lg font-semibold text-fuchsia-700">{timeLeft}</p>
       <p className="text-[11px] text-gray-500">
         Beperkt aantal plaatsen – schrijf tijdig in.
       </p>
     </div>
   );
 }
-
 
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
@@ -157,149 +153,121 @@ export default function App() {
           </div>
         </div>
 
-{/* Werkgroep + Lovable opleiding naast elkaar */}
-<div className="grid md:grid-cols-2 gap-6 mb-12">
-  {/* Team kaart */}
-  <Card className="p-8 sm:p-10 shadow-xl border-0 bg-white">
-    <div className="text-center max-w-3xl mx-auto">
-      <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-semibold mb-6">
-        <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-        Werkgroep Digitale Didactiek
-      </div>
-      <div className="space-y-4 text-gray-700 leading-relaxed">
-        <div className="grid sm:grid-cols-2 gap-6 mt-8 text-left">
-          <div className="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
-            <p className="font-semibold text-gray-900 mb-2">Technisch team</p>
-            <p className="text-sm">Mieke Verbeerst, Barbara Van Hecke, Arne Breemeersch</p>
-          </div>
-          <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
-            <p className="font-semibold text-gray-900 mb-2">Pedagogisch team</p>
-            <p className="text-sm">Jasper Gerits, Glenn Van de Voorde</p>
-          </div>
+        {/* Werkgroep + Lovable opleiding in 1/3 – 2/3 layout */}
+        <div className="mb-12 flex flex-col md:flex-row md:items-stretch md:gap-6">
+          {/* Team kaart – 1/3 breed op desktop */}
+          <Card className="p-8 sm:p-10 shadow-xl border-0 bg-white md:w-1/3 md:flex-none">
+            <div className="max-w-md mx-auto">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-semibold mb-6">
+                <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+                Werkgroep Digitale Didactiek
+              </div>
+              <div className="space-y-4 text-gray-700 leading-relaxed">
+                <div className="space-y-3 text-left">
+                  <div className="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
+                    <p className="font-semibold text-gray-900 mb-1">Technisch team</p>
+                    <p className="text-sm">
+                      Mieke Verbeerst, Barbara Van Hecke, Arne Breemeersch
+                    </p>
+                  </div>
+                  <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
+                    <p className="font-semibold text-gray-900 mb-1">Pedagogisch team</p>
+                    <p className="text-sm">Jasper Gerits, Glenn Van de Voorde</p>
+                  </div>
+                </div>
+                <p className="pt-2 text-sm">
+                  Is iets onduidelijk?{" "}
+                  <strong className="text-blue-700">Spreek ons gerust aan.</strong>
+                </p>
+              </div>
+            </div>
+          </Card>
+
+          {/* Lovable Bijscholing – 2/3 breed op desktop */}
+          <Card className="mt-6 md:mt-0 p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-blue-50 via-fuchsia-50 to-fuchsia-100 hover:-translate-y-1 hover:shadow-2xl transition-transform duration-200 md:w-2/3 md:flex-none">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 rounded-full text-xs font-semibold mb-4">
+              <span className="w-1.5 h-1.5 bg-fuchsia-600 rounded-full" />
+              🔥 Nieuw in december
+            </div>
+
+            {/* Titel + icoon */}
+            <div className="flex items-center gap-2 mb-3">
+              <div className="p-2 rounded-xl bg-fuchsia-600 text-white shadow-md">
+                <Sparkles className="h-5 w-5" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900">
+                Bijscholing: <span className="text-fuchsia-700">Lovable</span>
+              </h3>
+            </div>
+
+            {/* Korte beschrijving */}
+            <p className="text-gray-700 text-sm mb-4">
+              Maak in 1 uur een eigen AI-website met <strong>Lovable</strong>. Ideaal om
+              snel een portaal, projectsite of oefenapp voor je leerlingen te bouwen.
+            </p>
+
+            {/* Bullets */}
+            <ul className="text-sm text-gray-800 space-y-1.5 mb-4">
+              <li>✅ Basis van Lovable in onderwijscontext</li>
+              <li>✅ Voorbeelden van sites van collega’s</li>
+              <li>✅ Tijd om zelf iets te bouwen</li>
+            </ul>
+
+            {/* Meta: datum, lokaal, doelgroep */}
+            <div className="mt-2 space-y-2 text-sm text-gray-700">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-fuchsia-700" />
+                <span>
+                  <strong>Datum:</strong> 15 december 2025
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-4 w-4 text-fuchsia-700" />
+                <span>
+                  <strong>Startuur:</strong> bv. 16u00 (pas gerust aan)
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-fuchsia-700" />
+                <span>
+                  <strong>Locatie:</strong> Lokaal Z314
+                </span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs px-2 py-1 rounded-full bg-fuchsia-700/10 text-fuchsia-800 font-semibold">
+                  Doelgroep: alle leerkrachten · beginners welkom
+                </span>
+              </div>
+            </div>
+
+            {/* Countdown timer blok */}
+            <div className="mt-6 p-4 bg-white/80 rounded-2xl shadow-inner border border-fuchsia-200">
+              <p className="text-xs text-gray-600 mb-1">⏳ Tijd tot start</p>
+              <CountdownTimer targetDate="2025-12-15T16:00:00" />
+            </div>
+
+            {/* Inschrijven knop + extra link */}
+            <div className="mt-6 space-y-2">
+              <Button
+                as="a"
+                href="#"
+                // TODO: vervang "#" door je echte inschrijfformulier (bv. Google Form)
+                variant="primary"
+                className="w-full justify-center bg-fuchsia-600 hover:bg-fuchsia-700"
+              >
+                📥 Schrijf je in
+              </Button>
+              <a
+                href="#"
+                className="w-full text-xs text-fuchsia-800 underline flex items-center justify-center gap-1"
+              >
+                <LinkIcon className="h-3 w-3" />
+                📑 Bekijk voorbeelden van Lovable-projecten
+              </a>
+            </div>
+          </Card>
         </div>
-        <p className="mt-6 text-base">
-          Is iets onduidelijk? <strong className="text-blue-700">Spreek ons gerust aan.</strong>
-        </p>
-      </div>
-    </div>
-  </Card>
-
-{/* Werkgroep + Lovable opleiding in 1/3 – 2/3 layout */}
-<div className="mb-12 flex flex-col md:flex-row md:items-stretch md:gap-6">
-  {/* Team kaart – 1/3 breed op desktop */}
-  <Card className="p-8 sm:p-10 shadow-xl border-0 bg-white md:w-1/3 md:flex-none">
-    <div className="max-w-md mx-auto">
-      <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-900 rounded-full text-sm font-semibold mb-6">
-        <span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-        Werkgroep Digitale Didactiek
-      </div>
-      <div className="space-y-4 text-gray-700 leading-relaxed">
-        <div className="space-y-3 text-left">
-          <div className="p-5 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-100">
-            <p className="font-semibold text-gray-900 mb-1">Technisch team</p>
-            <p className="text-sm">Mieke Verbeerst, Barbara Van Hecke, Arne Breemeersch</p>
-          </div>
-          <div className="p-5 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl border border-emerald-100">
-            <p className="font-semibold text-gray-900 mb-1">Pedagogisch team</p>
-            <p className="text-sm">Jasper Gerits, Glenn Van de Voorde</p>
-          </div>
-        </div>
-        <p className="pt-2 text-sm">
-          Is iets onduidelijk?{" "}
-          <strong className="text-blue-700">Spreek ons gerust aan.</strong>
-        </p>
-      </div>
-    </div>
-  </Card>
-
-  {/* Lovable Bijscholing – 2/3 breed op desktop */}
-  <Card className="mt-6 md:mt-0 p-8 sm:p-10 shadow-xl border-0 bg-gradient-to-br from-blue-50 via-fuchsia-50 to-fuchsia-100 hover:-translate-y-1 hover:shadow-2xl transition-transform duration-200 md:w-2/3 md:flex-none">
-    {/* Badge */}
-    <div className="inline-flex items-center gap-2 px-3 py-1 bg-fuchsia-100 text-fuchsia-700 rounded-full text-xs font-semibold mb-4">
-      <span className="w-1.5 h-1.5 bg-fuchsia-600 rounded-full" />
-      🔥 Nieuw in december
-    </div>
-
-    {/* Titel + icoon */}
-    <div className="flex items-center gap-2 mb-3">
-      <div className="p-2 rounded-xl bg-fuchsia-600 text-white shadow-md">
-        <Sparkles className="h-5 w-5" />
-      </div>
-      <h3 className="text-2xl font-bold text-gray-900">
-        Bijscholing: <span className="text-fuchsia-700">Lovable</span>
-      </h3>
-    </div>
-
-    {/* Korte beschrijving */}
-    <p className="text-gray-700 text-sm mb-4">
-      Maak in 1 uur een eigen AI-website met <strong>Lovable</strong>. Ideaal om snel
-      een portaal, projectsite of oefenapp voor je leerlingen te bouwen.
-    </p>
-
-    {/* Bullets */}
-    <ul className="text-sm text-gray-800 space-y-1.5 mb-4">
-      <li>✅ Basis van Lovable in onderwijscontext</li>
-      <li>✅ Voorbeelden van sites van collega’s</li>
-      <li>✅ Tijd om zelf iets te bouwen</li>
-    </ul>
-
-    {/* Meta: datum, lokaal, doelgroep */}
-    <div className="mt-2 space-y-2 text-sm text-gray-700">
-      <div className="flex items-center gap-2">
-        <Calendar className="h-4 w-4 text-fuchsia-700" />
-        <span>
-          <strong>Datum:</strong> 15 december 2025
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <Clock className="h-4 w-4 text-fuchsia-700" />
-        <span>
-          <strong>Startuur:</strong> bv. 16u00 (pas gerust aan)
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <MapPin className="h-4 w-4 text-fuchsia-700" />
-        <span>
-          <strong>Locatie:</strong> Lokaal Z314
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <span className="text-xs px-2 py-1 rounded-full bg-fuchsia-700/10 text-fuchsia-800 font-semibold">
-          Doelgroep: alle leerkrachten · beginners welkom
-        </span>
-      </div>
-    </div>
-
-    {/* Countdown timer blok */}
-    <div className="mt-6 p-4 bg-white/80 rounded-2xl shadow-inner border border-fuchsia-200">
-      <p className="text-xs text-gray-600 mb-1">⏳ Tijd tot start</p>
-      <CountdownTimer targetDate="2025-12-15T16:00:00" />
-    </div>
-
-    {/* Inschrijven knop + extra link */}
-    <div className="mt-6 space-y-2">
-      <Button
-        as="a"
-        href="#"
-        // TODO: vervang "#" door je echte inschrijfformulier (bv. Google Form)
-        variant="primary"
-        className="w-full justify-center bg-fuchsia-600 hover:bg-fuchsia-700"
-      >
-        📥 Schrijf je in
-      </Button>
-      <a
-        href="#"
-        className="w-full text-xs text-fuchsia-800 underline flex items-center justify-center gap-1"
-      >
-        <LinkIcon className="h-3 w-3" />
-        📑 Bekijk voorbeelden van Lovable-projecten
-      </a>
-    </div>
-  </Card>
-</div>
-
-
-
 
         {/* Twee hoofdcards naast elkaar */}
         <div className="grid gap-6 md:grid-cols-2">
@@ -385,7 +353,7 @@ export default function App() {
             </div>
           </Card>
 
-          {/* Vragen kaart (rechts) – ZONDER iframe, met knop naar popup */}
+          {/* Vragen kaart (rechts) */}
           <Card className="p-0 overflow-hidden group">
             <div className="p-6 sm:p-7 flex items-start gap-3 border-b border-gray-200/50 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600">
               <div className="rounded-xl p-2.5 bg-white/20 backdrop-blur text-white shadow-lg">
@@ -727,7 +695,9 @@ export default function App() {
                 <ul className="list-none text-sm text-gray-700 space-y-2.5">
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold mt-0.5">→</span>
-                    <span>Begin met een demo voor de hele klas voordat leerlingen zelfstandig aan de slag gaan.</span>
+                    <span>
+                      Begin met een demo voor de hele klas voordat leerlingen zelfstandig aan de slag gaan.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-blue-600 font-bold mt-0.5">→</span>

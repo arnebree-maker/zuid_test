@@ -403,62 +403,75 @@ Belangrijk:
             </div>
           </Card>
 
-          {/* Vragen & ondersteuning – chatbot laten opvallen */}
-          <Card className="p-6 relative overflow-hidden">
-            {/* subtiele banner */}
-            <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-sky-400 to-blue-600" />
+{/* Bot Zuid – prominente kaart */}
+<Card className="p-6 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500">
+  {/* bovenrand */}
+  <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
 
-            <div className="mb-4 flex items-center justify-between">
-              <div>
-                <p className="text-[11px] uppercase tracking-wide text-slate-500 font-semibold">
-                  Vragen &amp; ondersteuning
-                </p>
-                <h3 className="text-sm sm:text-base font-semibold text-slate-900 mt-1">
-                  Snelle hulp bij ICT en AI
-                </h3>
-              </div>
-              <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-semibold text-blue-700 border border-blue-100">
-                Nieuw: Bot Zuid
-              </span>
-            </div>
+  <div className="relative space-y-4 text-white">
+    
+    {/* Titel */}
+    <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-full bg-white/15 flex items-center justify-center shadow-sm border border-white/30">
+          <span className="text-lg font-semibold">🤖</span>
+        </div>
+        <div>
+          <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
+            Chatbot · ICT & AI
+          </p>
+          <h3 className="text-sm sm:text-base font-semibold">
+            Bot Zuid – ICT (Gemini)
+          </h3>
+        </div>
+      </div>
+      <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">
+        Nieuw & experimenteel
+      </span>
+    </div>
 
-            {/* Chatbot blok */}
-            <div className="mb-4 rounded-xl border border-blue-100 bg-blue-50/60 p-4 flex flex-col gap-2">
-              <div className="flex items-center gap-2">
-                <div className="h-9 w-9 rounded-full bg-blue-600 flex items-center justify-center text-white shadow-sm">
-                  <HelpCircle className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-[11px] uppercase tracking-wide text-blue-700 font-semibold">
-                    Chatbot
-                  </p>
-                  <p className="text-sm font-semibold text-slate-900">
-                    Bot Zuid – ICT (Gemini)
-                  </p>
-                </div>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                Stel je vraag over Smartschool, hardware, software of AI in de klas. De
-                chatbot is gebouwd met Google Gemini en afgestemd op onze scholengroep.
-              </p>
+    {/* Korte uitleg */}
+    <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
+      Stel je vraag over Smartschool, hardware, software of AI in de klas. 
+      Bot Zuid is gebouwd met Google Gemini en afgestemd op Scholengroep Sint-Rembert.
+      Antwoorden zijn kort, duidelijk en in het Nederlands.
+    </p>
 
-              {/* Inline chatbot */}
-              <SupportChat />
+    {/* inline chat */}
+    <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm">
+      <p className="text-[11px] font-semibold text-slate-500 mb-1">
+        Direct chatten met Bot Zuid
+      </p>
+      <SupportChat />
+    </div>
 
-              {/* Fallback-link als de chat niet zou werken */}
-              <div className="mt-2">
-                <Button
-                  as="a"
-                  href={GEMINI_URL}
-                  variant="ghost"
-                  className="w-full justify-center text-xs"
-                >
-                  <LinkIcon className="h-3 w-3" />
-                  Werkt dit niet? Open Bot Zuid in een nieuw tabblad
-                </Button>
-              </div>
+    {/* Suggested questions */}
+    <div className="flex flex-wrap gap-1.5 text-[11px] mt-2">
+      <span className="px-2 py-1 rounded-full bg-white/15 border border-white/20">
+        💻 “Mijn projector werkt niet…”
+      </span>
+      <span className="px-2 py-1 rounded-full bg-white/15 border border-white/20">
+        📱 “Hoe kan ik AI veilig gebruiken?”
+      </span>
+      <span className="px-2 py-1 rounded-full bg-white/15 border border-white/20">
+        🧪 “Idee voor AI in mijn les…”
+      </span>
+    </div>
 
-            </div>
+    {/* fallback link */}
+    <Button
+      as="a"
+      href={GEMINI_URL}
+      variant="secondary"
+      className="w-full justify-center bg-white/10 text-white border-white/40 hover:bg-white/20 text-xs"
+    >
+      <LinkIcon className="h-3 w-3" />
+      Werkt dit niet? Open Bot Zuid in een nieuw tabblad
+    </Button>
+
+  </div>
+</Card>
+
 
             {/* Topdesk blok */}
             <div className="pt-3 border-t border-slate-200 mt-2">

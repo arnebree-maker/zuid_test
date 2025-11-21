@@ -167,13 +167,16 @@ function SupportChat() {
       </div>
 
       <form onSubmit={handleSubmit} className="flex items-center gap-2">
-        <input
-          type="text"
-          className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Typ je vraag…"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
+<input
+  type="text"
+  className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm 
+             bg-white text-slate-900 placeholder:text-slate-400
+             focus:outline-none focus:ring-2 focus:ring-blue-500"
+  placeholder="Typ je vraag…"
+  value={input}
+  onChange={(e) => setInput(e.target.value)}
+/>
+
         <Button type="submit" variant="primary" className="px-3 py-1.5 text-xs">
           Verstuur
         </Button>

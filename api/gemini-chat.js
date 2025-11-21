@@ -1,3 +1,5 @@
+// api/gemini-chat.js
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ error: "Method not allowed" });
@@ -6,6 +8,7 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
+    console.error("GEMINI_API_KEY ontbreekt op de server");
     res.status(500).json({ error: "GEMINI_API_KEY not configured" });
     return;
   }

@@ -1,5 +1,3 @@
-// api/gemini-chat.js
-
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ reply: "Method not allowed" });
@@ -8,28 +6,24 @@ export default async function handler(req, res) {
   const apiKey = process.env.GEMINI_API_KEY;
 
   if (!apiKey) {
-    console.error("❌ GEMINI_API_KEY ontbreekt op de server");
-    return res
-      .status(500)
-      .json({ reply: "Serverfout: GEMINI_API_KEY is niet ingesteld." });
+    return res.status(500).json({
+      reply: "Serverfout: GEMINI_API_KEY ontbreekt.",
+    });
   }
 
   try {
-    // In Vercel wordt req.body al als JSON aangeleverd (zoals we zagen bij de test)
     const { messages } = req.body || {};
 
     if (!messages || !Array.isArray(messages)) {
-      console.error("Geen geldige messages array:", req.body);
-      return res
-        .status(400)
-        .json({ reply: "Serverfout: geen geldige berichtenlijst ontvangen." });
+      return res.status(400).json({
+        reply: "Serverfout: geen geldige berichten ontvangen.",
+      });
     }
 
-    // ➜ Gebruik de v1beta-endpoint, die zeker met jouw AI Studio key werkt
-const url =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=" +
-  apiKey;
-
+    // ✔ JUISTE endpoint voor jouw sleutel
+    const url =
+      "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" +
+      apiKey;
 
     const geminiResponse = await fetch(url, {
       method: "POST",
@@ -45,14 +39,10 @@ const url =
     const data = await geminiResponse.json();
 
     if (!geminiResponse.ok) {
-      console.error("❌ Gemini API fout:", data);
-      const msg =
-        data.error?.message ||
-        JSON.stringify(data) ||
-        "Onbekende fout van Gemini.";
-      // Let op: we stoppen de fout TEVENS in 'reply' zodat jij hem in de chat ziet
       return res.status(500).json({
-        reply: "Gemini API-fout: " + msg,
+        reply:
+          "Gemini API-fout: " +
+          (data.error?.message || JSON.stringify(data)),
       });
     }
 
@@ -63,10 +53,8 @@ const url =
 
     return res.status(200).json({ reply });
   } catch (err) {
-    console.error("❌ Serverfout:", err);
     return res.status(500).json({
-      reply:
-        "Serverfout bij het praten met Gemini: " + (err.message || String(err)),
+      reply: "Serverfout: " + (err.message || String(err)),
     });
   }
 }

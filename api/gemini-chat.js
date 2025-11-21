@@ -2,59 +2,58 @@
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ reply: "Method not allowed" });
   }
 
-  // API key ophalen uit Vercel
   const apiKey = process.env.GEMINI_API_KEY;
+
   if (!apiKey) {
     console.error("❌ GEMINI_API_KEY ontbreekt op de server");
-    return res.status(500).json({ error: "GEMINI_API_KEY not configured" });
+    return res
+      .status(500)
+      .json({ reply: "Serverfout: GEMINI_API_KEY is niet ingesteld." });
   }
 
   try {
-    // Body veilig inlezen (werkt 100% op Vercel)
-    let rawBody = "";
-    await new Promise((resolve) => {
-      req.on("data", (chunk) => (rawBody += chunk));
-      req.on("end", resolve);
+    // In Vercel wordt req.body al als JSON aangeleverd (zoals we zagen bij de test)
+    const { messages } = req.body || {};
+
+    if (!messages || !Array.isArray(messages)) {
+      console.error("Geen geldige messages array:", req.body);
+      return res
+        .status(400)
+        .json({ reply: "Serverfout: geen geldige berichtenlijst ontvangen." });
+    }
+
+    // ➜ Gebruik de v1beta-endpoint, die zeker met jouw AI Studio key werkt
+    const url =
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" +
+      apiKey;
+
+    const geminiResponse = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: messages.map((m) => ({
+          role: m.role === "user" ? "user" : "model",
+          parts: [{ text: m.text }],
+        })),
+      }),
     });
 
-    let parsed = {};
-    try {
-      parsed = rawBody ? JSON.parse(rawBody) : {};
-    } catch (e) {
-      console.error("❌ Kon JSON niet parsen:", rawBody);
-      return res.status(400).json({ error: "Invalid JSON body" });
-    }
-
-    const { messages } = parsed;
-    if (!messages || !Array.isArray(messages)) {
-      return res.status(400).json({ error: "Missing messages array" });
-    }
-
-    // 🚀 CALL NAAR GEMINI
-    const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: messages.map((msg) => ({
-            role: msg.role === "user" ? "user" : "model",
-            parts: [{ text: msg.text }],
-          })),
-        }),
-      }
-    );
+    const data = await geminiResponse.json();
 
     if (!geminiResponse.ok) {
-      const err = await geminiResponse.text();
-      console.error("❌ Gemini API fout:", err);
-      return res.status(500).json({ error: "Gemini API error" });
+      console.error("❌ Gemini API fout:", data);
+      const msg =
+        data.error?.message ||
+        JSON.stringify(data) ||
+        "Onbekende fout van Gemini.";
+      // Let op: we stoppen de fout TEVENS in 'reply' zodat jij hem in de chat ziet
+      return res.status(500).json({
+        reply: "Gemini API-fout: " + msg,
+      });
     }
-
-    const data = await geminiResponse.json();
 
     const reply =
       data.candidates?.[0]?.content?.parts
@@ -63,7 +62,10 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ reply });
   } catch (err) {
-    console.error("❌ Server fout:", err);
-    return res.status(500).json({ error: "Server error" });
+    console.error("❌ Serverfout:", err);
+    return res.status(500).json({
+      reply:
+        "Serverfout bij het praten met Gemini: " + (err.message || String(err)),
+    });
   }
 }

@@ -101,6 +101,89 @@ function CountdownTimer({ targetDate }) {
     </div>
   );
 }
+function SupportChat() {
+  const [messages, setMessages] = React.useState([
+    {
+      role: "bot",
+      text: "Hallo! Ik ben Bot Zuid. Stel hier je vraag over ICT of AI in de klas.",
+    },
+  ]);
+  const [input, setInput] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!input.trim() || loading) return;
+
+    const newMessages = [...messages, { role: "user", text: input.trim() }];
+    setMessages(newMessages);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/gemini-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: newMessages }),
+      });
+
+      const data = await res.json();
+      const reply =
+        data?.reply ||
+        "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
+
+      setMessages([...newMessages, { role: "bot", text: reply }]);
+    } catch (err) {
+      console.error(err);
+      setMessages([
+        ...newMessages,
+        {
+          role: "bot",
+          text: "Er ging iets mis bij de verbinding met de server.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="mt-3 rounded-xl border border-blue-100 bg-white p-3">
+      <div className="h-48 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
+        {messages.map((m, i) => (
+          <div
+            key={i}
+            className={`max-w-[85%] px-2.5 py-1.5 rounded-lg ${
+              m.role === "user"
+                ? "ml-auto bg-blue-600 text-white"
+                : "mr-auto bg-slate-100 text-slate-800"
+            }`}
+          >
+            {m.text}
+          </div>
+        ))}
+        {loading && (
+          <div className="mr-auto bg-slate-100 text-slate-500 text-xs px-2.5 py-1.5 rounded-lg">
+            Bot Zuid is aan het typen…
+          </div>
+        )}
+      </div>
+
+      <form onSubmit={handleSubmit} className="flex items-center gap-2">
+        <input
+          type="text"
+          className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Typ je vraag…"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <Button type="submit" variant="primary" className="px-3 py-1.5 text-xs">
+          Verstuur
+        </Button>
+      </form>
+    </div>
+  );
+}
 
 export default function App() {
   const [showExamples, setShowExamples] = useState(false);
@@ -358,27 +441,23 @@ Belangrijk:
                 Stel je vraag over Smartschool, hardware, software of AI in de klas. De
                 chatbot is gebouwd met Google Gemini en afgestemd op onze scholengroep.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Button
-                  variant="primary"
-                  onClick={openGeminiChat}
-                  className="flex-1 justify-center"
-                >
-                  <span className="inline-flex items-center gap-1">
-                    Chat met Bot Zuid
-                    <ChevronRight className="h-4 w-4" />
-                  </span>
-                </Button>
+
+              {/* Inline chatbot */}
+              <SupportChat />
+
+              {/* Fallback-link als de chat niet zou werken */}
+              <div className="mt-2">
                 <Button
                   as="a"
                   href={GEMINI_URL}
                   variant="ghost"
-                  className="flex-1 justify-center text-xs"
+                  className="w-full justify-center text-xs"
                 >
                   <LinkIcon className="h-3 w-3" />
-                  Open in nieuw tabblad
+                  Werkt dit niet? Open Bot Zuid in een nieuw tabblad
                 </Button>
               </div>
+
             </div>
 
             {/* Topdesk blok */}

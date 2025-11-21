@@ -26,9 +26,10 @@ export default async function handler(req, res) {
     }
 
     // ➜ Gebruik de v1beta-endpoint, die zeker met jouw AI Studio key werkt
-    const url =
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" +
-      apiKey;
+const url =
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-001:generateContent?key=" +
+  apiKey;
+
 
     const geminiResponse = await fetch(url, {
       method: "POST",

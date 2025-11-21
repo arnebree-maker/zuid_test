@@ -484,7 +484,7 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
         {/* Compacte hero */}
-        <section className="mt-6 mb-8">
+        <section className="mt-6 mb-4">
           <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
             <div className="relative h-[38vh] sm:h-[42vh]">
               <img
@@ -511,24 +511,22 @@ export default function App() {
           </div>
         </section>
 
-        {/* Werkgroep + Bot Zuid */}
-        <section className="mb-8 grid gap-5 md:grid-cols-2">
-          {/* Werkgroep */}
-          <Card className="p-5">
-            <div className="space-y-3">
+        {/* Werkgroep klein onder de foto */}
+        <section className="mb-8">
+          <Card className="p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
-                <h3 className="text-sm sm:text-base font-semibold text-slate-800">
+                <h3 className="text-xs sm:text-sm font-semibold text-slate-800">
                   Werkgroep Digitale Didactiek
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1">
+                <p className="text-[11px] sm:text-xs text-slate-500">
                   Aanspreekpunt voor vragen over ICT &amp; AI in je les.
                 </p>
               </div>
-
-              <div className="space-y-2 text-sm">
-                <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
-                  <p className="font-semibold text-slate-800 text-sm">Technisch team</p>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+              <div className="grid grid-cols-2 gap-3 text-[11px] sm:text-xs text-slate-700">
+                <div>
+                  <p className="font-semibold text-slate-800 mb-1">Technisch team</p>
+                  <p className="leading-relaxed">
                     Mieke Verbeerst
                     <br />
                     Barbara Van Hecke
@@ -536,25 +534,21 @@ export default function App() {
                     Arne Breemeersch
                   </p>
                 </div>
-                <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
-                  <p className="font-semibold text-slate-800 text-sm">Pedagogisch team</p>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                <div>
+                  <p className="font-semibold text-slate-800 mb-1">Pedagogisch team</p>
+                  <p className="leading-relaxed">
                     Jasper Gerits
                     <br />
                     Glenn Van de Voorde
                   </p>
                 </div>
               </div>
-
-              <p className="text-xs sm:text-sm text-slate-600">
-                Liever offline?{" "}
-                <span className="font-semibold text-slate-800">
-                  Spreek ons gerust aan op school.
-                </span>
-              </p>
             </div>
           </Card>
+        </section>
 
+        {/* Bot Zuid links + snelkoppelingen rechts */}
+        <section className="mb-8 grid gap-5 md:grid-cols-2">
           {/* Bot Zuid */}
           <Card className="p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500">
             <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
@@ -633,10 +627,8 @@ export default function App() {
               </Button>
             </div>
           </Card>
-        </section>
 
-        {/* Tegels met interne "pagina's" */}
-        <section className="mb-8">
+          {/* Snel naar de juiste info – nu rechts */}
           <Card className="p-5">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
@@ -653,7 +645,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
               <button
                 type="button"
                 onClick={() => setActivePage("ai-tools")}

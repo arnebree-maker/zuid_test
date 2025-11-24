@@ -491,32 +491,88 @@ export default function App() {
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
         {/* Compacte hero */}
-        <section className="mt-6 mb-4">
-          <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-900">
-            <div className="relative h-[38vh] sm:h-[42vh]">
-              <img
-                src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
-                alt="Team samenwerking en enthousiasme"
-                className="w-full h-full object-cover opacity-80"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-900/55 to-transparent" />
-              <div className="absolute inset-0 flex items-center">
-                <div className="px-6 sm:px-8 max-w-xl space-y-3">
-                  <p className="text-[11px] font-semibold tracking-wide text-blue-300 uppercase">
-                    Portaal Digitale Didactiek
-                  </p>
-                  <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white leading-tight">
-                    ICT &amp; AI-ondersteuning
-                  </h2>
-                  <p className="text-xs sm:text-sm text-slate-200 max-w-md">
-                    Startpunt voor AI-tools, voorbeelden en hulp bij ICT-vragen binnen
-                    Scholengroep Sint-Rembert.
-                  </p>
-                </div>
-              </div>
+{/* Hero / banner – moderner & groter */}
+<section className="mt-6 mb-6">
+  <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
+    <div className="relative h-[46vh] sm:h-[55vh] md:h-[65vh]">
+      <img
+        src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
+        alt="Team samenwerking en enthousiasme"
+        className="w-full h-full object-cover opacity-80"
+      />
+
+      {/* overlays */}
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+
+      {/* content */}
+      <div className="absolute inset-0 flex items-center">
+        <div className="w-full px-6 sm:px-8 md:px-10">
+          <div className="max-w-2xl space-y-4 md:space-y-5 bg-slate-900/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
+            {/* kleine labels bovenaan */}
+            <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px]">
+              <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 border border-blue-300/40 px-2 py-1 text-blue-100 font-semibold uppercase tracking-wide">
+                <Sparkles className="h-3 w-3" />
+                Digitale didactiek
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/70 border border-slate-600 px-2 py-1 text-slate-200">
+                ICT &amp; AI-ondersteuning
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-300/40 px-2 py-1 text-emerald-100">
+                Voor alle leerkrachten
+              </span>
+            </div>
+
+            {/* titel + baseline */}
+            <div className="space-y-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
+                Alles rond ICT &amp; AI
+                <span className="block text-sm sm:text-base md:text-lg text-slate-200 font-normal mt-1.5">
+                  Eén startpunt voor tools, voorbeelden, bijscholing en ondersteuning
+                  binnen Scholengroep Sint-Rembert.
+                </span>
+              </h2>
+            </div>
+
+            {/* “call to action” knoppen – klikken zet meteen de juiste sectie open */}
+            <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
+              <Button
+                type="button"
+                variant="primary"
+                className="bg-blue-500 hover:bg-blue-600"
+                onClick={() => setActivePage("ai-tools")}
+              >
+                <Lightbulb className="h-4 w-4" />
+                AI-tools bekijken
+              </Button>
+
+              <Button
+                type="button"
+                variant="secondary"
+                className="border-slate-500/70 bg-slate-900/40 text-slate-100 hover:bg-slate-800"
+                onClick={() => setActivePage("voorbeelden")}
+              >
+                <BookOpen className="h-4 w-4" />
+                Voorbeelden &amp; scenario&apos;s
+              </Button>
+
+              <Button
+                type="button"
+                variant="ghost"
+                className="text-slate-200 hover:bg-slate-800/60"
+                onClick={() => setActivePage("bijscholing")}
+              >
+                <Sparkles className="h-4 w-4" />
+                Bijscholing Lovable
+              </Button>
             </div>
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
         {/* Werkgroep klein onder de foto */}
         <section className="mb-8">

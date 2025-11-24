@@ -547,10 +547,10 @@ export default function App() {
           </Card>
         </section>
 
-{/* Snel naar de juiste info (links) + Bot Zuid (rechts) */}
-<section className="mb-6 grid gap-4 md:grid-cols-4 items-stretch">
-  {/* Snel naar de juiste info – links, 1/4 breed */}
-  <Card className="h-full p-5 flex flex-col md:col-span-1">
+{/* Snel naar de juiste info (links, sticky) + Bot Zuid (rechts) */}
+<section className="mb-6 grid gap-4 md:grid-cols-3 items-start">
+  {/* Snel naar de juiste info – links, 1/3 breed en sticky */}
+  <Card className="h-full p-5 flex flex-col md:col-span-1 md:sticky md:top-24">
     <div className="flex items-center gap-2 mb-3">
       <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
         <Sparkles className="h-4 w-4" />
@@ -644,7 +644,7 @@ export default function App() {
       </button>
     </div>
 
-    {/* Kleine extra tekst + link onderaan om hoogte mooi te vullen */}
+    {/* Kleine extra tekst + link onderaan */}
     <div className="mt-4 pt-3 border-t border-slate-200 text-[11px] sm:text-xs text-slate-600 space-y-1">
       <p className="font-semibold text-slate-800">
         Tip: start met de voorbeelden.
@@ -665,8 +665,8 @@ export default function App() {
     </div>
   </Card>
 
-  {/* Bot Zuid – rechts, neemt 3/4 in */}
-  <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 md:col-span-3">
+  {/* Bot Zuid – rechts, 2/3 breed */}
+  <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 md:col-span-2">
     <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
     <div className="relative space-y-3 text-white">
       <div className="flex items-center justify-between gap-3">
@@ -745,6 +745,8 @@ export default function App() {
     </div>
   </Card>
 </section>
+
+
 
         {/* Actieve "subpagina" */}
         {activePage && (

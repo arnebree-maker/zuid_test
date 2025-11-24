@@ -547,10 +547,126 @@ export default function App() {
           </Card>
         </section>
 
-{/* Bot Zuid links + snelkoppelingen rechts */}
-<section className="mb-6 grid gap-4 md:grid-cols-2 items-start md:items-stretch">
-  {/* Bot Zuid – links, full height */}
-  <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500">
+{/* Snel naar de juiste info (links) + Bot Zuid (rechts) */}
+<section className="mb-6 grid gap-4 md:grid-cols-4 items-stretch">
+  {/* Snel naar de juiste info – links, 1/4 breed */}
+  <Card className="h-full p-5 flex flex-col md:col-span-1">
+    <div className="flex items-center gap-2 mb-3">
+      <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
+        <Sparkles className="h-4 w-4" />
+      </div>
+      <div>
+        <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+          Snel naar de juiste info
+        </h3>
+        <p className="text-xs sm:text-sm text-slate-500">
+          Kies een onderdeel. De inhoud verschijnt onderaan op deze pagina.
+        </p>
+      </div>
+    </div>
+
+    {/* Links onder elkaar */}
+    <div className="flex flex-col gap-2 text-sm">
+      <button
+        type="button"
+        onClick={() => setActivePage("ai-tools")}
+        className={`group rounded-lg border px-3 py-2.5 text-left transition-colors ${
+          activePage === "ai-tools"
+            ? "border-blue-500 bg-blue-50"
+            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-semibold text-slate-900">AI-tools</span>
+          <Lightbulb className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
+        </div>
+        <p className="text-xs text-slate-600">
+          Overzicht van tools zoals ChatGPT, Gemini, NotebookLM, Genially…
+        </p>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActivePage("voorbeelden")}
+        className={`group rounded-lg border px-3 py-2.5 text-left transition-colors ${
+          activePage === "voorbeelden"
+            ? "border-blue-500 bg-blue-50"
+            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-semibold text-slate-900">
+            Voorbeelden &amp; scenario&apos;s
+          </span>
+          <BookOpen className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
+        </div>
+        <p className="text-xs text-slate-600">
+          Drive-map met concrete lesvoorbeelden en prompts van collega&apos;s.
+        </p>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActivePage("bijscholing")}
+        className={`group rounded-lg border px-3 py-2.5 text-left transition-colors ${
+          activePage === "bijscholing"
+            ? "border-blue-500 bg-blue-50"
+            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-semibold text-slate-900">
+            Bijscholing &amp; vorming
+          </span>
+          <Sparkles className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
+        </div>
+        <p className="text-xs text-slate-600">
+          Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.
+        </p>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setActivePage("ai-beleid")}
+        className={`group rounded-lg border px-3 py-2.5 text-left transition-colors ${
+          activePage === "ai-beleid"
+            ? "border-blue-500 bg-blue-50"
+            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
+        }`}
+      >
+        <div className="flex items-center justify-between mb-1">
+          <span className="font-semibold text-slate-900">AI-richtlijnen</span>
+          <Lightbulb className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
+        </div>
+        <p className="text-xs text-slate-600">
+          Wat mag wel/niet met AI + links naar achtergrondinfo.
+        </p>
+      </button>
+    </div>
+
+    {/* Kleine extra tekst + link onderaan om hoogte mooi te vullen */}
+    <div className="mt-4 pt-3 border-t border-slate-200 text-[11px] sm:text-xs text-slate-600 space-y-1">
+      <p className="font-semibold text-slate-800">
+        Tip: start met de voorbeelden.
+      </p>
+      <p>
+        In de Drive-map vind je kant-en-klare lessen en prompts die je meteen kan
+        uitproberen in de klas.
+      </p>
+      <Button
+        as="a"
+        href={DRIVE_EXAMPLES_URL}
+        variant="ghost"
+        className="justify-start px-0 text-[11px]"
+      >
+        <LinkIcon className="h-3 w-3 mr-1" />
+        Open de map met voorbeelden
+      </Button>
+    </div>
+  </Card>
+
+  {/* Bot Zuid – rechts, neemt 3/4 in */}
+  <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 md:col-span-3">
     <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
     <div className="relative space-y-3 text-white">
       <div className="flex items-center justify-between gap-3">
@@ -628,124 +744,7 @@ export default function App() {
       </Button>
     </div>
   </Card>
-
-  {/* Snel naar de juiste info – rechts, full height en opgevuld */}
-  <Card className="h-full p-5 flex flex-col">
-    <div className="flex items-center gap-2 mb-3">
-      <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
-        <Sparkles className="h-4 w-4" />
-      </div>
-      <div>
-        <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-          Snel naar de juiste info
-        </h3>
-        <p className="text-xs sm:text-sm text-slate-500">
-          Klik op een tegel. De inhoud verschijnt hieronder.
-        </p>
-      </div>
-    </div>
-
-    {/* Tegels */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-      <button
-        type="button"
-        onClick={() => setActivePage("ai-tools")}
-        className={`group rounded-xl border px-4 py-3 flex flex-col justify-between text-left transition-colors ${
-          activePage === "ai-tools"
-            ? "border-blue-500 bg-blue-50"
-            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="font-semibold text-slate-900">AI-tools</span>
-          <Lightbulb className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
-        </div>
-        <p className="text-xs text-slate-600">
-          Overzicht van AI-tools zoals ChatGPT, Gemini, NotebookLM, Genially...
-        </p>
-      </button>
-
-      <button
-        type="button"
-        onClick={() => setActivePage("voorbeelden")}
-        className={`group rounded-xl border px-4 py-3 flex flex-col justify-between text-left transition-colors ${
-          activePage === "voorbeelden"
-            ? "border-blue-500 bg-blue-50"
-            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="font-semibold text-slate-900">
-            Voorbeelden &amp; scenario&apos;s
-          </span>
-          <BookOpen className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
-        </div>
-        <p className="text-xs text-slate-600">
-          Drive-map met concrete lesvoorbeelden en prompts van collega&apos;s.
-        </p>
-      </button>
-
-      <button
-        type="button"
-        onClick={() => setActivePage("bijscholing")}
-        className={`group rounded-xl border px-4 py-3 flex flex-col justify-between text-left transition-colors ${
-          activePage === "bijscholing"
-            ? "border-blue-500 bg-blue-50"
-            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="font-semibold text-slate-900">
-            Bijscholing &amp; vorming
-          </span>
-          <Sparkles className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
-        </div>
-        <p className="text-xs text-slate-600">
-          Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.
-        </p>
-      </button>
-
-      <button
-        type="button"
-        onClick={() => setActivePage("ai-beleid")}
-        className={`group rounded-xl border px-4 py-3 flex flex-col justify-between text-left transition-colors ${
-          activePage === "ai-beleid"
-            ? "border-blue-500 bg-blue-50"
-            : "border-slate-200 bg-slate-50 hover:border-blue-500 hover:bg-blue-50"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1.5">
-          <span className="font-semibold text-slate-900">AI-richtlijnen</span>
-          <Lightbulb className="h-4 w-4 text-slate-500 group-hover:text-blue-600" />
-        </div>
-        <p className="text-xs text-slate-600">
-          Wat mag wel/niet met AI + links naar achtergrondinfo.
-        </p>
-      </button>
-    </div>
-
-    {/* Extra compacte info onder de tegels om hoogte op te vullen */}
-    <div className="mt-4 pt-3 border-t border-slate-200 text-xs sm:text-[13px] text-slate-600 space-y-1">
-      <p className="font-semibold text-slate-800">
-        Tip: start met de voorbeelden.
-      </p>
-      <p>
-        In de Drive-map vind je kant-en-klare lessen, prompts en mini-projecten
-        die je meteen kan uitproberen in de klas.
-      </p>
-      <Button
-        as="a"
-        href={DRIVE_EXAMPLES_URL}
-        variant="ghost"
-        className="justify-start px-0 text-xs"
-      >
-        <LinkIcon className="h-3 w-3 mr-1" />
-        Open de map met voorbeelden
-      </Button>
-    </div>
-  </Card>
 </section>
-
 
         {/* Actieve "subpagina" */}
         {activePage && (
@@ -764,20 +763,7 @@ export default function App() {
         </footer>
       </main>
 
-      {/* Floating chat bubble – opent Gemini in apart venster */}
-      <button
-        type="button"
-        onClick={openGeminiChat}
-        className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full shadow-lg bg-blue-600 text-white px-4 h-12 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-      >
-        <div className="relative flex items-center justify-center">
-          <span className="absolute inline-flex h-9 w-9 rounded-full bg-blue-500 opacity-60 animate-ping" />
-          <span className="relative inline-flex h-9 w-9 rounded-full bg-blue-600 items-center justify-center">
-            <HelpCircle className="h-5 w-5" />
-          </span>
-        </div>
-        <span className="hidden sm:inline text-xs font-medium">Chat met Bot Zuid</span>
-      </button>
+      
     </div>
   );
 }

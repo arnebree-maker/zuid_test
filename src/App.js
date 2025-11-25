@@ -11,11 +11,23 @@ import {
   Link as LinkIcon,
 } from "lucide-react";
 
+const TEAMS_CHAT_URL =
+  "https://teams.microsoft.com/l/chat/0/0?users=arne.breemeersch@sint-rembert.be";
+
+const OUTLOOK_MEETING_URL =
+  "https://outlook.office.com/calendar/0/deeplink/compose?to=arne.breemeersch@sint-rembert.be&subject=Afspraak%20ICT%20%2F%20AI&body=Beschrijf%20kort%20je%20vraag%20over%20ICT%20of%20AI.";
+
 const GEMINI_URL =
   "https://gemini.google.com/gem/1eAez_W8DALYxBVNPQTzmg2CVx4XDn6w7?usp=sharing";
 
 const DRIVE_EXAMPLES_URL =
   "https://drive.google.com/drive/folders/12hkdkdgrNgK8W3b5qXjJvcPaKsinLEuj?usp=sharing";
+
+// Teams / Outlook links
+const TEAMS_CHAT_URL =
+  "https://teams.microsoft.com/l/chat/0/0?users=arne.breemeersch@sint-rembert.be";
+const OUTLOOK_CALENDAR_URL =
+  "https://outlook.office.com/calendar/view/week";
 
 /* ------------ Basis UI-componenten ------------ */
 
@@ -442,6 +454,117 @@ function PolicySection() {
   );
 }
 
+/* ------------ Zwevend plannertje rechtsonder (Teams) ------------ */
+
+function FloatingPlanner() {
+  const [open, setOpen] = useState(false);
+
+  // Hier kan je eventueel later een echte status ophalen (Graph API e.d.)
+  const statusLabel = "Meestal beschikbaar op maandag–donderdag, 8u30–16u30";
+  const statusState: "free" | "busy" = "free"; // manueel aanpasbaar
+
+  return (
+    <div className="fixed bottom-4 right-4 z-50">
+      {/* Uitgeklapt paneel */}
+      {open && (
+        <div className="mb-3 w-72 sm:w-80 rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/20 p-4 text-sm">
+          <div className="flex items-start justify-between gap-2 mb-2">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.08em] text-blue-500 font-semibold">
+                Afspraak in Teams
+              </p>
+              <h3 className="text-sm font-semibold text-slate-900">
+                Plan een moment met Arne
+              </h3>
+              <p className="text-[11px] text-slate-500 mt-0.5">
+                Handig voor vragen over ICT &amp; AI of een korte 1-op-1.
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="h-6 w-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-500 hover:bg-slate-200 text-xs"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Status */}
+          <div className="mb-3 space-y-1">
+            <div className="inline-flex items-center gap-1.5 rounded-full border px-2 py-1 text-[11px]">
+              <span
+                className={`h-2 w-2 rounded-full ${
+                  statusState === "free" ? "bg-emerald-500" : "bg-amber-500"
+                }`}
+              />
+              <span className="font-semibold text-slate-700">
+                {statusState === "free" ? "Beschikbaar (indicatief)" : "Waarschijnlijk bezet"}
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-500">{statusLabel}</p>
+          </div>
+
+          {/* Contactopties */}
+          <div className="space-y-2">
+<Button
+  as="a"
+  href={TEAMS_CHAT_URL}
+  variant="primary"
+  className="w-full justify-center text-xs"
+>
+  <span className="text-base">💬</span>
+  Start een Teams-chat
+</Button>
+
+<Button
+  as="a"
+  href={OUTLOOK_MEETING_URL}
+  variant="secondary"
+  className="w-full justify-center text-xs"
+>
+  <Calendar className="h-3 w-3" />
+  Plan via Outlook / Teams
+</Button>
+
+
+            <div className="text-[11px] text-slate-500 leading-snug">
+              <p>
+                Voeg bij het plannen in je uitnodiging kort toe waarover je vraag gaat.{" "}
+              </p>
+              <p className="mt-1">
+                E-mail:{" "}
+                <a
+                  href="mailto:arne.breemeersch@sint-rembert.be"
+                  className="font-semibold text-blue-600 hover:text-blue-700"
+                >
+                  arne.breemeersch@sint-rembert.be
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Drijvende knop */}
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center gap-2 rounded-full bg-blue-600 text-white shadow-xl shadow-blue-600/40 px-3 py-2 text-xs sm:text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+      >
+        <div className="h-7 w-7 rounded-full bg-white/10 flex items-center justify-center border border-white/30">
+          <span className="text-[13px] font-semibold">AB</span>
+        </div>
+        <div className="flex flex-col items-start leading-tight">
+          <span className="font-semibold">Afspraak met Arne</span>
+          <span className="text-[10px] text-blue-100">
+            Teams / Outlook · klik om te plannen
+          </span>
+        </div>
+      </button>
+    </div>
+  );
+}
+
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
@@ -490,89 +613,87 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-        {/* Compacte hero */}
-{/* Hero / banner – moderner & groter */}
-<section className="mt-6 mb-6">
-  <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
-    <div className="relative h-[46vh] sm:h-[55vh] md:h-[65vh]">
-      <img
-        src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
-        alt="Team samenwerking en enthousiasme"
-        className="w-full h-full object-cover opacity-80"
-      />
+        {/* Hero / banner – moderner & groter */}
+        <section className="mt-6 mb-6">
+          <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
+            <div className="relative h-[46vh] sm:h-[55vh] md:h-[65vh]">
+              <img
+                src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
+                alt="Team samenwerking en enthousiasme"
+                className="w-full h-full object-cover opacity-80"
+              />
 
-      {/* overlays */}
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+              {/* overlays */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
 
-      {/* content */}
-      <div className="absolute inset-0 flex items-center">
-        <div className="w-full px-6 sm:px-8 md:px-10">
-          <div className="max-w-2xl space-y-4 md:space-y-5 bg-slate-900/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
-            {/* kleine labels bovenaan */}
-            <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px]">
-              <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 border border-blue-300/40 px-2 py-1 text-blue-100 font-semibold uppercase tracking-wide">
-                <Sparkles className="h-3 w-3" />
-                Digitale didactiek
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/70 border border-slate-600 px-2 py-1 text-slate-200">
-                ICT &amp; AI-ondersteuning
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-300/40 px-2 py-1 text-emerald-100">
-                Voor alle leerkrachten
-              </span>
-            </div>
+              {/* content */}
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full px-6 sm:px-8 md:px-10">
+                  <div className="max-w-2xl space-y-4 md:space-y-5 bg-slate-900/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
+                    {/* kleine labels bovenaan */}
+                    <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px]">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 border border-blue-300/40 px-2 py-1 text-blue-100 font-semibold uppercase tracking-wide">
+                        <Sparkles className="h-3 w-3" />
+                        Digitale didactiek
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/70 border border-slate-600 px-2 py-1 text-slate-200">
+                        ICT &amp; AI-ondersteuning
+                      </span>
+                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-300/40 px-2 py-1 text-emerald-100">
+                        Voor alle leerkrachten
+                      </span>
+                    </div>
 
-            {/* titel + baseline */}
-            <div className="space-y-2">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-                Alles rond ICT &amp; AI
-                <span className="block text-sm sm:text-base md:text-lg text-slate-200 font-normal mt-1.5">
-                  Eén startpunt voor tools, voorbeelden, bijscholing en ondersteuning
-                  binnen Scholengroep Sint-Rembert.
-                </span>
-              </h2>
-            </div>
+                    {/* titel + baseline */}
+                    <div className="space-y-2">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
+                        Alles rond ICT &amp; AI
+                        <span className="block text-sm sm:text-base md:text-lg text-slate-200 font-normal mt-1.5">
+                          Eén startpunt voor tools, voorbeelden, bijscholing en ondersteuning
+                          binnen Scholengroep Sint-Rembert.
+                        </span>
+                      </h2>
+                    </div>
 
-            {/* “call to action” knoppen – klikken zet meteen de juiste sectie open */}
-            <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
-              <Button
-                type="button"
-                variant="primary"
-                className="bg-blue-500 hover:bg-blue-600"
-                onClick={() => setActivePage("ai-tools")}
-              >
-                <Lightbulb className="h-4 w-4" />
-                AI-tools bekijken
-              </Button>
+                    {/* “call to action” knoppen – klikken zet meteen de juiste sectie open */}
+                    <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
+                      <Button
+                        type="button"
+                        variant="primary"
+                        className="bg-blue-500 hover:bg-blue-600"
+                        onClick={() => setActivePage("ai-tools")}
+                      >
+                        <Lightbulb className="h-4 w-4" />
+                        AI-tools bekijken
+                      </Button>
 
-              <Button
-                type="button"
-                variant="secondary"
-                className="border-slate-500/70 bg-slate-900/40 text-slate-100 hover:bg-slate-800"
-                onClick={() => setActivePage("voorbeelden")}
-              >
-                <BookOpen className="h-4 w-4" />
-                Voorbeelden &amp; scenario&apos;s
-              </Button>
+                      <Button
+                        type="button"
+                        variant="secondary"
+                        className="border-slate-500/70 bg-slate-900/40 text-slate-100 hover:bg-slate-800"
+                        onClick={() => setActivePage("voorbeelden")}
+                      >
+                        <BookOpen className="h-4 w-4" />
+                        Voorbeelden &amp; scenario&apos;s
+                      </Button>
 
-              <Button
-                type="button"
-                variant="ghost"
-                className="text-slate-200 hover:bg-slate-800/60"
-                onClick={() => setActivePage("bijscholing")}
-              >
-                <Sparkles className="h-4 w-4" />
-                Bijscholing Lovable
-              </Button>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="text-slate-200 hover:bg-slate-800/60"
+                        onClick={() => setActivePage("bijscholing")}
+                      >
+                        <Sparkles className="h-4 w-4" />
+                        Bijscholing Lovable
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
+        </section>
 
         {/* Werkgroep klein onder de foto */}
         <section className="mb-8">
@@ -612,212 +733,211 @@ export default function App() {
 
         {/* Snel naar de juiste info (links, sticky, opvallend) + Bot Zuid (rechts) */}
         <section className="mb-6 grid gap-4 md:grid-cols-3 items-start">
-          {/* Snel naar de juiste info – links, 1/3 breed, sticky en visueel opvallend */}
-{/* Snel naar de juiste info – links, 1/3 breed, sticky en extra opvallend */}
-<Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
-  {/* bovenste band */}
-  <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400" />
+          {/* Snel naar de juiste info – links, 1/3 breed, sticky en extra opvallend */}
+          <Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
+            {/* bovenste band */}
+            <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400" />
 
-  <div className="p-5 space-y-4">
-    <div className="flex items-start justify-between gap-2">
-      <div className="space-y-2">
-        <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-blue-500/20 border border-blue-300/40 text-[11px] font-semibold text-blue-100">
-          <Sparkles className="h-3 w-3" />
-          <span>Stap 1: kies een onderdeel</span>
-        </div>
-        <div>
-          <p className="text-[11px] uppercase tracking-[0.08em] text-blue-200 font-semibold">
-            Navigatie
-          </p>
-          <h3 className="text-sm sm:text-base font-semibold">
-            Snel naar de juiste info
-          </h3>
-          <p className="text-[11px] sm:text-xs text-slate-200 mt-1">
-            <span className="font-semibold text-blue-100">Klik op een tegel</span> – onderaan
-            deze pagina verschijnt de bijhorende sectie.
-          </p>
-        </div>
-      </div>
-      <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/40 border border-blue-200/60">
-        <ChevronRight className="h-4 w-4 text-blue-100" />
-      </div>
-    </div>
+            <div className="p-5 space-y-4">
+              <div className="flex items-start justify-between gap-2">
+                <div className="space-y-2">
+                  <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-blue-500/20 border border-blue-300/40 text-[11px] font-semibold text-blue-100">
+                    <Sparkles className="h-3 w-3" />
+                    <span>Stap 1: kies een onderdeel</span>
+                  </div>
+                  <div>
+                    <p className="text-[11px] uppercase tracking-[0.08em] text-blue-200 font-semibold">
+                      Navigatie
+                    </p>
+                    <h3 className="text-sm sm:text-base font-semibold">
+                      Snel naar de juiste info
+                    </h3>
+                    <p className="text-[11px] sm:text-xs text-slate-200 mt-1">
+                      <span className="font-semibold text-blue-100">Klik op een tegel</span> – onderaan
+                      deze pagina verschijnt de bijhorende sectie.
+                    </p>
+                  </div>
+                </div>
+                <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/40 border border-blue-200/60">
+                  <ChevronRight className="h-4 w-4 text-blue-100" />
+                </div>
+              </div>
 
-    {/* Tegels onder elkaar */}
-    <div className="flex flex-col gap-2 text-sm">
-      <button
-        type="button"
-        onClick={() => setActivePage("ai-tools")}
-        className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-          activePage === "ai-tools"
-            ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-            : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1">
-          <span
-            className={`font-semibold text-xs ${
-              activePage === "ai-tools" ? "text-slate-900" : "text-white"
-            }`}
-          >
-            AI-tools
-          </span>
-          <Lightbulb
-            className={`h-4 w-4 ${
-              activePage === "ai-tools"
-                ? "text-blue-600"
-                : "text-blue-200 group-hover:text-blue-300"
-            }`}
-          />
-        </div>
-        <p
-          className={`text-[11px] ${
-            activePage === "ai-tools" ? "text-slate-600" : "text-slate-200"
-          }`}
-        >
-          Overzicht van tools zoals ChatGPT, Gemini, NotebookLM, Genially…
-        </p>
-      </button>
+              {/* Tegels onder elkaar */}
+              <div className="flex flex-col gap-2 text-sm">
+                <button
+                  type="button"
+                  onClick={() => setActivePage("ai-tools")}
+                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
+                    activePage === "ai-tools"
+                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
+                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className={`font-semibold text-xs ${
+                        activePage === "ai-tools" ? "text-slate-900" : "text-white"
+                      }`}
+                    >
+                      AI-tools
+                    </span>
+                    <Lightbulb
+                      className={`h-4 w-4 ${
+                        activePage === "ai-tools"
+                          ? "text-blue-600"
+                          : "text-blue-200 group-hover:text-blue-300"
+                      }`}
+                    />
+                  </div>
+                  <p
+                    className={`text-[11px] ${
+                      activePage === "ai-tools" ? "text-slate-600" : "text-slate-200"
+                    }`}
+                  >
+                    Overzicht van tools zoals ChatGPT, Gemini, NotebookLM, Genially…
+                  </p>
+                </button>
 
-      <button
-        type="button"
-        onClick={() => setActivePage("voorbeelden")}
-        className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-          activePage === "voorbeelden"
-            ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-            : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1">
-          <span
-            className={`font-semibold text-xs ${
-              activePage === "voorbeelden" ? "text-slate-900" : "text-white"
-            }`}
-          >
-            Voorbeelden &amp; scenario&apos;s
-          </span>
-          <BookOpen
-            className={`h-4 w-4 ${
-              activePage === "voorbeelden"
-                ? "text-blue-600"
-                : "text-blue-200 group-hover:text-blue-300"
-            }`}
-          />
-        </div>
-        <p
-          className={`text-[11px] ${
-            activePage === "voorbeelden" ? "text-slate-600" : "text-slate-200"
-          }`}
-        >
-          Drive-map met concrete lesvoorbeelden en prompts van collega&apos;s.
-        </p>
-      </button>
+                <button
+                  type="button"
+                  onClick={() => setActivePage("voorbeelden")}
+                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
+                    activePage === "voorbeelden"
+                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
+                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className={`font-semibold text-xs ${
+                        activePage === "voorbeelden" ? "text-slate-900" : "text-white"
+                      }`}
+                    >
+                      Voorbeelden &amp; scenario&apos;s
+                    </span>
+                    <BookOpen
+                      className={`h-4 w-4 ${
+                        activePage === "voorbeelden"
+                          ? "text-blue-600"
+                          : "text-blue-200 group-hover:text-blue-300"
+                      }`}
+                    />
+                  </div>
+                  <p
+                    className={`text-[11px] ${
+                      activePage === "voorbeelden" ? "text-slate-600" : "text-slate-200"
+                    }`}
+                  >
+                    Drive-map met concrete lesvoorbeelden en prompts van collega&apos;s.
+                  </p>
+                </button>
 
-      <button
-        type="button"
-        onClick={() => setActivePage("bijscholing")}
-        className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-          activePage === "bijscholing"
-            ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-            : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1">
-          <span
-            className={`font-semibold text-xs ${
-              activePage === "bijscholing" ? "text-slate-900" : "text-white"
-            }`}
-          >
-            Bijscholing &amp; vorming
-          </span>
-          <Sparkles
-            className={`h-4 w-4 ${
-              activePage === "bijscholing"
-                ? "text-blue-600"
-                : "text-blue-200 group-hover:text-blue-300"
-            }`}
-          />
-        </div>
-        <p
-          className={`text-[11px] ${
-            activePage === "bijscholing" ? "text-slate-600" : "text-slate-200"
-          }`}
-        >
-          Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.
-        </p>
-      </button>
+                <button
+                  type="button"
+                  onClick={() => setActivePage("bijscholing")}
+                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
+                    activePage === "bijscholing"
+                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
+                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className={`font-semibold text-xs ${
+                        activePage === "bijscholing" ? "text-slate-900" : "text-white"
+                      }`}
+                    >
+                      Bijscholing &amp; vorming
+                    </span>
+                    <Sparkles
+                      className={`h-4 w-4 ${
+                        activePage === "bijscholing"
+                          ? "text-blue-600"
+                          : "text-blue-200 group-hover:text-blue-300"
+                      }`}
+                    />
+                  </div>
+                  <p
+                    className={`text-[11px] ${
+                      activePage === "bijscholing" ? "text-slate-600" : "text-slate-200"
+                    }`}
+                  >
+                    Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.
+                  </p>
+                </button>
 
-      <button
-        type="button"
-        onClick={() => setActivePage("ai-beleid")}
-        className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-          activePage === "ai-beleid"
-            ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-            : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-        }`}
-      >
-        <div className="flex items-center justify-between mb-1">
-          <span
-            className={`font-semibold text-xs ${
-              activePage === "ai-beleid" ? "text-slate-900" : "text-white"
-            }`}
-          >
-            AI-richtlijnen
-          </span>
-          <Lightbulb
-            className={`h-4 w-4 ${
-              activePage === "ai-beleid"
-                ? "text-blue-600"
-                : "text-blue-200 group-hover:text-blue-300"
-            }`}
-          />
-        </div>
-        <p
-          className={`text-[11px] ${
-            activePage === "ai-beleid" ? "text-slate-600" : "text-slate-200"
-          }`}
-        >
-          Wat mag wel/niet met AI + links naar achtergrondinfo.
-        </p>
-      </button>
-    </div>
+                <button
+                  type="button"
+                  onClick={() => setActivePage("ai-beleid")}
+                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
+                    activePage === "ai-beleid"
+                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
+                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className={`font-semibold text-xs ${
+                        activePage === "ai-beleid" ? "text-slate-900" : "text-white"
+                      }`}
+                    >
+                      AI-richtlijnen
+                    </span>
+                    <Lightbulb
+                      className={`h-4 w-4 ${
+                        activePage === "ai-beleid"
+                          ? "text-blue-600"
+                          : "text-blue-200 group-hover:text-blue-300"
+                      }`}
+                    />
+                  </div>
+                  <p
+                    className={`text-[11px] ${
+                      activePage === "ai-beleid" ? "text-slate-600" : "text-slate-200"
+                    }`}
+                  >
+                    Wat mag wel/niet met AI + links naar achtergrondinfo.
+                  </p>
+                </button>
+              </div>
 
-    {/* Actieve melding: laat zien dat er iets onderaan verschijnt */}
-    {activePageLabel && (
-      <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-white text-slate-900 px-3 py-1 shadow-sm">
-          <span className="h-1.5 w-1.5 rounded-full bg-lime-500 animate-pulse" />
-          <span className="font-semibold">
-            {activePageLabel} is geopend hieronder op de pagina.
-          </span>
-        </div>
-        <p className="text-[10px] text-slate-200">
-          Scroll naar beneden om de inhoud te bekijken.
-        </p>
-      </div>
-    )}
+              {/* Actieve melding: laat zien dat er iets onderaan verschijnt */}
+              {activePageLabel && (
+                <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-white text-slate-900 px-3 py-1 shadow-sm">
+                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500 animate-pulse" />
+                    <span className="font-semibold">
+                      {activePageLabel} is geopend hieronder op de pagina.
+                    </span>
+                  </div>
+                  <p className="text-[10px] text-slate-200">
+                    Scroll naar beneden om de inhoud te bekijken.
+                  </p>
+                </div>
+              )}
 
-    {/* Extra link naar Drive */}
-    <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
-      <p className="font-semibold text-blue-100">
-        Tip: start met de voorbeelden.
-      </p>
-      <p className="text-[10px] text-slate-200">
-        In de Drive-map vind je kant-en-klare lessen en prompts die je meteen kan
-        uitproberen in de klas.
-      </p>
-      <Button
-        as="a"
-        href={DRIVE_EXAMPLES_URL}
-        variant="ghost"
-        className="justify-start px-0 text-[11px] text-blue-100 hover:text-white"
-      >
-        <LinkIcon className="h-3 w-3 mr-1" />
-        Open de map met voorbeelden
-      </Button>
-    </div>
-  </div>
-</Card>
+              {/* Extra link naar Drive */}
+              <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
+                <p className="font-semibold text-blue-100">
+                  Tip: start met de voorbeelden.
+                </p>
+                <p className="text-[10px] text-slate-200">
+                  In de Drive-map vind je kant-en-klare lessen en prompts die je meteen kan
+                  uitproberen in de klas.
+                </p>
+                <Button
+                  as="a"
+                  href={DRIVE_EXAMPLES_URL}
+                  variant="ghost"
+                  className="justify-start px-0 text-[11px] text-blue-100 hover:text-white"
+                >
+                  <LinkIcon className="h-3 w-3 mr-1" />
+                  Open de map met voorbeelden
+                </Button>
+              </div>
+            </div>
+          </Card>
 
           {/* Bot Zuid – rechts, 2/3 breed */}
           <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 md:col-span-2">
@@ -900,19 +1020,18 @@ export default function App() {
           </Card>
         </section>
 
-{/* Actieve "subpagina" */}
-{activePage && (
-  <section className="mb-10 space-y-3">
-    <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
-      <Sparkles className="h-3 w-3" />
-      <span>
-        Je bekijkt nu: <span className="underline">{activePageLabel}</span>
-      </span>
-    </div>
-    {renderActiveSection()}
-  </section>
-)}
-
+        {/* Actieve "subpagina" */}
+        {activePage && (
+          <section className="mb-10 space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
+              <Sparkles className="h-3 w-3" />
+              <span>
+                Je bekijkt nu: <span className="underline">{activePageLabel}</span>
+              </span>
+            </div>
+            {renderActiveSection()}
+          </section>
+        )}
 
         {/* Footer */}
         <footer className="mt-6 flex justify-center">
@@ -923,6 +1042,9 @@ export default function App() {
           </div>
         </footer>
       </main>
+
+      {/* Zwevend plannertje rechtsonder */}
+      <FloatingPlanner />
     </div>
   );
 }

@@ -26,6 +26,10 @@ const BOT_ZUID_AVATAR = "/media/bot-zuid.png";
 const OUTLOOK_MEETING_URL =
   "https://outlook.office.com/calendar/0/deeplink/compose?to=arne.breemeersch@sint-rembert.be&subject=Afspraak%20ICT%20%2F%20AI&body=Beschrijf%20kort%20je%20vraag%20over%20ICT%20of%20AI.";
 
+const LEREN_PROMPTEN_URL =
+  "https://chatgpt.com/g/g-6773b281c35c8191a20e8182134d34ca-leren-prompten-aivoorstudenten";
+
+
 /* ------------ Intro video overlay ------------ */
 
 function IntroVideoOverlay() {
@@ -769,6 +773,34 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
             </p>
           </div>
         </div>
+
+    <div>
+  <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+    Stap 1 – Leren prompten
+  </h2>
+  <p className="text-xs sm:text-sm text-slate-500">
+    In 10 minuten leer je hoe je duidelijke vragen kan stellen aan AI.
+    Daarna kan je kiezen tussen een website, een chatbot of NotebookLM.
+  </p>
+</div>
+
+{/* 🔽 HIER PLAATS JE DE KNOP NAAR JE GPT 🔽 */}
+
+<div className="mt-3">
+  <Button
+    as="a"
+    href={LEREN_PROMPTEN_URL}
+    variant="secondary"
+    className="text-xs"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Open oefen-chat “Leren prompten”
+  </Button>
+</div>
+
+{/* 🔼 EINDE TOEVOEGING 🔼 */}
+
 
         <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
           <div className="space-y-2">

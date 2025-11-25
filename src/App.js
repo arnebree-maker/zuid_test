@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState, useEffect } from "react";
 import {
   ChevronRight,
@@ -56,11 +57,17 @@ const Button = ({
     ...rest,
   };
 
-  return isLink ? <a {...props}>{children}</a> : <button {...props}>{children}</button>;
+  return isLink ? (
+    <a {...props}>{children}</a>
+  ) : (
+    <button {...props}>{children}</button>
+  );
 };
 
 const Card = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
+  <div
+    className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}
+  >
     {children}
   </div>
 );
@@ -209,13 +216,28 @@ function AiToolsSection() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-        <Button as="a" href="https://chatgpt.com/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://chatgpt.com/"
+          variant="secondary"
+          className="justify-center"
+        >
           ChatGPT
         </Button>
-        <Button as="a" href="https://gemini.google.com/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://gemini.google.com/"
+          variant="secondary"
+          className="justify-center"
+        >
           Google Gemini
         </Button>
-        <Button as="a" href="https://www.genial.ly/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://www.genial.ly/"
+          variant="secondary"
+          className="justify-center"
+        >
           Genially
         </Button>
         <Button
@@ -226,10 +248,20 @@ function AiToolsSection() {
         >
           NotebookLM
         </Button>
-        <Button as="a" href="https://gamma.app/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://gamma.app/"
+          variant="secondary"
+          className="justify-center"
+        >
           Gamma
         </Button>
-        <Button as="a" href="https://lovable.dev/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://lovable.dev/"
+          variant="secondary"
+          className="justify-center"
+        >
           Lovable
         </Button>
         <Button
@@ -243,8 +275,8 @@ function AiToolsSection() {
       </div>
 
       <p className="text-xs sm:text-sm text-slate-600">
-        Tip: kies één tool en test die in een kleine opdracht. Laat leerlingen meedenken over
-        wat werkt en wat niet.
+        Tip: kies één tool en test die in een kleine opdracht. Laat leerlingen meedenken
+        over wat werkt en wat niet.
       </p>
     </Card>
   );
@@ -253,7 +285,7 @@ function AiToolsSection() {
 function ExamplesSection() {
   return (
     <Card className="p-6">
-      <div className="flex items-center gap-2 mb-3">
+      <div className="flex items-center gap-2 mb-4">
         <div className="h-8 w-8 rounded-lg bg-slate-900 flex items-center justify-center text-white">
           <BookOpen className="h-4 w-4" />
         </div>
@@ -262,36 +294,162 @@ function ExamplesSection() {
             Voorbeelden &amp; scenario&apos;s
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
-            Uitgewerkte lessen, prompts en ideeën van collega&apos;s.
+            Voorbeelden die je meteen kan tonen aan collega&apos;s, met een korte uitleg en
+            een live preview.
           </p>
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 text-sm leading-relaxed mb-4">
-        <div>
-          <p className="font-semibold text-slate-800 mb-1">Wat vind je in de map?</p>
-          <ul className="list-disc pl-5 space-y-1.5 text-slate-700">
-            <li>Lesvoorbeelden per vak en graad.</li>
-            <li>Prompts die effectief waren in de klas.</li>
-            <li>Genially- en Lovable-projecten voor directe inzet.</li>
-            <li>NotebookLM-notebooks met samenvattingen.</li>
-          </ul>
+      <div className="space-y-6">
+        {/* Lovable */}
+        <div className="grid gap-4 md:grid-cols-2 items-start">
+          <div className="space-y-2 text-sm">
+            <h4 className="font-semibold text-slate-900">
+              Voorbeeld 1 · Lovable – website voor rekenen in logistiek
+            </h4>
+            <p className="text-slate-600">
+              <span className="font-semibold">Lovable</span> is een AI-gestuurde
+              webbuilder. Je beschrijft wat je wil en Lovable maakt een eerste versie van
+              je website. Ideaal om snel een projectsite of ondersteunende leersite te
+              maken, zonder zelf te coderen.
+            </p>
+            <ul className="list-disc pl-5 text-slate-600 space-y-1">
+              <li>Interactieve uitleg over rekentechnieken in de logistiek.</li>
+              <li>Geschikt om als startpagina in de les te gebruiken.</li>
+              <li>Makkelijk aanpasbaar: tekst, kleuren en voorbeeldopdrachten.</li>
+            </ul>
+            <Button
+              as="a"
+              href="https://rekenenindelogistiek.lovable.app/"
+              variant="primary"
+              className="mt-2 justify-center"
+            >
+              Open Lovable-voorbeeld in nieuw tabblad
+            </Button>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-slate-900 overflow-hidden">
+            <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] text-slate-200">
+              <span>Live preview (Lovable)</span>
+              <span className="text-slate-400">https://rekenenindelogistiek.lovable.app</span>
+            </div>
+            <iframe
+              title="Lovable voorbeeld"
+              src="https://rekenenindelogistiek.lovable.app/"
+              className="w-full h-56 bg-slate-900"
+            />
+          </div>
         </div>
-        <div className="space-y-2">
-          <Button
-            as="a"
-            href={DRIVE_EXAMPLES_URL}
-            variant="primary"
-            className="justify-center"
-          >
-            <LinkIcon className="h-4 w-4" />
-            Open de Drive-map met voorbeelden
-          </Button>
-          <p className="text-xs text-slate-600">
-            Je mag materiaal gebruiken, aanpassen en nieuwe voorbeelden toevoegen. Vermeld
-            eventueel kort je naam en vak in de bestandsnaam.
-          </p>
+
+        {/* AI Studio */}
+        <div className="grid gap-4 md:grid-cols-2 items-start">
+          <div className="space-y-2 text-sm">
+            <h4 className="font-semibold text-slate-900">
+              Voorbeeld 2 · Google AI Studio – AI-app rond logistiek rekenen
+            </h4>
+            <p className="text-slate-600">
+              <span className="font-semibold">AI Studio</span> laat je eigen AI-apps
+              bouwen op basis van Gemini. Je kiest een model, schrijft een prompt en kan
+              zo een kleine rekentool of tutor voor leerlingen maken.
+            </p>
+            <ul className="list-disc pl-5 text-slate-600 space-y-1">
+              <li>Voorbeeld-app die leerlingen helpt bij rekenoefeningen.</li>
+              <li>Je kan de prompt aanpassen aan jouw vak of graad.</li>
+              <li>Handig om snelle prototypes te testen voor in de klas.</li>
+            </ul>
+            <Button
+              as="a"
+              href="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
+              variant="primary"
+              className="mt-2 justify-center"
+            >
+              Open AI Studio-voorbeeld in nieuw tabblad
+            </Button>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-slate-900 overflow-hidden">
+            <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] text-slate-200">
+              <span>Live preview (AI Studio)</span>
+              <span className="text-slate-400">AI-app in Google AI Studio</span>
+            </div>
+            <iframe
+              title="AI Studio voorbeeld"
+              src="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
+              className="w-full h-56 bg-slate-900"
+            />
+          </div>
         </div>
+
+        {/* NotebookLM */}
+        <div className="grid gap-4 md:grid-cols-2 items-start">
+          <div className="space-y-2 text-sm">
+            <h4 className="font-semibold text-slate-900">
+              Voorbeeld 3 · NotebookLM – AI-samenvattingen en vragen
+            </h4>
+            <p className="text-slate-600">
+              <span className="font-semibold">NotebookLM</span> is een AI-notitieboek:
+              je laadt documenten of slides op en stelt er vragen over. Ideaal om leerstof
+              te herwerken of als voorbereiding op toetsen.
+            </p>
+            <ul className="list-disc pl-5 text-slate-600 space-y-1">
+              <li>Notebook met leermateriaal rond logistiek.</li>
+              <li>Leerlingen kunnen vragen stellen over de inhoud.</li>
+              <li>Je kan automatisch samenvattingen of oefenvragen laten maken.</li>
+            </ul>
+            <Button
+              as="a"
+              href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
+              variant="primary"
+              className="mt-2 justify-center"
+            >
+              Open NotebookLM-voorbeeld in nieuw tabblad
+            </Button>
+          </div>
+          <div className="rounded-xl border border-slate-200 bg-slate-900 overflow-hidden">
+            <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between text-[11px] text-slate-200">
+              <span>Live preview (NotebookLM)</span>
+              <span className="text-slate-400">NotebookLM-notebook</span>
+            </div>
+            <iframe
+              title="NotebookLM voorbeeld"
+              src="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
+              className="w-full h-56 bg-slate-900"
+            />
+          </div>
+        </div>
+
+        {/* Placeholder voor vierde voorbeeld */}
+        <div className="grid gap-4 md:grid-cols-2 items-start">
+          <div className="space-y-2 text-sm">
+            <h4 className="font-semibold text-slate-900">
+              Voorbeeld 4 · Volgt nog
+            </h4>
+            <p className="text-slate-600">
+              Hier komt later nog een vierde voorbeeld (bijvoorbeeld een Genially, een
+              AI-quiz of iets anders uit de praktijk van collega&apos;s).
+            </p>
+            <p className="text-slate-600">
+              Zodra het klaar is, verschijnt hier de uitleg én een link naar het
+              voorbeeld in een nieuw tabblad.
+            </p>
+          </div>
+          <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-xs text-slate-400 h-56">
+            Plaats voor een extra voorbeeld (coming soon)
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 border-t pt-4 border-slate-200 text-xs text-slate-600">
+        <p className="mb-1">
+          Meer voorbeelden (ook van collega&apos;s) vind je in de gedeelde Drive-map:
+        </p>
+        <Button
+          as="a"
+          href={DRIVE_EXAMPLES_URL}
+          variant="secondary"
+          className="justify-center text-xs"
+        >
+          <LinkIcon className="h-3 w-3" />
+          Open de Drive-map met voorbeelden
+        </Button>
       </div>
     </Card>
   );
@@ -452,13 +610,11 @@ function PolicySection() {
 function FloatingPlanner() {
   const [open, setOpen] = useState(false);
 
-  // Simpele manuele status (kan later via Graph API)
   const statusLabel = "Meestal beschikbaar op maandag–donderdag, 8u30–16u30";
-  const statusState = "free"; // "free" of "busy"
+  const statusState = "free"; // "free" of "busy" - manueel aanpasbaar
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
-      {/* Uitgeklapt paneel */}
       {open && (
         <div className="mb-3 w-72 sm:w-80 rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-900/20 p-4 text-sm">
           <div className="flex items-start justify-between gap-2 mb-2">
@@ -482,7 +638,6 @@ function FloatingPlanner() {
             </button>
           </div>
 
-          {/* Status */}
           <div className="mb-3 space-y-1">
             <div className="inline-flex items-center gap-1.5 rounded-full border px-2 py-1 text-[11px]">
               <span
@@ -491,13 +646,14 @@ function FloatingPlanner() {
                 }`}
               />
               <span className="font-semibold text-slate-700">
-                {statusState === "free" ? "Beschikbaar (indicatief)" : "Waarschijnlijk bezet"}
+                {statusState === "free"
+                  ? "Beschikbaar (indicatief)"
+                  : "Waarschijnlijk bezet"}
               </span>
             </div>
             <p className="text-[11px] text-slate-500">{statusLabel}</p>
           </div>
 
-          {/* Contactopties */}
           <div className="space-y-2">
             <Button
               as="a"
@@ -520,7 +676,10 @@ function FloatingPlanner() {
             </Button>
 
             <div className="text-[11px] text-slate-500 leading-snug">
-              <p>Voeg in je uitnodiging kort toe waarover je vraag gaat.</p>
+              <p>
+                Voeg bij het plannen in je uitnodiging kort toe waarover je vraag
+                gaat.
+              </p>
               <p className="mt-1">
                 E-mail:{" "}
                 <a
@@ -535,7 +694,6 @@ function FloatingPlanner() {
         </div>
       )}
 
-      {/* Drijvende knop */}
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
@@ -612,11 +770,9 @@ export default function App() {
                 className="w-full h-full object-cover opacity-80"
               />
 
-              {/* overlays */}
               <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
               <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
 
-              {/* content */}
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full px-6 sm:px-8 md:px-10">
                   <div className="max-w-2xl space-y-4 md:space-y-5 bg-slate-900/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
@@ -637,8 +793,8 @@ export default function App() {
                       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
                         Alles rond ICT &amp; AI
                         <span className="block text-sm sm:text-base md:text-lg text-slate-200 font-normal mt-1.5">
-                          Eén startpunt voor tools, voorbeelden, bijscholing en ondersteuning
-                          binnen Scholengroep Sint-Rembert.
+                          Eén startpunt voor tools, voorbeelden, bijscholing en
+                          ondersteuning binnen Scholengroep Sint-Rembert.
                         </span>
                       </h2>
                     </div>
@@ -717,9 +873,8 @@ export default function App() {
           </Card>
         </section>
 
-        {/* Snel naar info + Bot Zuid */}
+        {/* Snel naar de juiste info + Bot Zuid */}
         <section className="mb-6 grid gap-4 md:grid-cols-3 items-start">
-          {/* Navigatie links */}
           <Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
             <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400" />
 
@@ -738,8 +893,10 @@ export default function App() {
                       Snel naar de juiste info
                     </h3>
                     <p className="text-[11px] sm:text-xs text-slate-200 mt-1">
-                      <span className="font-semibold text-blue-100">Klik op een tegel</span> – onderaan
-                      deze pagina verschijnt de bijhorende sectie.
+                      <span className="font-semibold text-blue-100">
+                        Klik op een tegel
+                      </span>{" "}
+                      – onderaan deze pagina verschijnt de bijhorende sectie.
                     </p>
                   </div>
                 </div>
@@ -810,10 +967,12 @@ export default function App() {
                   </div>
                   <p
                     className={`text-[11px] ${
-                      activePage === "voorbeelden" ? "text-slate-600" : "text-slate-200"
+                      activePage === "voorbeelden"
+                        ? "text-slate-600"
+                        : "text-slate-200"
                     }`}
                   >
-                    Drive-map met concrete lesvoorbeelden en prompts van collega&apos;s.
+                    Concrete voorbeelden (Lovable, AI Studio, NotebookLM) met preview.
                   </p>
                 </button>
 
@@ -844,7 +1003,9 @@ export default function App() {
                   </div>
                   <p
                     className={`text-[11px] ${
-                      activePage === "bijscholing" ? "text-slate-600" : "text-slate-200"
+                      activePage === "bijscholing"
+                        ? "text-slate-600"
+                        : "text-slate-200"
                     }`}
                   >
                     Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.
@@ -901,7 +1062,9 @@ export default function App() {
               )}
 
               <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
-                <p className="font-semibold text-blue-100">Tip: start met de voorbeelden.</p>
+                <p className="font-semibold text-blue-100">
+                  Tip: start met de voorbeelden.
+                </p>
                 <p className="text-[10px] text-slate-200">
                   In de Drive-map vind je kant-en-klare lessen en prompts die je meteen kan
                   uitproberen in de klas.
@@ -943,9 +1106,9 @@ export default function App() {
               </div>
 
               <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
-                Stel je vraag over Smartschool, hardware, software of AI in de klas. Bot Zuid
-                is afgestemd op onze scholengroep en antwoordt kort, duidelijk en in het
-                Nederlands.
+                Stel je vraag over Smartschool, hardware, software of AI in de klas. Bot
+                Zuid is afgestemd op onze scholengroep en antwoordt kort, duidelijk en in
+                het Nederlands.
               </p>
 
               <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">
@@ -961,7 +1124,8 @@ export default function App() {
                     Problemen met ICT-materiaal?
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                    Gebruik ons officiële ticketsysteem voor storingen, defecten en aanvragen.
+                    Gebruik ons officiële ticketsysteem voor storingen, defecten en
+                    aanvragen.
                   </p>
                   <div className="mt-2">
                     <Button
@@ -1017,13 +1181,13 @@ export default function App() {
         <footer className="mt-6 flex justify-center">
           <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
             <p className="text-[11px] text-slate-500">
-              © {new Date().getFullYear()} Scholengroep Sint-Rembert · Werkgroep Digitale Didactiek
+              © {new Date().getFullYear()} Scholengroep Sint-Rembert · Werkgroep Digitale
+              Didactiek
             </p>
           </div>
         </footer>
       </main>
 
-      {/* Zwevend plannertje rechtsonder */}
       <FloatingPlanner />
     </div>
   );

@@ -20,6 +20,9 @@ const DRIVE_EXAMPLES_URL =
 const TEAMS_CHAT_URL =
   "https://teams.microsoft.com/l/chat/0/0?users=arne.breemeersch@sint-rembert.be";
 
+const BOT_ZUID_AVATAR = "/media/bot-zuid.png";
+
+
 const OUTLOOK_MEETING_URL =
   "https://outlook.office.com/calendar/0/deeplink/compose?to=arne.breemeersch@sint-rembert.be&subject=Afspraak%20ICT%20%2F%20AI&body=Beschrijf%20kort%20je%20vraag%20over%20ICT%20of%20AI.";
 
@@ -150,21 +153,44 @@ function SupportChat() {
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
       <div className="h-40 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
-        {messages.map((m, i) => (
-          <div
-            key={i}
-            className={`max-w-[85%] px-2.5 py-1.5 rounded-lg ${
-              m.role === "user"
-                ? "ml-auto bg-blue-600 text-white"
-                : "mr-auto bg-white text-slate-800 border border-slate-200"
-            }`}
-          >
-            {m.text}
-          </div>
-        ))}
+        {messages.map((m, i) => {
+          const isUser = m.role === "user";
+          return (
+            <div
+              key={i}
+              className={`flex items-end gap-2 ${
+                isUser ? "justify-end" : "justify-start"
+              }`}
+            >
+              {!isUser && (
+                <img
+                  src={BOT_ZUID_AVATAR}
+                  alt="Bot Zuid"
+                  className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
+                />
+              )}
+              <div
+                className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
+                  isUser
+                    ? "bg-blue-600 text-white ml-auto"
+                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
+                }`}
+              >
+                {m.text}
+              </div>
+            </div>
+          );
+        })}
         {loading && (
-          <div className="mr-auto bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
-            Bot Zuid is aan het typen…
+          <div className="flex items-end gap-2 justify-start">
+            <img
+              src={BOT_ZUID_AVATAR}
+              alt="Bot Zuid"
+              className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
+            />
+            <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
+              Bot Zuid is aan het typen…
+            </div>
           </div>
         )}
       </div>
@@ -184,6 +210,7 @@ function SupportChat() {
     </div>
   );
 }
+
 
 /* ------------ Timer voor bijscholing ------------ */
 
@@ -1128,9 +1155,14 @@ export default function App() {
             <div className="relative space-y-3 text-white">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full bg-white/15 flex items-center justify-center shadow-sm border border-white/30">
-                    <span className="text-lg font-semibold">🤖</span>
-                  </div>
+<div className="h-9 w-9 rounded-full overflow-hidden bg-white/15 shadow-sm border border-white/40">
+  <img
+    src={BOT_ZUID_AVATAR}
+    alt="Bot Zuid"
+    className="h-full w-full object-cover"
+  />
+</div>
+
                   <div>
                     <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
                       Chatbot · ICT &amp; AI

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   ChevronRight,
-  HelpCircle,
-  Lightbulb,aimport React, { useState, useEffect } from "react";
-import {
-  ChevronRight,
-  HelpCircle,
   Lightbulb,
   Sparkles,
   BookOpen,
@@ -26,6 +21,7 @@ const TEAMS_CHAT_URL =
 
 const OUTLOOK_MEETING_URL =
   "https://outlook.office.com/calendar/0/deeplink/compose?to=arne.breemeersch@sint-rembert.be&subject=Afspraak%20ICT%20%2F%20AI&body=Beschrijf%20kort%20je%20vraag%20over%20ICT%20of%20AI.";
+
 
 /* ------------ Basis UI-componenten ------------ */
 

@@ -622,7 +622,7 @@ function PolicySection() {
 function FloatingPlanner() {
   const [open, setOpen] = useState(false);
 
-  const statusLabel = "Meestal beschikbaar op maandag–donderdag, 8u30–16u30";
+  const statusLabel = "Meestal beschikbaar tijdens de lesuren";
   const statusState = "free"; // "free" of "busy" - manueel aanpasbaar
 
   return (
@@ -635,10 +635,10 @@ function FloatingPlanner() {
                 Afspraak in Teams
               </p>
               <h3 className="text-sm font-semibold text-slate-900">
-                Plan een moment met Arne
+                Plan een moment met Glenn, Jasper of Arne
               </h3>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                Handig voor vragen over ICT &amp; AI of een korte 1-op-1.
+                Handig voor vragen over Pedagogische ICT &amp; AI of een korte 1-op-1.
               </p>
             </div>
             <button
@@ -659,7 +659,7 @@ function FloatingPlanner() {
               />
               <span className="font-semibold text-slate-700">
                 {statusState === "free"
-                  ? "Beschikbaar (indicatief)"
+                  ? "Beschikbaar "
                   : "Waarschijnlijk bezet"}
               </span>
             </div>
@@ -715,7 +715,7 @@ function FloatingPlanner() {
           <span className="text-[13px] font-semibold">AB</span>
         </div>
         <div className="flex flex-col items-start leading-tight">
-          <span className="font-semibold">Afspraak met Arne</span>
+          <span className="font-semibold">Pedagogische vragen?</span>
           <span className="text-[10px] text-blue-100">
             Teams / Outlook · klik om te plannen
           </span>
@@ -1118,9 +1118,8 @@ export default function App() {
               </div>
 
               <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
-                Stel je vraag over Smartschool, hardware, software of AI in de klas. Bot
-                Zuid is afgestemd op onze scholengroep en antwoordt kort, duidelijk en in
-                het Nederlands.
+                Stel je vraag over Smartschool, hardware en software. Bot
+                Zuid is afgestemd op onze scholengroep.
               </p>
 
               <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">

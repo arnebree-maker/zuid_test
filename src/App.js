@@ -455,7 +455,8 @@ function FloatingPlanner() {
 
   // Hier kan je eventueel later een echte status ophalen (Graph API e.d.)
   const statusLabel = "Meestal beschikbaar op maandag–donderdag, 8u30–16u30";
-  const statusState = "free"; // "free" of "busy" - manueel aanpasbaar
+const statusState = "free"; // "free" of "busy" - manueel aanpasbaar
+
 
   return (
     <div className="fixed bottom-4 right-4 z-50">

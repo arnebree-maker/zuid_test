@@ -23,7 +23,8 @@ const TEAMS_CHAT_URL =
 const OUTLOOK_MEETING_URL =
   "https://outlook.office.com/calendar/0/deeplink/compose?to=arne.breemeersch@sint-rembert.be&subject=Afspraak%20ICT%20%2F%20AI&body=Beschrijf%20kort%20je%20vraag%20over%20ICT%20of%20AI.";
 
-/* ------------ Basis UI-componenten ------------ */
+/* ------------ Intro video overlay ------------ */
+
 function IntroVideoOverlay() {
   const [visible, setVisible] = useState(true);
 
@@ -32,15 +33,12 @@ function IntroVideoOverlay() {
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
       <div className="relative max-w-3xl w-full">
-        {/* Video */}
         <video
           src="/media/promo.mp4"
           autoPlay
           controls
           className="w-full rounded-xl shadow-2xl border border-white/20"
         />
-
-        {/* Sluitknop */}
         <button
           onClick={() => setVisible(false)}
           className="absolute -top-3 -right-3 bg-white text-black rounded-full h-8 w-8 flex items-center justify-center font-bold shadow-lg hover:bg-slate-200"
@@ -51,6 +49,8 @@ function IntroVideoOverlay() {
     </div>
   );
 }
+
+/* ------------ Basis UI-componenten ------------ */
 
 const Button = ({
   children,
@@ -309,6 +309,8 @@ function AiToolsSection() {
   );
 }
 
+/* ------------ Voorbeelden-overzicht ------------ */
+
 function ExamplesOverview() {
   return (
     <>
@@ -362,7 +364,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* AI Studio – NU MET SCREENSHOT */}
+      {/* AI Studio – met screenshot */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -403,7 +405,6 @@ function ExamplesOverview() {
             </Button>
           </div>
 
-          {/* HIER DE FOTO ipv iframe */}
           <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
             <img
               src="/media/pizzabestellen.png"
@@ -490,7 +491,6 @@ function ExamplesOverview() {
     </>
   );
 }
-
 
 /* ------------ Bijscholing / Policy / Planner ------------ */
 
@@ -650,7 +650,7 @@ function FloatingPlanner() {
   const [open, setOpen] = useState(false);
 
   const statusLabel = "Meestal beschikbaar tijdens de lesuren";
-  const statusState = "free"; // "free" of "busy" - manueel aanpasbaar
+  const statusState = "free"; // "free" of "busy"
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -685,9 +685,7 @@ function FloatingPlanner() {
                 }`}
               />
               <span className="font-semibold text-slate-700">
-                {statusState === "free"
-                  ? "Beschikbaar "
-                  : "Waarschijnlijk bezet"}
+                {statusState === "free" ? "Beschikbaar" : "Waarschijnlijk bezet"}
               </span>
             </div>
             <p className="text-[11px] text-slate-500">{statusLabel}</p>
@@ -773,14 +771,12 @@ export default function App() {
     return null;
   };
 
-return (
-  <div className="min-h-screen bg-slate-100 text-slate-900">
+  return (
+    <div className="min-h-screen bg-slate-100 text-slate-900">
+      {/* Intro-video overlay */}
+      <IntroVideoOverlay />
 
-    <IntroVideoOverlay />   {/* ⬅️ HIER MOET HIJ STAAN */}
-
-    {/* Top bar */}
-    <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
-
+      {/* Top bar */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -1150,8 +1146,8 @@ return (
               </div>
 
               <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
-                Stel je vraag over Smartschool, hardware en software. Bot
-                Zuid is afgestemd op onze scholengroep.
+                Stel je vraag over Smartschool, hardware en software. Bot Zuid is
+                afgestemd op onze scholengroep.
               </p>
 
               <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">

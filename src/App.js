@@ -284,186 +284,162 @@ function AiToolsSection() {
 
 function ExamplesOverview() {
   return (
-    <main className="min-h-screen bg-slate-100 text-slate-900">
-      <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white text-sm font-semibold">
-              SR
-            </span>
-            <div>
-              <h1 className="text-sm sm:text-base font-semibold tracking-tight">
-                Scholengroep Sint-Rembert · SiVi &amp; VLTI
-              </h1>
-              <p className="text-xs text-slate-500">
-                Voorbeelden &amp; scenario&apos;s met AI
-              </p>
-            </div>
+    <>
+      {/* Lovable */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
+            <BookOpen className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Voorbeeld 1 – Lovable (AI-website)
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              AI-gestuurde webapp om snel les- of projectsites te bouwen.
+            </p>
           </div>
         </div>
-      </header>
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 space-y-8">
-        {/* Lovable */}
-        <Card className="p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
-              <BookOpen className="h-4 w-4" />
-            </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                Voorbeeld 1 – Lovable (AI-website)
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500">
-                AI-gestuurde webapp om snel les- of projectsites te bouwen.
-              </p>
-            </div>
+        <div className="grid gap-5 md:grid-cols-2 items-start">
+          <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
+            <p>
+              <span className="font-semibold">Wat is Lovable?</span> Lovable is een tool
+              die op basis van tekst (prompts) een volledige webapplicatie maakt. Ideaal
+              om snel een interactieve leersite of een tool voor leerlingen te bouwen.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Laat AI een eerste versie van je site genereren.</li>
+              <li>Pas teksten, oefeningen en stijl achteraf aan.</li>
+              <li>Publiceer met één klik en deel de link met leerlingen.</li>
+            </ul>
+
+            <Button
+              as="a"
+              href="https://rekenenindelogistiek.lovable.app/"
+              variant="primary"
+              className="justify-center w-full sm:w-auto"
+            >
+              <LinkIcon className="h-4 w-4" />
+              Open Lovable-voorbeeld
+            </Button>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 items-start">
-            <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-              <p>
-                <span className="font-semibold">Wat is Lovable?</span> Lovable
-                is een tool die op basis van tekst (prompts) een volledige
-                webapplicatie maakt. Ideaal om snel een interactieve
-                leersite of een tool voor leerlingen te bouwen.
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5">
-                <li>Laat AI een eerste versie van je site genereren.</li>
-                <li>Pas teksten, oefeningen en stijl achteraf aan.</li>
-                <li>Publiceer met één klik en deel de link met leerlingen.</li>
-              </ul>
-
-              <Button
-                as="a"
-                href="https://rekenenindelogistiek.lovable.app/"
-                variant="primary"
-                className="justify-center w-full sm:w-auto"
-              >
-                <LinkIcon className="h-4 w-4" />
-                Open Lovable-voorbeeld
-              </Button>
-            </div>
-
-            <div className="relative rounded-2xl border border-slate-200 bg-slate-950/90 overflow-hidden">
-              <iframe
-                title="Lovable voorbeeld"
-                src="https://rekenenindelogistiek.lovable.app/"
-                className="w-full h-72 sm:h-80 md:h-full border-0"
-              />
-            </div>
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-950/90 overflow-hidden">
+            <iframe
+              title="Lovable voorbeeld"
+              src="https://rekenenindelogistiek.lovable.app/"
+              className="w-full h-72 sm:h-80 md:h-full border-0"
+            />
           </div>
-        </Card>
+        </div>
+      </Card>
 
-        {/* AI Studio */}
-        <Card className="p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
-              <Sparkles className="h-4 w-4" />
-            </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                Voorbeeld 2 – Google AI Studio
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500">
-                Prompts ontwerpen, testen en verfijnen met Gemini-modellen.
-              </p>
-            </div>
+      {/* AI Studio */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+            <Sparkles className="h-4 w-4" />
           </div>
-
-          <div className="grid gap-5 md:grid-cols-2 items-start">
-            <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-              <p>
-                <span className="font-semibold">Wat is AI Studio?</span> In
-                Google AI Studio kan je prompts bouwen en uitproberen met
-                verschillende Gemini-modellen. Vanuit daar kan je ze kopiëren
-                naar Classroom-materiaal, scripts of eigen tools.
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5">
-                <li>Test veilig prompts voor toetsen en oefeningen.</li>
-                <li>Bewaar “goede” prompts als templates voor collega&apos;s.</li>
-                <li>Bekijk meteen verschillende varianten van een antwoord.</li>
-              </ul>
-
-              <Button
-                as="a"
-                href="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
-                variant="primary"
-                className="justify-center w-full sm:w-auto"
-              >
-                <LinkIcon className="h-4 w-4" />
-                Open AI-Studio-voorbeeld
-              </Button>
-            </div>
-
-            <div className="relative rounded-2xl border border-slate-200 bg-slate-950/90 overflow-hidden">
-              <iframe
-                title="AI Studio voorbeeld"
-                src="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
-                className="w-full h-72 sm:h-80 md:h-full border-0"
-              />
-            </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Voorbeeld 2 – Google AI Studio
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Prompts ontwerpen, testen en verfijnen met Gemini-modellen.
+            </p>
           </div>
-        </Card>
+        </div>
 
-        {/* NotebookLM – MET SCREENSHOT, GEEN LIVE PREVIEW */}
-        <Card className="p-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
-              <BookOpen className="h-4 w-4" />
-            </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                Voorbeeld 3 – NotebookLM
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-500">
-                AI-samenvattingen, uitleg en audio-studio op basis van je eigen
-                bronnen.
-              </p>
-            </div>
+        <div className="grid gap-5 md:grid-cols-2 items-start">
+          <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
+            <p>
+              <span className="font-semibold">Wat is AI Studio?</span> In Google AI
+              Studio kan je prompts bouwen en uitproberen met verschillende
+              Gemini-modellen. Vanuit daar kan je ze kopiëren naar Classroom-materiaal,
+              scripts of eigen tools.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Test veilig prompts voor toetsen en oefeningen.</li>
+              <li>Bewaar “goede” prompts als templates voor collega&apos;s.</li>
+              <li>Bekijk meteen verschillende varianten van een antwoord.</li>
+            </ul>
+
+            <Button
+              as="a"
+              href="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
+              variant="primary"
+              className="justify-center w-full sm:w-auto"
+            >
+              <LinkIcon className="h-4 w-4" />
+              Open AI-Studio-voorbeeld
+            </Button>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 items-start">
-            <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-              <p>
-                <span className="font-semibold">Wat is NotebookLM?</span>{" "}
-                NotebookLM laat je eigen documenten uploaden (PDF, Google Docs,
-                websites…) en maakt daar samenvattingen, leervragen en
-                audio-uitleg van.
-              </p>
-              <ul className="list-disc pl-5 space-y-1.5">
-                <li>Laat leerlingen vragen stellen over een hoofdstuk.</li>
-                <li>Genereer voorbeeldvragen en begripsvragen.</li>
-                <li>Gebruik de audio-studio als “podcast” over de leerstof.</li>
-              </ul>
-
-              <Button
-                as="a"
-                href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
-                variant="primary"
-                className="justify-center w-full sm:w-auto"
-              >
-                <LinkIcon className="h-4 w-4" />
-                Open NotebookLM-voorbeeld
-              </Button>
-            </div>
-
-            {/* HIER GEEN IFRAME MEER, MAAR JE SCREENSHOT */}
-            <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
-<img
-  src="/media/notebooklm.png"
-  alt="NotebookLM-voorbeeld"
-  className="w-full h-full object-cover"
-/>
-
-            </div>
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-950/90 overflow-hidden">
+            <iframe
+              title="AI Studio voorbeeld"
+              src="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
+              className="w-full h-72 sm:h-80 md:h-full border-0"
+            />
           </div>
-        </Card>
-      </div>
-    </main>
+        </div>
+      </Card>
+
+      {/* NotebookLM – screenshot */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
+            <BookOpen className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Voorbeeld 3 – NotebookLM
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              AI-samenvattingen, uitleg en audio-studio op basis van je eigen bronnen.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-2 items-start">
+          <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
+            <p>
+              <span className="font-semibold">Wat is NotebookLM?</span> NotebookLM laat je
+              eigen documenten uploaden (PDF, Google Docs, websites…) en maakt daar
+              samenvattingen, leervragen en audio-uitleg van.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Laat leerlingen vragen stellen over een hoofdstuk.</li>
+              <li>Genereer voorbeeldvragen en begripsvragen.</li>
+              <li>Gebruik de audio-studio als “podcast” over de leerstof.</li>
+            </ul>
+
+            <Button
+              as="a"
+              href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
+              variant="primary"
+              className="justify-center w-full sm:w-auto"
+            >
+              <LinkIcon className="h-4 w-4" />
+              Open NotebookLM-voorbeeld
+            </Button>
+          </div>
+
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
+            <img
+              src="/media/notebooklm.png"
+              alt="NotebookLM-voorbeeld"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </Card>
+    </>
   );
 }
 
+/* ------------ Bijscholing / Policy / Planner ------------ */
 
 function TrainingSection() {
   return (
@@ -738,7 +714,7 @@ export default function App() {
 
   const renderActiveSection = () => {
     if (activePage === "ai-tools") return <AiToolsSection />;
-    if (activePage === "voorbeelden") return <ExamplesSection />;
+    if (activePage === "voorbeelden") return <ExamplesOverview />;
     if (activePage === "bijscholing") return <TrainingSection />;
     if (activePage === "ai-beleid") return <PolicySection />;
     return null;

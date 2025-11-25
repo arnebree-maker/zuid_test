@@ -450,11 +450,12 @@ function ExamplesOverview() {
 
             {/* HIER GEEN IFRAME MEER, MAAR JE SCREENSHOT */}
             <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
-              <img
-                src="/media/notebooklm-marketstructures.png"
-                alt="NotebookLM-voorbeeld: Market Structures"
-                className="w-full h-full object-cover"
-              />
+<img
+  src="/media/notebooklm.png"
+  alt="NotebookLM-voorbeeld"
+  className="w-full h-full object-cover"
+/>
+
             </div>
           </div>
         </Card>

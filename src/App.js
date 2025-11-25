@@ -671,6 +671,214 @@ function PolicySection() {
   );
 }
 
+function GettingStartedSection() {
+  return (
+    <div className="space-y-4">
+      {/* Blok 1: Leren prompten */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+            <Lightbulb className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Stap 1 – Leren prompten
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              In 10 minuten leer je hoe je duidelijke vragen kan stellen aan AI.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+          <div className="space-y-2">
+            <p className="font-semibold text-slate-900">Basisprincipes:</p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li><span className="font-semibold">Geef context:</span> voor welk vak, welke klas, welk niveau?</li>
+              <li><span className="font-semibold">Zeg wat je wil:</span> samenvatting, oefening, uitleg, rubriek…</li>
+              <li><span className="font-semibold">Leg beperkingen vast:</span> max. aantal woorden, taal, stijl.</li>
+              <li><span className="font-semibold">Vraag om controle:</span> “toon eerst een voorstel”, “stel 3 varianten voor”.</li>
+            </ul>
+          </div>
+
+          <div className="space-y-2">
+            <p className="font-semibold text-slate-900">Voorbeeldprompt voor leerkrachten:</p>
+            <div className="rounded-xl bg-slate-900 text-slate-50 text-xs p-3 whitespace-pre-line">
+              <p>
+                Je bent een didactische assistent voor leerkrachten secundair onderwijs.
+                Ik geef les in het vak [vak] aan leerlingen van [graad / richting].
+                Maak 3 ideeën voor een korte klasopdracht van max. 20 minuten.
+                Gebruik eenvoudige taal die past bij mijn leerlingen.
+              </p>
+            </div>
+
+            <p className="text-xs text-slate-500">
+              Tip: laat collega&apos;s hun beste prompts delen in de Drive-map, en maak zo een gezamenlijke prompt-bibliotheek.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      {/* Blok 2: Lovable – website bouwen */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
+            <Sparkles className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Stap 2 – Lovable: eenvoudige leswebsite bouwen
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              In 30 minuten een eerste versie van een lessenwebsite voor je klas.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+          <div className="space-y-2">
+            <p className="font-semibold">Stappenplan:</p>
+            <ol className="list-decimal pl-5 space-y-1.5">
+              <li>Ga naar <a href="https://lovable.dev" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">lovable.dev</a> en log in (Google / Microsoft).</li>
+              <li>Klik op <span className="font-semibold">“Create new app”</span>.</li>
+              <li>Plak de prompt hiernaast in het tekstvak.</li>
+              <li>Laat Lovable een eerste versie genereren en bekijk het resultaat.</li>
+              <li>Pas teksten, kleuren en titels aan zodat het echt bij jouw vak past.</li>
+              <li>Publiceer en kopieer de link voor je leerlingen.</li>
+            </ol>
+          </div>
+
+          <div className="space-y-2">
+            <p className="font-semibold">Prompt om te kopiëren in Lovable:</p>
+            <div className="rounded-xl bg-slate-900 text-slate-50 text-xs p-3 whitespace-pre-line">
+              <p>
+                Je bent een webdesigner voor een secundaire school.
+                Bouw een eenvoudige, overzichtelijke website voor mijn lessen [vak] aan leerlingen van [studierichting / graad].
+
+                De website moet minstens deze pagina's hebben:
+                - Startpagina met korte uitleg over het vak en een welkomstboodschap.
+                - Pagina "Lessen" met een overzicht van thema's of hoofdstukken.
+                - Pagina "Oefeningen" met ruimte voor opdrachten, oefeningen en online tools.
+                - Pagina "Praktische info" met afspraken, evaluatie en contact.
+
+                Gebruik een rustige, moderne lay-out.
+                Zorg dat ik teksten achteraf makkelijk kan aanpassen.
+                De taal is Nederlands en gericht op 14–18-jarigen.
+              </p>
+            </div>
+            <p className="text-xs text-slate-500">
+              Laat deelnemers tijdens de sessie hun vak invullen en de site personaliseren.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      {/* Blok 3: AI Studio – chatbot Engels */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+            <Sparkles className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Stap 3 – Google AI Studio: chatbot Engels
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Maak een chatbot waarmee leerlingen Engels kunnen oefenen.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+          <div className="space-y-2">
+            <p className="font-semibold">Stappenplan:</p>
+            <ol className="list-decimal pl-5 space-y-1.5">
+              <li>Ga naar <a href="https://aistudio.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">aistudio.google.com</a>.</li>
+              <li>Klik op <span className="font-semibold">“New chat”</span> of “New prompt” (afhankelijk van de interface).</li>
+              <li>Kies een **Gemini-model** dat geschikt is voor onderwijs (bv. 1.5 Flash / Pro).</li>
+              <li>Plak de prompt hiernaast in het systeem- of instructieveld.</li>
+              <li>Test zelf enkele voorbeeldvragen (“Start a dialogue about hobbies”).</li>
+              <li>Laat leerlingen in duo&apos;s chatten en geef hen voorbeeldopdrachten.</li>
+            </ol>
+          </div>
+
+          <div className="space-y-2">
+            <p className="font-semibold">Prompt voor een Engelse oefen-chatbot:</p>
+            <div className="rounded-xl bg-slate-900 text-slate-50 text-xs p-3 whitespace-pre-line">
+              <p>
+                You are an English conversation tutor for secondary school students in Belgium (ages 14–18).
+                Your goal is to help students practise everyday English in a safe and motivating way.
+
+                Rules:
+                - Always answer in simple, clear English (level A2–B1).
+                - Ask short follow-up questions to keep the conversation going.
+                - Correct important grammar or vocabulary mistakes, but in a friendly way.
+                - Never give full translations unless the student explicitly asks.
+                - Encourage the student and keep the tone positive.
+
+                Start with: 
+                "Hi! I am your English chatbot. Let&apos;s practise English together. 
+                What would you like to talk about today? Hobbies, school, work, travel, or something else?"
+              </p>
+            </div>
+            <p className="text-xs text-slate-500">
+              Laat leerkrachten zelf het niveau (A2/B1/B2) aanpassen aan hun groep.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      {/* Blok 4: NotebookLM – hoofdstuk uploaden */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
+            <BookOpen className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Stap 4 – NotebookLM: werk met een echt hoofdstuk
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              Upload een hoofdstuk uit een cursus en laat AI er vragen & uitleg bij maken.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
+          <div className="space-y-2">
+            <p className="font-semibold">Stappenplan:</p>
+            <ol className="list-decimal pl-5 space-y-1.5">
+              <li>Ga naar <a href="https://notebooklm.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">notebooklm.google.com</a>.</li>
+              <li>Klik op <span className="font-semibold">“New notebook”</span>.</li>
+              <li>Upload één hoofdstuk (PDF of Google Doc) van een cursus.</li>
+              <li>Wacht tot NotebookLM het document heeft verwerkt.</li>
+              <li>Stel enkele testvragen zoals “Maak 5 meerkeuzevragen over paragraaf 2”.</li>
+              <li>Laat leerlingen bijvoorbeeld zelf examenvragen formuleren met behulp van NotebookLM.</li>
+            </ol>
+          </div>
+
+          <div className="space-y-2">
+            <p className="font-semibold">Voorbeelden van prompts in NotebookLM:</p>
+            <div className="rounded-xl bg-slate-900 text-slate-50 text-xs p-3 whitespace-pre-line">
+              <p>
+                - Maak een beknopte samenvatting van dit hoofdstuk in maximum 200 woorden, in het Nederlands.
+                - Formuleer 5 meerkeuzevragen met telkens 4 opties over de kernbegrippen van dit hoofdstuk.
+                - Stel 5 open vragen die peilen naar inzicht (geen pure reproductie).
+                - Leg de belangrijkste begrippen eenvoudig uit zoals aan een leerling van 14 jaar.
+                - Maak een stappenplan dat de leerling kan volgen om dit hoofdstuk zelfstandig te studeren.
+              </p>
+            </div>
+            <p className="text-xs text-slate-500">
+              Tip: toon ook eens hoe de audio-studio werkt en laat NotebookLM een korte “podcast” maken van het hoofdstuk.
+            </p>
+          </div>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+
 /* ------------ Zwevend plannertje rechtsonder (Teams) ------------ */
 
 function FloatingPlanner() {
@@ -782,21 +990,24 @@ function FloatingPlanner() {
 export default function App() {
   const [activePage, setActivePage] = useState(null); // null = enkel home
 
-  const activePageLabel =
-    {
-      "ai-tools": "AI-tools",
-      voorbeelden: "Voorbeelden & scenario's",
-      bijscholing: "Bijscholing & vorming",
-      "ai-beleid": "AI-richtlijnen",
-    }[activePage] || null;
+const activePageLabel =
+  {
+    "ai-tools": "AI-tools",
+    voorbeelden: "Voorbeelden & scenario's",
+    bijscholing: "Bijscholing & vorming",
+    "ai-beleid": "AI-richtlijnen",
+    "aan-de-slag": "Aan de slag",
+  }[activePage] || null;
 
-  const renderActiveSection = () => {
-    if (activePage === "ai-tools") return <AiToolsSection />;
-    if (activePage === "voorbeelden") return <ExamplesOverview />;
-    if (activePage === "bijscholing") return <TrainingSection />;
-    if (activePage === "ai-beleid") return <PolicySection />;
-    return null;
-  };
+
+const renderActiveSection = () => {
+  if (activePage === "ai-tools") return <AiToolsSection />;
+  if (activePage === "voorbeelden") return <ExamplesOverview />;
+  if (activePage === "bijscholing") return <TrainingSection />;
+  if (activePage === "ai-beleid") return <PolicySection />;
+  if (activePage === "aan-de-slag") return <GettingStartedSection />;
+  return null;
+};
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
@@ -876,6 +1087,7 @@ export default function App() {
                         <Lightbulb className="h-4 w-4" />
                         AI-tools bekijken
                       </Button>
+                          
 
                       <Button
                         type="button"
@@ -1042,6 +1254,41 @@ export default function App() {
                     Concrete voorbeelden (Lovable, AI Studio, NotebookLM) met preview.
                   </p>
                 </button>
+
+                      <button
+  type="button"
+  onClick={() => setActivePage("aan-de-slag")}
+  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
+    activePage === "aan-de-slag"
+      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
+      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
+  }`}
+>
+  <div className="flex items-center justify-between mb-1">
+    <span
+      className={`font-semibold text-xs ${
+        activePage === "aan-de-slag" ? "text-slate-900" : "text-white"
+      }`}
+    >
+      Aan de slag
+    </span>
+    <Sparkles
+      className={`h-4 w-4 ${
+        activePage === "aan-de-slag"
+          ? "text-blue-600"
+          : "text-blue-200 group-hover:text-blue-300"
+      }`}
+    />
+  </div>
+  <p
+    className={`text-[11px] ${
+      activePage === "aan-de-slag" ? "text-slate-600" : "text-slate-200"
+    }`}
+  >
+    Stap-voor-stap: leren prompten, website, chatbot en NotebookLM.
+  </p>
+</button>
+
 
                 <button
                   type="button"

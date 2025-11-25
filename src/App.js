@@ -372,7 +372,7 @@ function ExamplesOverview() {
               className="justify-center w-full sm:w-auto"
             >
               <LinkIcon className="h-4 w-4" />
-              Open AI Studio
+              Open AI Studio-voorbeeld
             </Button>
           </div>
 

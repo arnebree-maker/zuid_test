@@ -335,7 +335,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* AI Studio */}
+      {/* AI Studio – NU MET SCREENSHOT */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -367,20 +367,21 @@ function ExamplesOverview() {
 
             <Button
               as="a"
-              href="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
+              href="https://aistudio.google.com/"
               variant="primary"
               className="justify-center w-full sm:w-auto"
             >
               <LinkIcon className="h-4 w-4" />
-              Open AI-Studio-voorbeeld
+              Open AI Studio
             </Button>
           </div>
 
-          <div className="relative rounded-2xl border border-slate-200 bg-slate-950/90 overflow-hidden">
-            <iframe
-              title="AI Studio voorbeeld"
-              src="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
-              className="w-full h-72 sm:h-80 md:h-full border-0"
+          {/* HIER DE FOTO ipv iframe */}
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
+            <img
+              src="/media/pizzabestellen.png"
+              alt="Voorbeeld prompt in Google AI Studio - pizzabestelling"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
@@ -435,9 +436,34 @@ function ExamplesOverview() {
           </div>
         </div>
       </Card>
+
+      {/* Extra: meer voorbeelden in Drive */}
+      <Card className="p-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
+          <div>
+            <p className="font-semibold text-slate-900">
+              Meer voorbeelden & eigen materiaal
+            </p>
+            <p className="text-xs sm:text-sm text-slate-600">
+              In deze Drive-map vind je nog extra voorbeelden van collega&apos;s. Je mag
+              hier ook zelf je eigen AI-lessen of projecten uploaden.
+            </p>
+          </div>
+          <Button
+            as="a"
+            href={DRIVE_EXAMPLES_URL}
+            variant="secondary"
+            className="justify-center w-full sm:w-auto"
+          >
+            <LinkIcon className="h-4 w-4" />
+            Open de Drive-map met voorbeelden
+          </Button>
+        </div>
+      </Card>
     </>
   );
 }
+
 
 /* ------------ Bijscholing / Policy / Planner ------------ */
 

@@ -24,6 +24,33 @@ const OUTLOOK_MEETING_URL =
   "https://outlook.office.com/calendar/0/deeplink/compose?to=arne.breemeersch@sint-rembert.be&subject=Afspraak%20ICT%20%2F%20AI&body=Beschrijf%20kort%20je%20vraag%20over%20ICT%20of%20AI.";
 
 /* ------------ Basis UI-componenten ------------ */
+function IntroVideoOverlay() {
+  const [visible, setVisible] = useState(true);
+
+  if (!visible) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+      <div className="relative max-w-3xl w-full">
+        {/* Video */}
+        <video
+          src="/media/promo.mp4"
+          autoPlay
+          controls
+          className="w-full rounded-xl shadow-2xl border border-white/20"
+        />
+
+        {/* Sluitknop */}
+        <button
+          onClick={() => setVisible(false)}
+          className="absolute -top-3 -right-3 bg-white text-black rounded-full h-8 w-8 flex items-center justify-center font-bold shadow-lg hover:bg-slate-200"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+  );
+}
 
 const Button = ({
   children,
@@ -746,9 +773,14 @@ export default function App() {
     return null;
   };
 
-  return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
-      {/* Top bar */}
+return (
+  <div className="min-h-screen bg-slate-100 text-slate-900">
+
+    <IntroVideoOverlay />   {/* ⬅️ HIER MOET HIJ STAAN */}
+
+    {/* Top bar */}
+    <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
+
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">

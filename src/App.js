@@ -280,7 +280,7 @@ function BestPractices() {
   };
 
   return (
-    <section className="mb-8">
+    <section className="mt-6">
       <Card className="p-5 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <div>
@@ -362,7 +362,6 @@ function SupportChat() {
     setInput("");
     setLoading(true);
 
-    // eventueel: enkel laatste N berichten meesturen
     const slimMessages = newMessages.slice(-6);
 
     try {
@@ -391,14 +390,6 @@ function SupportChat() {
       setLoading(false);
     }
   };
-
-  const quickExamples = [
-    "Mijn beamer zegt 'no signal'. Wat kan ik proberen?",
-    "Hoe installeer ik Kurzweil op mijn schoollaptop?",
-    "De leerlingen horen geen geluid bij een YouTube-video in de klas.",
-    "Waar meld ik een defecte projector of smartboard?",
-    "Hoe kan ik een leerling opnieuw laten inloggen in Smartschool?",
-  ];
 
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -461,24 +452,6 @@ function SupportChat() {
           >
             Verstuur
           </Button>
-        </div>
-
-        <div className="border-t border-slate-200 pt-2">
-          <p className="text-[10px] text-slate-500 mb-1">
-            Idee nodig? Klik op één van deze voorbeelden:
-          </p>
-          <div className="flex flex-wrap gap-1.5">
-            {quickExamples.map((example, idx) => (
-              <button
-                key={idx}
-                type="button"
-                onClick={() => setInput(example)}
-                className="text-[10px] rounded-full border border-slate-200 bg-slate-50 px-2 py-1 hover:bg-slate-100"
-              >
-                {example}
-              </button>
-            ))}
-          </div>
         </div>
 
         <p className="text-[10px] text-slate-400">
@@ -796,6 +769,9 @@ function ExamplesOverview() {
           </Button>
         </div>
       </Card>
+
+      {/* Best practices alleen hier tonen */}
+      <BestPractices />
     </>
   );
 }
@@ -1543,9 +1519,6 @@ export default function App() {
           </Card>
         </section>
 
-        {/* Quick actions */}
-        <QuickActions onOpenPage={setActivePage} />
-
         {/* Snel naar de juiste info + Bot Zuid */}
         <section className="mb-6 grid gap-4 md:grid-cols-3 items-start">
           <Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
@@ -1856,10 +1829,10 @@ export default function App() {
 
               <div className="flex flex-wrap gap-1.5 text-[10px]">
                 <span className="px-2 py-1 rounded-full bg-white/15 border border-white/20">
-                  💻 “Mijn projector toont ‘no signal’…”
+                  💻 “Mijn projector toont niets…”
                 </span>
                 <span className="px-2 py-1 rounded-full bg-white/15 border border-white/20">
-                  📚 “Kurzweil werkt niet meer bij een leerling…”
+                  📚 “Kurzweil werkt niet bij een leerling…”
                 </span>
                 <span className="px-2 py-1 rounded-full bg-white/15 border border-white/20">
                   🔐 “Probleem met inloggen in Smartschool…”
@@ -1878,6 +1851,9 @@ export default function App() {
           </Card>
         </section>
 
+        {/* Quick actions ONDER de chatbot */}
+        <QuickActions onOpenPage={setActivePage} />
+
         {/* Actieve "subpagina" */}
         {activePage && (
           <section className="mb-10 space-y-3">
@@ -1890,9 +1866,6 @@ export default function App() {
             {renderActiveSection()}
           </section>
         )}
-
-        {/* Best practices */}
-        <BestPractices />
 
         {/* Footer */}
         <footer className="mt-6 flex justify-center">

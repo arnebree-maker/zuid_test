@@ -828,7 +828,7 @@ function ExamplesOverview() {
 
             <Button
               as="a"
-              href="https://aistudio.google.com/apps/drive/17F82NQrZhAf6lxeTwzl2GwvayVbGK-hD?fullscreenApplet=true&showPreview=true&showAssistant=true"
+              href="https://ai.studio/apps/drive/1SMyT079OFgchM9EoBf1Guv2J39XkADu4?fullscreenApplet=true"
               variant="primary"
               className="justify-center w-full sm:w-auto"
             >

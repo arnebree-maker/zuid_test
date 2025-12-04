@@ -209,15 +209,16 @@ const PromptBlock = ({ label, text }) => {
 function LandingHero() {
   return (
     <section className="mt-6 mb-8">
-      <div className="relative flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden border border-slate-200">
-        {/* Linker gedeelte: foto */}
-        <div className="relative w-full lg:w-1/2 h-56 sm:h-72 lg:h-[420px] overflow-hidden">
-          <div className="absolute inset-0 hero-diagonal">
+      <div className="relative flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
+        {/* Linker gedeelte: foto als “kaart” */}
+        <div className="relative w-full lg:w-1/2 h-56 sm:h-72 lg:h-[420px] flex items-center justify-center">
+          <div className="relative w-[92%] h-[88%] rounded-3xl overflow-hidden shadow-xl border border-white/70 bg-slate-900">
             <img
               src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
               alt="Digitale didactiek team"
               className="w-full h-full object-cover"
             />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-slate-900/30 via-transparent to-white/10" />
           </div>
         </div>
 
@@ -262,21 +263,27 @@ function LandingHero() {
                 <p>Aanspreekpunt voor vragen over ICT &amp; AI in je les.</p>
               </div>
               <div>
-                <p className="font-semibold text-slate-800 mb-1">Technisch team</p>
+                <p className="font-semibold text-slate-800 mb-1 flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-blue-500 inline-block" />
+                  Technisch team
+                </p>
                 <p className="leading-relaxed">
-                  Mieke Verbeerst
+                  • Mieke Verbeerst
                   <br />
-                  Barbara Van Hecke
+                  • Barbara Van Hecke
                   <br />
-                  Arne Breemeersch
+                  • Arne Breemeersch
                 </p>
               </div>
               <div>
-                <p className="font-semibold text-slate-800 mb-1">Pedagogisch team</p>
+                <p className="font-semibold text-slate-800 mb-1 flex items-center gap-1">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500 inline-block" />
+                  Pedagogisch team
+                </p>
                 <p className="leading-relaxed">
-                  Jasper Gerits
+                  • Jasper Gerits
                   <br />
-                  Glenn Van de Voorde
+                  • Glenn Van de Voorde
                 </p>
               </div>
             </div>
@@ -618,23 +625,48 @@ function TrainingSection() {
 function TrainingTeaser() {
   return (
     <section className="mb-8">
-      <Card className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600">
-            Bijscholing Lovable
-          </p>
-          <p className="text-sm font-semibold text-slate-900">
-            AI-website bouwen in 1 uur – 15 december 2025 · 16u · Lokaal Z314
-          </p>
-          <p className="text-[11px] text-slate-500 mt-1">
-            Voor alle leerkrachten die met een eenvoudige AI-website willen starten.
-          </p>
-        </div>
-        <div className="flex flex-col sm:items-end gap-2">
-          <CountdownTimer targetDate="2025-12-15T16:00:00" />
-          <Button as="a" href="#" variant="primary" className="text-xs px-3 py-1.5">
-            Inschrijven
-          </Button>
+      <Card className="p-4 sm:p-5 relative overflow-hidden">
+        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-400" />
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2">
+          <div>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-2 py-0.5 text-[10px] font-semibold">
+                Nieuw in december
+              </span>
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600">
+                Bijscholing Lovable
+              </p>
+            </div>
+            <p className="text-sm font-semibold text-slate-900">
+              AI-website bouwen in 1 uur – 15 december 2025 · 16u · Lokaal Z314
+            </p>
+            <p className="text-[11px] text-slate-500 mt-1">
+              Voor alle leerkrachten die met een eenvoudige AI-website willen starten.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:items-end gap-2 min-w-[190px]">
+            <div className="flex items-center gap-3">
+              {/* mini kalender */}
+              <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                <span className="text-[10px] uppercase tracking-wide text-slate-500">
+                  Dec
+                </span>
+                <span className="text-xl font-semibold text-slate-900 leading-none">
+                  15
+                </span>
+              </div>
+              <CountdownTimer targetDate="2025-12-15T16:00:00" />
+            </div>
+            <Button
+              as="a"
+              href="#"
+              variant="primary"
+              className="text-xs px-3 py-1.5 w-full sm:w-auto"
+            >
+              Inschrijven
+            </Button>
+          </div>
         </div>
       </Card>
     </section>
@@ -1368,84 +1400,79 @@ function FloatingPlanner() {
   );
 }
 
-/* ------------ Bot Zuid sectie ------------ */
+/* ------------ Bot Zuid sectie (voor in overlay) ------------ */
 
-function BotZuidSection() {
+function BotZuidContent() {
   return (
-    <section id="bot-zuid-section" className="mt-6 mb-10">
-      <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500">
-        <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
-        <div className="relative space-y-3 text-white">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full overflow-hidden bg-white/15 shadow-sm border border-white/40">
-                <img
-                  src={BOT_ZUID_AVATAR}
-                  alt="Bot Zuid"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-
-              <div>
-                <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
-                  Probleem met ICT?
-                </p>
-                <h3 className="text-sm sm:text-base font-semibold">
-                  Bot Zuid – projector, Kurzweil &amp; Smartschool
-                </h3>
-              </div>
-            </div>
-            <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">
-              Nieuw &amp; experimenteel
-            </span>
+    <div className="space-y-3 text-white">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="h-9 w-9 rounded-full overflow-hidden bg-white/15 shadow-sm border border-white/40">
+            <img
+              src={BOT_ZUID_AVATAR}
+              alt="Bot Zuid"
+              className="h-full w-full object-cover"
+            />
           </div>
 
-          <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
-            Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
-            ander ICT-materiaal. Bot Zuid helpt je eerst zelf op weg. Werkt het niet?
-            Gebruik dan het officiële ticketsysteem.
-          </p>
-
-          <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">
-            <div>
-              <p className="text-[11px] font-semibold text-slate-500 mb-1">
-                Direct chatten met Bot Zuid
-              </p>
-              <SupportChat />
-            </div>
-
-            <div className="pt-3 border-t border-slate-200">
-              <h4 className="text-sm font-semibold text-slate-900">
-                Werkt het nog steeds niet?
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                Gebruik ons officiële ticketsysteem voor storingen, defecten en
-                aanvragen.
-              </p>
-              <div className="mt-2">
-                <Button
-                  as="a"
-                  href="https://sint-rembert.topdesk.net/"
-                  variant="secondary"
-                >
-                  Naar Topdesk
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
+          <div>
+            <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
+              Probleem met ICT?
+            </p>
+            <h3 className="text-sm sm:text-base font-semibold">
+              Bot Zuid – projector, Kurzweil &amp; Smartschool
+            </h3>
           </div>
-
-          <Button
-            as="a"
-            href={GEMINI_URL}
-            variant="secondary"
-            className="w-full justify-center bg-white/10 text-white border-white/40 hover:bg-white/20 text-xs"
-          >
-            Werkt dit niet? Open Bot Zuid in een nieuw tabblad
-          </Button>
         </div>
-      </Card>
-    </section>
+        <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">
+          Nieuw &amp; experimenteel
+        </span>
+      </div>
+
+      <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
+        Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
+        ander ICT-materiaal. Bot Zuid helpt je eerst zelf op weg. Werkt het niet?
+        Gebruik dan het officiële ticketsysteem.
+      </p>
+
+      <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">
+        <div>
+          <p className="text-[11px] font-semibold text-slate-500 mb-1">
+            Direct chatten met Bot Zuid
+          </p>
+          <SupportChat />
+        </div>
+
+        <div className="pt-3 border-t border-slate-200">
+          <h4 className="text-sm font-semibold text-slate-900">
+            Werkt het nog steeds niet?
+          </h4>
+          <p className="text-xs sm:text-sm text-slate-600 mt-1">
+            Gebruik ons officiële ticketsysteem voor storingen, defecten en
+            aanvragen.
+          </p>
+          <div className="mt-2">
+            <Button
+              as="a"
+              href="https://sint-rembert.topdesk.net/"
+              variant="secondary"
+            >
+              Naar Topdesk
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      </div>
+
+      <Button
+        as="a"
+        href={GEMINI_URL}
+        variant="secondary"
+        className="w-full justify-center bg-white/10 text-white border-white/40 hover:bg-white/20 text-xs"
+      >
+        Werkt dit niet? Open Bot Zuid in een nieuw tabblad
+      </Button>
+    </div>
   );
 }
 
@@ -1463,43 +1490,69 @@ function EntryChoice({ onChooseAI, onChooseBot }) {
             Waar ben je nu naar op zoek?
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Kies of je iets wil doen met AI in je les of dat je een technisch probleem hebt.
+            Wil je iets doen met AI in je les, of heb je een technisch probleem?
           </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
+          {/* AI in mijn les */}
           <button
             type="button"
             onClick={onChooseAI}
             className="group rounded-xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:border-blue-400 hover:bg-blue-50"
           >
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-lg">✨</span>
-              <p className="text-xs font-semibold text-slate-900">AI in mijn les</p>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">✨</span>
+                <p className="text-xs font-semibold text-slate-900">AI in mijn les</p>
+              </div>
+              <span className="inline-flex items-center rounded-full bg-blue-100 text-blue-800 px-2 py-0.5 text-[10px] font-semibold">
+                Pedagogisch
+              </span>
             </div>
 
             <p className="text-[11px] text-slate-600 mb-2">
               Ik zoek voorbeelden, prompts of stappenplannen om AI te gebruiken in mijn les.
             </p>
 
+            <div className="text-[10px] text-slate-500 mb-2">
+              <p className="font-semibold text-slate-700">Voorbeelden:</p>
+              <p>• Lovable-leswebsite</p>
+              <p>• Engelse oefen-chatbot</p>
+              <p>• NotebookLM-samenvattingen</p>
+            </div>
+
             <span className="inline-flex items-center text-[11px] font-semibold text-blue-700 group-hover:text-blue-800">
               AI-ideeën en voorbeelden openen →
             </span>
           </button>
 
+          {/* Technische hulp */}
           <button
             type="button"
             onClick={onChooseBot}
             className="group rounded-xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:border-blue-400 hover:bg-blue-50"
           >
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-lg">💻</span>
-              <p className="text-xs font-semibold text-slate-900">Technische hulp</p>
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2">
+                <span className="text-lg">💻</span>
+                <p className="text-xs font-semibold text-slate-900">Technische hulp</p>
+              </div>
+              <span className="inline-flex items-center rounded-full bg-slate-900 text-white px-2 py-0.5 text-[10px] font-semibold">
+                Technisch
+              </span>
             </div>
 
             <p className="text-[11px] text-slate-600 mb-2">
               Ik heb een probleem met projector, Kurzweil, Smartschool, printers of wifi.
             </p>
+
+            <div className="text-[10px] text-slate-500 mb-2">
+              <p className="font-semibold text-slate-700">Typische vragen:</p>
+              <p>• Geen beeld op projector</p>
+              <p>• Kurzweil werkt niet bij leerling</p>
+              <p>• Inloggen in Smartschool lukt niet</p>
+            </div>
 
             <span className="inline-flex items-center text-[11px] font-semibold text-blue-700 group-hover:text-blue-800">
               Open Bot Zuid →
@@ -1688,42 +1741,73 @@ function AIOverlay({ activePage, onChangePage, onClose }) {
   );
 }
 
+/* ------------ Bot-overlay ------------ */
+
+function BotOverlay({ onClose }) {
+  return (
+    <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+      <div className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 rounded-3xl shadow-2xl max-w-4xl w-full h-[80vh] flex flex-col overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-white/20 bg-white/5">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.16em] text-blue-50 font-semibold">
+              Technische hulp
+            </p>
+            <p className="text-sm text-blue-100">
+              Bot Zuid helpt je bij projector, Kurzweil, Smartschool en andere ICT-vragen.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex items-center justify-center rounded-full h-8 w-8 bg-white/15 text-white hover:bg-white/25"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Scrollbare content */}
+        <div className="flex-1 overflow-y-auto px-5 sm:px-6 pb-6 pt-4">
+          <BotZuidContent />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
   const [aiOverlayOpen, setAiOverlayOpen] = useState(false);
+  const [botOverlayOpen, setBotOverlayOpen] = useState(false);
   const [activePage, setActivePage] = useState("voorbeelden");
   const [showIntroVideo, setShowIntroVideo] = useState(true);
-  const [showBot, setShowBot] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
   const handleChooseAI = () => {
-    setShowBot(false);
+    setBotOverlayOpen(false);
     setActivePage("voorbeelden");
     setAiOverlayOpen(true);
   };
 
   const handleChooseBot = () => {
-    setShowBot(true);
-    if (typeof document !== "undefined") {
-      setTimeout(() => {
-        const el = document.getElementById("bot-zuid-section");
-        if (el && el.scrollIntoView) {
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
-      }, 50);
-    }
+    setAiOverlayOpen(false);
+    setBotOverlayOpen(true);
   };
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-900">
+    <div className="min-h-screen bg-slate-100 text-slate-900 relative overflow-hidden">
+      {/* zachte achtergrondvormen */}
+      <div className="pointer-events-none absolute -top-32 -right-24 h-72 w-72 rounded-full bg-blue-50" />
+      <div className="pointer-events-none absolute bottom-0 -left-24 h-80 w-80 rounded-full bg-emerald-50" />
+
       {showIntroVideo && (
         <IntroVideoOverlay onClose={() => setShowIntroVideo(false)} />
       )}
 
       {/* Top bar */}
-      <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
+      <header className="relative z-10 border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white text-sm font-semibold">
@@ -1747,23 +1831,32 @@ export default function App() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 pb-16">
         <LandingHero />
+
+        {/* divider */}
+        <div className="my-4 flex items-center justify-center">
+          <div className="h-px w-full max-w-xs bg-slate-200 relative">
+            <span className="absolute left-1/2 -translate-x-1/2 -top-2.5 bg-slate-100 px-2 text-[10px] text-slate-400">
+              Voor leerkrachten
+            </span>
+          </div>
+        </div>
 
         <EntryChoice onChooseAI={handleChooseAI} onChooseBot={handleChooseBot} />
 
         {/* Bijscholing altijd zichtbaar als teaser */}
         <TrainingTeaser />
 
-        {/* Bot Zuid alleen als gekozen */}
-        {showBot && <BotZuidSection />}
-
         {/* Footer */}
         <footer className="mt-6 flex justify-center">
-          <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2">
             <p className="text-[11px] text-slate-500">
               © {currentYear} Scholengroep Sint-Rembert · Werkgroep Digitale Didactiek
             </p>
+            <span className="text-[11px] text-slate-400">
+              Samen sterk in ICT &amp; AI 💙
+            </span>
           </div>
         </footer>
       </main>
@@ -1776,6 +1869,9 @@ export default function App() {
           onClose={() => setAiOverlayOpen(false)}
         />
       )}
+
+      {/* Bot-overlay boven de hele pagina */}
+      {botOverlayOpen && <BotOverlay onClose={() => setBotOverlayOpen(false)} />}
 
       <FloatingPlanner />
     </div>

@@ -45,7 +45,7 @@ Belangrijke stijl:
 - Geef geen gevoelige of privacy-schendende informatie.
 `.trim();
 
-    // 👇 Zet de context eerst, daarna de echte conversatiegeschiedenis
+    // 👇 Context eerst, dan gesprek
     const contents = [
       {
         role: "user",
@@ -57,14 +57,12 @@ Belangrijke stijl:
       })),
     ];
 
-    // ✅ Gebruik een publiek beschikbaar model i.p.v. gemini-3-pro-preview
-const MODEL = "gemini-1.5-flash"; // of "gemini-1.5-pro"
+    // ✅ Gebruik de nieuwe v1 endpoint + -latest modelnaam
+    const MODEL = "gemini-1.5-flash-latest"; // eventueel "gemini-1.5-pro-latest"
+    const API_VERSION = "v1";
 
     const url =
-      "https://generativelanguage.googleapis.com/v1beta/models/" +
-      MODEL +
-      ":generateContent?key=" +
-      apiKey;
+      `https://generativelanguage.googleapis.com/${API_VERSION}/models/${MODEL}:generateContent?key=${apiKey}`;
 
     const geminiResponse = await fetch(url, {
       method: "POST",

@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
     // 👉 Context / persoonlijkheid van Bot Zuid
     const contextText = `
-Je bent **Bot Zuid**, de digitale ICT- en AI-assistent van Scholengroep Sint-Rembert
+Je bent Bot Zuid, de digitale ICT- en AI-assistent van Scholengroep Sint-Rembert
 (SiVi en VLTI in Torhout).
 
 Jouw taak:
@@ -57,8 +57,13 @@ Belangrijke stijl:
       })),
     ];
 
+    // ✅ Gebruik een publiek beschikbaar model i.p.v. gemini-3-pro-preview
+    const MODEL = "gemini-1.5-flash"; // of "gemini-1.5-pro" als je wil
+
     const url =
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-preview:generateContent?key=" +
+      "https://generativelanguage.googleapis.com/v1beta/models/" +
+      MODEL +
+      ":generateContent?key=" +
       apiKey;
 
     const geminiResponse = await fetch(url, {

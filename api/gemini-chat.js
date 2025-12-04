@@ -45,7 +45,7 @@ Belangrijke stijl:
 - Geef geen gevoelige of privacy-schendende informatie.
 `.trim();
 
-    // 👇 Context eerst, dan gesprek
+    // 👇 Context eerst, dan de echte conversatie
     const contents = [
       {
         role: "user",
@@ -57,12 +57,11 @@ Belangrijke stijl:
       })),
     ];
 
-    // ✅ Gebruik de nieuwe v1 endpoint + -latest modelnaam
-    const MODEL = "gemini-1.5-flash-latest"; // eventueel "gemini-1.5-pro-latest"
-    const API_VERSION = "v1";
+    // ✅ Gebruik een model dat zeker bestaat op de v1beta endpoint
+    const MODEL = "gemini-2.0-flash"; // stabiel, snel model
+    const API_VERSION = "v1beta";
 
-    const url =
-      `https://generativelanguage.googleapis.com/${API_VERSION}/models/${MODEL}:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/${API_VERSION}/models/${MODEL}:generateContent?key=${apiKey}`;
 
     const geminiResponse = await fetch(url, {
       method: "POST",
@@ -86,7 +85,8 @@ Belangrijke stijl:
     const reply =
       data.candidates?.[0]?.content?.parts
         ?.map((p) => p.text)
-        .join("") || "Ik kon geen antwoord genereren, probeer het even opnieuw.";
+        .join("") ||
+      "Ik kon geen antwoord genereren, probeer het even opnieuw.";
 
     return res.status(200).json({ reply });
   } catch (err) {

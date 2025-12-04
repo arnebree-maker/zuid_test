@@ -30,9 +30,8 @@ const LEREN_PROMPTEN_URL =
 
 const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
-/* ------------ Data buiten componenten houden ------------ */
+/* ------------ Data ------------ */
 
-// Best practices items
 const BEST_PRACTICE_ITEMS = [
   {
     id: "engels-chatbot",
@@ -60,7 +59,6 @@ const BEST_PRACTICE_ITEMS = [
   },
 ];
 
-// Prompts voor Aan de slag
 const BASIC_PROMPT = `Je bent een didactische assistent voor leerkrachten secundair onderwijs.
 Ik geef les in het vak [vak] aan leerlingen van [graad / richting].
 Maak 3 ideeën voor een korte klasopdracht van max. 20 minuten.
@@ -139,9 +137,7 @@ const Button = ({
 };
 
 const Card = ({ children, className = "" }) => (
-  <div
-    className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}
-  >
+  <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
     {children}
   </div>
 );
@@ -207,7 +203,135 @@ const PromptBlock = ({ label, text }) => {
   );
 };
 
-/* ------------ Best practices van collega's ------------ */
+/* ------------ Landing hero (minibricks-stijl) ------------ */
+
+function LandingHero({ onSelectSection, onShowVideo }) {
+  return (
+    <section className="mt-6 mb-8">
+      <div className="relative flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden border border-slate-200">
+        {/* Linker gedeelte: schuine foto */}
+        <div className="relative w-full lg:w-1/2 h-56 sm:h-72 lg:h-[420px] overflow-hidden">
+          <div className="absolute inset-0 hero-diagonal">
+            <img
+              src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
+              alt="Digitale didactiek in actie"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Tekst rechts */}
+        <div className="flex-1 px-6 sm:px-10 py-8 lg:py-10 flex flex-col justify-between">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+            {/* Grote titel */}
+            <div className="max-w-md">
+              <p className="text-xs font-semibold tracking-[0.16em] uppercase text-orange-500 mb-3">
+                Scholengroep Sint-Rembert
+              </p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold leading-tight text-slate-900">
+                ICT &amp; AI
+                <br />
+                in jouw les
+              </h2>
+            </div>
+
+            {/* Korte uitleg rechts */}
+            <div className="max-w-sm text-sm text-slate-600">
+              <p>
+                Eén startpunt voor{" "}
+                <span className="font-semibold text-slate-900">
+                  voorbeelden, tools, ondersteuning en bijscholing
+                </span>{" "}
+                rond digitale didactiek binnen SiVi &amp; VLTI.
+              </p>
+              <p className="mt-3">
+                Start met een concreet voorbeeld, leer zelf een AI-tool maken of stel je
+                technische vraag aan Bot Zuid.
+              </p>
+            </div>
+          </div>
+
+          {/* Call-to-actions */}
+          <div className="mt-6 flex flex-wrap gap-2 sm:gap-3 text-sm">
+            <Button
+              variant="primary"
+              onClick={() => onSelectSection("voorbeelden")}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
+              <BookOpen className="h-4 w-4" />
+              Voorbeelden bekijken
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => onSelectSection("aan-de-slag")}
+            >
+              <Sparkles className="h-4 w-4" />
+              Aan de slag met AI
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => onSelectSection("bijscholing")}
+            >
+              <Calendar className="h-4 w-4" />
+              Bijscholing Lovable
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={onShowVideo}
+              className="text-slate-500"
+            >
+              🎥 Intro-video
+            </Button>
+          </div>
+
+          {/* “Nav”-lijn onderaan */}
+          <div className="mt-6 border-t border-slate-200 pt-3">
+            <nav className="flex flex-wrap gap-4 text-[11px] sm:text-xs text-slate-500">
+              <button
+                type="button"
+                className="relative pb-1 hover:text-orange-500"
+                onClick={() => onSelectSection("voorbeelden")}
+              >
+                Home / Voorbeelden
+                <span className="absolute left-0 -bottom-0.5 h-[2px] w-10 bg-orange-500" />
+              </button>
+              <button
+                type="button"
+                className="pb-1 hover:text-slate-700"
+                onClick={() => onSelectSection("aan-de-slag")}
+              >
+                Aan de slag
+              </button>
+              <button
+                type="button"
+                className="pb-1 hover:text-slate-700"
+                onClick={() => onSelectSection("bijscholing")}
+              >
+                Bijscholing
+              </button>
+              <button
+                type="button"
+                className="pb-1 hover:text-slate-700"
+                onClick={() => onSelectSection("ai-tools")}
+              >
+                AI-tools
+              </button>
+              <button
+                type="button"
+                className="pb-1 hover:text-slate-700"
+                onClick={() => onSelectSection("ai-beleid")}
+              >
+                AI-richtlijnen
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------ Best practices ------------ */
 
 function BestPractices() {
   const [likes, setLikes] = useState(() => {
@@ -291,7 +415,7 @@ function BestPractices() {
   );
 }
 
-/* ------------ Chatcomponent (Bot Zuid – technisch) ------------ */
+/* ------------ Bot Zuid ------------ */
 
 function SupportChat() {
   const [messages, setMessages] = useState([
@@ -324,8 +448,9 @@ function SupportChat() {
 
       const data = await res.json();
       const reply =
-        data?.reply ||
-        "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
+        data && data.reply
+          ? data.reply
+          : "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
 
       setMessages([...newMessages, { role: "bot", text: reply }]);
     } catch (err) {
@@ -436,7 +561,7 @@ function CountdownTimer({ targetDate }) {
       const m = Math.floor((diff / (1000 * 60)) % 60);
       const s = Math.floor((diff / 1000) % 60);
 
-      setTimeLeft(`${d} dagen · ${h}u ${m}m ${s}s`);
+      setTimeLeft(d + " dagen · " + h + "u " + m + "m " + s + "s");
     }, 1000);
 
     return () => clearInterval(interval);
@@ -454,7 +579,7 @@ function CountdownTimer({ targetDate }) {
   );
 }
 
-/* ------------ AI-tools (extra onderdeel) ------------ */
+/* ------------ AI-tools ------------ */
 
 function AiToolsSection() {
   return (
@@ -474,52 +599,22 @@ function AiToolsSection() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-        <Button
-          as="a"
-          href="https://chatgpt.com/"
-          variant="secondary"
-          className="justify-center"
-        >
+        <Button as="a" href="https://chatgpt.com/" variant="secondary" className="justify-center">
           ChatGPT
         </Button>
-        <Button
-          as="a"
-          href="https://gemini.google.com/"
-          variant="secondary"
-          className="justify-center"
-        >
+        <Button as="a" href="https://gemini.google.com/" variant="secondary" className="justify-center">
           Google Gemini
         </Button>
-        <Button
-          as="a"
-          href="https://www.genial.ly/"
-          variant="secondary"
-          className="justify-center"
-        >
+        <Button as="a" href="https://www.genial.ly/" variant="secondary" className="justify-center">
           Genially
         </Button>
-        <Button
-          as="a"
-          href="https://notebooklm.google.com/"
-          variant="secondary"
-          className="justify-center"
-        >
+        <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="justify-center">
           NotebookLM
         </Button>
-        <Button
-          as="a"
-          href="https://gamma.app/"
-          variant="secondary"
-          className="justify-center"
-        >
+        <Button as="a" href="https://gamma.app/" variant="secondary" className="justify-center">
           Gamma
         </Button>
-        <Button
-          as="a"
-          href="https://lovable.dev/"
-          variant="secondary"
-          className="justify-center"
-        >
+        <Button as="a" href="https://lovable.dev/" variant="secondary" className="justify-center">
           Lovable
         </Button>
         <Button
@@ -726,7 +821,7 @@ function ExamplesOverview() {
   );
 }
 
-/* ------------ Aan de slag – leren prompten + stappen ------------ */
+/* ------------ Aan de slag ------------ */
 
 function GettingStartedSection() {
   const [unlocked, setUnlocked] = useState(false);
@@ -811,7 +906,6 @@ function GettingStartedSection() {
         </div>
       </Card>
 
-      {/* Alleen tonen als stap 1 "ontgrendeld" is */}
       {unlocked && (
         <>
           {/* Stap 2 – Lovable */}
@@ -905,7 +999,7 @@ function GettingStartedSection() {
                   </li>
                   <li>
                     Klik op <span className="font-semibold">“New chat”</span> of “New
-                    prompt” (afhankelijk van de interface).
+                    prompt”.
                   </li>
                   <li>
                     Kies een Gemini-model dat geschikt is voor onderwijs (bv. 1.5 Flash /
@@ -1001,7 +1095,7 @@ function GettingStartedSection() {
   );
 }
 
-/* ------------ Bijscholing / Policy (extra onderdelen) ------------ */
+/* ------------ Bijscholing ------------ */
 
 function TrainingSection() {
   return (
@@ -1081,6 +1175,8 @@ function TrainingSection() {
   );
 }
 
+/* ------------ AI-richtlijnen ------------ */
+
 function PolicySection() {
   return (
     <Card className="p-6">
@@ -1153,13 +1249,13 @@ function PolicySection() {
   );
 }
 
-/* ------------ Zwevend plannertje rechtsonder (Teams) ------------ */
+/* ------------ Floating planner (Teams) ------------ */
 
 function FloatingPlanner() {
   const [open, setOpen] = useState(false);
 
   const statusLabel = "Meestal beschikbaar tijdens de lesuren";
-  const statusState = "free"; // "free" of "busy"
+  const statusState = "free";
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -1189,9 +1285,10 @@ function FloatingPlanner() {
           <div className="mb-3 space-y-1">
             <div className="inline-flex items-center gap-1.5 rounded-full border px-2 py-1 text-[11px]">
               <span
-                className={`h-2 w-2 rounded-full ${
-                  statusState === "free" ? "bg-emerald-500" : "bg-amber-500"
-                }`}
+                className={
+                  "h-2 w-2 rounded-full " +
+                  (statusState === "free" ? "bg-emerald-500" : "bg-amber-500")
+                }
               />
               <span className="font-semibold text-slate-700">
                 {statusState === "free" ? "Beschikbaar" : "Waarschijnlijk bezet"}
@@ -1242,7 +1339,7 @@ function FloatingPlanner() {
 
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => setOpen(function (v) { return !v; })}
         className="flex items-center gap-2 rounded-full bg-blue-600 text-white shadow-xl shadow-blue-600/40 px-3 py-2 text-xs sm:text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
         aria-label="Plan een moment over digitale didactiek"
       >
@@ -1260,7 +1357,7 @@ function FloatingPlanner() {
   );
 }
 
-/* ------------ Sectie-config (belangrijke vs extra onderdelen) ------------ */
+/* ------------ Sectie-config ------------ */
 
 const SECTIONS = {
   "aan-de-slag": {
@@ -1282,7 +1379,7 @@ const SECTIONS = {
     description: "Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.",
     Icon: Sparkles,
     component: TrainingSection,
-    primary: true, // BIJSCHOLING ZICHTBAAR ALS HOOFDOPTIE
+    primary: true,
   },
   "ai-tools": {
     label: "AI-tools",
@@ -1300,24 +1397,19 @@ const SECTIONS = {
   },
 };
 
-/* ------------ Navigatie in de donkere kaart links ------------ */
+/* ------------ Navigatiekaart links ------------ */
 
 function SectionNav({ activePage, setActivePage }) {
-  const primarySections = Object.entries(SECTIONS).filter(
-    function ([, cfg]) {
-      return cfg.primary;
-    }
-  );
-  const extraSections = Object.entries(SECTIONS).filter(
-    function ([, cfg]) {
-      return !cfg.primary;
-    }
-  );
+  const primarySections = Object.entries(SECTIONS).filter(function ([, cfg]) {
+    return cfg.primary;
+  });
+  const extraSections = Object.entries(SECTIONS).filter(function ([, cfg]) {
+    return !cfg.primary;
+  });
   const [showExtra, setShowExtra] = useState(false);
 
   return (
     <div className="flex flex-col gap-3 text-sm">
-      {/* Belangrijkste secties */}
       <div className="flex flex-col gap-2">
         {primarySections.map(function ([key, cfg]) {
           const isActive = activePage === key;
@@ -1327,32 +1419,36 @@ function SectionNav({ activePage, setActivePage }) {
               key={key}
               type="button"
               onClick={() => setActivePage(key)}
-              className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-                isActive
+              className={
+                "group rounded-lg border px-3 py-2.5 text-left transition-all " +
+                (isActive
                   ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                  : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-              }`}
+                  : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10")
+              }
             >
               <div className="flex items-center justify-between mb-1">
                 <span
-                  className={`font-semibold text-xs ${
-                    isActive ? "text-slate-900" : "text-white"
-                  }`}
+                  className={
+                    "font-semibold text-xs " +
+                    (isActive ? "text-slate-900" : "text-white")
+                  }
                 >
                   {cfg.label}
                 </span>
                 <Icon
-                  className={`h-4 w-4 ${
-                    isActive
+                  className={
+                    "h-4 w-4 " +
+                    (isActive
                       ? "text-blue-600"
-                      : "text-blue-200 group-hover:text-blue-300"
-                  }`}
+                      : "text-blue-200 group-hover:text-blue-300")
+                  }
                 />
               </div>
               <p
-                className={`text-[11px] ${
-                  isActive ? "text-slate-600" : "text-slate-200"
-                }`}
+                className={
+                  "text-[11px] " +
+                  (isActive ? "text-slate-600" : "text-slate-200")
+                }
               >
                 {cfg.description}
               </p>
@@ -1361,7 +1457,6 @@ function SectionNav({ activePage, setActivePage }) {
         })}
       </div>
 
-      {/* Extra onderdelen onder een inklapbaar blokje */}
       {extraSections.length > 0 && (
         <div className="pt-2 border-t border-white/15">
           <button
@@ -1384,11 +1479,12 @@ function SectionNav({ activePage, setActivePage }) {
                     key={key}
                     type="button"
                     onClick={() => setActivePage(key)}
-                    className={`group rounded-lg border px-3 py-2 text-left text-[11px] transition-all ${
-                      isActive
+                    className={
+                      "group rounded-lg border px-3 py-2 text-left text-[11px] transition-all " +
+                      (isActive
                         ? "border-blue-200 bg-white text-slate-900"
-                        : "border-white/15 bg-white/5 hover:border-blue-200 hover:bg-white/10"
-                    }`}
+                        : "border-white/15 bg-white/5 hover:border-blue-200 hover:bg-white/10")
+                    }
                   >
                     <div className="flex items-center gap-2">
                       <Icon className="h-3 w-3 text-blue-200" />
@@ -1405,7 +1501,7 @@ function SectionNav({ activePage, setActivePage }) {
   );
 }
 
-/* ------------ Quick actions / mini-opdrachten ------------ */
+/* ------------ Quick actions ------------ */
 
 function QuickActions({ onOpenPage }) {
   return (
@@ -1493,17 +1589,14 @@ function QuickActions({ onOpenPage }) {
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
-  // Standaard focus: Voorbeelden
   const [activePage, setActivePage] = useState("voorbeelden");
-  // Video start automatisch zoals in de oorspronkelijke versie
   const [showIntroVideo, setShowIntroVideo] = useState(true);
 
   const activeConfig = SECTIONS[activePage] || null;
   const activePageLabel = activeConfig ? activeConfig.label : null;
-
   const currentYear = new Date().getFullYear();
 
-  const renderActiveSection = function () {
+  const renderActiveSection = () => {
     if (!activeConfig) return null;
     const Component = activeConfig.component;
     return <Component />;
@@ -1541,75 +1634,13 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-        {/* Hero / banner */}
-        <section className="mt-6 mb-6">
-          <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
-            <div className="relative h-[40vh] sm:h-[50vh] md:h-[54vh]">
-              <img
-                src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
-                alt="Team samenwerking en enthousiasme"
-                className="w-full h-full object-cover opacity-75"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
+        {/* Nieuwe hero */}
+        <LandingHero
+          onSelectSection={setActivePage}
+          onShowVideo={() => setShowIntroVideo(true)}
+        />
 
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full px-6 sm:px-8 md:px-10">
-                  <div className="max-w-xl space-y-4 bg-slate-950/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
-                    <p className="inline-flex items-center gap-2 rounded-full bg-blue-500/20 border border-blue-300/40 px-3 py-1 text-[11px] font-semibold text-blue-100 uppercase tracking-wide">
-                      <Sparkles className="h-3 w-3" />
-                      Digitale didactiek &amp; ICT
-                    </p>
-                    <div className="space-y-2">
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white leading-tight">
-                        Eén startpunt voor ICT &amp; AI in je les
-                      </h2>
-                      <p className="text-xs sm:text-sm text-slate-200">
-                        Kies wat je nu nodig hebt: voorbeelden voor in de klas, zelf aan
-                        de slag met AI of hulp bij een technisch probleem.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
-                      <Button
-                        type="button"
-                        variant="primary"
-                        onClick={() => setActivePage("voorbeelden")}
-                        className="bg-blue-500 hover:bg-blue-600"
-                      >
-                        <BookOpen className="h-4 w-4" />
-                        Voorbeelden bekijken
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="secondary"
-                        onClick={() => setActivePage("aan-de-slag")}
-                        className="border-slate-500/70 bg-slate-900/40 text-slate-100 hover:bg-slate-800"
-                      >
-                        <Sparkles className="h-4 w-4" />
-                        Zelf aan de slag
-                      </Button>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        onClick={() => setShowIntroVideo(true)}
-                        className="text-slate-200 hover:bg-slate-800/60"
-                      >
-                        🎥 Bekijk de korte intro-video
-                      </Button>
-                    </div>
-
-                    <p className="text-[11px] text-slate-300">
-                      Technisch probleem? Scroll naar beneden voor Bot Zuid of gebruik de
-                      Teams-knop rechtsonder voor pedagogische vragen.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Werkgroep klein onder de foto */}
+        {/* Werkgroep */}
         <section className="mb-6">
           <Card className="p-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -1649,7 +1680,7 @@ export default function App() {
 
         {/* Navigatie + Bot Zuid */}
         <section className="mb-8 grid gap-4 md:grid-cols-3 items-start">
-          {/* Linkerkaart: sectie-navigatie */}
+          {/* Linkerkaart */}
           <Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
             <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400" />
 
@@ -1759,8 +1790,6 @@ export default function App() {
                 </div>
               </div>
 
-              {/* chips met voorbeeld-vragen zijn hier bewust weg om ruimte te besparen */}
-
               <Button
                 as="a"
                 href={GEMINI_URL}
@@ -1773,10 +1802,10 @@ export default function App() {
           </Card>
         </section>
 
-        {/* Quick actions ONDER de chatbot */}
+        {/* Quick actions onder chatbot */}
         <QuickActions onOpenPage={setActivePage} />
 
-        {/* Actieve "subpagina" */}
+        {/* Actieve sectie */}
         {activeConfig && (
           <section className="mb-10 space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">

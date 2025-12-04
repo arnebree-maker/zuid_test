@@ -30,32 +30,76 @@ const LEREN_PROMPTEN_URL =
 
 const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
-/* ------------ Intro video overlay ------------ */
+/* ------------ Data buiten componenten houden ------------ */
 
-function IntroVideoOverlay() {
-  const [visible, setVisible] = useState(true);
+// Best practices items
+const BEST_PRACTICE_ITEMS = [
+  {
+    id: "engels-chatbot",
+    title: "Engelse chatbot voor vrije spreekvaardigheid",
+    teacher: "3e graad TSO · Engels",
+    description:
+      "Leerlingen kiezen een thema (hobby's, reizen, werk) en voeren een gestructureerd gesprek met een AI-chatbot. Nadien maken ze een korte reflectie op hun fouten en nieuwe woorden.",
+    tools: "Google AI Studio",
+  },
+  {
+    id: "lovable-portfolio",
+    title: "Lovable-portfolio voor praktijkprojecten",
+    teacher: "2e graad BSO · Praktijkvakken",
+    description:
+      "Elke leerling krijgt een eigen Lovable-site als digitaal portfolio. Ze uploaden foto's, korte verslagen en AI-gegenereerde reflectievragen.",
+    tools: "Lovable + foto's / documenten",
+  },
+  {
+    id: "notebooklm-samenvattingen",
+    title: "NotebookLM als samenvattingscoach",
+    teacher: "3e graad ASO · Economie",
+    description:
+      "Hoofdstukken uit de cursus worden in NotebookLM gezet. Leerlingen vergelijken hun eigen samenvatting met de AI-samenvatting en verbeteren die stap voor stap.",
+    tools: "NotebookLM",
+  },
+];
 
-  if (!visible) return null;
+// Prompts voor Aan de slag
+const BASIC_PROMPT = `Je bent een didactische assistent voor leerkrachten secundair onderwijs.
+Ik geef les in het vak [vak] aan leerlingen van [graad / richting].
+Maak 3 ideeën voor een korte klasopdracht van max. 20 minuten.
+Gebruik eenvoudige taal die past bij mijn leerlingen.`;
 
-  return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
-      <div className="relative max-w-3xl w-full">
-        <video
-          src="/media/promo.mp4"
-          autoPlay
-          controls
-          className="w-full rounded-xl shadow-2xl border border-white/20"
-        />
-        <button
-          onClick={() => setVisible(false)}
-          className="absolute -top-3 -right-3 bg-white text-black rounded-full h-8 w-8 flex items-center justify-center font-bold shadow-lg hover:bg-slate-200"
-        >
-          ×
-        </button>
-      </div>
-    </div>
-  );
-}
+const LOVABLE_PROMPT = `Je bent een webdesigner voor een secundaire school.
+Bouw een eenvoudige, overzichtelijke website voor mijn lessen [vak] aan leerlingen van [studierichting / graad].
+
+De website moet minstens deze pagina's hebben:
+- Startpagina met korte uitleg over het vak en een welkomstboodschap.
+- Pagina "Lessen" met een overzicht van thema's of hoofdstukken.
+- Pagina "Oefeningen" met ruimte voor opdrachten, oefeningen en online tools.
+- Pagina "Praktische info" met afspraken, evaluatie en contact.
+
+Gebruik een rustige, moderne lay-out.
+Zorg dat ik teksten achteraf makkelijk kan aanpassen.
+De taal is Nederlands en gericht op 14–18-jarigen.`;
+
+const AI_STUDIO_PROMPT = `You are an English conversation tutor for secondary school students in Belgium (ages 14–18).
+Your goal is to help students practise everyday English in a safe and motivating way.
+
+Rules:
+- Always answer in simple, clear English (level A2–B1).
+- Ask short follow-up questions to keep the conversation going.
+- Correct important grammar or vocabulary mistakes, but in a friendly way.
+- Never give full translations unless the student explicitly asks.
+- Encourage the student and keep the tone positive.
+
+Start with:
+"Hi! I am your English chatbot. Let's practise English together.
+What would you like to talk about today? Hobbies, school, work, travel, or something else?"`;
+
+const NOTEBOOKLM_PROMPTS = `Voorbeelden van prompts in NotebookLM:
+
+- Maak een beknopte samenvatting van dit hoofdstuk in maximum 200 woorden, in het Nederlands.
+- Formuleer 5 meerkeuzevragen met telkens 4 opties over de kernbegrippen van dit hoofdstuk.
+- Stel 5 open vragen die peilen naar inzicht (geen pure reproductie).
+- Leg de belangrijkste begrippen eenvoudig uit zoals aan een leerling van 14 jaar.
+- Maak een stappenplan dat de leerling kan volgen om dit hoofdstuk zelfstandig te studeren.`;
 
 /* ------------ Basis UI-componenten ------------ */
 
@@ -91,11 +135,7 @@ const Button = ({
     ...rest,
   };
 
-  return isLink ? (
-    <a {...props}>{children}</a>
-  ) : (
-    <button {...props}>{children}</button>
-  );
+  return isLink ? <a {...props}>{children}</a> : <button {...props}>{children}</button>;
 };
 
 const Card = ({ children, className = "" }) => (
@@ -105,6 +145,29 @@ const Card = ({ children, className = "" }) => (
     {children}
   </div>
 );
+
+/* ------------ Intro video overlay ------------ */
+
+function IntroVideoOverlay({ onClose }) {
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
+      <div className="relative max-w-3xl w-full">
+        <video
+          src="/media/promo.mp4"
+          autoPlay
+          controls
+          className="w-full rounded-xl shadow-2xl border border-white/20"
+        />
+        <button
+          onClick={onClose}
+          className="absolute -top-3 -right-3 bg-white text-black rounded-full h-8 w-8 flex items-center justify-center font-bold shadow-lg hover:bg-slate-200"
+        >
+          ×
+        </button>
+      </div>
+    </div>
+  );
+}
 
 /* ------------ PromptBlock met copy-knop ------------ */
 
@@ -144,91 +207,6 @@ const PromptBlock = ({ label, text }) => {
   );
 };
 
-/* ------------ Quick actions / mini-opdrachten ------------ */
-
-function QuickActions({ onOpenPage }) {
-  return (
-    <section className="mb-6">
-      <Card className="p-4 sm:p-5">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-blue-500">
-              Snel iets uitproberen
-            </p>
-            <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-              Kies een mini-opdracht (5–15 minuten)
-            </h3>
-            <p className="text-[11px] sm:text-xs text-slate-500">
-              Handig om tijdens een overleg of korte pauze één concrete AI-stap te zetten.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
-          <button
-            type="button"
-            onClick={() => onOpenPage("aan-de-slag")}
-            className="group flex flex-col items-start gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-left hover:border-blue-400 hover:bg-blue-50 transition-colors"
-          >
-            <span className="text-xl">✍️</span>
-            <span className="text-xs font-semibold text-slate-900">
-              1. Schrijf je eerste AI-prompt
-            </span>
-            <span className="text-[11px] text-slate-600">
-              Ga naar “Aan de slag” en test een basisprompt voor jouw vak.
-            </span>
-          </button>
-
-          <Button
-            as="a"
-            href="https://rekenenindelogistiek.lovable.app/"
-            variant="secondary"
-            className="flex flex-col items-start gap-1 rounded-xl border border-slate-200 bg-white px-3 py-3 text-left hover:border-blue-400 hover:bg-blue-50"
-          >
-            <span className="text-xl">🌐</span>
-            <span className="text-xs font-semibold text-slate-900">
-              2. Bekijk een AI-leswebsite
-            </span>
-            <span className="text-[11px] text-slate-600">
-              Open het Lovable-voorbeeld en bedenk hoe dit voor jouw vak kan werken.
-            </span>
-          </Button>
-
-          <Button
-            as="a"
-            href="https://aistudio.google.com/"
-            variant="secondary"
-            className="flex flex-col items-start gap-1 rounded-xl border border-slate-200 bg-white px-3 py-3 text-left hover:border-blue-400 hover:bg-blue-50"
-          >
-            <span className="text-xl">💬</span>
-            <span className="text-xs font-semibold text-slate-900">
-              3. Test een Engelse chatbot
-            </span>
-            <span className="text-[11px] text-slate-600">
-              Maak in AI Studio een kleine oefen-chat voor Engels (of een ander vak).
-            </span>
-          </Button>
-
-          <Button
-            as="a"
-            href="https://notebooklm.google.com/"
-            variant="secondary"
-            className="flex flex-col items-start gap-1 rounded-xl border border-slate-200 bg-white px-3 py-3 text-left hover:border-blue-400 hover:bg-blue-50"
-          >
-            <span className="text-xl">📄</span>
-            <span className="text-xs font-semibold text-slate-900">
-              4. Laat NotebookLM een hoofdstuk uitleggen
-            </span>
-            <span className="text-[11px] text-slate-600">
-              Upload één hoofdstuk en laat AI er vragen of een samenvatting bij maken.
-            </span>
-          </Button>
-        </div>
-      </Card>
-    </section>
-  );
-}
-
 /* ------------ Best practices van collega's ------------ */
 
 function BestPractices() {
@@ -241,33 +219,6 @@ function BestPractices() {
       return {};
     }
   });
-
-  const items = [
-    {
-      id: "engels-chatbot",
-      title: "Engelse chatbot voor vrije spreekvaardigheid",
-      teacher: "3e graad TSO · Engels",
-      description:
-        "Leerlingen kiezen een thema (hobby's, reizen, werk) en voeren een gestructureerd gesprek met een AI-chatbot. Nadien maken ze een korte reflectie op hun fouten en nieuwe woorden.",
-      tools: "Google AI Studio",
-    },
-    {
-      id: "lovable-portfolio",
-      title: "Lovable-portfolio voor praktijkprojecten",
-      teacher: "2e graad BSO · Praktijkvakken",
-      description:
-        "Elke leerling krijgt een eigen Lovable-site als digitaal portfolio. Ze uploaden foto's, korte verslagen en AI-gegenereerde reflectievragen.",
-      tools: "Lovable + foto's / documenten",
-    },
-    {
-      id: "notebooklm-samenvattingen",
-      title: "NotebookLM als samenvattingscoach",
-      teacher: "3e graad ASO · Economie",
-      description:
-        "Hoofdstukken uit de cursus worden in NotebookLM gezet. Leerlingen vergelijken hun eigen samenvatting met de AI-samenvatting en verbeteren die stap voor stap.",
-      tools: "NotebookLM",
-    },
-  ];
 
   const toggleLike = (id) => {
     setLikes((prev) => {
@@ -298,7 +249,7 @@ function BestPractices() {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3 text-sm">
-          {items.map((item) => (
+          {BEST_PRACTICE_ITEMS.map((item) => (
             <div
               key={item.id}
               className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-3"
@@ -503,7 +454,7 @@ function CountdownTimer({ targetDate }) {
   );
 }
 
-/* ------------ Subsecties (AI-tools, voorbeelden, …) ------------ */
+/* ------------ AI-tools (extra onderdeel) ------------ */
 
 function AiToolsSection() {
   return (
@@ -770,7 +721,6 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* Best practices alleen hier tonen */}
       <BestPractices />
     </>
   );
@@ -781,49 +731,9 @@ function ExamplesOverview() {
 function GettingStartedSection() {
   const [unlocked, setUnlocked] = useState(false);
 
-  const lovablePrompt = `Je bent een webdesigner voor een secundaire school.
-Bouw een eenvoudige, overzichtelijke website voor mijn lessen [vak] aan leerlingen van [studierichting / graad].
-
-De website moet minstens deze pagina's hebben:
-- Startpagina met korte uitleg over het vak en een welkomstboodschap.
-- Pagina "Lessen" met een overzicht van thema's of hoofdstukken.
-- Pagina "Oefeningen" met ruimte voor opdrachten, oefeningen en online tools.
-- Pagina "Praktische info" met afspraken, evaluatie en contact.
-
-Gebruik een rustige, moderne lay-out.
-Zorg dat ik teksten achteraf makkelijk kan aanpassen.
-De taal is Nederlands en gericht op 14–18-jarigen.`;
-
-  const aiStudioPrompt = `You are an English conversation tutor for secondary school students in Belgium (ages 14–18).
-Your goal is to help students practise everyday English in a safe and motivating way.
-
-Rules:
-- Always answer in simple, clear English (level A2–B1).
-- Ask short follow-up questions to keep the conversation going.
-- Correct important grammar or vocabulary mistakes, but in a friendly way.
-- Never give full translations unless the student explicitly asks.
-- Encourage the student and keep the tone positive.
-
-Start with:
-"Hi! I am your English chatbot. Let's practise English together.
-What would you like to talk about today? Hobbies, school, work, travel, or something else?"`;
-
-  const notebookLmPrompts = `Voorbeelden van prompts in NotebookLM:
-
-- Maak een beknopte samenvatting van dit hoofdstuk in maximum 200 woorden, in het Nederlands.
-- Formuleer 5 meerkeuzevragen met telkens 4 opties over de kernbegrippen van dit hoofdstuk.
-- Stel 5 open vragen die peilen naar inzicht (geen pure reproductie).
-- Leg de belangrijkste begrippen eenvoudig uit zoals aan een leerling van 14 jaar.
-- Maak een stappenplan dat de leerling kan volgen om dit hoofdstuk zelfstandig te studeren.`;
-
-  const basicPrompt = `Je bent een didactische assistent voor leerkrachten secundair onderwijs.
-Ik geef les in het vak [vak] aan leerlingen van [graad / richting].
-Maak 3 ideeën voor een korte klasopdracht van max. 20 minuten.
-Gebruik eenvoudige taal die past bij mijn leerlingen.`;
-
   return (
     <div className="space-y-4">
-      {/* Stap 1 – Leren prompten (verplicht eerst) */}
+      {/* Stap 1 – Leren prompten */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -877,7 +787,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
           <div className="space-y-3">
             <PromptBlock
               label="Voorbeeldprompt voor leerkrachten (algemeen)"
-              text={basicPrompt}
+              text={BASIC_PROMPT}
             />
             <p className="text-[11px] text-slate-500">
               Tip: laat collega&apos;s hun beste prompts delen in de Drive-map en bouw
@@ -901,7 +811,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
         </div>
       </Card>
 
-      {/* Enkel tonen als stap 1 "ontgrendeld" is */}
+      {/* Alleen tonen als stap 1 "ontgrendeld" is */}
       {unlocked && (
         <>
           {/* Stap 2 – Lovable */}
@@ -951,7 +861,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
               <div className="space-y-3">
                 <PromptBlock
                   label="Prompt om te kopiëren in Lovable"
-                  text={lovablePrompt}
+                  text={LOVABLE_PROMPT}
                 />
                 <p className="text-[11px] text-slate-500">
                   Laat deelnemers tijdens de sessie hun vak invullen en de site
@@ -1015,7 +925,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
               <div className="space-y-3">
                 <PromptBlock
                   label="Prompt voor een Engelse oefen-chatbot"
-                  text={aiStudioPrompt}
+                  text={AI_STUDIO_PROMPT}
                 />
                 <p className="text-[11px] text-slate-500">
                   Pas het niveau (A2/B1/B2) aan in de prompt, afhankelijk van je klas.
@@ -1076,7 +986,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
               <div className="space-y-3">
                 <PromptBlock
                   label="Voorbeelden van prompts in NotebookLM"
-                  text={notebookLmPrompts}
+                  text={NOTEBOOKLM_PROMPTS}
                 />
                 <p className="text-[11px] text-slate-500">
                   Toon ook eens hoe de audio-studio werkt en laat NotebookLM een korte
@@ -1091,7 +1001,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
   );
 }
 
-/* ------------ Bijscholing / Policy / Planner ------------ */
+/* ------------ Bijscholing / Policy (extra onderdelen) ------------ */
 
 function TrainingSection() {
   return (
@@ -1350,33 +1260,164 @@ function FloatingPlanner() {
   );
 }
 
+/* ------------ Sectie-config (belangrijke vs extra onderdelen) ------------ */
+
+const SECTIONS = {
+  "aan-de-slag": {
+    label: "Aan de slag",
+    description: "Leren prompten + stappen voor website, chatbot en NotebookLM.",
+    Icon: Sparkles,
+    component: GettingStartedSection,
+    primary: true,
+  },
+  voorbeelden: {
+    label: "Voorbeelden",
+    description: "Concrete voorbeelden (Lovable, AI Studio, NotebookLM) met preview.",
+    Icon: BookOpen,
+    component: ExamplesOverview,
+    primary: true,
+  },
+  "ai-tools": {
+    label: "AI-tools",
+    description: "Overzicht van tools zoals ChatGPT, Gemini, NotebookLM, Genially…",
+    Icon: Lightbulb,
+    component: AiToolsSection,
+    primary: false,
+  },
+  bijscholing: {
+    label: "Bijscholing",
+    description: "Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.",
+    Icon: Sparkles,
+    component: TrainingSection,
+    primary: false,
+  },
+  "ai-beleid": {
+    label: "AI-richtlijnen",
+    description: "Wat mag wel/niet met AI + links naar achtergrondinfo.",
+    Icon: Lightbulb,
+    component: PolicySection,
+    primary: false,
+  },
+};
+
+/* ------------ Navigatie in de donkere kaart links ------------ */
+
+function SectionNav({ activePage, setActivePage }) {
+  const primarySections = Object.entries(SECTIONS).filter(
+    ([, cfg]) => cfg.primary
+  );
+  const extraSections = Object.entries(SECTIONS).filter(
+    ([, cfg]) => !cfg.primary
+  );
+  const [showExtra, setShowExtra] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-3 text-sm">
+      {/* Belangrijkste secties */}
+      <div className="flex flex-col gap-2">
+        {primarySections.map(([key, cfg]) => {
+          const isActive = activePage === key;
+          const Icon = cfg.Icon;
+          return (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setActivePage(key)}
+              className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
+                isActive
+                  ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
+                  : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
+              }`}
+            >
+              <div className="flex items-center justify-between mb-1">
+                <span
+                  className={`font-semibold text-xs ${
+                    isActive ? "text-slate-900" : "text-white"
+                  }`}
+                >
+                  {cfg.label}
+                </span>
+                <Icon
+                  className={`h-4 w-4 ${
+                    isActive
+                      ? "text-blue-600"
+                      : "text-blue-200 group-hover:text-blue-300"
+                  }`}
+                />
+              </div>
+              <p
+                className={`text-[11px] ${
+                  isActive ? "text-slate-600" : "text-slate-200"
+                }`}
+              >
+                {cfg.description}
+              </p>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Extra onderdelen onder een inklapbaar blokje */}
+      {extraSections.length > 0 && (
+        <div className="pt-2 border-t border-white/15">
+          <button
+            type="button"
+            onClick={() => setShowExtra((v) => !v)}
+            className="text-[11px] text-blue-100 underline underline-offset-2"
+          >
+            {showExtra
+              ? "Verberg extra onderdelen"
+              : "Toon extra onderdelen (AI-tools, bijscholing, richtlijnen)"}
+          </button>
+
+          {showExtra && (
+            <div className="mt-2 flex flex-col gap-2">
+              {extraSections.map(([key, cfg]) => {
+                const isActive = activePage === key;
+                const Icon = cfg.Icon;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => setActivePage(key)}
+                    className={`group rounded-lg border px-3 py-2 text-left text-[11px] transition-all ${
+                      isActive
+                        ? "border-blue-200 bg-white text-slate-900"
+                        : "border-white/15 bg-white/5 hover:border-blue-200 hover:bg-white/10"
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <Icon className="h-3 w-3 text-blue-200" />
+                      <span>{cfg.label}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
-  const [activePage, setActivePage] = useState(null); // null = enkel home
+  // Standaard focus: Voorbeelden
+  const [activePage, setActivePage] = useState("voorbeelden");
+  const [showIntroVideo, setShowIntroVideo] = useState(false);
 
-  const activePageLabel =
-    {
-      "ai-tools": "AI-tools",
-      voorbeelden: "Voorbeelden & scenario's",
-      bijscholing: "Bijscholing & vorming",
-      "ai-beleid": "AI-richtlijnen",
-      "aan-de-slag": "Aan de slag",
-    }[activePage] || null;
+  const activeConfig = SECTIONS[activePage];
+  const activePageLabel = activeConfig?.label ?? null;
 
-  const renderActiveSection = () => {
-    if (activePage === "ai-tools") return <AiToolsSection />;
-    if (activePage === "voorbeelden") return <ExamplesOverview />;
-    if (activePage === "bijscholing") return <TrainingSection />;
-    if (activePage === "ai-beleid") return <PolicySection />;
-    if (activePage === "aan-de-slag") return <GettingStartedSection />;
-    return null;
-  };
+  const currentYear = new Date().getFullYear();
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
-      {/* Intro-video overlay */}
-      <IntroVideoOverlay />
+      {showIntroVideo && (
+        <IntroVideoOverlay onClose={() => setShowIntroVideo(false)} />
+      )}
 
       {/* Top bar */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-40">
@@ -1404,76 +1445,67 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-        {/* Hero / banner */}
+        {/* Hero / banner – eenvoudiger, focus op twee stappen */}
         <section className="mt-6 mb-6">
           <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
-            <div className="relative h-[46vh] sm:h-[55vh] md:h-[65vh]">
+            <div className="relative h-[40vh] sm:h-[50vh] md:h-[54vh]">
               <img
                 src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
                 alt="Team samenwerking en enthousiasme"
-                className="w-full h-full object-cover opacity-80"
+                className="w-full h-full object-cover opacity-75"
               />
-
               <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
-              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
 
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full px-6 sm:px-8 md:px-10">
-                  <div className="max-w-2xl space-y-4 md:space-y-5 bg-slate-900/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
-                    <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px]">
-                      <span className="inline-flex items-center gap-1 rounded-full bg-blue-500/20 border border-blue-300/40 px-2 py-1 text-blue-100 font-semibold uppercase tracking-wide">
-                        <Sparkles className="h-3 w-3" />
-                        Digitale didactiek
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-slate-800/70 border border-slate-600 px-2 py-1 text-slate-200">
-                        ICT &amp; AI-ondersteuning
-                      </span>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/15 border border-emerald-300/40 px-2 py-1 text-emerald-100">
-                        Voor alle leerkrachten
-                      </span>
-                    </div>
-
+                  <div className="max-w-xl space-y-4 bg-slate-950/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
+                    <p className="inline-flex items-center gap-2 rounded-full bg-blue-500/20 border border-blue-300/40 px-3 py-1 text-[11px] font-semibold text-blue-100 uppercase tracking-wide">
+                      <Sparkles className="h-3 w-3" />
+                      Digitale didactiek &amp; ICT
+                    </p>
                     <div className="space-y-2">
-                      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
-                        Alles rond ICT &amp; AI
-                        <span className="block text-sm sm:text-base md:text-lg text-slate-200 font-normal mt-1.5">
-                          Eén startpunt voor tools, voorbeelden, bijscholing en
-                          ondersteuning binnen Scholengroep Sint-Rembert.
-                        </span>
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-white leading-tight">
+                        Eén startpunt voor ICT &amp; AI in je les
                       </h2>
+                      <p className="text-xs sm:text-sm text-slate-200">
+                        Kies wat je nu nodig hebt: voorbeelden voor in de klas, zelf aan
+                        de slag met AI of hulp bij een technisch probleem.
+                      </p>
                     </div>
 
                     <div className="flex flex-wrap gap-2 sm:gap-3 text-xs sm:text-sm">
                       <Button
                         type="button"
                         variant="primary"
+                        onClick={() => setActivePage("voorbeelden")}
                         className="bg-blue-500 hover:bg-blue-600"
-                        onClick={() => setActivePage("ai-tools")}
                       >
-                        <Lightbulb className="h-4 w-4" />
-                        AI-tools bekijken
+                        <BookOpen className="h-4 w-4" />
+                        Voorbeelden bekijken
                       </Button>
-
                       <Button
                         type="button"
                         variant="secondary"
+                        onClick={() => setActivePage("aan-de-slag")}
                         className="border-slate-500/70 bg-slate-900/40 text-slate-100 hover:bg-slate-800"
-                        onClick={() => setActivePage("voorbeelden")}
                       >
-                        <BookOpen className="h-4 w-4" />
-                        Voorbeelden &amp; scenario&apos;s
+                        <Sparkles className="h-4 w-4" />
+                        Zelf aan de slag
                       </Button>
-
                       <Button
                         type="button"
                         variant="ghost"
+                        onClick={() => setShowIntroVideo(true)}
                         className="text-slate-200 hover:bg-slate-800/60"
-                        onClick={() => setActivePage("bijscholing")}
                       >
-                        <Sparkles className="h-4 w-4" />
-                        Bijscholing Lovable
+                        🎥 Bekijk de korte intro-video
                       </Button>
                     </div>
+
+                    <p className="text-[11px] text-slate-300">
+                      Technisch probleem? Scroll naar beneden voor Bot Zuid of gebruik de
+                      Teams-knop rechtsonder voor pedagogische vragen.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1482,7 +1514,7 @@ export default function App() {
         </section>
 
         {/* Werkgroep klein onder de foto */}
-        <section className="mb-8">
+        <section className="mb-6">
           <Card className="p-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <div>
@@ -1519,8 +1551,9 @@ export default function App() {
           </Card>
         </section>
 
-        {/* Snel naar de juiste info + Bot Zuid */}
-        <section className="mb-6 grid gap-4 md:grid-cols-3 items-start">
+        {/* Navigatie + Bot Zuid */}
+        <section className="mb-8 grid gap-4 md:grid-cols-3 items-start">
+          {/* Linkerkaart: sectie-navigatie */}
           <Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
             <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400" />
 
@@ -1529,7 +1562,7 @@ export default function App() {
                 <div className="space-y-2">
                   <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-blue-500/20 border border-blue-300/40 text-[11px] font-semibold text-blue-100">
                     <Sparkles className="h-3 w-3" />
-                    <span>Stap 1: kies een onderdeel</span>
+                    <span>Kies een onderdeel</span>
                   </div>
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.08em] text-blue-200 font-semibold">
@@ -1539,10 +1572,8 @@ export default function App() {
                       Snel naar de juiste info
                     </h3>
                     <p className="text-[11px] sm:text-xs text-slate-200 mt-1">
-                      <span className="font-semibold text-blue-100">
-                        Klik op een tegel
-                      </span>{" "}
-                      – onderaan deze pagina verschijnt de bijhorende sectie.
+                      Klik op een tegel – onderaan deze pagina verschijnt de inhoud van
+                      dat onderdeel.
                     </p>
                   </div>
                 </div>
@@ -1551,183 +1582,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-2 text-sm">
-                <button
-                  type="button"
-                  onClick={() => setActivePage("aan-de-slag")}
-                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-                    activePage === "aan-de-slag"
-                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className={`font-semibold text-xs ${
-                        activePage === "aan-de-slag" ? "text-slate-900" : "text-white"
-                      }`}
-                    >
-                      Aan de slag
-                    </span>
-                    <Sparkles
-                      className={`h-4 w-4 ${
-                        activePage === "aan-de-slag"
-                          ? "text-blue-600"
-                          : "text-blue-200 group-hover:text-blue-300"
-                      }`}
-                    />
-                  </div>
-                  <p
-                    className={`text-[11px] ${
-                      activePage === "aan-de-slag"
-                        ? "text-slate-600"
-                        : "text-slate-200"
-                    }`}
-                  >
-                    Stap-voor-stap: leren prompten, website, chatbot en NotebookLM.
-                  </p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActivePage("ai-tools")}
-                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-                    activePage === "ai-tools"
-                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className={`font-semibold text-xs ${
-                        activePage === "ai-tools" ? "text-slate-900" : "text-white"
-                      }`}
-                    >
-                      AI-tools
-                    </span>
-                    <Lightbulb
-                      className={`h-4 w-4 ${
-                        activePage === "ai-tools"
-                          ? "text-blue-600"
-                          : "text-blue-200 group-hover:text-blue-300"
-                      }`}
-                    />
-                  </div>
-                  <p
-                    className={`text-[11px] ${
-                      activePage === "ai-tools" ? "text-slate-600" : "text-slate-200"
-                    }`}
-                  >
-                    Overzicht van tools zoals ChatGPT, Gemini, NotebookLM, Genially…
-                  </p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActivePage("voorbeelden")}
-                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-                    activePage === "voorbeelden"
-                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className={`font-semibold text-xs ${
-                        activePage === "voorbeelden" ? "text-slate-900" : "text-white"
-                      }`}
-                    >
-                      Voorbeelden &amp; scenario&apos;s
-                    </span>
-                    <BookOpen
-                      className={`h-4 w-4 ${
-                        activePage === "voorbeelden"
-                          ? "text-blue-600"
-                          : "text-blue-200 group-hover:text-blue-300"
-                      }`}
-                    />
-                  </div>
-                  <p
-                    className={`text-[11px] ${
-                      activePage === "voorbeelden"
-                        ? "text-slate-600"
-                        : "text-slate-200"
-                    }`}
-                  >
-                    Concrete voorbeelden (Lovable, AI Studio, NotebookLM) met preview.
-                  </p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActivePage("bijscholing")}
-                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-                    activePage === "bijscholing"
-                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className={`font-semibold text-xs ${
-                        activePage === "bijscholing" ? "text-slate-900" : "text-white"
-                      }`}
-                    >
-                      Bijscholing &amp; vorming
-                    </span>
-                    <Sparkles
-                      className={`h-4 w-4 ${
-                        activePage === "bijscholing"
-                          ? "text-blue-600"
-                          : "text-blue-200 group-hover:text-blue-300"
-                      }`}
-                    />
-                  </div>
-                  <p
-                    className={`text-[11px] ${
-                      activePage === "bijscholing"
-                        ? "text-slate-600"
-                        : "text-slate-200"
-                    }`}
-                  >
-                    Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.
-                  </p>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => setActivePage("ai-beleid")}
-                  className={`group rounded-lg border px-3 py-2.5 text-left transition-all ${
-                    activePage === "ai-beleid"
-                      ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                      : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <span
-                      className={`font-semibold text-xs ${
-                        activePage === "ai-beleid" ? "text-slate-900" : "text-white"
-                      }`}
-                    >
-                      AI-richtlijnen
-                    </span>
-                    <Lightbulb
-                      className={`h-4 w-4 ${
-                        activePage === "ai-beleid"
-                          ? "text-blue-600"
-                          : "text-blue-200 group-hover:text-blue-300"
-                      }`}
-                    />
-                  </div>
-                  <p
-                    className={`text-[11px] ${
-                      activePage === "ai-beleid" ? "text-slate-600" : "text-slate-200"
-                    }`}
-                  >
-                    Wat mag wel/niet met AI + links naar achtergrondinfo.
-                  </p>
-                </button>
-              </div>
+              <SectionNav activePage={activePage} setActivePage={setActivePage} />
 
               {activePageLabel && (
                 <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
@@ -1748,8 +1603,8 @@ export default function App() {
                   Tip: start met de voorbeelden.
                 </p>
                 <p className="text-[10px] text-slate-200">
-                  In de Drive-map vind je kant-en-klare lessen en prompts die je meteen kan
-                  uitproberen in de klas.
+                  In de Drive-map vind je kant-en-klare lessen en prompts die je meteen
+                  kan uitproberen in de klas.
                 </p>
                 <Button
                   as="a"
@@ -1780,10 +1635,10 @@ export default function App() {
 
                   <div>
                     <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
-                      Chatbot · technische ICT-vragen
+                      Probleem met ICT?
                     </p>
                     <h3 className="text-sm sm:text-base font-semibold">
-                      Bot Zuid – projectie, Kurzweil &amp; Smartschool
+                      Bot Zuid – projector, Kurzweil &amp; Smartschool
                     </h3>
                   </div>
                 </div>
@@ -1808,7 +1663,7 @@ export default function App() {
 
                 <div className="pt-3 border-t border-slate-200">
                   <h4 className="text-sm font-semibold text-slate-900">
-                    Problemen met ICT-materiaal?
+                    Werkt het nog steeds niet?
                   </h4>
                   <p className="text-xs sm:text-sm text-slate-600 mt-1">
                     Gebruik ons officiële ticketsysteem voor storingen, defecten en
@@ -1851,19 +1706,16 @@ export default function App() {
           </Card>
         </section>
 
-        {/* Quick actions ONDER de chatbot */}
-        <QuickActions onOpenPage={setActivePage} />
-
         {/* Actieve "subpagina" */}
-        {activePage && (
+        {activeConfig && (
           <section className="mb-10 space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
               <Sparkles className="h-3 w-3" />
               <span>
-                Je bekijkt nu: <span className="underline">{activePageLabel}</span>
+                Je bekijkt nu: <span className="underline">{activeConfig.label}</span>
               </span>
             </div>
-            {renderActiveSection()}
+            <activeConfig.component />
           </section>
         )}
 
@@ -1871,8 +1723,7 @@ export default function App() {
         <footer className="mt-6 flex justify-center">
           <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
             <p className="text-[11px] text-slate-500">
-              © {new Date().getFullYear()} Scholengroep Sint-Rembert · Werkgroep Digitale
-              Didactiek
+              © {currentYear} Scholengroep Sint-Rembert · Werkgroep Digitale Didactiek
             </p>
           </div>
         </footer>

@@ -1495,7 +1495,7 @@ export default function App() {
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-900/10" />
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
 
-                <div className="absolute inset-0 flex items-center">
+                <div className="absolute inset-0 flex items-end pb-10 sm:pb-12 md:pb-16">
                   <div className="w-full px-6 sm:px-8 md:px-10">
                     <div className="max-w-2xl space-y-4 md:space-y-5 bg-slate-900/60 backdrop-blur-sm rounded-2xl px-4 sm:px-6 py-4 sm:py-5 border border-slate-700/60">
                       <div className="flex flex-wrap gap-2 text-[10px] sm:text-[11px]">

@@ -8,6 +8,7 @@ import {
   Calendar,
   MapPin,
   Clock,
+  X,
   Link as LinkIcon,
 } from "lucide-react";
 
@@ -121,7 +122,7 @@ const Button = ({
       "bg-transparent text-slate-700 hover:bg-slate-100 focus:ring-slate-300",
   };
 
-  const cls = base + " " + variants[variant] + " " + className;
+  const cls = `${base} ${variants[variant]} ${className}`;
   const isLink = Tag === "a" || href;
 
   const props = {
@@ -137,7 +138,7 @@ const Button = ({
 };
 
 const Card = ({ children, className = "" }) => (
-  <div className={"rounded-2xl border border-slate-200 bg-white shadow-sm " + className}>
+  <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
     {children}
   </div>
 );
@@ -203,7 +204,7 @@ const PromptBlock = ({ label, text }) => {
   );
 };
 
-/* ------------ Landing hero (met teams erin) ------------ */
+/* ------------ Hero ------------ */
 
 function LandingHero() {
   return (
@@ -428,10 +429,9 @@ function SupportChat() {
           return (
             <div
               key={i}
-              className={
-                "flex items-end gap-2 " +
-                (isUser ? "justify-end" : "justify-start")
-              }
+              className={`flex items-end gap-2 ${
+                isUser ? "justify-end" : "justify-start"
+              }`}
             >
               {!isUser && (
                 <img
@@ -441,12 +441,11 @@ function SupportChat() {
                 />
               )}
               <div
-                className={
-                  "max-w-[75%] px-2.5 py-1.5 rounded-lg " +
-                  (isUser
+                className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
+                  isUser
                     ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-slate-800 border border-slate-200 mr-auto")
-                }
+                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
+                }`}
               >
                 {m.text}
               </div>
@@ -494,7 +493,7 @@ function SupportChat() {
   );
 }
 
-/* ------------ Timer voor bijscholing ------------ */
+/* ------------ Timer / Bijscholing ------------ */
 
 function CountdownTimer({ targetDate }) {
   const [timeLeft, setTimeLeft] = useState("");
@@ -531,6 +530,114 @@ function CountdownTimer({ targetDate }) {
         Beperkt aantal plaatsen – schrijf tijdig in.
       </p>
     </div>
+  );
+}
+
+/* Volledige bijscholing (in AI-overlay) */
+function TrainingSection() {
+  return (
+    <Card className="p-6">
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div>
+          <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
+            Bijscholing
+          </p>
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 flex items-center gap-2 mt-1">
+            <Sparkles className="h-4 w-4 text-blue-500" />
+            Lovable · AI-website bouwen
+          </h3>
+          <p className="text-sm text-slate-600 mt-2">
+            In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span>{" "}
+            een eenvoudige AI-gestuurde website maakt voor je les of project.
+          </p>
+        </div>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-slate-700">
+            <Calendar className="h-4 w-4 text-blue-500" />
+            <span>
+              <span className="font-semibold">Datum:</span> 15 december 2025
+            </span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-700">
+            <Clock className="h-4 w-4 text-blue-500" />
+            <span>
+              <span className="font-semibold">Startuur:</span> 16u00
+            </span>
+          </div>
+          <div className="flex items-center gap-2 text-slate-700">
+            <MapPin className="h-4 w-4 text-blue-500" />
+            <span>
+              <span className="font-semibold">Locatie:</span> Lokaal Z314
+            </span>
+          </div>
+          <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
+            Doelgroep: alle leerkrachten · beginners welkom
+          </span>
+        </div>
+
+        <div className="space-y-2 text-sm">
+          <p className="text-xs font-semibold text-slate-500 uppercase">
+            Je leert o.a.:
+          </p>
+          <ul className="text-sm text-slate-700 space-y-1.5">
+            <li>• Basis van Lovable in onderwijscontext.</li>
+            <li>• Een eenvoudige les- of projectsite opzetten.</li>
+            <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
+          <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
+          <CountdownTimer targetDate="2025-12-15T16:00:00" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Button as="a" href="#" variant="primary" className="w-full justify-center">
+            Inschrijven voor Lovable
+          </Button>
+          <Button
+            as="a"
+            href={DRIVE_EXAMPLES_URL}
+            variant="ghost"
+            className="w-full justify-center text-xs"
+          >
+            <LinkIcon className="h-3 w-3" />
+            Bekijk voorbeeldprojecten (Drive)
+          </Button>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+/* Compacte teaser op de homepagina (bijscholing altijd zichtbaar) */
+function TrainingTeaser() {
+  return (
+    <section className="mb-8">
+      <Card className="p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600">
+            Bijscholing Lovable
+          </p>
+          <p className="text-sm font-semibold text-slate-900">
+            AI-website bouwen in 1 uur – 15 december 2025 · 16u · Lokaal Z314
+          </p>
+          <p className="text-[11px] text-slate-500 mt-1">
+            Voor alle leerkrachten die met een eenvoudige AI-website willen starten.
+          </p>
+        </div>
+        <div className="flex flex-col sm:items-end gap-2">
+          <CountdownTimer targetDate="2025-12-15T16:00:00" />
+          <Button as="a" href="#" variant="primary" className="text-xs px-3 py-1.5">
+            Inschrijven
+          </Button>
+        </div>
+      </Card>
+    </section>
   );
 }
 
@@ -1080,88 +1187,6 @@ function GettingStartedSection() {
   );
 }
 
-/* ------------ Bijscholing (nu alleen na keuze AI) ------------ */
-
-function TrainingSection() {
-  return (
-    <Card className="p-6">
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <div>
-          <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
-            Bijscholing
-          </p>
-          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 flex items-center gap-2 mt-1">
-            <Sparkles className="h-4 w-4 text-blue-500" />
-            Lovable · AI-website bouwen
-          </h3>
-          <p className="text-sm text-slate-600 mt-2">
-            In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span>{" "}
-            een eenvoudige AI-gestuurde website maakt voor je les of project.
-          </p>
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-slate-700">
-            <Calendar className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Datum:</span> 15 december 2025
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <Clock className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Startuur:</span> 16u00
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <MapPin className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Locatie:</span> Lokaal Z314
-            </span>
-          </div>
-          <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
-            Doelgroep: alle leerkrachten · beginners welkom
-          </span>
-        </div>
-
-        <div className="space-y-2 text-sm">
-          <p className="text-xs font-semibold text-slate-500 uppercase">
-            Je leert o.a.:
-          </p>
-          <ul className="text-sm text-slate-700 space-y-1.5">
-            <li>• Basis van Lovable in onderwijscontext.</li>
-            <li>• Een eenvoudige les- of projectsite opzetten.</li>
-            <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-        <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
-          <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
-          <CountdownTimer targetDate="2025-12-15T16:00:00" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <Button as="a" href="#" variant="primary" className="w-full justify-center">
-            Inschrijven voor Lovable
-          </Button>
-          <Button
-            as="a"
-            href={DRIVE_EXAMPLES_URL}
-            variant="ghost"
-            className="w-full justify-center text-xs"
-          >
-            <LinkIcon className="h-3 w-3" />
-            Bekijk voorbeeldprojecten (Drive)
-          </Button>
-        </div>
-      </div>
-    </Card>
-  );
-}
-
 /* ------------ AI-richtlijnen ------------ */
 
 function PolicySection() {
@@ -1272,10 +1297,9 @@ function FloatingPlanner() {
           <div className="mb-3 space-y-1">
             <div className="inline-flex items-center gap-1.5 rounded-full border px-2 py-1 text-[11px]">
               <span
-                className={
-                  "h-2 w-2 rounded-full " +
-                  (statusState === "free" ? "bg-emerald-500" : "bg-amber-500")
-                }
+                className={`h-2 w-2 rounded-full ${
+                  statusState === "free" ? "bg-emerald-500" : "bg-amber-500"
+                }`}
               />
               <span className="font-semibold text-slate-700">
                 {statusState === "free" ? "Beschikbaar" : "Waarschijnlijk bezet"}
@@ -1344,11 +1368,11 @@ function FloatingPlanner() {
   );
 }
 
-/* ------------ Bot Zuid sectie (alleen bij keuze) ------------ */
+/* ------------ Bot Zuid sectie ------------ */
 
 function BotZuidSection() {
   return (
-    <section id="bot-zuid-section" className="mt-6">
+    <section id="bot-zuid-section" className="mt-6 mb-10">
       <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500">
         <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
         <div className="relative space-y-3 text-white">
@@ -1425,7 +1449,7 @@ function BotZuidSection() {
   );
 }
 
-/* ------------ Entry keuze: AI of Bot (enige knoppen op home) ------------ */
+/* ------------ Keuze op home ------------ */
 
 function EntryChoice({ onChooseAI, onChooseBot }) {
   return (
@@ -1459,7 +1483,7 @@ function EntryChoice({ onChooseAI, onChooseBot }) {
             </p>
 
             <span className="inline-flex items-center text-[11px] font-semibold text-blue-700 group-hover:text-blue-800">
-              Naar voorbeelden &amp; aan de slag →
+              AI-ideeën en voorbeelden openen →
             </span>
           </button>
 
@@ -1487,7 +1511,7 @@ function EntryChoice({ onChooseAI, onChooseBot }) {
   );
 }
 
-/* ------------ Quick actions (alleen na keuze AI) ------------ */
+/* ------------ Quick actions (gebruikt in AI-overlay) ------------ */
 
 function QuickActions({ onOpenPage }) {
   return (
@@ -1572,7 +1596,7 @@ function QuickActions({ onOpenPage }) {
   );
 }
 
-/* ------------ Sectie-config voor AI-deel ------------ */
+/* ------------ Secties map ------------ */
 
 const SECTIONS = {
   "aan-de-slag": {
@@ -1593,26 +1617,91 @@ const SECTIONS = {
   },
 };
 
+/* ------------ AI-overlay (mix modal + fullscreen) ------------ */
+
+function AIOverlay({ activePage, onChangePage, onClose }) {
+  const current = SECTIONS[activePage] || SECTIONS["voorbeelden"];
+  const SectionComponent = current.component;
+
+  return (
+    <div className="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6">
+      <div className="relative bg-white rounded-3xl shadow-2xl max-w-6xl w-full h-[90vh] flex flex-col overflow-hidden">
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 sm:px-6 py-4 border-b border-slate-200">
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.16em] text-blue-600 font-semibold">
+              AI in mijn les
+            </p>
+            <p className="text-sm text-slate-500">
+              Voorbeelden, stappenplannen en richtlijnen om AI in je lessen te gebruiken.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="inline-flex items-center justify-center rounded-full h-8 w-8 bg-slate-100 text-slate-600 hover:bg-slate-200"
+          >
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Nav-balk binnen overlay */}
+        <div className="px-5 sm:px-6 pt-3 pb-2 border-b border-slate-100 bg-slate-50">
+          <div className="flex flex-wrap gap-2 text-xs">
+            {Object.entries(SECTIONS).map(([key, cfg]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => onChangePage(key)}
+                className={`inline-flex items-center rounded-full px-3 py-1 border text-xs font-medium transition ${
+                  key === activePage
+                    ? "border-blue-500 bg-blue-50 text-blue-700"
+                    : "border-slate-200 bg-white text-slate-700 hover:bg-slate-100"
+                }`}
+              >
+                {cfg.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Scrollbare content */}
+        <div className="flex-1 overflow-y-auto px-5 sm:px-6 pb-6 pt-4 bg-slate-50/60">
+          <QuickActions onOpenPage={onChangePage} />
+
+          <section className="mb-6 space-y-3">
+            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
+              <Sparkles className="h-3 w-3" />
+              <span>
+                Je bekijkt nu:{" "}
+                <span className="underline">{current.label}</span>
+              </span>
+            </div>
+            <SectionComponent />
+          </section>
+
+          {/* Volledige bijscholing binnen AI-overlay */}
+          <TrainingSection />
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
-  const [activePage, setActivePage] = useState(null); // niets open op start
+  const [aiOverlayOpen, setAiOverlayOpen] = useState(false);
+  const [activePage, setActivePage] = useState("voorbeelden");
   const [showIntroVideo, setShowIntroVideo] = useState(true);
   const [showBot, setShowBot] = useState(false);
 
-  const activeConfig = activePage ? SECTIONS[activePage] : null;
-  const activePageLabel = activeConfig ? activeConfig.label : null;
   const currentYear = new Date().getFullYear();
-
-  const renderActiveSection = () => {
-    if (!activeConfig) return null;
-    const Component = activeConfig.component;
-    return <Component />;
-  };
 
   const handleChooseAI = () => {
     setShowBot(false);
     setActivePage("voorbeelden");
+    setAiOverlayOpen(true);
   };
 
   const handleChooseBot = () => {
@@ -1659,34 +1748,14 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-        {/* Hero met teams */}
         <LandingHero />
 
-        {/* Keuze: AI of Bot (enige knoppen op start) */}
         <EntryChoice onChooseAI={handleChooseAI} onChooseBot={handleChooseBot} />
 
-        {/* Alles hieronder verschijnt pas NA keuze AI */}
-        {activeConfig && (
-          <>
-            <QuickActions onOpenPage={setActivePage} />
+        {/* Bijscholing altijd zichtbaar als teaser */}
+        <TrainingTeaser />
 
-            <section className="mb-10 space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
-                <Sparkles className="h-3 w-3" />
-                <span>
-                  Je bekijkt nu: <span className="underline">{activePageLabel}</span>
-                </span>
-              </div>
-              {renderActiveSection()}
-            </section>
-
-            <section className="mb-8">
-              <TrainingSection />
-            </section>
-          </>
-        )}
-
-        {/* Bot Zuid alleen bij keuze technische hulp */}
+        {/* Bot Zuid alleen als gekozen */}
         {showBot && <BotZuidSection />}
 
         {/* Footer */}
@@ -1698,6 +1767,15 @@ export default function App() {
           </div>
         </footer>
       </main>
+
+      {/* AI-overlay boven de hele pagina */}
+      {aiOverlayOpen && (
+        <AIOverlay
+          activePage={activePage}
+          onChangePage={setActivePage}
+          onClose={() => setAiOverlayOpen(false)}
+        />
+      )}
 
       <FloatingPlanner />
     </div>

@@ -48,7 +48,7 @@ function IntroVideoOverlay() {
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[9999] p-4">
       <div className="relative max-w-3xl w-full">
         <video
-          src="/media/promo.mp4"
+          src="/media/promo1.mp4"
           autoPlay
           controls
           className="w-full rounded-xl shadow-2xl border border-white/20"

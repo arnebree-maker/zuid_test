@@ -540,6 +540,39 @@ function CountdownTimer({ targetDate }) {
   );
 }
 
+/* Kleinere countdown voor in de header */
+function MiniCountdown({ targetDate }) {
+  const [label, setLabel] = useState("");
+
+  useEffect(() => {
+    const update = () => {
+      const now = new Date();
+      const event = new Date(targetDate);
+      const diff = event.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        setLabel("Vandaag");
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+      if (d <= 0) {
+        setLabel(`Nog ${h}u`);
+      } else {
+        setLabel(`Nog ${d}d ${h}u`);
+      }
+    };
+
+    update();
+    const interval = setInterval(update, 60000); // elke minuut
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  return <span>{label}</span>;
+}
+
 /* Volledige bijscholing (in AI-overlay) */
 function TrainingSection() {
   return (
@@ -618,58 +651,6 @@ function TrainingSection() {
         </div>
       </div>
     </Card>
-  );
-}
-
-/* Compacte teaser op de homepagina (bijscholing altijd zichtbaar) */
-function TrainingTeaser() {
-  return (
-    <section className="mb-8">
-      <Card className="p-4 sm:p-5 relative overflow-hidden">
-        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-400" />
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2">
-          <div>
-            <div className="flex items-center gap-2 mb-1">
-              <span className="inline-flex items-center rounded-full bg-amber-100 text-amber-800 px-2 py-0.5 text-[10px] font-semibold">
-                Nieuw in december
-              </span>
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600">
-                Bijscholing Lovable
-              </p>
-            </div>
-            <p className="text-sm font-semibold text-slate-900">
-              AI-website bouwen in 1 uur – 15 december 2025 · 16u · Lokaal Z314
-            </p>
-            <p className="text-[11px] text-slate-500 mt-1">
-              Voor alle leerkrachten die met een eenvoudige AI-website willen starten.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:items-end gap-2 min-w-[190px]">
-            <div className="flex items-center gap-3">
-              {/* mini kalender */}
-              <div className="flex flex-col items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
-                <span className="text-[10px] uppercase tracking-wide text-slate-500">
-                  Dec
-                </span>
-                <span className="text-xl font-semibold text-slate-900 leading-none">
-                  15
-                </span>
-              </div>
-              <CountdownTimer targetDate="2025-12-15T16:00:00" />
-            </div>
-            <Button
-              as="a"
-              href="#"
-              variant="primary"
-              className="text-xs px-3 py-1.5 w-full sm:w-auto"
-            >
-              Inschrijven
-            </Button>
-          </div>
-        </div>
-      </Card>
-    </section>
   );
 }
 
@@ -1822,11 +1803,30 @@ export default function App() {
               </p>
             </div>
           </div>
-          <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500">
-            Werkgroep{" "}
-            <span className="font-semibold text-slate-700">
-              Digitale Didactiek
-            </span>
+
+          <div className="hidden sm:flex items-center gap-4">
+            <div className="flex items-center gap-2 text-xs text-slate-500">
+              Werkgroep{" "}
+              <span className="font-semibold text-slate-700">
+                Digitale Didactiek
+              </span>
+            </div>
+
+            {/* Bijscholing badge in header */}
+            <a
+              href="#"
+              className="group inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-[11px] hover:bg-blue-100"
+            >
+              <Sparkles className="h-3 w-3 text-blue-600" />
+              <div className="flex flex-col leading-tight">
+                <span className="font-semibold text-blue-800">
+                  Bijscholing Lovable
+                </span>
+                <span className="text-[10px] text-blue-700">
+                  <MiniCountdown targetDate="2025-12-15T16:00:00" /> · 15 dec · 16u
+                </span>
+              </div>
+            </a>
           </div>
         </div>
       </header>
@@ -1844,9 +1844,6 @@ export default function App() {
         </div>
 
         <EntryChoice onChooseAI={handleChooseAI} onChooseBot={handleChooseBot} />
-
-        {/* Bijscholing altijd zichtbaar als teaser */}
-        <TrainingTeaser />
 
         {/* Footer */}
         <footer className="mt-6 flex justify-center">

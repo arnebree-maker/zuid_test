@@ -174,9 +174,7 @@ const PromptBlock = ({ label, text }) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(function () {
-        setCopied(false);
-      }, 1500);
+      setTimeout(() => setCopied(false), 1500);
     } catch (e) {
       console.error("Kon niet kopiëren", e);
     }
@@ -205,9 +203,9 @@ const PromptBlock = ({ label, text }) => {
   );
 };
 
-/* ------------ Landing hero ------------ */
+/* ------------ Landing hero (met teams erin) ------------ */
 
-function LandingHero({ onSelectSection, onShowVideo, onScrollToTraining }) {
+function LandingHero() {
   return (
     <section className="mt-6 mb-8">
       <div className="relative flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden border border-slate-200">
@@ -216,7 +214,7 @@ function LandingHero({ onSelectSection, onShowVideo, onScrollToTraining }) {
           <div className="absolute inset-0 hero-diagonal">
             <img
               src="/media/01037808-bc10-468e-a00f-af57eea24fce.jpeg"
-              alt="Digitale didactiek in actie"
+              alt="Digitale didactiek team"
               className="w-full h-full object-cover"
             />
           </div>
@@ -253,91 +251,34 @@ function LandingHero({ onSelectSection, onShowVideo, onScrollToTraining }) {
             </div>
           </div>
 
-          {/* Call-to-actions */}
-          <div className="mt-6 flex flex-wrap gap-2 sm:gap-3 text-sm">
-            <Button
-              variant="primary"
-              onClick={function () {
-                onSelectSection("voorbeelden");
-              }}
-              className="bg-blue-600 hover:bg-blue-700"
-            >
-              <BookOpen className="h-4 w-4" />
-              Voorbeelden bekijken
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={function () {
-                onSelectSection("aan-de-slag");
-              }}
-            >
-              <Sparkles className="h-4 w-4" />
-              Aan de slag met AI
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={onScrollToTraining}
-            >
-              <Calendar className="h-4 w-4" />
-              Bijscholing Lovable
-            </Button>
-            <Button
-              variant="ghost"
-              onClick={onShowVideo}
-              className="text-slate-500"
-            >
-              🎥 Intro-video
-            </Button>
-          </div>
-
-          {/* Nav-lijntje onderaan */}
-          <div className="mt-6 border-t border-slate-200 pt-3">
-            <nav className="flex flex-wrap gap-4 text-[11px] sm:text-xs text-slate-500">
-              <button
-                type="button"
-                className="relative pb-1 hover:text-orange-500"
-                onClick={function () {
-                  onSelectSection("voorbeelden");
-                }}
-              >
-                Home / Voorbeelden
-                <span className="absolute left-0 -bottom-0.5 h-[2px] w-10 bg-orange-500" />
-              </button>
-              <button
-                type="button"
-                className="pb-1 hover:text-slate-700"
-                onClick={function () {
-                  onSelectSection("aan-de-slag");
-                }}
-              >
-                Aan de slag
-              </button>
-              <button
-                type="button"
-                className="pb-1 hover:text-slate-700"
-                onClick={onScrollToTraining}
-              >
-                Bijscholing
-              </button>
-              <button
-                type="button"
-                className="pb-1 hover:text-slate-700"
-                onClick={function () {
-                  onSelectSection("ai-tools");
-                }}
-              >
-                AI-tools
-              </button>
-              <button
-                type="button"
-                className="pb-1 hover:text-slate-700"
-                onClick={function () {
-                  onSelectSection("ai-beleid");
-                }}
-              >
-                AI-richtlijnen
-              </button>
-            </nav>
+          {/* Teams-info onderaan hero */}
+          <div className="mt-6 border-t border-slate-200 pt-4">
+            <div className="grid gap-4 md:grid-cols-3 text-[11px] sm:text-xs text-slate-600">
+              <div>
+                <p className="font-semibold text-slate-800 mb-1">
+                  Werkgroep Digitale Didactiek
+                </p>
+                <p>Aanspreekpunt voor vragen over ICT &amp; AI in je les.</p>
+              </div>
+              <div>
+                <p className="font-semibold text-slate-800 mb-1">Technisch team</p>
+                <p className="leading-relaxed">
+                  Mieke Verbeerst
+                  <br />
+                  Barbara Van Hecke
+                  <br />
+                  Arne Breemeersch
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold text-slate-800 mb-1">Pedagogisch team</p>
+                <p className="leading-relaxed">
+                  Jasper Gerits
+                  <br />
+                  Glenn Van de Voorde
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,7 +289,7 @@ function LandingHero({ onSelectSection, onShowVideo, onScrollToTraining }) {
 /* ------------ Best practices ------------ */
 
 function BestPractices() {
-  const [likes, setLikes] = useState(function () {
+  const [likes, setLikes] = useState(() => {
     if (typeof window === "undefined") return {};
     try {
       const stored = localStorage.getItem(BEST_PRACTICE_KEY);
@@ -358,8 +299,8 @@ function BestPractices() {
     }
   });
 
-  const toggleLike = function (id) {
-    setLikes(function (prev) {
+  const toggleLike = (id) => {
+    setLikes((prev) => {
       const updated = { ...prev, [id]: !prev[id] };
       if (typeof window !== "undefined") {
         localStorage.setItem(BEST_PRACTICE_KEY, JSON.stringify(updated));
@@ -387,44 +328,40 @@ function BestPractices() {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3 text-sm">
-          {BEST_PRACTICE_ITEMS.map(function (item) {
-            return (
-              <div
-                key={item.id}
-                className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-3"
-              >
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div>
-                    <h4 className="text-xs font-semibold text-slate-900">
-                      {item.title}
-                    </h4>
-                    <p className="text-[11px] text-slate-500">{item.teacher}</p>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={function () {
-                      toggleLike(item.id);
-                    }}
-                    className="inline-flex items-center justify-center h-7 w-7 rounded-full border border-slate-200 bg-white hover:bg-amber-50"
-                  >
-                    <span
-                      className={
-                        (likes[item.id] ? "text-amber-500" : "text-slate-400") + " text-sm"
-                      }
-                    >
-                      ★
-                    </span>
-                  </button>
+          {BEST_PRACTICE_ITEMS.map((item) => (
+            <div
+              key={item.id}
+              className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-3"
+            >
+              <div className="flex items-start justify-between gap-2 mb-2">
+                <div>
+                  <h4 className="text-xs font-semibold text-slate-900">
+                    {item.title}
+                  </h4>
+                  <p className="text-[11px] text-slate-500">{item.teacher}</p>
                 </div>
-                <p className="text-[11px] text-slate-700 mb-2 flex-1">
-                  {item.description}
-                </p>
-                <p className="text-[10px] text-slate-500">
-                  <span className="font-semibold">Tools:</span> {item.tools}
-                </p>
+                <button
+                  type="button"
+                  onClick={() => toggleLike(item.id)}
+                  className="inline-flex items-center justify-center h-7 w-7 rounded-full border border-slate-200 bg-white hover:bg-amber-50"
+                >
+                  <span
+                    className={
+                      (likes[item.id] ? "text-amber-500" : "text-slate-400") + " text-sm"
+                    }
+                  >
+                    ★
+                  </span>
+                </button>
               </div>
-            );
-          })}
+              <p className="text-[11px] text-slate-700 mb-2 flex-1">
+                {item.description}
+              </p>
+              <p className="text-[10px] text-slate-500">
+                <span className="font-semibold">Tools:</span> {item.tools}
+              </p>
+            </div>
+          ))}
         </div>
       </Card>
     </section>
@@ -443,12 +380,12 @@ function SupportChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async function (e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!input.trim() || loading) return;
 
     const userMessage = { role: "user", text: input.trim() };
-    const newMessages = messages.concat(userMessage);
+    const newMessages = [...messages, userMessage];
     setMessages(newMessages);
     setInput("");
     setLoading(true);
@@ -468,15 +405,16 @@ function SupportChat() {
           ? data.reply
           : "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
 
-      setMessages(newMessages.concat({ role: "bot", text: reply }));
+      setMessages([...newMessages, { role: "bot", text: reply }]);
     } catch (err) {
       console.error(err);
-      setMessages(
-        newMessages.concat({
+      setMessages([
+        ...newMessages,
+        {
           role: "bot",
           text: "Er ging iets mis bij de verbinding met de server.",
-        })
-      );
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -485,7 +423,7 @@ function SupportChat() {
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
       <div className="h-40 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
-        {messages.map(function (m, i) {
+        {messages.map((m, i) => {
           const isUser = m.role === "user";
           return (
             <div
@@ -536,9 +474,7 @@ function SupportChat() {
             className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Beschrijf kort je technisch probleem…"
             value={input}
-            onChange={function (e) {
-              setInput(e.target.value);
-            }}
+            onChange={(e) => setInput(e.target.value)}
           />
           <Button
             type="submit"
@@ -563,33 +499,28 @@ function SupportChat() {
 function CountdownTimer({ targetDate }) {
   const [timeLeft, setTimeLeft] = useState("");
 
-  useEffect(
-    function () {
-      const interval = setInterval(function () {
-        const now = new Date();
-        const event = new Date(targetDate);
-        const diff = event.getTime() - now.getTime();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const now = new Date();
+      const event = new Date(targetDate);
+      const diff = event.getTime() - now.getTime();
 
-        if (diff <= 0) {
-          setTimeLeft("De bijscholing is gestart.");
-          clearInterval(interval);
-          return;
-        }
-
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const m = Math.floor((diff / (1000 * 60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
-
-        setTimeLeft(d + " dagen · " + h + "u " + m + "m " + s + "s");
-      }, 1000);
-
-      return function () {
+      if (diff <= 0) {
+        setTimeLeft("De bijscholing is gestart.");
         clearInterval(interval);
-      };
-    },
-    [targetDate]
-  );
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      setTimeLeft(`${d} dagen · ${h}u ${m}m ${s}s`);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [targetDate]);
 
   return (
     <div className="flex flex-col gap-1">
@@ -745,7 +676,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* AI Studio – met screenshot */}
+      {/* AI Studio */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -796,7 +727,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* NotebookLM – screenshot */}
+      {/* NotebookLM */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
@@ -952,9 +883,7 @@ function GettingStartedSection() {
           <Button
             type="button"
             variant="primary"
-            onClick={function () {
-              setUnlocked(true);
-            }}
+            onClick={() => setUnlocked(true)}
             className="self-start sm:self-auto text-xs"
           >
             Ik heb dit geprobeerd – toon de volgende stappen
@@ -1151,87 +1080,85 @@ function GettingStartedSection() {
   );
 }
 
-/* ------------ Bijscholing (altijd zichtbaar) ------------ */
+/* ------------ Bijscholing (nu alleen na keuze AI) ------------ */
 
 function TrainingSection() {
   return (
-    <section id="training">
-      <Card className="p-6">
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <div>
-            <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
-              Bijscholing
-            </p>
-            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 flex items-center gap-2 mt-1">
-              <Sparkles className="h-4 w-4 text-blue-500" />
-              Lovable · AI-website bouwen
-            </h3>
-            <p className="text-sm text-slate-600 mt-2">
-              In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span>{" "}
-              een eenvoudige AI-gestuurde website maakt voor je les of project.
-            </p>
-          </div>
+    <Card className="p-6">
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div>
+          <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
+            Bijscholing
+          </p>
+          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 flex items-center gap-2 mt-1">
+            <Sparkles className="h-4 w-4 text-blue-500" />
+            Lovable · AI-website bouwen
+          </h3>
+          <p className="text-sm text-slate-600 mt-2">
+            In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span>{" "}
+            een eenvoudige AI-gestuurde website maakt voor je les of project.
+          </p>
         </div>
+      </div>
 
-        <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-slate-700">
-              <Calendar className="h-4 w-4 text-blue-500" />
-              <span>
-                <span className="font-semibold">Datum:</span> 15 december 2025
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-700">
-              <Clock className="h-4 w-4 text-blue-500" />
-              <span>
-                <span className="font-semibold">Startuur:</span> 16u00
-              </span>
-            </div>
-            <div className="flex items-center gap-2 text-slate-700">
-              <MapPin className="h-4 w-4 text-blue-500" />
-              <span>
-                <span className="font-semibold">Locatie:</span> Lokaal Z314
-              </span>
-            </div>
-            <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
-              Doelgroep: alle leerkrachten · beginners welkom
+      <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2 text-slate-700">
+            <Calendar className="h-4 w-4 text-blue-500" />
+            <span>
+              <span className="font-semibold">Datum:</span> 15 december 2025
             </span>
           </div>
-
-          <div className="space-y-2 text-sm">
-            <p className="text-xs font-semibold text-slate-500 uppercase">
-              Je leert o.a.:
-            </p>
-            <ul className="text-sm text-slate-700 space-y-1.5">
-              <li>• Basis van Lovable in onderwijscontext.</li>
-              <li>• Een eenvoudige les- of projectsite opzetten.</li>
-              <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
-            </ul>
+          <div className="flex items-center gap-2 text-slate-700">
+            <Clock className="h-4 w-4 text-blue-500" />
+            <span>
+              <span className="font-semibold">Startuur:</span> 16u00
+            </span>
           </div>
+          <div className="flex items-center gap-2 text-slate-700">
+            <MapPin className="h-4 w-4 text-blue-500" />
+            <span>
+              <span className="font-semibold">Locatie:</span> Lokaal Z314
+            </span>
+          </div>
+          <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
+            Doelgroep: alle leerkrachten · beginners welkom
+          </span>
         </div>
 
-        <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-          <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
-            <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
-            <CountdownTimer targetDate="2025-12-15T16:00:00" />
-          </div>
-          <div className="flex flex-col gap-2">
-            <Button as="a" href="#" variant="primary" className="w-full justify-center">
-              Inschrijven voor Lovable
-            </Button>
-            <Button
-              as="a"
-              href={DRIVE_EXAMPLES_URL}
-              variant="ghost"
-              className="w-full justify-center text-xs"
-            >
-              <LinkIcon className="h-3 w-3" />
-              Bekijk voorbeeldprojecten (Drive)
-            </Button>
-          </div>
+        <div className="space-y-2 text-sm">
+          <p className="text-xs font-semibold text-slate-500 uppercase">
+            Je leert o.a.:
+          </p>
+          <ul className="text-sm text-slate-700 space-y-1.5">
+            <li>• Basis van Lovable in onderwijscontext.</li>
+            <li>• Een eenvoudige les- of projectsite opzetten.</li>
+            <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
+          </ul>
         </div>
-      </Card>
-    </section>
+      </div>
+
+      <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+        <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
+          <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
+          <CountdownTimer targetDate="2025-12-15T16:00:00" />
+        </div>
+        <div className="flex flex-col gap-2">
+          <Button as="a" href="#" variant="primary" className="w-full justify-center">
+            Inschrijven voor Lovable
+          </Button>
+          <Button
+            as="a"
+            href={DRIVE_EXAMPLES_URL}
+            variant="ghost"
+            className="w-full justify-center text-xs"
+          >
+            <LinkIcon className="h-3 w-3" />
+            Bekijk voorbeeldprojecten (Drive)
+          </Button>
+        </div>
+      </div>
+    </Card>
   );
 }
 
@@ -1335,9 +1262,7 @@ function FloatingPlanner() {
             </div>
             <button
               type="button"
-              onClick={function () {
-                setOpen(false);
-              }}
+              onClick={() => setOpen(false)}
               className="h-6 w-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-500 hover:bg-slate-200 text-xs"
             >
               ✕
@@ -1401,11 +1326,7 @@ function FloatingPlanner() {
 
       <button
         type="button"
-        onClick={function () {
-          setOpen(function (v) {
-            return !v;
-          });
-        }}
+        onClick={() => setOpen((v) => !v)}
         className="flex items-center gap-2 rounded-full bg-blue-600 text-white shadow-xl shadow-blue-600/40 px-3 py-2 text-xs sm:text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
         aria-label="Plan een moment over digitale didactiek"
       >
@@ -1504,7 +1425,7 @@ function BotZuidSection() {
   );
 }
 
-/* ------------ Entry keuze: AI of Bot ------------ */
+/* ------------ Entry keuze: AI of Bot (enige knoppen op home) ------------ */
 
 function EntryChoice({ onChooseAI, onChooseBot }) {
   return (
@@ -1566,7 +1487,7 @@ function EntryChoice({ onChooseAI, onChooseBot }) {
   );
 }
 
-/* ------------ Quick actions ------------ */
+/* ------------ Quick actions (alleen na keuze AI) ------------ */
 
 function QuickActions({ onOpenPage }) {
   return (
@@ -1589,9 +1510,7 @@ function QuickActions({ onOpenPage }) {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
           <button
             type="button"
-            onClick={function () {
-              onOpenPage("aan-de-slag");
-            }}
+            onClick={() => onOpenPage("aan-de-slag")}
             className="group flex flex-col items-start gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-left hover:border-blue-400 hover:bg-blue-50 transition-colors"
           >
             <span className="text-xl">✍️</span>
@@ -1677,37 +1596,29 @@ const SECTIONS = {
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
-  const [activePage, setActivePage] = useState("voorbeelden");
+  const [activePage, setActivePage] = useState(null); // niets open op start
   const [showIntroVideo, setShowIntroVideo] = useState(true);
   const [showBot, setShowBot] = useState(false);
 
-  const activeConfig = SECTIONS[activePage] || null;
+  const activeConfig = activePage ? SECTIONS[activePage] : null;
   const activePageLabel = activeConfig ? activeConfig.label : null;
   const currentYear = new Date().getFullYear();
 
-  const renderActiveSection = function () {
+  const renderActiveSection = () => {
     if (!activeConfig) return null;
     const Component = activeConfig.component;
     return <Component />;
   };
 
-  const scrollToTraining = function () {
-    if (typeof document === "undefined") return;
-    const el = document.getElementById("training");
-    if (el && el.scrollIntoView) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
-  const handleChooseAI = function () {
+  const handleChooseAI = () => {
     setShowBot(false);
     setActivePage("voorbeelden");
   };
 
-  const handleChooseBot = function () {
+  const handleChooseBot = () => {
     setShowBot(true);
     if (typeof document !== "undefined") {
-      setTimeout(function () {
+      setTimeout(() => {
         const el = document.getElementById("bot-zuid-section");
         if (el && el.scrollIntoView) {
           el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1719,7 +1630,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       {showIntroVideo && (
-        <IntroVideoOverlay onClose={function () { setShowIntroVideo(false); }} />
+        <IntroVideoOverlay onClose={() => setShowIntroVideo(false)} />
       )}
 
       {/* Top bar */}
@@ -1748,76 +1659,34 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-        {/* Hero */}
-        <LandingHero
-          onSelectSection={setActivePage}
-          onShowVideo={function () { setShowIntroVideo(true); }}
-          onScrollToTraining={scrollToTraining}
-        />
+        {/* Hero met teams */}
+        <LandingHero />
 
-        {/* Werkgroep */}
-        <section className="mb-6">
-          <Card className="p-4">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-              <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-slate-800">
-                  Werkgroep Digitale Didactiek
-                </h3>
-                <p className="text-[11px] sm:text-xs text-slate-500">
-                  Aanspreekpunt voor vragen over ICT &amp; AI in je les.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 gap-3 text-[11px] sm:text-xs text-slate-700">
-                <div>
-                  <p className="font-semibold text-slate-800 mb-1">Technisch team</p>
-                  <p className="leading-relaxed">
-                    Mieke Verbeerst
-                    <br />
-                    Barbara Van Hecke
-                    <br />
-                    Arne Breemeersch
-                  </p>
-                </div>
-                <div>
-                  <p className="font-semibold text-slate-800 mb-1">
-                    Pedagogisch team
-                  </p>
-                  <p className="leading-relaxed">
-                    Jasper Gerits
-                    <br />
-                    Glenn Van de Voorde
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </section>
-
-        {/* Keuze: AI of Bot */}
+        {/* Keuze: AI of Bot (enige knoppen op start) */}
         <EntryChoice onChooseAI={handleChooseAI} onChooseBot={handleChooseBot} />
 
-        {/* Snel AI uitproberen */}
-        <QuickActions onOpenPage={setActivePage} />
-
-        {/* Actieve AI-sectie */}
+        {/* Alles hieronder verschijnt pas NA keuze AI */}
         {activeConfig && (
-          <section className="mb-10 space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
-              <Sparkles className="h-3 w-3" />
-              <span>
-                Je bekijkt nu: <span className="underline">{activePageLabel}</span>
-              </span>
-            </div>
-            {renderActiveSection()}
-          </section>
+          <>
+            <QuickActions onOpenPage={setActivePage} />
+
+            <section className="mb-10 space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
+                <Sparkles className="h-3 w-3" />
+                <span>
+                  Je bekijkt nu: <span className="underline">{activePageLabel}</span>
+                </span>
+              </div>
+              {renderActiveSection()}
+            </section>
+
+            <section className="mb-8">
+              <TrainingSection />
+            </section>
+          </>
         )}
 
-        {/* Bijscholing staat altijd zichtbaar */}
-        <section className="mb-8">
-          <TrainingSection />
-        </section>
-
-        {/* Bot Zuid alleen bij keuze */}
+        {/* Bot Zuid alleen bij keuze technische hulp */}
         {showBot && <BotZuidSection />}
 
         {/* Footer */}

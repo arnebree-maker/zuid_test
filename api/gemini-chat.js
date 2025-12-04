@@ -58,7 +58,7 @@ Belangrijke stijl:
     ];
 
     // ✅ Gebruik een publiek beschikbaar model i.p.v. gemini-3-pro-preview
-    const MODEL = "gemini-1.5-flash"; // of "gemini-1.5-pro" als je wil
+const MODEL = "gemini-1.5-flash"; // of "gemini-1.5-pro"
 
     const url =
       "https://generativelanguage.googleapis.com/v1beta/models/" +

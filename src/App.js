@@ -121,7 +121,7 @@ const Button = ({
       "bg-transparent text-slate-700 hover:bg-slate-100 focus:ring-slate-300",
   };
 
-  const cls = `${base} ${variants[variant]} ${className}`;
+  const cls = base + " " + variants[variant] + " " + className;
   const isLink = Tag === "a" || href;
 
   const props = {
@@ -137,7 +137,7 @@ const Button = ({
 };
 
 const Card = ({ children, className = "" }) => (
-  <div className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}>
+  <div className={"rounded-2xl border border-slate-200 bg-white shadow-sm " + className}>
     {children}
   </div>
 );
@@ -174,7 +174,9 @@ const PromptBlock = ({ label, text }) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
+      setTimeout(function () {
+        setCopied(false);
+      }, 1500);
     } catch (e) {
       console.error("Kon niet kopiëren", e);
     }
@@ -203,13 +205,13 @@ const PromptBlock = ({ label, text }) => {
   );
 };
 
-/* ------------ Landing hero (minibricks-stijl) ------------ */
+/* ------------ Landing hero ------------ */
 
-function LandingHero({ onSelectSection, onShowVideo }) {
+function LandingHero({ onSelectSection, onShowVideo, onScrollToTraining }) {
   return (
     <section className="mt-6 mb-8">
       <div className="relative flex flex-col lg:flex-row bg-white rounded-3xl overflow-hidden border border-slate-200">
-        {/* Linker gedeelte: schuine foto */}
+        {/* Linker gedeelte: foto */}
         <div className="relative w-full lg:w-1/2 h-56 sm:h-72 lg:h-[420px] overflow-hidden">
           <div className="absolute inset-0 hero-diagonal">
             <img
@@ -255,7 +257,9 @@ function LandingHero({ onSelectSection, onShowVideo }) {
           <div className="mt-6 flex flex-wrap gap-2 sm:gap-3 text-sm">
             <Button
               variant="primary"
-              onClick={() => onSelectSection("voorbeelden")}
+              onClick={function () {
+                onSelectSection("voorbeelden");
+              }}
               className="bg-blue-600 hover:bg-blue-700"
             >
               <BookOpen className="h-4 w-4" />
@@ -263,14 +267,16 @@ function LandingHero({ onSelectSection, onShowVideo }) {
             </Button>
             <Button
               variant="secondary"
-              onClick={() => onSelectSection("aan-de-slag")}
+              onClick={function () {
+                onSelectSection("aan-de-slag");
+              }}
             >
               <Sparkles className="h-4 w-4" />
               Aan de slag met AI
             </Button>
             <Button
               variant="ghost"
-              onClick={() => onSelectSection("bijscholing")}
+              onClick={onScrollToTraining}
             >
               <Calendar className="h-4 w-4" />
               Bijscholing Lovable
@@ -284,13 +290,15 @@ function LandingHero({ onSelectSection, onShowVideo }) {
             </Button>
           </div>
 
-          {/* “Nav”-lijn onderaan */}
+          {/* Nav-lijntje onderaan */}
           <div className="mt-6 border-t border-slate-200 pt-3">
             <nav className="flex flex-wrap gap-4 text-[11px] sm:text-xs text-slate-500">
               <button
                 type="button"
                 className="relative pb-1 hover:text-orange-500"
-                onClick={() => onSelectSection("voorbeelden")}
+                onClick={function () {
+                  onSelectSection("voorbeelden");
+                }}
               >
                 Home / Voorbeelden
                 <span className="absolute left-0 -bottom-0.5 h-[2px] w-10 bg-orange-500" />
@@ -298,28 +306,34 @@ function LandingHero({ onSelectSection, onShowVideo }) {
               <button
                 type="button"
                 className="pb-1 hover:text-slate-700"
-                onClick={() => onSelectSection("aan-de-slag")}
+                onClick={function () {
+                  onSelectSection("aan-de-slag");
+                }}
               >
                 Aan de slag
               </button>
               <button
                 type="button"
                 className="pb-1 hover:text-slate-700"
-                onClick={() => onSelectSection("bijscholing")}
+                onClick={onScrollToTraining}
               >
                 Bijscholing
               </button>
               <button
                 type="button"
                 className="pb-1 hover:text-slate-700"
-                onClick={() => onSelectSection("ai-tools")}
+                onClick={function () {
+                  onSelectSection("ai-tools");
+                }}
               >
                 AI-tools
               </button>
               <button
                 type="button"
                 className="pb-1 hover:text-slate-700"
-                onClick={() => onSelectSection("ai-beleid")}
+                onClick={function () {
+                  onSelectSection("ai-beleid");
+                }}
               >
                 AI-richtlijnen
               </button>
@@ -334,7 +348,7 @@ function LandingHero({ onSelectSection, onShowVideo }) {
 /* ------------ Best practices ------------ */
 
 function BestPractices() {
-  const [likes, setLikes] = useState(() => {
+  const [likes, setLikes] = useState(function () {
     if (typeof window === "undefined") return {};
     try {
       const stored = localStorage.getItem(BEST_PRACTICE_KEY);
@@ -344,8 +358,8 @@ function BestPractices() {
     }
   });
 
-  const toggleLike = (id) => {
-    setLikes((prev) => {
+  const toggleLike = function (id) {
+    setLikes(function (prev) {
       const updated = { ...prev, [id]: !prev[id] };
       if (typeof window !== "undefined") {
         localStorage.setItem(BEST_PRACTICE_KEY, JSON.stringify(updated));
@@ -373,49 +387,51 @@ function BestPractices() {
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3 text-sm">
-          {BEST_PRACTICE_ITEMS.map((item) => (
-            <div
-              key={item.id}
-              className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-3"
-            >
-              <div className="flex items-start justify-between gap-2 mb-2">
-                <div>
-                  <h4 className="text-xs font-semibold text-slate-900">
-                    {item.title}
-                  </h4>
-                  <p className="text-[11px] text-slate-500">{item.teacher}</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => toggleLike(item.id)}
-                  className="inline-flex items-center justify-center h-7 w-7 rounded-full border border-slate-200 bg-white hover:bg-amber-50"
-                >
-                  <span
-                    className={
-                      likes[item.id]
-                        ? "text-amber-500 text-sm"
-                        : "text-slate-400 text-sm"
-                    }
+          {BEST_PRACTICE_ITEMS.map(function (item) {
+            return (
+              <div
+                key={item.id}
+                className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 p-3"
+              >
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <div>
+                    <h4 className="text-xs font-semibold text-slate-900">
+                      {item.title}
+                    </h4>
+                    <p className="text-[11px] text-slate-500">{item.teacher}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={function () {
+                      toggleLike(item.id);
+                    }}
+                    className="inline-flex items-center justify-center h-7 w-7 rounded-full border border-slate-200 bg-white hover:bg-amber-50"
                   >
-                    ★
-                  </span>
-                </button>
+                    <span
+                      className={
+                        (likes[item.id] ? "text-amber-500" : "text-slate-400") + " text-sm"
+                      }
+                    >
+                      ★
+                    </span>
+                  </button>
+                </div>
+                <p className="text-[11px] text-slate-700 mb-2 flex-1">
+                  {item.description}
+                </p>
+                <p className="text-[10px] text-slate-500">
+                  <span className="font-semibold">Tools:</span> {item.tools}
+                </p>
               </div>
-              <p className="text-[11px] text-slate-700 mb-2 flex-1">
-                {item.description}
-              </p>
-              <p className="text-[10px] text-slate-500">
-                <span className="font-semibold">Tools:</span> {item.tools}
-              </p>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Card>
     </section>
   );
 }
 
-/* ------------ Bot Zuid ------------ */
+/* ------------ Bot Zuid chat ------------ */
 
 function SupportChat() {
   const [messages, setMessages] = useState([
@@ -427,12 +443,12 @@ function SupportChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async function (e) {
     e.preventDefault();
     if (!input.trim() || loading) return;
 
     const userMessage = { role: "user", text: input.trim() };
-    const newMessages = [...messages, userMessage];
+    const newMessages = messages.concat(userMessage);
     setMessages(newMessages);
     setInput("");
     setLoading(true);
@@ -452,16 +468,15 @@ function SupportChat() {
           ? data.reply
           : "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
 
-      setMessages([...newMessages, { role: "bot", text: reply }]);
+      setMessages(newMessages.concat({ role: "bot", text: reply }));
     } catch (err) {
       console.error(err);
-      setMessages([
-        ...newMessages,
-        {
+      setMessages(
+        newMessages.concat({
           role: "bot",
           text: "Er ging iets mis bij de verbinding met de server.",
-        },
-      ]);
+        })
+      );
     } finally {
       setLoading(false);
     }
@@ -470,14 +485,15 @@ function SupportChat() {
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
       <div className="h-40 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
-        {messages.map((m, i) => {
+        {messages.map(function (m, i) {
           const isUser = m.role === "user";
           return (
             <div
               key={i}
-              className={`flex items-end gap-2 ${
-                isUser ? "justify-end" : "justify-start"
-              }`}
+              className={
+                "flex items-end gap-2 " +
+                (isUser ? "justify-end" : "justify-start")
+              }
             >
               {!isUser && (
                 <img
@@ -487,11 +503,12 @@ function SupportChat() {
                 />
               )}
               <div
-                className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
-                  isUser
+                className={
+                  "max-w-[75%] px-2.5 py-1.5 rounded-lg " +
+                  (isUser
                     ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
-                }`}
+                    : "bg-white text-slate-800 border border-slate-200 mr-auto")
+                }
               >
                 {m.text}
               </div>
@@ -519,7 +536,9 @@ function SupportChat() {
             className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Beschrijf kort je technisch probleem…"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={function (e) {
+              setInput(e.target.value);
+            }}
           />
           <Button
             type="submit"
@@ -544,28 +563,33 @@ function SupportChat() {
 function CountdownTimer({ targetDate }) {
   const [timeLeft, setTimeLeft] = useState("");
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = new Date();
-      const event = new Date(targetDate);
-      const diff = event.getTime() - now.getTime();
+  useEffect(
+    function () {
+      const interval = setInterval(function () {
+        const now = new Date();
+        const event = new Date(targetDate);
+        const diff = event.getTime() - now.getTime();
 
-      if (diff <= 0) {
-        setTimeLeft("De bijscholing is gestart.");
+        if (diff <= 0) {
+          setTimeLeft("De bijscholing is gestart.");
+          clearInterval(interval);
+          return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+
+        setTimeLeft(d + " dagen · " + h + "u " + m + "m " + s + "s");
+      }, 1000);
+
+      return function () {
         clearInterval(interval);
-        return;
-      }
-
-      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const m = Math.floor((diff / (1000 * 60)) % 60);
-      const s = Math.floor((diff / 1000) % 60);
-
-      setTimeLeft(d + " dagen · " + h + "u " + m + "m " + s + "s");
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [targetDate]);
+      };
+    },
+    [targetDate]
+  );
 
   return (
     <div className="flex flex-col gap-1">
@@ -599,22 +623,52 @@ function AiToolsSection() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-        <Button as="a" href="https://chatgpt.com/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://chatgpt.com/"
+          variant="secondary"
+          className="justify-center"
+        >
           ChatGPT
         </Button>
-        <Button as="a" href="https://gemini.google.com/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://gemini.google.com/"
+          variant="secondary"
+          className="justify-center"
+        >
           Google Gemini
         </Button>
-        <Button as="a" href="https://www.genial.ly/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://www.genial.ly/"
+          variant="secondary"
+          className="justify-center"
+        >
           Genially
         </Button>
-        <Button as="a" href="https://notebooklm.google.com/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://notebooklm.google.com/"
+          variant="secondary"
+          className="justify-center"
+        >
           NotebookLM
         </Button>
-        <Button as="a" href="https://gamma.app/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://gamma.app/"
+          variant="secondary"
+          className="justify-center"
+        >
           Gamma
         </Button>
-        <Button as="a" href="https://lovable.dev/" variant="secondary" className="justify-center">
+        <Button
+          as="a"
+          href="https://lovable.dev/"
+          variant="secondary"
+          className="justify-center"
+        >
           Lovable
         </Button>
         <Button
@@ -898,7 +952,9 @@ function GettingStartedSection() {
           <Button
             type="button"
             variant="primary"
-            onClick={() => setUnlocked(true)}
+            onClick={function () {
+              setUnlocked(true);
+            }}
             className="self-start sm:self-auto text-xs"
           >
             Ik heb dit geprobeerd – toon de volgende stappen
@@ -1095,83 +1151,87 @@ function GettingStartedSection() {
   );
 }
 
-/* ------------ Bijscholing ------------ */
+/* ------------ Bijscholing (altijd zichtbaar) ------------ */
 
 function TrainingSection() {
   return (
-    <Card className="p-6">
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <div>
-          <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
-            Bijscholing
-          </p>
-          <h3 className="text-lg sm:text-xl font-semibold text-slate-900 flex items-center gap-2 mt-1">
-            <Sparkles className="h-4 w-4 text-blue-500" />
-            Lovable · AI-website bouwen
-          </h3>
-          <p className="text-sm text-slate-600 mt-2">
-            In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span> een
-            eenvoudige AI-gestuurde website maakt voor je les of project.
-          </p>
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-slate-700">
-            <Calendar className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Datum:</span> 15 december 2025
-            </span>
+    <section id="training">
+      <Card className="p-6">
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <div>
+            <p className="text-[11px] font-medium text-blue-600 uppercase tracking-wide">
+              Bijscholing
+            </p>
+            <h3 className="text-lg sm:text-xl font-semibold text-slate-900 flex items-center gap-2 mt-1">
+              <Sparkles className="h-4 w-4 text-blue-500" />
+              Lovable · AI-website bouwen
+            </h3>
+            <p className="text-sm text-slate-600 mt-2">
+              In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span>{" "}
+              een eenvoudige AI-gestuurde website maakt voor je les of project.
+            </p>
           </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <Clock className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Startuur:</span> 16u00
-            </span>
-          </div>
-          <div className="flex items-center gap-2 text-slate-700">
-            <MapPin className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Locatie:</span> Lokaal Z314
-            </span>
-          </div>
-          <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
-            Doelgroep: alle leerkrachten · beginners welkom
-          </span>
         </div>
 
-        <div className="space-y-2 text-sm">
-          <p className="text-xs font-semibold text-slate-500 uppercase">Je leert o.a.:</p>
-          <ul className="text-sm text-slate-700 space-y-1.5">
-            <li>• Basis van Lovable in onderwijscontext.</li>
-            <li>• Een eenvoudige les- of projectsite opzetten.</li>
-            <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
-          </ul>
-        </div>
-      </div>
+        <div className="grid sm:grid-cols-2 gap-4 text-sm mb-4">
+          <div className="space-y-2">
+            <div className="flex items-center gap-2 text-slate-700">
+              <Calendar className="h-4 w-4 text-blue-500" />
+              <span>
+                <span className="font-semibold">Datum:</span> 15 december 2025
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-700">
+              <Clock className="h-4 w-4 text-blue-500" />
+              <span>
+                <span className="font-semibold">Startuur:</span> 16u00
+              </span>
+            </div>
+            <div className="flex items-center gap-2 text-slate-700">
+              <MapPin className="h-4 w-4 text-blue-500" />
+              <span>
+                <span className="font-semibold">Locatie:</span> Lokaal Z314
+              </span>
+            </div>
+            <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
+              Doelgroep: alle leerkrachten · beginners welkom
+            </span>
+          </div>
 
-      <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-        <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
-          <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
-          <CountdownTimer targetDate="2025-12-15T16:00:00" />
+          <div className="space-y-2 text-sm">
+            <p className="text-xs font-semibold text-slate-500 uppercase">
+              Je leert o.a.:
+            </p>
+            <ul className="text-sm text-slate-700 space-y-1.5">
+              <li>• Basis van Lovable in onderwijscontext.</li>
+              <li>• Een eenvoudige les- of projectsite opzetten.</li>
+              <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
+            </ul>
+          </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <Button as="a" href="#" variant="primary" className="w-full justify-center">
-            Inschrijven voor Lovable
-          </Button>
-          <Button
-            as="a"
-            href={DRIVE_EXAMPLES_URL}
-            variant="ghost"
-            className="w-full justify-center text-xs"
-          >
-            <LinkIcon className="h-3 w-3" />
-            Bekijk voorbeeldprojecten (Drive)
-          </Button>
+
+        <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+          <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
+            <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
+            <CountdownTimer targetDate="2025-12-15T16:00:00" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <Button as="a" href="#" variant="primary" className="w-full justify-center">
+              Inschrijven voor Lovable
+            </Button>
+            <Button
+              as="a"
+              href={DRIVE_EXAMPLES_URL}
+              variant="ghost"
+              className="w-full justify-center text-xs"
+            >
+              <LinkIcon className="h-3 w-3" />
+              Bekijk voorbeeldprojecten (Drive)
+            </Button>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </section>
   );
 }
 
@@ -1275,7 +1335,9 @@ function FloatingPlanner() {
             </div>
             <button
               type="button"
-              onClick={() => setOpen(false)}
+              onClick={function () {
+                setOpen(false);
+              }}
               className="h-6 w-6 rounded-full flex items-center justify-center bg-slate-100 text-slate-500 hover:bg-slate-200 text-xs"
             >
               ✕
@@ -1339,7 +1401,11 @@ function FloatingPlanner() {
 
       <button
         type="button"
-        onClick={() => setOpen(function (v) { return !v; })}
+        onClick={function () {
+          setOpen(function (v) {
+            return !v;
+          });
+        }}
         className="flex items-center gap-2 rounded-full bg-blue-600 text-white shadow-xl shadow-blue-600/40 px-3 py-2 text-xs sm:text-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
         aria-label="Plan een moment over digitale didactiek"
       >
@@ -1357,147 +1423,146 @@ function FloatingPlanner() {
   );
 }
 
-/* ------------ Sectie-config ------------ */
+/* ------------ Bot Zuid sectie (alleen bij keuze) ------------ */
 
-const SECTIONS = {
-  "aan-de-slag": {
-    label: "Aan de slag",
-    description: "Leren prompten + stappen voor website, chatbot en NotebookLM.",
-    Icon: Sparkles,
-    component: GettingStartedSection,
-    primary: true,
-  },
-  voorbeelden: {
-    label: "Voorbeelden",
-    description: "Concrete voorbeelden (Lovable, AI Studio, NotebookLM) met preview.",
-    Icon: BookOpen,
-    component: ExamplesOverview,
-    primary: true,
-  },
-  bijscholing: {
-    label: "Bijscholing",
-    description: "Info over Lovable-sessies en toekomstige AI-/ICT-vormingen.",
-    Icon: Sparkles,
-    component: TrainingSection,
-    primary: true,
-  },
-  "ai-tools": {
-    label: "AI-tools",
-    description: "Overzicht van tools zoals ChatGPT, Gemini, NotebookLM, Genially…",
-    Icon: Lightbulb,
-    component: AiToolsSection,
-    primary: false,
-  },
-  "ai-beleid": {
-    label: "AI-richtlijnen",
-    description: "Wat mag wel/niet met AI + links naar achtergrondinfo.",
-    Icon: Lightbulb,
-    component: PolicySection,
-    primary: false,
-  },
-};
-
-/* ------------ Navigatiekaart links ------------ */
-
-function SectionNav({ activePage, setActivePage }) {
-  const primarySections = Object.entries(SECTIONS).filter(function ([, cfg]) {
-    return cfg.primary;
-  });
-  const extraSections = Object.entries(SECTIONS).filter(function ([, cfg]) {
-    return !cfg.primary;
-  });
-  const [showExtra, setShowExtra] = useState(false);
-
+function BotZuidSection() {
   return (
-    <div className="flex flex-col gap-3 text-sm">
-      <div className="flex flex-col gap-2">
-        {primarySections.map(function ([key, cfg]) {
-          const isActive = activePage === key;
-          const Icon = cfg.Icon;
-          return (
-            <button
-              key={key}
-              type="button"
-              onClick={() => setActivePage(key)}
-              className={
-                "group rounded-lg border px-3 py-2.5 text-left transition-all " +
-                (isActive
-                  ? "border-blue-300 bg-white text-slate-900 shadow-md scale-[1.02]"
-                  : "border-white/20 bg-white/5 hover:border-blue-300 hover:bg-white/10")
-              }
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span
-                  className={
-                    "font-semibold text-xs " +
-                    (isActive ? "text-slate-900" : "text-white")
-                  }
-                >
-                  {cfg.label}
-                </span>
-                <Icon
-                  className={
-                    "h-4 w-4 " +
-                    (isActive
-                      ? "text-blue-600"
-                      : "text-blue-200 group-hover:text-blue-300")
-                  }
+    <section id="bot-zuid-section" className="mt-6">
+      <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500">
+        <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
+        <div className="relative space-y-3 text-white">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="h-9 w-9 rounded-full overflow-hidden bg-white/15 shadow-sm border border-white/40">
+                <img
+                  src={BOT_ZUID_AVATAR}
+                  alt="Bot Zuid"
+                  className="h-full w-full object-cover"
                 />
               </div>
-              <p
-                className={
-                  "text-[11px] " +
-                  (isActive ? "text-slate-600" : "text-slate-200")
-                }
-              >
-                {cfg.description}
-              </p>
-            </button>
-          );
-        })}
-      </div>
 
-      {extraSections.length > 0 && (
-        <div className="pt-2 border-t border-white/15">
+              <div>
+                <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
+                  Probleem met ICT?
+                </p>
+                <h3 className="text-sm sm:text-base font-semibold">
+                  Bot Zuid – projector, Kurzweil &amp; Smartschool
+                </h3>
+              </div>
+            </div>
+            <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">
+              Nieuw &amp; experimenteel
+            </span>
+          </div>
+
+          <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
+            Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
+            ander ICT-materiaal. Bot Zuid helpt je eerst zelf op weg. Werkt het niet?
+            Gebruik dan het officiële ticketsysteem.
+          </p>
+
+          <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">
+            <div>
+              <p className="text-[11px] font-semibold text-slate-500 mb-1">
+                Direct chatten met Bot Zuid
+              </p>
+              <SupportChat />
+            </div>
+
+            <div className="pt-3 border-t border-slate-200">
+              <h4 className="text-sm font-semibold text-slate-900">
+                Werkt het nog steeds niet?
+              </h4>
+              <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                Gebruik ons officiële ticketsysteem voor storingen, defecten en
+                aanvragen.
+              </p>
+              <div className="mt-2">
+                <Button
+                  as="a"
+                  href="https://sint-rembert.topdesk.net/"
+                  variant="secondary"
+                >
+                  Naar Topdesk
+                  <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <Button
+            as="a"
+            href={GEMINI_URL}
+            variant="secondary"
+            className="w-full justify-center bg-white/10 text-white border-white/40 hover:bg-white/20 text-xs"
+          >
+            Werkt dit niet? Open Bot Zuid in een nieuw tabblad
+          </Button>
+        </div>
+      </Card>
+    </section>
+  );
+}
+
+/* ------------ Entry keuze: AI of Bot ------------ */
+
+function EntryChoice({ onChooseAI, onChooseBot }) {
+  return (
+    <section className="mb-6">
+      <Card className="p-6 bg-white border border-slate-200 shadow-sm">
+        <div className="mb-4">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-blue-600">
+            Kies een onderdeel
+          </p>
+          <h2 className="text-sm sm:text-base font-semibold text-slate-900">
+            Waar ben je nu naar op zoek?
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            Kies of je iets wil doen met AI in je les of dat je een technisch probleem hebt.
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
           <button
             type="button"
-            onClick={() => setShowExtra(function (v) { return !v; })}
-            className="text-[11px] text-blue-100 underline underline-offset-2"
+            onClick={onChooseAI}
+            className="group rounded-xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:border-blue-400 hover:bg-blue-50"
           >
-            {showExtra
-              ? "Verberg extra onderdelen"
-              : "Toon extra onderdelen (AI-tools, richtlijnen)"}
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">✨</span>
+              <p className="text-xs font-semibold text-slate-900">AI in mijn les</p>
+            </div>
+
+            <p className="text-[11px] text-slate-600 mb-2">
+              Ik zoek voorbeelden, prompts of stappenplannen om AI te gebruiken in mijn les.
+            </p>
+
+            <span className="inline-flex items-center text-[11px] font-semibold text-blue-700 group-hover:text-blue-800">
+              Naar voorbeelden &amp; aan de slag →
+            </span>
           </button>
 
-          {showExtra && (
-            <div className="mt-2 flex flex-col gap-2">
-              {extraSections.map(function ([key, cfg]) {
-                const isActive = activePage === key;
-                const Icon = cfg.Icon;
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    onClick={() => setActivePage(key)}
-                    className={
-                      "group rounded-lg border px-3 py-2 text-left text-[11px] transition-all " +
-                      (isActive
-                        ? "border-blue-200 bg-white text-slate-900"
-                        : "border-white/15 bg-white/5 hover:border-blue-200 hover:bg-white/10")
-                    }
-                  >
-                    <div className="flex items-center gap-2">
-                      <Icon className="h-3 w-3 text-blue-200" />
-                      <span>{cfg.label}</span>
-                    </div>
-                  </button>
-                );
-              })}
+          <button
+            type="button"
+            onClick={onChooseBot}
+            className="group rounded-xl border border-slate-200 bg-slate-50 p-4 text-left transition hover:border-blue-400 hover:bg-blue-50"
+          >
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">💻</span>
+              <p className="text-xs font-semibold text-slate-900">Technische hulp</p>
             </div>
-          )}
+
+            <p className="text-[11px] text-slate-600 mb-2">
+              Ik heb een probleem met projector, Kurzweil, Smartschool, printers of wifi.
+            </p>
+
+            <span className="inline-flex items-center text-[11px] font-semibold text-blue-700 group-hover:text-blue-800">
+              Open Bot Zuid →
+            </span>
+          </button>
         </div>
-      )}
-    </div>
+      </Card>
+    </section>
   );
 }
 
@@ -1524,7 +1589,9 @@ function QuickActions({ onOpenPage }) {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
           <button
             type="button"
-            onClick={() => onOpenPage("aan-de-slag")}
+            onClick={function () {
+              onOpenPage("aan-de-slag");
+            }}
             className="group flex flex-col items-start gap-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-3 text-left hover:border-blue-400 hover:bg-blue-50 transition-colors"
           >
             <span className="text-xl">✍️</span>
@@ -1586,26 +1653,73 @@ function QuickActions({ onOpenPage }) {
   );
 }
 
+/* ------------ Sectie-config voor AI-deel ------------ */
+
+const SECTIONS = {
+  "aan-de-slag": {
+    label: "Aan de slag",
+    component: GettingStartedSection,
+  },
+  voorbeelden: {
+    label: "Voorbeelden",
+    component: ExamplesOverview,
+  },
+  "ai-tools": {
+    label: "AI-tools",
+    component: AiToolsSection,
+  },
+  "ai-beleid": {
+    label: "AI-richtlijnen",
+    component: PolicySection,
+  },
+};
+
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
   const [activePage, setActivePage] = useState("voorbeelden");
   const [showIntroVideo, setShowIntroVideo] = useState(true);
+  const [showBot, setShowBot] = useState(false);
 
   const activeConfig = SECTIONS[activePage] || null;
   const activePageLabel = activeConfig ? activeConfig.label : null;
   const currentYear = new Date().getFullYear();
 
-  const renderActiveSection = () => {
+  const renderActiveSection = function () {
     if (!activeConfig) return null;
     const Component = activeConfig.component;
     return <Component />;
   };
 
+  const scrollToTraining = function () {
+    if (typeof document === "undefined") return;
+    const el = document.getElementById("training");
+    if (el && el.scrollIntoView) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleChooseAI = function () {
+    setShowBot(false);
+    setActivePage("voorbeelden");
+  };
+
+  const handleChooseBot = function () {
+    setShowBot(true);
+    if (typeof document !== "undefined") {
+      setTimeout(function () {
+        const el = document.getElementById("bot-zuid-section");
+        if (el && el.scrollIntoView) {
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      }, 50);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-slate-100 text-slate-900">
       {showIntroVideo && (
-        <IntroVideoOverlay onClose={() => setShowIntroVideo(false)} />
+        <IntroVideoOverlay onClose={function () { setShowIntroVideo(false); }} />
       )}
 
       {/* Top bar */}
@@ -1634,10 +1748,11 @@ export default function App() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-        {/* Nieuwe hero */}
+        {/* Hero */}
         <LandingHero
           onSelectSection={setActivePage}
-          onShowVideo={() => setShowIntroVideo(true)}
+          onShowVideo={function () { setShowIntroVideo(true); }}
+          onScrollToTraining={scrollToTraining}
         />
 
         {/* Werkgroep */}
@@ -1678,134 +1793,13 @@ export default function App() {
           </Card>
         </section>
 
-        {/* Navigatie + Bot Zuid */}
-        <section className="mb-8 grid gap-4 md:grid-cols-3 items-start">
-          {/* Linkerkaart */}
-          <Card className="h-full p-0 md:col-span-1 md:sticky md:top-24 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 text-white border-0 shadow-2xl">
-            <div className="h-1 w-full bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400" />
+        {/* Keuze: AI of Bot */}
+        <EntryChoice onChooseAI={handleChooseAI} onChooseBot={handleChooseBot} />
 
-            <div className="p-5 space-y-4">
-              <div className="flex items-start justify-between gap-2">
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 bg-blue-500/20 border border-blue-300/40 text-[11px] font-semibold text-blue-100">
-                    <Sparkles className="h-3 w-3" />
-                    <span>Kies een onderdeel</span>
-                  </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.08em] text-blue-200 font-semibold">
-                      Navigatie
-                    </p>
-                    <h3 className="text-sm sm:text-base font-semibold">
-                      Snel naar de juiste info
-                    </h3>
-                    <p className="text-[11px] sm:text-xs text-slate-200 mt-1">
-                      Klik op een tegel – onderaan deze pagina verschijnt de inhoud van
-                      dat onderdeel.
-                    </p>
-                  </div>
-                </div>
-                <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/40 border border-blue-200/60">
-                  <ChevronRight className="h-4 w-4 text-blue-100" />
-                </div>
-              </div>
-
-              <SectionNav activePage={activePage} setActivePage={setActivePage} />
-
-              {activePageLabel && (
-                <div className="mt-3 pt-3 border-t border-white/20 text-[11px] text-slate-100 space-y-1">
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-white text-slate-900 px-3 py-1 shadow-sm">
-                    <span className="h-1.5 w-1.5 rounded-full bg-lime-500 animate-pulse" />
-                    <span className="font-semibold">
-                      {activePageLabel} is geopend hieronder op de pagina.
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-slate-200">
-                    Scroll naar beneden om de inhoud te bekijken.
-                  </p>
-                </div>
-              )}
-            </div>
-          </Card>
-
-          {/* Bot Zuid – rechts */}
-          <Card className="h-full p-5 relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-500 md:col-span-2">
-            <div className="absolute inset-x-0 top-0 h-1 bg-white/40" />
-            <div className="relative space-y-3 text-white">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full overflow-hidden bg-white/15 shadow-sm border border-white/40">
-                    <img
-                      src={BOT_ZUID_AVATAR}
-                      alt="Bot Zuid"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-
-                  <div>
-                    <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
-                      Probleem met ICT?
-                    </p>
-                    <h3 className="text-sm sm:text-base font-semibold">
-                      Bot Zuid – projector, Kurzweil &amp; Smartschool
-                    </h3>
-                  </div>
-                </div>
-                <span className="inline-flex items-center rounded-full bg-white/15 px-2 py-0.5 text-[10px] font-semibold">
-                  Nieuw &amp; experimenteel
-                </span>
-              </div>
-
-              <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
-                Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
-                ander ICT-materiaal. Bot Zuid helpt je eerst zelf op weg. Werkt het niet?
-                Gebruik dan het officiële ticketsysteem.
-              </p>
-
-              <div className="bg-white rounded-xl p-3 sm:p-4 shadow-sm space-y-3">
-                <div>
-                  <p className="text-[11px] font-semibold text-slate-500 mb-1">
-                    Direct chatten met Bot Zuid
-                  </p>
-                  <SupportChat />
-                </div>
-
-                <div className="pt-3 border-t border-slate-200">
-                  <h4 className="text-sm font-semibold text-slate-900">
-                    Werkt het nog steeds niet?
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-600 mt-1">
-                    Gebruik ons officiële ticketsysteem voor storingen, defecten en
-                    aanvragen.
-                  </p>
-                  <div className="mt-2">
-                    <Button
-                      as="a"
-                      href="https://sint-rembert.topdesk.net/"
-                      variant="secondary"
-                    >
-                      Naar Topdesk
-                      <ChevronRight className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-
-              <Button
-                as="a"
-                href={GEMINI_URL}
-                variant="secondary"
-                className="w-full justify-center bg-white/10 text-white border-white/40 hover:bg-white/20 text-xs"
-              >
-                Werkt dit niet? Open Bot Zuid in een nieuw tabblad
-              </Button>
-            </div>
-          </Card>
-        </section>
-
-        {/* Quick actions onder chatbot */}
+        {/* Snel AI uitproberen */}
         <QuickActions onOpenPage={setActivePage} />
 
-        {/* Actieve sectie */}
+        {/* Actieve AI-sectie */}
         {activeConfig && (
           <section className="mb-10 space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200 px-3 py-1 text-[11px] sm:text-xs text-blue-800 font-semibold">
@@ -1817,6 +1811,14 @@ export default function App() {
             {renderActiveSection()}
           </section>
         )}
+
+        {/* Bijscholing staat altijd zichtbaar */}
+        <section className="mb-8">
+          <TrainingSection />
+        </section>
+
+        {/* Bot Zuid alleen bij keuze */}
+        {showBot && <BotZuidSection />}
 
         {/* Footer */}
         <footer className="mt-6 flex justify-center">

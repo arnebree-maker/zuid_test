@@ -1,10 +1,7 @@
 .App {
   text-align: center;
 }
-.bot-message {
-  white-space: pre-line;   /* <- hierdoor worden \n echte enters */
-  text-align: left;        /* eventueel, zodat het niet gecentreerd is */
-}
+
 
 .App-logo {
   height: 40vmin;
@@ -42,4 +39,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.bot-message {
+  white-space: pre-line;   /* <- hierdoor worden \n echte enters */
+
 }

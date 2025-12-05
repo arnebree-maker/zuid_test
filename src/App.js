@@ -313,6 +313,17 @@ function SupportChat() {
     }
   };
 
+  // Helper om \n om te zetten naar echte <br />-regels
+  const renderWithLineBreaks = (text) => {
+    const lines = text.split("\n");
+    return lines.map((line, idx) => (
+      <React.Fragment key={idx}>
+        {line}
+        {idx < lines.length - 1 && <br />}
+      </React.Fragment>
+    ));
+  };
+
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
       <div className="h-40 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
@@ -334,15 +345,15 @@ function SupportChat() {
                 />
               )}
 
-              {/* Bubbels – met line breaks bij bot */}
+              {/* Bubble met line breaks */}
               <div
                 className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
                   isUser
                     ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-slate-800 border border-slate-200 mr-auto bot-message"
+                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
                 }`}
               >
-                {m.text}
+                {renderWithLineBreaks(m.text)}
               </div>
             </div>
           );

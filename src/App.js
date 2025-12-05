@@ -325,6 +325,7 @@ function SupportChat() {
                 isUser ? "justify-end" : "justify-start"
               }`}
             >
+              {/* Avatar bij bot-berichten */}
               {!isUser && (
                 <img
                   src={BOT_ZUID_AVATAR}
@@ -332,11 +333,13 @@ function SupportChat() {
                   className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
                 />
               )}
+
+              {/* Bubbels – met line breaks bij bot */}
               <div
                 className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
                   isUser
                     ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
+                    : "bg-white text-slate-800 border border-slate-200 mr-auto bot-message"
                 }`}
               >
                 {m.text}
@@ -344,6 +347,7 @@ function SupportChat() {
             </div>
           );
         })}
+
         {loading && (
           <div className="flex items-end gap-2 justify-start">
             <img
@@ -384,6 +388,7 @@ function SupportChat() {
     </div>
   );
 }
+
 
 /* ------------ Timer voor bijscholing ------------ */
 

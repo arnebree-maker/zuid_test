@@ -268,7 +268,7 @@ function SupportChat() {
   const [messages, setMessages] = useState([
     {
       role: "bot",
-      text: "Hallo! Ik ben Bot Zuid. Stel hier je vraag over projectie, Kurzweil, Smartschool, printers of ander ICT-materiaal.",
+      text: "Hallo! Ik ben Bot Zuid. Stel hier je vraag over Bookwidgets, projectie, (toezicht bij) Kurzweil, de planner op SmartSchool, aanwezigheden scannen, geluidsproblemen, Untis of laptopproblemen (laptop wilt niet afsluiten).",
     },
   ]);
   const [input, setInput] = useState("");

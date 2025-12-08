@@ -321,16 +321,6 @@ function SupportChat() {
     }
   };
 
-  // Helper om \n om te zetten naar echte <br />-regels
-  const renderWithLineBreaks = (text) => {
-    const lines = text.split("\n");
-    return lines.map((line, idx) => (
-      <React.Fragment key={idx}>
-        {line}
-        {idx < lines.length - 1 && <br />}
-      </React.Fragment>
-    ));
-  };
 
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -353,7 +343,7 @@ function SupportChat() {
                 />
               )}
 
-              {/* Bubble met line breaks */}
+              {/* Bubble met automatische links */}
               <div
                 className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
                   isUser
@@ -361,9 +351,11 @@ function SupportChat() {
                     : "bg-white text-slate-800 border border-slate-200 mr-auto"
                 }`}
               >
-                {renderWithLineBreaks(m.text)}
+                <Linkify options={linkifyOptions}>
+                  {m.text}
+                </Linkify>
               </div>
-            </div>
+
           );
         })}
 

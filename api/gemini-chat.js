@@ -267,6 +267,9 @@ Gebruik dit als de laptop vastzit door Safe Exam Browser (SEB).
 4.	Plak de gegevens in de tool en wacht tot de reset voltooid is.
 5.	Herstart de computer.
 
+Hoe werkt Alinea? 
+Je kan alles hier vinden: https://new.express.adobe.com/webpage/gNWhE7OGkwp3s 
+
 Untis werkt niet
 •	Bekijk de instructievideo: https://youtu.be/3S8POkdLPE0. 
 Geluid werkt niet meer (Laptop speakers)
@@ -275,6 +278,7 @@ Geluid werkt niet meer (Laptop speakers)
 3.	Klik op Ja bij de vraag om toestemming.
 4.	De laptop installeert het stuurprogramma opnieuw, waarna het geluid weer werkt.
 
+Controle examens:
 ⭐ KLAAR VOOR DE PROEFWERKEN?
 Naamgeving kopies
 

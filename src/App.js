@@ -38,11 +38,6 @@ const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
 const TRAINING_TARGET_ISO = "2025-12-15T16:00:00"; // Bijscholing Lovable
 
-const linkifyOptions = {
-  target: "_blank",
-  rel: "noopener noreferrer",
-};
-
 /* ------------ Intro video overlay ------------ */
 
 function IntroVideoOverlay() {
@@ -270,6 +265,24 @@ function BestPractices() {
 
 /* ------------ Chatcomponent (Bot Zuid – technisch) ------------ */
 
+// Linkify-instellingen: maak URLs klikbaar + open in nieuw tabblad
+const linkifyOptions = {
+  className: "chat-link",
+  target: "_blank",
+  rel: "noopener noreferrer",
+};
+
+// Helper: \n omzetten naar <br /> zodat regeleindes mooi blijven
+function renderWithLineBreaks(text) {
+  const lines = (text || "").split("\n");
+  return lines.map((line, idx) => (
+    <React.Fragment key={idx}>
+      {line}
+      {idx < lines.length - 1 && <br />}
+    </React.Fragment>
+  ));
+}
+
 function SupportChat() {
   const [messages, setMessages] = useState([
     {
@@ -290,6 +303,7 @@ function SupportChat() {
     setInput("");
     setLoading(true);
 
+    // Gespreksgeschiedenis beperken
     const slimMessages = newMessages.slice(-6);
 
     try {
@@ -338,6 +352,7 @@ function SupportChat() {
                   className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
                 />
               )}
+
               <div
                 className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
                   isUser
@@ -345,15 +360,9 @@ function SupportChat() {
                     : "bg-white text-slate-800 border border-slate-200 mr-auto"
                 }`}
               >
-                <Linkify
-  options={{
-    className: "chat-link",
-    target: "_blank"
-  }}
->
-  {renderWithLineBreaks(m.text)}
-</Linkify>
-
+                <Linkify options={linkifyOptions}>
+                  {renderWithLineBreaks(m.text)}
+                </Linkify>
               </div>
             </div>
           );
@@ -707,6 +716,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
+      {/* Best practices */}
       <BestPractices />
     </>
   );
@@ -759,6 +769,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
 
   return (
     <div className="space-y-4">
+      {/* Stap 1 – Leren prompten */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -836,8 +847,10 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
         </div>
       </Card>
 
+      {/* Verdere stappen pas na ontgrendelen */}
       {unlocked && (
         <>
+          {/* Stap 2 – Lovable */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
@@ -894,6 +907,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
             </div>
           </Card>
 
+          {/* Stap 3 – AI Studio */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -956,6 +970,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
             </div>
           </Card>
 
+          {/* Stap 4 – NotebookLM */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
@@ -1180,7 +1195,7 @@ function FloatingPlanner() {
   const [open, setOpen] = useState(false);
 
   const statusLabel = "Meestal beschikbaar tijdens de lesuren";
-  const statusState = "free";
+  const statusState = "free"; // "free" of "busy"
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -1313,8 +1328,13 @@ function AiOverlay({ onClose }) {
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-6">
+          {/* Voorbeelden */}
           <ExamplesOverview />
+
+          {/* Aan de slag */}
           <GettingStartedSection />
+
+          {/* AI-tools & beleid onderaan */}
           <AiToolsSection />
           <PolicySection />
           <TrainingSection />
@@ -1426,6 +1446,7 @@ function BotOverlay({ onClose }) {
 export default function App() {
   const [activeOverlay, setActiveOverlay] = useState(null); // 'ai' | 'bot' | null
 
+  // Kleine "timer" voor in de header: gewoon dagen resterend
   const now = new Date();
   const trainingDate = new Date(TRAINING_TARGET_ISO);
   const diffMs = trainingDate.getTime() - now.getTime();
@@ -1436,6 +1457,7 @@ export default function App() {
     <div className="h-screen flex flex-col bg-slate-100 text-slate-900">
       <IntroVideoOverlay />
 
+      {/* Header met bijscholing-badge */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-30">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -1460,6 +1482,7 @@ export default function App() {
               </span>
             </div>
 
+            {/* Subtiele bijscholing-badge */}
             <Button
               as="a"
               href="#"
@@ -1480,8 +1503,10 @@ export default function App() {
         </div>
       </header>
 
+      {/* Scroll-container met scroll-snap */}
       <main className="flex-1 overflow-y-auto snap-y snap-mandatory">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
+          {/* Hero / banner – snap-start */}
           <section className="mt-6 mb-6 snap-start">
             <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
               <div className="relative h-[75vh] sm:h-[80vh] md:h-[80vh]">
@@ -1527,6 +1552,7 @@ export default function App() {
                     </div>
                   </div>
 
+                  {/* Team-blok rechts onderaan */}
                   <div className="hidden md:block absolute bottom-6 right-6">
                     <div className="bg-slate-900/80 border border-slate-700 rounded-2xl px-4 py-3 text-xs text-slate-100 backdrop-blur-sm shadow-lg">
                       <p className="font-semibold text-[11px] text-slate-200 mb-2">
@@ -1557,6 +1583,7 @@ export default function App() {
                   </div>
                 </div>
 
+                {/* Scroll-hint */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-[10px] text-slate-200">
                   <div className="inline-flex flex-col items-center gap-1">
                     <span>Scroll om te starten</span>
@@ -1567,8 +1594,10 @@ export default function App() {
             </div>
           </section>
 
+          {/* Kies een onderdeel – snap-start */}
           <section className="mb-8 snap-start">
             <div className="grid gap-4 md:grid-cols-2 items-stretch">
+              {/* AI in mijn les */}
               <Card className="p-5 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-blue-300 transition-all bg-white">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="h-9 w-9 rounded-xl bg-blue-600 flex items-center justify-center text-white">
@@ -1600,6 +1629,7 @@ export default function App() {
                 </div>
               </Card>
 
+              {/* Technische hulp */}
               <Card className="p-5 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-blue-300 transition-all bg-white">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="h-9 w-9 rounded-xl bg-slate-900 flex items-center justify-center text-white">
@@ -1633,6 +1663,7 @@ export default function App() {
             </div>
           </section>
 
+          {/* Footer */}
           <footer className="mt-6 flex justify-center">
             <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
               <p className="text-[11px] text-slate-500">
@@ -1646,6 +1677,7 @@ export default function App() {
 
       <FloatingPlanner />
 
+      {/* Overlays */}
       {activeOverlay === "ai" && <AiOverlay onClose={() => setActiveOverlay(null)} />}
       {activeOverlay === "bot" && <BotOverlay onClose={() => setActiveOverlay(null)} />}
     </div>

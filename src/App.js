@@ -14,6 +14,8 @@ import {
   Wrench,
 } from "lucide-react";
 
+import Linkify from "linkify-react";
+
 /* ------------ Constantes ------------ */
 
 const GEMINI_URL =
@@ -36,6 +38,12 @@ const LEREN_PROMPTEN_URL =
 const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
 const TRAINING_TARGET_ISO = "2025-12-15T16:00:00"; // Bijscholing Lovable
+
+const linkifyOptions = {
+  target: "_blank",
+  rel: "noopener noreferrer",
+};
+
 
 /* ------------ Intro video overlay ------------ */
 

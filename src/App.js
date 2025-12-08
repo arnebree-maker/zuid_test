@@ -326,7 +326,7 @@ function SupportChat() {
 
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
-      <div className="h-40 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
+      <div className="h-80 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
         {messages.map((m, i) => {
           const isUser = m.role === "user";
           return (

@@ -267,7 +267,7 @@ function BestPractices() {
 const NEWS_ITEMS = [
   {
     id: 1,
-    date: "dec 2025",
+    date: "jan 2025",
     title: "Bot Zuid live (testfase)",
     description:
       "Bot Zuid helpt je bij vragen over projectie, Kurzweil, Classroom.cloud, lesfiches en meer. Te bereiken via het portaal Digitale Didactiek.",
@@ -275,18 +275,20 @@ const NEWS_ITEMS = [
   },
   {
     id: 2,
-    date: "nov 2025",
+    date: "dec 2025",
     title: "Portaal Digitale Didactiek online",
     description:
-      "Eén startpunt voor alles rond AI in de les, technische hulp en bijscholingen voor SiVi & VLTI. Feedback welkom via Teams.",
-    tag: "Digitale didactiek",
+      "Infobundel einde 1e trimester",
+    tag: "Examens",
+    fileUrl: "/infobundel.pdf",     // Zorg dat dit bestand in /public staat
+  fileLabel: "📄 Download de Proefwerken Gids (PDF)"
   },
   {
     id: 3,
-    date: "okt 2025",
+    date: "dec 2025",
     title: "Proefwerken: Kurzweil & A-klas",
     description:
-      "Handleidingen rond Kurzweil-examens en Alinea/Examode staan gebundeld op Adobe Express. Check ze tijdig voor de proefwerken.",
+      "Problemen rond Kurzweil. Lees alles goed na wat je moet doen op SmartSchool.",
     tag: "Proefwerken",
   },
 ];

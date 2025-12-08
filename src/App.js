@@ -302,11 +302,8 @@ function NewsTimeline() {
             Laatste nieuws
           </p>
           <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-            Het laatste nieuw uit lokaal 209
+            Updates vanuit lokaal 209
           </h3>
-          <p className="text-xs sm:text-sm text-slate-500">
-           De meest recente items staan bovenaan.
-          </p>
         </div>
       </div>
 

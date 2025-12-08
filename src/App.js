@@ -265,27 +265,15 @@ function BestPractices() {
 
 /* ------------ Chatcomponent (Bot Zuid – technisch) ------------ */
 
-// Linkify-instellingen: maak URLs klikbaar + open in nieuw tabblad
+// Linkify: maak URLs klikbaar, behoud \n als nieuwe lijnen
 const linkifyOptions = {
-  nl2br: true, // maak zelf <br> van \n
+  nl2br: true,
   attributes: {
     target: "_blank",
     rel: "noopener noreferrer",
   },
-  className: "chat-link", // komt nu op de <a> zelf
+  className: "chat-link",
 };
-
-
-// Helper: \n omzetten naar <br /> zodat regeleindes mooi blijven
-function renderWithLineBreaks(text) {
-  const lines = (text || "").split("\n");
-  return lines.map((line, idx) => (
-    <React.Fragment key={idx}>
-      {line}
-      {idx < lines.length - 1 && <br />}
-    </React.Fragment>
-  ));
-}
 
 function SupportChat() {
   const [messages, setMessages] = useState([
@@ -307,7 +295,6 @@ function SupportChat() {
     setInput("");
     setLoading(true);
 
-    // Gespreksgeschiedenis beperken
     const slimMessages = newMessages.slice(-6);
 
     try {
@@ -357,16 +344,16 @@ function SupportChat() {
                 />
               )}
 
-<div
-  className={`max-w-[75%] px-2.5 py-1.5 rounded-lg whitespace-pre-wrap ${
-    isUser
-      ? "bg-blue-600 text-white ml-auto"
-      : "bg-white text-slate-800 border border-slate-200 mr-auto"
-  }`}
->
-  <Linkify options={linkifyOptions}>{m.text}</Linkify>
-</div>
-
+              <div
+                className={`max-w-[75%] px-2.5 py-1.5 rounded-lg whitespace-pre-wrap ${
+                  isUser
+                    ? "bg-blue-600 text-white ml-auto"
+                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
+                }`}
+              >
+                <Linkify options={linkifyOptions}>{m.text}</Linkify>
+              </div>
+            </div>
           );
         })}
 
@@ -593,7 +580,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* AI Studio – met screenshot */}
+      {/* AI Studio */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -644,7 +631,7 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* NotebookLM – screenshot */}
+      {/* NotebookLM */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
@@ -718,13 +705,12 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* Best practices */}
       <BestPractices />
     </>
   );
 }
 
-/* ------------ Aan de slag – leren prompten + stappen ------------ */
+/* ------------ Getting Started – stappen ------------ */
 
 function GettingStartedSection() {
   const [unlocked, setUnlocked] = useState(false);
@@ -771,7 +757,6 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
 
   return (
     <div className="space-y-4">
-      {/* Stap 1 – Leren prompten */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-3">
           <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -849,10 +834,9 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
         </div>
       </Card>
 
-      {/* Verdere stappen pas na ontgrendelen */}
       {unlocked && (
         <>
-          {/* Stap 2 – Lovable */}
+          {/* Lovable */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
@@ -882,15 +866,15 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                     >
                       lovable.dev
                     </a>{" "}
-                    en log in (Google / Microsoft).
+                    en log in.
                   </li>
                   <li>
                     Klik op <span className="font-semibold">“Create new app”</span>.
                   </li>
                   <li>Plak de prompt hiernaast in het tekstvak.</li>
-                  <li>Laat Lovable een eerste versie genereren en bekijk het resultaat.</li>
+                  <li>Laat Lovable een eerste versie genereren.</li>
                   <li>
-                    Pas teksten, kleuren en titels aan zodat het echt bij jouw vak past.
+                    Pas teksten, kleuren en titels aan zodat het bij jouw vak past.
                   </li>
                   <li>Publiceer en kopieer de link voor je leerlingen.</li>
                 </ol>
@@ -909,7 +893,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
             </div>
           </Card>
 
-          {/* Stap 3 – AI Studio */}
+          {/* AI Studio */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
@@ -941,21 +925,12 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                     </a>
                     .
                   </li>
-                  <li>
-                    Klik op <span className="font-semibold">“New chat”</span> of “New
-                    prompt”.
-                  </li>
-                  <li>
-                    Kies een Gemini-model dat geschikt is voor onderwijs (bv. 1.5 Flash /
-                    Pro).
-                  </li>
+                  <li>Klik op “New chat” of “New prompt”.</li>
+                  <li>Kies een geschikt Gemini-model.</li>
                   <li>Plak de prompt hiernaast in het instructieveld.</li>
+                  <li>Test zelf enkele voorbeeldvragen.</li>
                   <li>
-                    Test zelf enkele voorbeeldvragen (bv. “Start a dialogue about
-                    hobbies”).
-                  </li>
-                  <li>
-                    Laat leerlingen in duo&apos;s chatten en geef hen voorbeeldopdrachten.
+                    Laat leerlingen in duo&apos;s chatten en geef hen opdrachten.
                   </li>
                 </ol>
               </div>
@@ -972,7 +947,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
             </div>
           </Card>
 
-          {/* Stap 4 – NotebookLM */}
+          {/* NotebookLM */}
           <Card className="p-6">
             <div className="flex items-center gap-3 mb-3">
               <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
@@ -983,8 +958,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   Stap 4 – NotebookLM: werk met een echt hoofdstuk
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  Upload een hoofdstuk uit een cursus en laat AI er vragen & uitleg bij
-                  maken.
+                  Upload een hoofdstuk en laat AI er vragen & uitleg bij maken.
                 </p>
               </div>
             </div>
@@ -1005,18 +979,14 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                     </a>
                     .
                   </li>
-                  <li>
-                    Klik op <span className="font-semibold">“New notebook”</span>.
-                  </li>
-                  <li>Upload één hoofdstuk (PDF of Google Doc) van een cursus.</li>
+                  <li>Klik op “New notebook”.</li>
+                  <li>Upload één hoofdstuk (PDF of Google Doc).</li>
                   <li>Wacht tot NotebookLM het document heeft verwerkt.</li>
                   <li>
-                    Stel enkele testvragen zoals “Maak 5 meerkeuzevragen over paragraaf
-                    2”.
+                    Stel testvragen zoals “Maak 5 meerkeuzevragen over paragraaf 2”.
                   </li>
                   <li>
-                    Laat leerlingen bijvoorbeeld zelf examenvragen formuleren met
-                    NotebookLM.
+                    Laat leerlingen zelf examenvragen formuleren met NotebookLM.
                   </li>
                 </ol>
               </div>
@@ -1028,7 +998,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                 />
                 <p className="text-[11px] text-slate-500">
                   Toon ook eens hoe de audio-studio werkt en laat NotebookLM een korte
-                  “podcast” maken van het hoofdstuk.
+                  “podcast” maken.
                 </p>
               </div>
             </div>
@@ -1191,13 +1161,13 @@ function PolicySection() {
   );
 }
 
-/* ------------ Zwevend plannertje rechtsonder (Teams) ------------ */
+/* ------------ Floating planner ------------ */
 
 function FloatingPlanner() {
   const [open, setOpen] = useState(false);
 
   const statusLabel = "Meestal beschikbaar tijdens de lesuren";
-  const statusState = "free"; // "free" of "busy"
+  const statusState = "free";
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
@@ -1261,8 +1231,7 @@ function FloatingPlanner() {
 
             <div className="text-[11px] text-slate-500 leading-snug">
               <p>
-                Voeg bij het plannen in je uitnodiging kort toe waarover je vraag
-                gaat.
+                Voeg bij het plannen kort toe waarover je vraag gaat.
               </p>
               <p className="mt-1">
                 E-mail:{" "}
@@ -1330,13 +1299,8 @@ function AiOverlay({ onClose }) {
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-6">
-          {/* Voorbeelden */}
           <ExamplesOverview />
-
-          {/* Aan de slag */}
           <GettingStartedSection />
-
-          {/* AI-tools & beleid onderaan */}
           <AiToolsSection />
           <PolicySection />
           <TrainingSection />
@@ -1446,9 +1410,8 @@ function BotOverlay({ onClose }) {
 /* ------------ Hoofdcomponent ------------ */
 
 export default function App() {
-  const [activeOverlay, setActiveOverlay] = useState(null); // 'ai' | 'bot' | null
+  const [activeOverlay, setActiveOverlay] = useState(null);
 
-  // Kleine "timer" voor in de header: gewoon dagen resterend
   const now = new Date();
   const trainingDate = new Date(TRAINING_TARGET_ISO);
   const diffMs = trainingDate.getTime() - now.getTime();
@@ -1459,7 +1422,6 @@ export default function App() {
     <div className="h-screen flex flex-col bg-slate-100 text-slate-900">
       <IntroVideoOverlay />
 
-      {/* Header met bijscholing-badge */}
       <header className="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-30">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
@@ -1484,7 +1446,6 @@ export default function App() {
               </span>
             </div>
 
-            {/* Subtiele bijscholing-badge */}
             <Button
               as="a"
               href="#"
@@ -1505,10 +1466,9 @@ export default function App() {
         </div>
       </header>
 
-      {/* Scroll-container met scroll-snap */}
       <main className="flex-1 overflow-y-auto snap-y snap-mandatory">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 pb-16">
-          {/* Hero / banner – snap-start */}
+          {/* Hero */}
           <section className="mt-6 mb-6 snap-start">
             <div className="relative overflow-hidden rounded-3xl border border-slate-200/60 bg-slate-900 shadow-xl">
               <div className="relative h-[75vh] sm:h-[80vh] md:h-[80vh]">
@@ -1554,7 +1514,6 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Team-blok rechts onderaan */}
                   <div className="hidden md:block absolute bottom-6 right-6">
                     <div className="bg-slate-900/80 border border-slate-700 rounded-2xl px-4 py-3 text-xs text-slate-100 backdrop-blur-sm shadow-lg">
                       <p className="font-semibold text-[11px] text-slate-200 mb-2">
@@ -1585,7 +1544,6 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Scroll-hint */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-[10px] text-slate-200">
                   <div className="inline-flex flex-col items-center gap-1">
                     <span>Scroll om te starten</span>
@@ -1596,10 +1554,9 @@ export default function App() {
             </div>
           </section>
 
-          {/* Kies een onderdeel – snap-start */}
+          {/* Tegels */}
           <section className="mb-8 snap-start">
             <div className="grid gap-4 md:grid-cols-2 items-stretch">
-              {/* AI in mijn les */}
               <Card className="p-5 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-blue-300 transition-all bg-white">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="h-9 w-9 rounded-xl bg-blue-600 flex items-center justify-center text-white">
@@ -1631,7 +1588,6 @@ export default function App() {
                 </div>
               </Card>
 
-              {/* Technische hulp */}
               <Card className="p-5 flex flex-col justify-between cursor-pointer hover:shadow-md hover:border-blue-300 transition-all bg-white">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="h-9 w-9 rounded-xl bg-slate-900 flex items-center justify-center text-white">
@@ -1665,7 +1621,6 @@ export default function App() {
             </div>
           </section>
 
-          {/* Footer */}
           <footer className="mt-6 flex justify-center">
             <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
               <p className="text-[11px] text-slate-500">
@@ -1679,7 +1634,6 @@ export default function App() {
 
       <FloatingPlanner />
 
-      {/* Overlays */}
       {activeOverlay === "ai" && <AiOverlay onClose={() => setActiveOverlay(null)} />}
       {activeOverlay === "bot" && <BotOverlay onClose={() => setActiveOverlay(null)} />}
     </div>

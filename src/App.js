@@ -267,10 +267,14 @@ function BestPractices() {
 
 // Linkify-instellingen: maak URLs klikbaar + open in nieuw tabblad
 const linkifyOptions = {
-  className: "chat-link",
-  target: "_blank",
-  rel: "noopener noreferrer",
+  nl2br: true, // maak zelf <br> van \n
+  attributes: {
+    target: "_blank",
+    rel: "noopener noreferrer",
+  },
+  className: "chat-link", // komt nu op de <a> zelf
 };
+
 
 // Helper: \n omzetten naar <br /> zodat regeleindes mooi blijven
 function renderWithLineBreaks(text) {
@@ -353,18 +357,16 @@ function SupportChat() {
                 />
               )}
 
-              <div
-                className={`max-w-[75%] px-2.5 py-1.5 rounded-lg ${
-                  isUser
-                    ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
-                }`}
-              >
-                <Linkify options={linkifyOptions}>
-                  {renderWithLineBreaks(m.text)}
-                </Linkify>
-              </div>
-            </div>
+<div
+  className={`max-w-[75%] px-2.5 py-1.5 rounded-lg whitespace-pre-wrap ${
+    isUser
+      ? "bg-blue-600 text-white ml-auto"
+      : "bg-white text-slate-800 border border-slate-200 mr-auto"
+  }`}
+>
+  <Linkify options={linkifyOptions}>{m.text}</Linkify>
+</div>
+
           );
         })}
 

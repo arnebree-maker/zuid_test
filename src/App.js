@@ -302,11 +302,10 @@ function NewsTimeline() {
             Laatste nieuws
           </p>
           <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-            Tijdslijn Digitale Didactiek &amp; ICT
+            Het laatste nieuw uit lokaal 209
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
-            Korte updates over tools, proefwerken en ondersteuning. De meest
-            recente items staan bovenaan.
+           De meest recente items staan bovenaan.
           </p>
         </div>
       </div>

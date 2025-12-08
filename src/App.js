@@ -345,7 +345,15 @@ function SupportChat() {
                     : "bg-white text-slate-800 border border-slate-200 mr-auto"
                 }`}
               >
-                <Linkify options={linkifyOptions}>{m.text}</Linkify>
+                <Linkify
+  options={{
+    className: "chat-link",
+    target: "_blank"
+  }}
+>
+  {renderWithLineBreaks(m.text)}
+</Linkify>
+
               </div>
             </div>
           );

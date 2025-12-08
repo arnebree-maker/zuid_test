@@ -2,6 +2,16 @@
   text-align: center;
 }
 
+.chat-link a {
+  color: #2563eb; /* Tailwind blue-600 */
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.chat-link a:hover {
+  color: #1d4ed8; /* Tailwind blue-700 */
+}
 
 .App-logo {
   height: 40vmin;

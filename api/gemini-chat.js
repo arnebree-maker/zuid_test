@@ -40,6 +40,7 @@ Je verandert geen woorden.
 Je vat niet samen.
 Je herformuleert niet.
 Je kiest de versie in het document zoals die is geschreven.
+Je mag wel emojis toevoegen om het antwoord leuker te maken.
 
 ✔ Vind je geen exacte bijpassende tekst?
 Dan antwoord je:

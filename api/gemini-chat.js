@@ -179,6 +179,13 @@ Geluid werkt niet meer (Laptop speakers)
 3.	Klik op Ja bij de vraag om toestemming.
 4.	De laptop installeert het stuurprogramma opnieuw, waarna het geluid weer werkt.
 
+Classroomcloud
+Je kan alles vinden op deze website: https://new.express.adobe.com/webpage/hrQ5GgNjvoH7E 
+-Welke browser gebruik je het best?
+-Wat moet je doen als de leerlingen niet zichtbaar zijn?
+-Wat moet je doen als de leerling geen klascode kan ingeven?
+-Wanneer zijn de leerlingen zichtbaar?
+
 Kurzweil
 Hoe werkt kurzweil?
 https://new.express.adobe.com/webpage/MBQDpcouiCnm1 
@@ -268,6 +275,45 @@ Geluid werkt niet meer (Laptop speakers)
 3.	Klik op Ja bij de vraag om toestemming.
 4.	De laptop installeert het stuurprogramma opnieuw, waarna het geluid weer werkt.
 
+⭐ KLAAR VOOR DE PROEFWERKEN?
+Naamgeving kopies
+
+- S_Vak_Lkr_K1as_Datum.pdf
+Graag tijdig doorgeven en datum correct zetten!
+
+-Kurzweil
+Niet vergeten klaarzetten :-)
+
+-Instructies voor toezichters doornemen!
+Voorleessoftware in A-klas: examen uploaden en Excel invullen.
+
+-Deadlines Skore
+3 D & D/A: di 16-12 om 16:00
+4 D & D/A: wo 17-12 om 12:00
+5 D & D/A: di 16-12 om 16:00
+6 D & D/A: wo 17-12 om 12:00
+7 D/A: wo 17-12 om 12:00
+3/4/5/6 A: di 16-12 om 10:00
+
+Oogjes
+Donderdag 18-12 om 20:00
+Commentaren
+Tot start klassenraad
+Geen enters!
+
+⚠️ Problemen tijdens je proefwerk?
+
+Meld het via een Teams-chat aan zuid.proefwerken.
+We brengen de juiste mensen op de hoogte.
+
+Hoe stuur je een bericht?
+Open Teams
+Nieuwe chat
+Zoek zuid.proefwerken
+Klik op het mailadres om te starten
+
+Aan: zuid.proefwerken
+Mailadres: zuid.proefwerken@sint-rembert.be
 
 Tekstherkenning – Tekst uit een afbeelding halen? Dit doe je zo!
 https://new.express.adobe.com/webpage/XvaNp4iyEd0mT
@@ -275,6 +321,7 @@ https://new.express.adobe.com/webpage/XvaNp4iyEd0mT
 Geluid uit je bordboek opnemen? Check IT out!
 https://new.express.adobe.com/webpage/2lXwka1Cef84z
 `.trim();
+
 
     // Combineer regels + kennis in één contextblok
     const contextText = `${promptHeader}\n\n===== KENNISDOCUMENT BOT-ZUID =====\n\n${kennisDocument}`;

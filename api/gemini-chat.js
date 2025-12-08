@@ -158,10 +158,10 @@ Algemene regels:
 •	Afwezigheden ieder lesuur ingeven.
 Bij 2 aansluitende lesuren (blokuren): slechts één keer ingeven
 
-Projectieproblemen
+Projectieproblemen (geen beeld, projectie werkt niet)
 Stappenplan : werken met meerdere schermen
 https://new.express.adobe.com/publishedV2/urn:aaid:sc:EU:6d6845c5-9925-4c38-8b01-7cf4f3c0ca23?promoid=Y69SGM5H&mv=other 
-Projectieproblemen (Geen beeld / TV werkt niet)
+
 1.	Projectie op 3 schermen? Als alles werkt: niets aanpassen.
 Geen idee hoe? https://www.youtube.com/watch?v=JA-Yrfdz0t0 
 2.	Kabel: Zit de USB-C goed in de laptop? (Tip: als de laptop oplaadt, zit de kabel correct) .
@@ -173,6 +173,7 @@ o	Scroll naar 'Meerdere beeldschermen' en kies Deze beeldschermen dupliceren.
 o	Ga naar Geavanceerd beeldscherm in instellingen.
 o	Selecteer de TV of Monitor.
 o	Zet de frequentie op 30 Hz (of 29,97 Hz).
+
 Geluid werkt niet meer (Laptop speakers)
 1.	Klik op het Windows-logo en ga naar Instellingen > Geluid.
 2.	Scroll naar beneden en klik op Assistentie.
@@ -185,6 +186,9 @@ Je kan alles vinden op deze website: https://new.express.adobe.com/webpage/hrQ5G
 -Wat moet je doen als de leerlingen niet zichtbaar zijn?
 -Wat moet je doen als de leerling geen klascode kan ingeven?
 -Wanneer zijn de leerlingen zichtbaar?
+
+Hoe werkt Alinea? 
+Je kan alles hier vinden: https://new.express.adobe.com/webpage/gNWhE7OGkwp3s 
 
 Kurzweil
 Hoe werkt kurzweil?
@@ -204,18 +208,21 @@ Tips bij het opstellen van het examen:
 •	Leerlingen kunnen gebruik maken van de invulfunctie, maar voor kleur- of doorstreepopdrachten lukt dit niet altijd.
 •	Controleer steeds beide versies (papier en digitaal).
 •	De leerlingen printen zelf hun ingevulde versie uit en nieten deze aan het origineel (nietjesmachine aanwezig in Kurzweilklas).
+
 Examens omzetten: Optie 1 (PDF-examens via KESI Virtual Printer)
 1.	Open je examen (werkt enkel met PDF).
 2.	Kies voor Afdrukken.
 3.	Selecteer als printer de KESI Virtual Printer.
 4.	Klik op Afdrukken.
 5.	Kurzweil opent nu automatisch. Log in en wacht tot je rechts onderaan alle pagina’s ziet.
+
 Examens omzetten: Optie 2 (Rechtstreeks in Kurzweil)
 1.	Open het programma Kurzweil en meld aan met je logingegevens.
 2.	Kies onderaan bij ‘Converteren’ voor PDF omzetten naar KES.
 3.	Navigeer naar de map met PDF-examens, selecteer ze en kies Accepteren.
 4.	Kies de map waar de KES-bestanden moeten komen.
 5.	Klik op Conversie starten en daarna op OK.
+
 Belangrijke beperkingen instellen (Verplicht!)
 1.	Open het menu Hulpmiddelen > Functies blokkeren.
 2.	Zet bij Schrijven, Online en Referentie overal een vinkje bij.
@@ -235,13 +242,16 @@ Stappenplan toezichten Kurzweil/A-klas
 •	Check of bij alle leerlingen de “blauwe Classroom.cloud balk” actief staat nadat ze aangemeld zijn, bij deze leerlingen wordt de internettoegang door de ITcoördinatoren vergrendeld. 
 •	Leerlingen die invullen moeten zelf hun bestand op regelmatige basis bewaren! Het is goed om hen daar bij de start van het proefwerk eens aan te herinneren. NA INDIENEN EXAMEN MOET DE LEERLING DE LAPTOP AFSLUITEN!! Let op: proefwerken moeten ingediend zijn bij het belsignaal, anders kunnen ze niet meer bewaren!!! 
 Problemen? Via Teams/Chat/zuid.proefwerken word je verder geholpen door de juiste collega. 
+
 CHECKLIST TOEZICHTHOUDENDE LEERKRACHTEN ALINEA
 In de A-klas werken de leerlingen (die anders Kurzweil gebruiken) met Alinea/ExaMode. Dit is op zich al beveiligd. Classroom.cloud moet niet geactiveerd worden. 
 Leerlingen kunnen met hun gewone laptopaccount aanmelden op hun laptop.
  Meer info over de werking van Alinea/ExaMode volgt nog via een Smartschoolbericht.
+ Problemen? Via Teams/Chat/zuid.proefwerken word je verder geholpen door de juiste collega. 
 LESFICHE EN PLANNER
 
 Doel: Lesfiches koppelen leerplandoelen aan je lessen en maken je agenda herbruikbaar.
+
 Een lesfiche maken:
 1.	Ga naar Mijn lesfiches en maak een nieuwe aan.
 2.	Vul titel in (bijv. inhoudsopgave cursus) en selecteer het vak.
@@ -250,6 +260,7 @@ o	2de graad: Selecteer lesdoelen (GFL/GLI mag ook).
 o	3de graad: Doelen selecteren is niet verplicht.
 4.	Taken/Toetsen: Geef een titel, kies type (meebrengen/opdracht/taak/toets) en selecteer eventueel labels.
 5.	Je kunt een bijlage toevoegen zodat leerlingen deze nooit kwijt zijn.
+
 Lesfiches inplannen in de agenda:
 1.	Ga naar de Planner in Smartschool.
 2.	Klik op een lesmoment en kies Lesfiche plannen.
@@ -260,6 +271,7 @@ Schoolactiviteit plannen (voor coördinatoren): Gebruik dit voor vakvergaderinge
 
 Laptop wil niet afsluiten (SEB Reset) 
 Handleiding: https://new.express.adobe.com/webpage/AyiF9bBCGetTp 
+
 Gebruik dit als de laptop vastzit door Safe Exam Browser (SEB).
 1.	Open de SEB Reset Utility tool.
 2.	Kies de optie: Reset system configuration to default values.
@@ -267,11 +279,9 @@ Gebruik dit als de laptop vastzit door Safe Exam Browser (SEB).
 4.	Plak de gegevens in de tool en wacht tot de reset voltooid is.
 5.	Herstart de computer.
 
-Hoe werkt Alinea? 
-Je kan alles hier vinden: https://new.express.adobe.com/webpage/gNWhE7OGkwp3s 
-
 Untis werkt niet
-•	Bekijk de instructievideo: https://youtu.be/3S8POkdLPE0. 
+•	Bekijk de instructievideo: https://youtu.be/3S8POkdLPE0.
+
 Geluid werkt niet meer (Laptop speakers)
 1.	Klik op het Windows-logo en ga naar Instellingen > Geluid.
 2.	Scroll naar beneden en klik op Assistentie.
@@ -299,9 +309,9 @@ Voorleessoftware in A-klas: examen uploaden en Excel invullen.
 7 D/A: wo 17-12 om 12:00
 3/4/5/6 A: di 16-12 om 10:00
 
-Oogjes
+-Oogjes
 Donderdag 18-12 om 20:00
-Commentaren
+-Commentaren
 Tot start klassenraad
 Geen enters!
 

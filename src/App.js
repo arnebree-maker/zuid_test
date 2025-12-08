@@ -262,6 +262,94 @@ function BestPractices() {
     </section>
   );
 }
+/* ------------ Tijdslijn / laatste nieuws ------------ */
+
+const NEWS_ITEMS = [
+  {
+    id: 1,
+    date: "dec 2025",
+    title: "Bot Zuid live (testfase)",
+    description:
+      "Bot Zuid helpt je bij vragen over projectie, Kurzweil, Classroom.cloud, lesfiches en meer. Te bereiken via het portaal Digitale Didactiek.",
+    tag: "ICT-ondersteuning",
+  },
+  {
+    id: 2,
+    date: "nov 2025",
+    title: "Portaal Digitale Didactiek online",
+    description:
+      "Eén startpunt voor alles rond AI in de les, technische hulp en bijscholingen voor SiVi & VLTI. Feedback welkom via Teams.",
+    tag: "Digitale didactiek",
+  },
+  {
+    id: 3,
+    date: "okt 2025",
+    title: "Proefwerken: Kurzweil & A-klas",
+    description:
+      "Handleidingen rond Kurzweil-examens en Alinea/Examode staan gebundeld op Adobe Express. Check ze tijdig voor de proefwerken.",
+    tag: "Proefwerken",
+  },
+];
+
+function NewsTimeline() {
+  return (
+    <Card className="p-6 bg-white">
+      <div className="flex items-center justify-between gap-2 mb-4">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.08em] text-blue-500 font-semibold">
+            Laatste nieuws
+          </p>
+          <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+            Tijdslijn Digitale Didactiek &amp; ICT
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Korte updates over tools, proefwerken en ondersteuning. De meest
+            recente items staan bovenaan.
+          </p>
+        </div>
+      </div>
+
+      <div className="relative mt-4">
+        {/* verticale lijn */}
+        <div className="absolute left-3 sm:left-4 top-0 bottom-0 w-px bg-slate-200" />
+
+        <div className="space-y-4">
+          {NEWS_ITEMS.map((item, index) => (
+            <div
+              key={item.id}
+              className="relative flex gap-3 pl-7 sm:pl-9"
+            >
+              {/* bolletje op de lijn */}
+              <div className="absolute left-1 sm:left-2 mt-1.5 h-3 w-3 rounded-full bg-blue-500 border-2 border-white shadow-sm" />
+
+              <div className="flex-1">
+                <p className="text-[11px] uppercase tracking-wide text-slate-400">
+                  {item.date}
+                </p>
+                <h4 className="text-sm font-semibold text-slate-900">
+                  {item.title}
+                </h4>
+                <p className="text-xs sm:text-sm text-slate-600 mt-1">
+                  {item.description}
+                </p>
+                {item.tag && (
+                  <span className="inline-flex mt-1 rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-600">
+                    {item.tag}
+                  </span>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-4 text-[11px] text-slate-400">
+          Scroll verder voor oudere berichten. Oudste items kan je gerust
+          verwijderen wanneer er nieuwe updates bijkomen.
+        </p>
+      </div>
+    </Card>
+  );
+}
 
 /* ------------ Chatcomponent (Bot Zuid – technisch) ------------ */
 
@@ -1620,7 +1708,10 @@ export default function App() {
               </Card>
             </div>
           </section>
-
+  {/* Tijdslijn – dezelfde scroll-snap als de sectie hierboven */}
+          <section className="mb-8 snap-start">
+            <NewsTimeline />
+          </section>
           <footer className="mt-6 flex justify-center">
             <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
               <p className="text-[11px] text-slate-500">

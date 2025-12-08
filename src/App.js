@@ -280,7 +280,7 @@ const NEWS_ITEMS = [
     description:
       "Infobundel einde 1e trimester",
     tag: "Examens",
-    fileUrl: "/infobundel.pdf",     // Zorg dat dit bestand in /public staat
+    fileUrl: "/Infobundel.pdf",     // Zorg dat dit bestand in /public staat
   fileLabel: "📄 Download de Proefwerken Gids (PDF)"
   },
   {

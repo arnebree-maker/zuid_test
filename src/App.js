@@ -615,6 +615,69 @@ function AiToolsSection() {
 function ExamplesOverview() {
   return (
     <>
+
+           {/* NotebookLM */}
+      <Card className="p-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
+            <BookOpen className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+              Voorbeeld – NotebookLM
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500">
+              AI-samenvattingen, uitleg en audio-studio op basis van je eigen bronnen.
+            </p>
+          </div>
+        </div>
+
+        {/* Bovenste rij: tekst links, eerste foto rechts */}
+        <div className="grid gap-5 md:grid-cols-2 items-start">
+          <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
+            <p>
+              <span className="font-semibold">Wat is NotebookLM?</span> NotebookLM laat je
+              eigen documenten uploaden (PDF, Google Docs, websites…) en maakt daar
+              samenvattingen, leervragen en audio-uitleg van.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Laat leerlingen vragen stellen over een hoofdstuk.</li>
+              <li>Genereer voorbeeldvragen en begripsvragen.</li>
+              <li>Gebruik de audio-studio als “podcast” over de leerstof.</li>
+            </ul>
+
+            <Button
+              as="a"
+              href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
+              variant="primary"
+              className="justify-center w-full sm:w-auto"
+            >
+              <LinkIcon className="h-4 w-4" />
+              Open NotebookLM-voorbeeld
+            </Button>
+          </div>
+
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
+            <img
+              src="/media/notebooklm.png"
+              alt="NotebookLM-voorbeeld"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        {/* Onderste rij: recentste foto over de volledige breedte */}
+        <div className="mt-4">
+          <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
+            <img
+              src="/media/resultatenNotebooklm.png"
+              alt="Resultaten NotebookLM-enquête"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </Card>
+
       {/* Lovable */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
@@ -623,7 +686,7 @@ function ExamplesOverview() {
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Voorbeeld 1 – Lovable (AI-website)
+              Voorbeeld – Lovable (AI-website)
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
               AI-gestuurde webapp om snel les- of projectsites te bouwen.
@@ -674,7 +737,7 @@ function ExamplesOverview() {
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Voorbeeld 2 – Google AI Studio
+              Voorbeeld – Google AI Studio
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
               Prompts ontwerpen, testen en verfijnen met Gemini-modellen.
@@ -717,55 +780,6 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* NotebookLM */}
-      <Card className="p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
-            <BookOpen className="h-4 w-4" />
-          </div>
-          <div>
-            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Voorbeeld 3 – NotebookLM
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              AI-samenvattingen, uitleg en audio-studio op basis van je eigen bronnen.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid gap-5 md:grid-cols-2 items-start">
-          <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-            <p>
-              <span className="font-semibold">Wat is NotebookLM?</span> NotebookLM laat je
-              eigen documenten uploaden (PDF, Google Docs, websites…) en maakt daar
-              samenvattingen, leervragen en audio-uitleg van.
-            </p>
-            <ul className="list-disc pl-5 space-y-1.5">
-              <li>Laat leerlingen vragen stellen over een hoofdstuk.</li>
-              <li>Genereer voorbeeldvragen en begripsvragen.</li>
-              <li>Gebruik de audio-studio als “podcast” over de leerstof.</li>
-            </ul>
-
-            <Button
-              as="a"
-              href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
-              variant="primary"
-              className="justify-center w-full sm:w-auto"
-            >
-              <LinkIcon className="h-4 w-4" />
-              Open NotebookLM-voorbeeld
-            </Button>
-          </div>
-
-          <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
-            <img
-              src="/media/notebooklm.png"
-              alt="NotebookLM-voorbeeld"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </Card>
 
       {/* Extra: meer voorbeelden in Drive */}
       <Card className="p-4">

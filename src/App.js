@@ -648,7 +648,7 @@ function ExamplesOverview() {
 
             <Button
               as="a"
-              href="https://notebooklm.google.com/notebook/a316cc47-7fd7-46aa-aa65-cca2a9d7a8a7?artifactId=3be602e1-0406-418c-899f-e54dad77c9e6"
+              href="https://notebooklm.google.com/notebook/5e8fec43-9ffc-4e71-b5a5-7705d2de9043"
               variant="primary"
               className="justify-center w-full sm:w-auto"
             >

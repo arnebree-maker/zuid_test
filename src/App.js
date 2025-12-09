@@ -276,9 +276,9 @@ const NEWS_ITEMS = [
   {
     id: 2,
     date: "dec 2025",
-    title: "Portaal Digitale Didactiek online",
+    title: "Examens 1e trimester",
     description:
-      "Infobundel einde 1e trimester",
+      "Infobundel. Klik hier om te downloaden.",
     tag: "Examens",
     fileUrl: "/Infobundel.pdf",     // Zorg dat dit bestand in /public staat
   fileLabel: "📄 Download de Proefwerken Gids (PDF)"
@@ -288,7 +288,7 @@ const NEWS_ITEMS = [
     date: "dec 2025",
     title: "Proefwerken: Kurzweil & A-klas",
     description:
-      "Problemen rond Kurzweil. Lees alles goed na wat je moet doen op SmartSchool.",
+      "Problemen rond Kurzweil. Klik hier om het op te lossen.",
     tag: "Proefwerken",
   },
 ];
@@ -742,8 +742,8 @@ function ExamplesOverview() {
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Laat leerlingen oefenen/leren met hun taal.</li>
-              <li>De AI-instelling: "Geef de leerling 10 zinnen.</li>
-              <li>Bij een fout: geef een hint over de stam+t regel."</li>
+              <li>Bouw je eigen chatbot in een andere taal.</li>
+              <li>Publiceer met één klik en deel de link met leerlingen.</li>
             </ul>
 
             <Button

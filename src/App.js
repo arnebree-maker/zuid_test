@@ -36,7 +36,7 @@ const LEREN_PROMPTEN_URL =
 
 const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
-const TRAINING_TARGET_ISO = "2025-12-15T16:00:00"; // Bijscholing Lovable
+const TRAINING_TARGET_ISO = "2026-01-13T16:00:00"; // Bijscholing Lovable
 
 /* ------------ Intro video overlay ------------ */
 

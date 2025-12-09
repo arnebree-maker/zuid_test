@@ -659,19 +659,8 @@ function ExamplesOverview() {
 
           <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
             <img
-              src="/media/notebooklm.png"
-              alt="NotebookLM-voorbeeld"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Onderste rij: recentste foto over de volledige breedte */}
-        <div className="mt-4">
-          <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
-            <img
               src="/media/resultatenNotebooklm.png"
-              alt="Resultaten NotebookLM-enquête"
+              alt="NotebookLM-voorbeeld"
               className="w-full h-full object-cover"
             />
           </div>

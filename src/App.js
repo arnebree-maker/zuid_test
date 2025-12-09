@@ -1122,7 +1122,7 @@ function TrainingSection() {
           <div className="flex items-center gap-2 text-slate-700">
             <Calendar className="h-4 w-4 text-blue-500" />
             <span>
-              <span className="font-semibold">Datum:</span> 15 december 2025
+              <span className="font-semibold">Datum:</span> 13 januari 2026
             </span>
           </div>
           <div className="flex items-center gap-2 text-slate-700">

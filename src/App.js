@@ -738,14 +738,12 @@ function ExamplesOverview() {
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
               <span className="font-semibold">Wat is AI Studio?</span> In Google AI
-              Studio kan je prompts bouwen en uitproberen met verschillende
-              Gemini-modellen. Vanuit daar kan je ze kopiëren naar Classroom-materiaal,
-              scripts of eigen tools.
+               Je persoonlijke tool-bouwer. Maak specifieke bots die leerlingen helpen met één taak.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
-              <li>Test veilig prompts voor toetsen en oefeningen.</li>
-              <li>Bewaar “goede” prompts als templates voor collega&apos;s.</li>
-              <li>Bekijk meteen verschillende varianten van een antwoord.</li>
+              <li>De opdracht: "Oefen werkwoordspelling.".</li>
+              <li>De AI-instelling: "Geef de leerling 10 zinnen.</li>
+              <li>Bij een fout: geef een hint over de stam+t regel."</li>
             </ul>
 
             <Button

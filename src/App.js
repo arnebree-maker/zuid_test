@@ -659,7 +659,7 @@ function ExamplesOverview() {
 
           <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
             <img
-              src="/media/notebooklm.png"
+              src="/public/media/notebooklm.png"
               alt="NotebookLM-voorbeeld"
               className="w-full h-full object-cover"
             />

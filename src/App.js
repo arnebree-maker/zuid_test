@@ -741,7 +741,7 @@ function ExamplesOverview() {
                Je persoonlijke tool-bouwer. Maak specifieke bots die leerlingen helpen met één taak.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
-              <li>De opdracht: "Oefen werkwoordspelling.".</li>
+              <li>Laat leerlingen oefenen/leren met hun taal.</li>
               <li>De AI-instelling: "Geef de leerling 10 zinnen.</li>
               <li>Bij een fout: geef een hint over de stam+t regel."</li>
             </ul>

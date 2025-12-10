@@ -262,6 +262,7 @@ function BestPractices() {
     </section>
   );
 }
+
 /* ------------ Tijdslijn / laatste nieuws ------------ */
 
 const NEWS_ITEMS = [
@@ -277,11 +278,10 @@ const NEWS_ITEMS = [
     id: 2,
     date: "dec 2025",
     title: "Examens 1e trimester",
-    description:
-      "Infobundel. Klik hier om te downloaden.",
+    description: "Infobundel. Klik hier om te downloaden.",
     tag: "Examens",
-    fileUrl: "/Infobundel.pdf",     // Zorg dat dit bestand in /public staat
-  fileLabel: "📄 Download de Proefwerken Gids (PDF)"
+    fileUrl: "/Infobundel.pdf", // Zorg dat dit bestand in /public staat
+    fileLabel: "📄 Download de Proefwerken Gids (PDF)",
   },
   {
     id: 3,
@@ -312,11 +312,8 @@ function NewsTimeline() {
         <div className="absolute left-3 sm:left-4 top-0 bottom-0 w-px bg-slate-200" />
 
         <div className="space-y-4">
-          {NEWS_ITEMS.map((item, index) => (
-            <div
-              key={item.id}
-              className="relative flex gap-3 pl-7 sm:pl-9"
-            >
+          {NEWS_ITEMS.map((item) => (
+            <div key={item.id} className="relative flex gap-3 pl-7 sm:pl-9">
               {/* bolletje op de lijn */}
               <div className="absolute left-1 sm:left-2 mt-1.5 h-3 w-3 rounded-full bg-blue-500 border-2 border-white shadow-sm" />
 
@@ -330,6 +327,19 @@ function NewsTimeline() {
                 <p className="text-xs sm:text-sm text-slate-600 mt-1">
                   {item.description}
                 </p>
+                {item.fileUrl && (
+                  <div className="mt-1">
+                    <a
+                      href={item.fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 text-[11px] font-semibold text-blue-600 hover:text-blue-700 underline"
+                    >
+                      <LinkIcon className="h-3 w-3" />
+                      {item.fileLabel || "Download bijlage"}
+                    </a>
+                  </div>
+                )}
                 {item.tag && (
                   <span className="inline-flex mt-1 rounded-full bg-slate-100 border border-slate-200 px-2 py-0.5 text-[10px] text-slate-600">
                     {item.tag}
@@ -615,8 +625,7 @@ function AiToolsSection() {
 function ExamplesOverview() {
   return (
     <>
-
-           {/* NotebookLM */}
+      {/* NotebookLM */}
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
@@ -636,8 +645,8 @@ function ExamplesOverview() {
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
-              <span className="font-semibold">Wat is NotebookLM?</span> NotebookLM laat je
-              eigen documenten uploaden (PDF, Google Docs, websites…) en maakt daar
+              <span className="font-semibold">Wat is NotebookLM?</span> NotebookLM laat
+              je eigen documenten uploaden (PDF, Google Docs, websites…) en maakt daar
               samenvattingen, leervragen en audio-uitleg van.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -738,7 +747,8 @@ function ExamplesOverview() {
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
               <span className="font-semibold">Wat is AI Studio?</span> In Google AI
-               Je persoonlijke tool-bouwer. Maak specifieke bots die leerlingen helpen met één taak.
+              Studio ontwerp je eigen AI-bots en oefenchats. Je persoonlijke tool-bouwer.
+              Maak specifieke bots die leerlingen helpen met één taak.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Laat leerlingen oefenen/leren met hun taal.</li>
@@ -767,6 +777,139 @@ function ExamplesOverview() {
         </div>
       </Card>
 
+      {/* Premium voorbeelden (Lisa Den Baes) – 1 */}
+      <Card className="p-6 border-2 border-amber-300 bg-amber-50/70">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-amber-500 flex items-center justify-center text-white">
+            <Sparkles className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-2">
+              Premium voorbeeld – AI-lesontwerp
+              <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
+                Nieuw · Premium
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Een uitgewerkt AI-lesidee met concrete prompts, flow en visuele opbouw.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-[2fr,1.2fr] items-start text-sm text-slate-700">
+          <div className="space-y-2">
+            <p>
+              Dit premium voorbeeld toont hoe je een hele les kan ontwerpen met AI als
+              assistent: van leerdoelen tot opdrachten en reflectievragen.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+              <li>Structuur van een volledige AI-ondersteunde les.</li>
+              <li>Voorbeelden van prompts die je meteen kan hergebruiken.</li>
+              <li>Visuele lay-out die je kan tonen in een bijscholing.</li>
+            </ul>
+
+            <div className="mt-3 flex flex-wrap gap-2 items-center">
+              <Button
+                as="a"
+                href="https://claude.ai/public/artifacts/4b1326ca-a021-47a5-9cb5-df1fad6df97d"
+                variant="primary"
+                className="justify-center text-xs"
+              >
+                <LinkIcon className="h-4 w-4" />
+                Open premium voorbeeld 1
+              </Button>
+              <a
+                href="https://claude.ai/public/artifacts/4b1326ca-a021-47a5-9cb5-df1fad6df97d"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-semibold text-amber-800 underline decoration-2 underline-offset-2"
+              >
+                Bekijk het visuele voorbeeld van Lisa Den Baes
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-amber-200 bg-amber-100/60 px-3 py-2 text-[11px] text-amber-900">
+            <p className="font-semibold mb-1">Credits</p>
+            <p>
+              Premium voorbeeld uitgewerkt door{" "}
+              <span className="font-semibold">Lisa Den Baes</span>.
+            </p>
+            <p className="mt-1">
+              Ideaal om te tonen in een nascholing of om collega&apos;s te
+              inspireren met een volledig uitgeschreven AI-les.
+            </p>
+          </div>
+        </div>
+      </Card>
+
+      {/* Premium voorbeelden (Lisa Den Baes) – 2 */}
+      <Card className="p-6 border-2 border-amber-300 bg-amber-50/70">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-amber-500 flex items-center justify-center text-white">
+            <BookOpen className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-2">
+              Premium voorbeeld – AI-leerpad / opdracht
+              <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
+                Extra
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Nog een concreet voorbeeld van een AI-gestuurde opdrachtstructuur voor
+              leerlingen.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-[2fr,1.2fr] items-start text-sm text-slate-700">
+          <div className="space-y-2">
+            <p>
+              In dit tweede premium voorbeeld zie je hoe je een AI-opdracht kan
+              opbouwen als leerpad: stap voor stap, met duidelijke instructies en
+              reflectiemomenten.
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+              <li>Leerpadstructuur die je kan vertalen naar jouw vak.</li>
+              <li>Heldere instructies voor leerlingen en leerkrachten.</li>
+              <li>Visueel sterk uitgewerkt om meteen te tonen.</li>
+            </ul>
+
+            <div className="mt-3 flex flex-wrap gap-2 items-center">
+              <Button
+                as="a"
+                href="https://claude.ai/public/artifacts/e19377f2-6af1-48f2-8c25-58dec6ee8469"
+                variant="primary"
+                className="justify-center text-xs"
+              >
+                <LinkIcon className="h-4 w-4" />
+                Open premium voorbeeld 2
+              </Button>
+              <a
+                href="https://claude.ai/public/artifacts/e19377f2-6af1-48f2-8c25-58dec6ee8469"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[11px] font-semibold text-amber-800 underline decoration-2 underline-offset-2"
+              >
+                Bekijk het tweede voorbeeld van Lisa Den Baes
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-amber-200 bg-amber-100/60 px-3 py-2 text-[11px] text-amber-900">
+            <p className="font-semibold mb-1">Met dank aan</p>
+            <p>
+              Deze premium voorbeelden zijn{" "}
+              <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>.
+            </p>
+            <p className="mt-1">
+              Gebruik ze als inspiratiebron en verwijs gerust naar Lisa bij
+              presentaties of interne vormingen.
+            </p>
+          </div>
+        </div>
+      </Card>
 
       {/* Extra: meer voorbeelden in Drive */}
       <Card className="p-4">
@@ -1317,9 +1460,7 @@ function FloatingPlanner() {
             </Button>
 
             <div className="text-[11px] text-slate-500 leading-snug">
-              <p>
-                Voeg bij het plannen kort toe waarover je vraag gaat.
-              </p>
+              <p>Voeg bij het plannen kort toe waarover je vraag gaat.</p>
               <p className="mt-1">
                 E-mail:{" "}
                 <a
@@ -1502,8 +1643,7 @@ export default function App() {
   const now = new Date();
   const trainingDate = new Date(TRAINING_TARGET_ISO);
   const diffMs = trainingDate.getTime() - now.getTime();
-  const daysLeft =
-    diffMs > 0 ? Math.floor(diffMs / (1000 * 60 * 60 * 24)) : 0;
+  const daysLeft = diffMs > 0 ? Math.floor(diffMs / (1000 * 60 * 60 * 24)) : 0;
 
   return (
     <div className="h-screen flex flex-col bg-slate-100 text-slate-900">
@@ -1707,10 +1847,12 @@ export default function App() {
               </Card>
             </div>
           </section>
-  {/* Tijdslijn – dezelfde scroll-snap als de sectie hierboven */}
+
+          {/* Tijdslijn */}
           <section className="mb-8 snap-start">
             <NewsTimeline />
           </section>
+
           <footer className="mt-6 flex justify-center">
             <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
               <p className="text-[11px] text-slate-500">

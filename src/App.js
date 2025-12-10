@@ -470,13 +470,6 @@ function SupportChat() {
                       <li>💻 Laptopproblemen (bijv. geen geluid)</li>
                       <li>📝 TO DO-lijsten &amp; examens</li>
                     </ul>
-                    <p className="pt-1.5 mt-1.5 border-t border-slate-100 text-[10px] text-slate-500">
-                      Tip: beschrijf je probleem zo concreet mogelijk, bv.{" "}
-                      <span className="italic">
-                        “Beamer in Z314 geeft geen beeld via HDMI”.
-                      </span>{" "}
-                      Dan kan ik je stap voor stap beter helpen. 💡
-                    </p>
                   </div>
                 ) : (
                   <Linkify options={linkifyOptions}>{m.text}</Linkify>

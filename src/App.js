@@ -847,13 +847,12 @@ function ExamplesOverview() {
           </div>
 
           <div className="rounded-xl border border-amber-200 bg-amber-100/60 px-3 py-2 text-[11px] text-amber-900">
-            <p className="font-semibold mb-1">Credits</p>
+            <p className="font-semibold mb-1">Met dank aan</p>
             <p>
-              Premium voorbeeld uitgewerkt door{" "}
-              <span className="font-semibold">Lisa Den Baes</span>.
+              Deze premium voorbeelden zijn{" "}
+              <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>.
             </p>
           </div>
-        </div>
       </Card>
 
       {/* Premium voorbeelden (Lisa Den Baes) – 2 */}
@@ -866,7 +865,7 @@ function ExamplesOverview() {
             <h2 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-2">
               Premium voorbeeld – AI-leerpad / opdracht - Claude (betalend)
               <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
-                Extra
+                Nieuw · Premium
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">

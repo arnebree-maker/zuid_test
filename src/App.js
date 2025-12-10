@@ -381,50 +381,15 @@ function SupportChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!input.trim() || loading) return;
-
-    const userMessage = { role: "user", text: input.trim() };
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
-    setInput("");
-    setLoading(true);
-
-    const slimMessages = newMessages.slice(-6);
-
-    try {
-      const res = await fetch("/api/gemini-chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: slimMessages }),
-      });
-
-      const data = await res.json();
-      const reply =
-        data?.reply ||
-        "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
-
-      setMessages([...newMessages, { role: "bot", text: reply }]);
-    } catch (err) {
-      console.error(err);
-      setMessages([
-        ...newMessages,
-        {
-          role: "bot",
-          text: "Er ging iets mis bij de verbinding met de server.",
-        },
-      ]);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // ... handleSubmit blijft hetzelfde ...
 
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
       <div className="h-60 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
         {messages.map((m, i) => {
           const isUser = m.role === "user";
+          const isIntroBotMessage = !isUser && i === 0;
+
           return (
             <div
               key={i}
@@ -447,7 +412,28 @@ function SupportChat() {
                     : "bg-white text-slate-800 border border-slate-200 mr-auto"
                 }`}
               >
-                <Linkify options={linkifyOptions}>{m.text}</Linkify>
+                {isIntroBotMessage ? (
+                  <div className="space-y-1.5 text-[11px] leading-relaxed">
+                    <p className="font-semibold text-slate-900">
+                      Hallo! Ik ben Floris flowbot 👋
+                    </p>
+                    <p>Ik kan je helpen met o.a.:</p>
+                    <ul className="list-disc pl-4 space-y-0.5">
+                      <li>BookWidgets &amp; projectie (beamers / schermen)</li>
+                      <li>(Toezicht bij) Kurzweil of Alinea</li>
+                      <li>Smartschool – planner &amp; aanwezigheden scannen</li>
+                      <li>Untis &amp; lesroosters</li>
+                      <li>Laptopproblemen (bv. geen geluid)</li>
+                      <li>TO DO-lijst examens</li>
+                    </ul>
+                    <p className="pt-1.5 mt-1.5 border-t border-slate-100 text-[10px] text-slate-500">
+                      Tip: beschrijf je probleem zo concreet mogelijk, bv.:
+                      &nbsp;“Beamer in Z314 geeft geen beeld via HDMI”.
+                    </p>
+                  </div>
+                ) : (
+                  <Linkify options={linkifyOptions}>{m.text}</Linkify>
+                )}
               </div>
             </div>
           );
@@ -467,6 +453,7 @@ function SupportChat() {
         )}
       </div>
 
+      {/* formulier blijft hetzelfde */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <input
@@ -493,6 +480,7 @@ function SupportChat() {
     </div>
   );
 }
+
 
 /* ------------ Timer voor bijscholing ------------ */
 

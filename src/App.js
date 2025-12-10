@@ -270,7 +270,7 @@ const NEWS_ITEMS = [
     date: "jan 2025",
     title: "Bot Zuid live (testfase)",
     description:
-      "Bot Zuid helpt je bij vragen over projectie, Kurzweil, Classroom.cloud, lesfiches en meer. Te bereiken via het portaal Digitale Didactiek.",
+      "Floris flowbot Zuid helpt je bij vragen over projectie, Kurzweil, Classroom.cloud, lesfiches en meer. Te bereiken via het portaal Digitale Didactiek.",
     tag: "ICT-ondersteuning",
   },
   {
@@ -365,7 +365,7 @@ function SupportChat() {
   const [messages, setMessages] = useState([
     {
       role: "bot",
-      text: "Hallo! Ik ben Bot Zuid. Stel hier je vraag over Bookwidgets, projectie, (toezicht bij) Kurzweil of Alinea, SmartSchool (de planner en aanwezigheden scannen), Untis, laptopproblemen (geluid oa), TO DO examens.",
+      text: "Hallo! Ik ben Floris flowbot. Stel hier je vraag over Bookwidgets, projectie, (toezicht bij) Kurzweil of Alinea, SmartSchool (de planner en aanwezigheden scannen), Untis, laptopproblemen (geluid oa), TO DO examens.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -425,7 +425,7 @@ function SupportChat() {
               {!isUser && (
                 <img
                   src={BOT_ZUID_AVATAR}
-                  alt="Bot Zuid"
+                  alt="Floris flowbot"
                   className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
                 />
               )}
@@ -447,11 +447,11 @@ function SupportChat() {
           <div className="flex items-end gap-2 justify-start">
             <img
               src={BOT_ZUID_AVATAR}
-              alt="Bot Zuid"
+              alt="Floris flowbot"
               className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
             />
             <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
-              Bot Zuid is aan het nadenken… Dit kan enkele seconden duren.
+              Ik benaan het nadenken… Dit kan enkele seconden duren.
             </div>
           </div>
         )}
@@ -1407,7 +1407,7 @@ function BotOverlay({ onClose }) {
               Technische hulp
             </p>
             <h2 className="text-sm sm:text-base font-semibold text-slate-900">
-              Bot Zuid & officiële helpkanalen
+              Floris flowbot & officiële helpkanalen
             </h2>
           </div>
           <button
@@ -1426,16 +1426,16 @@ function BotOverlay({ onClose }) {
                 <div className="h-9 w-9 rounded-full overflow-hidden bg-white/15 shadow-sm border border-white/40">
                   <img
                     src={BOT_ZUID_AVATAR}
-                    alt="Bot Zuid"
+                    alt="Floris flowbot"
                     className="h-full w-full object-cover"
                   />
                 </div>
                 <div>
                   <p className="text-[11px] uppercase tracking-wide font-semibold text-blue-100">
-                    Chatbot · technische ICT-vragen
+                    Floris flowbot · technische ICT-vragen
                   </p>
                   <h3 className="text-sm sm:text-base font-semibold">
-                    Bot Zuid – projectie, Kurzweil &amp; Smartschool
+                    Floris flowbot – projectie, Kurzweil &amp; Smartschool
                   </h3>
                 </div>
               </div>
@@ -1445,14 +1445,14 @@ function BotOverlay({ onClose }) {
             </div>
             <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
               Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
-              ander ICT-materiaal. Bot Zuid helpt je eerst zelf op weg. Werkt het niet?
+              ander ICT-materiaal. Floris flowbot helpt je eerst zelf op weg. Werkt het niet?
               Gebruik dan het officiële ticketsysteem.
             </p>
           </Card>
 
           <Card className="p-4 bg-white">
             <p className="text-[11px] font-semibold text-slate-500 mb-1">
-              Direct chatten met Bot Zuid
+              Direct chatten met Floris flowbot
             </p>
             <SupportChat />
           </Card>
@@ -1485,7 +1485,7 @@ function BotOverlay({ onClose }) {
               className="justify-start text-xs"
             >
               <MessageCircle className="h-4 w-4" />
-              Open Bot Zuid in een nieuw tabblad
+              Open Floris flowbot in een nieuw tabblad
             </Button>
           </Card>
         </div>

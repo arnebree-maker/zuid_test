@@ -853,6 +853,7 @@ function ExamplesOverview() {
               <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>.
             </p>
           </div>
+                </div>
       </Card>
 
       {/* Premium voorbeelden (Lisa Den Baes) – 2 */}

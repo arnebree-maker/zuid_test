@@ -280,7 +280,7 @@ const NEWS_ITEMS = [
     title: "Examens 1e trimester",
     description: "Infobundel. Klik hier om te downloaden.",
     tag: "Examens",
-    fileUrl: "/Infobundel.pdf",
+    fileUrl: "/Infobundel.pdf", // Zorg dat dit bestand in /public staat
     fileLabel: "📄 Download de Proefwerken Gids (PDF)",
   },
   {
@@ -374,7 +374,7 @@ function SupportChat() {
   const [messages, setMessages] = useState([
     {
       role: "bot",
-      text: "Hallo! Ik ben Floris flowbot. Stel hier je vraag over Bookwidgets, projectie, (toezicht bij) Kurzweil of Alinea, SmartSchool (de planner en aanwezigheden scannen), Untis, laptopproblemen (geluid oa), TO DO examens.",
+      text: "INTRO_MESSAGE", // inhoud tonen we zelf mooier hieronder
     },
   ]);
   const [input, setInput] = useState("");
@@ -390,6 +390,7 @@ function SupportChat() {
     setInput("");
     setLoading(true);
 
+    // laatste 6 berichten doorsturen naar de API
     const slimMessages = newMessages.slice(-6);
 
     try {
@@ -402,7 +403,7 @@ function SupportChat() {
       const data = await res.json();
       const reply =
         data?.reply ||
-        "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
+        "Er ging iets mis bij het ophalen van een antwoord. Probeer het later nog eens. 🙈";
 
       setMessages([...newMessages, { role: "bot", text: reply }]);
     } catch (err) {
@@ -411,7 +412,8 @@ function SupportChat() {
         ...newMessages,
         {
           role: "bot",
-          text: "Er ging iets mis bij de verbinding met de server.",
+          text:
+            "Er ging iets mis bij de verbinding met de server. Controleer je internetverbinding of probeer later opnieuw. 🖥️⚠️",
         },
       ]);
     } finally {
@@ -454,23 +456,26 @@ function SupportChat() {
                       Hallo! Ik ben Floris flowbot 👋
                     </p>
                     <p>
-                      Ik help je bij praktische ICT-vragen rond onze campus. Je
-                      kan me bijvoorbeeld vragen stellen over:
+                      Ik help je graag bij{" "}
+                      <span className="font-semibold">
+                        praktische ICT-vragen op campus Zuid
+                      </span>
+                      . Je kan mij onder andere aanspreken voor:
                     </p>
                     <ul className="list-disc pl-4 space-y-0.5">
-                      <li>BookWidgets &amp; projectie (beamers / schermen)</li>
-                      <li>(Toezicht bij) Kurzweil of Alinea / A-klas</li>
-                      <li>Smartschool – planner &amp; aanwezigheden scannen</li>
-                      <li>Untis &amp; lesroosters</li>
-                      <li>Laptopproblemen (bv. geen geluid) 🎧</li>
-                      <li>TO DO-lijsten &amp; examens</li>
+                      <li>📺 BookWidgets &amp; projectie (beamers / schermen)</li>
+                      <li>🧑‍💻 (Toezicht bij) Kurzweil of Alinea / A-klas</li>
+                      <li>📲 Smartschool – planner &amp; aanwezigheden scannen</li>
+                      <li>📅 Untis &amp; lesroosters</li>
+                      <li>💻 Laptopproblemen (bijv. geen geluid)</li>
+                      <li>📝 TO DO-lijsten &amp; examens</li>
                     </ul>
                     <p className="pt-1.5 mt-1.5 border-t border-slate-100 text-[10px] text-slate-500">
                       Tip: beschrijf je probleem zo concreet mogelijk, bv.{" "}
                       <span className="italic">
                         “Beamer in Z314 geeft geen beeld via HDMI”.
                       </span>{" "}
-                      Dan kan ik je stap voor stap helpen 💡
+                      Dan kan ik je stap voor stap beter helpen. 💡
                     </p>
                   </div>
                 ) : (
@@ -669,6 +674,7 @@ function ExamplesOverview() {
           </div>
         </div>
 
+        {/* Bovenste rij: tekst links, eerste foto rechts */}
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
@@ -1613,8 +1619,8 @@ function BotOverlay({ onClose }) {
             </div>
             <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
               Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
-              ander ICT-materiaal. Floris flowbot helpt je eerst zelf op weg. Werkt het niet?
-              Gebruik dan het officiële ticketsysteem.
+              ander ICT-materiaal. Floris flowbot helpt je eerst zelf op weg. Werkt het
+              niet? Gebruik dan het officiële ticketsysteem.
             </p>
           </Card>
 
@@ -1886,3 +1892,15 @@ export default function App() {
                 © {new Date().getFullYear()} Scholengroep Sint-Rembert · Werkgroep
                 Digitale Didactiek
               </p>
+            </div>
+          </footer>
+        </div>
+      </main>
+
+      <FloatingPlanner />
+
+      {activeOverlay === "ai" && <AiOverlay onClose={() => setActiveOverlay(null)} />}
+      {activeOverlay === "bot" && <BotOverlay onClose={() => setActiveOverlay(null)} />}
+    </div>
+  );
+}

@@ -268,9 +268,9 @@ const NEWS_ITEMS = [
   {
     id: 1,
     date: "jan 2025",
-    title: "Bot Zuid live (testfase)",
+    title: "Floris flowbot live (testfase)",
     description:
-      "Floris flowbot Zuid helpt je bij vragen over projectie, Kurzweil, Classroom.cloud, lesfiches en meer. Te bereiken via het portaal Digitale Didactiek.",
+      "Floris flowbot helpt je bij vragen over projectie, Kurzweil, Classroom.cloud, lesfiches en meer. Te bereiken via het portaal Digitale Didactiek.",
     tag: "ICT-ondersteuning",
   },
   {
@@ -451,7 +451,7 @@ function SupportChat() {
               className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
             />
             <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
-              Ik benaan het nadenken… Dit kan enkele seconden duren.
+              Ik ben aan het nadenken… Dit kan enkele seconden duren.
             </div>
           </div>
         )}
@@ -1685,13 +1685,13 @@ export default function App() {
                       Technische hulp
                     </p>
                     <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-                      Bot Zuid & ICT-ondersteuning
+                      Floris flowbot & ICT-ondersteuning
                     </h3>
                   </div>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-600 mb-3">
                   Vragen over projector, Kurzweil, Smartschool, printers of wifi? Start
-                  een gesprek met Bot Zuid of ga meteen naar Topdesk.
+                  een gesprek met Floris flowbot of ga meteen naar Topdesk.
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-slate-500">
                   <span>Voor technische vragen of storingen.</span>

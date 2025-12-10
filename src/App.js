@@ -280,15 +280,14 @@ const NEWS_ITEMS = [
     title: "Examens 1e trimester",
     description: "Infobundel. Klik hier om te downloaden.",
     tag: "Examens",
-    fileUrl: "/Infobundel.pdf", // Zorg dat dit bestand in /public staat
+    fileUrl: "/Infobundel.pdf",
     fileLabel: "📄 Download de Proefwerken Gids (PDF)",
   },
   {
     id: 3,
     date: "dec 2025",
     title: "Proefwerken: Kurzweil & A-klas",
-    description:
-      "Problemen rond Kurzweil. Klik hier om het op te lossen.",
+    description: "Problemen rond Kurzweil. Klik hier om het op te lossen.",
     tag: "Proefwerken",
   },
 ];
@@ -381,7 +380,44 @@ function SupportChat() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ... handleSubmit blijft hetzelfde ...
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!input.trim() || loading) return;
+
+    const userMessage = { role: "user", text: input.trim() };
+    const newMessages = [...messages, userMessage];
+    setMessages(newMessages);
+    setInput("");
+    setLoading(true);
+
+    const slimMessages = newMessages.slice(-6);
+
+    try {
+      const res = await fetch("/api/gemini-chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: slimMessages }),
+      });
+
+      const data = await res.json();
+      const reply =
+        data?.reply ||
+        "Er ging iets mis bij het ophalen van een antwoord. Probeer later opnieuw.";
+
+      setMessages([...newMessages, { role: "bot", text: reply }]);
+    } catch (err) {
+      console.error(err);
+      setMessages([
+        ...newMessages,
+        {
+          role: "bot",
+          text: "Er ging iets mis bij de verbinding met de server.",
+        },
+      ]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
@@ -417,18 +453,24 @@ function SupportChat() {
                     <p className="font-semibold text-slate-900">
                       Hallo! Ik ben Floris flowbot 👋
                     </p>
-                    <p>Ik kan je helpen met o.a.:</p>
+                    <p>
+                      Ik help je bij praktische ICT-vragen rond onze campus. Je
+                      kan me bijvoorbeeld vragen stellen over:
+                    </p>
                     <ul className="list-disc pl-4 space-y-0.5">
                       <li>BookWidgets &amp; projectie (beamers / schermen)</li>
-                      <li>(Toezicht bij) Kurzweil of Alinea</li>
+                      <li>(Toezicht bij) Kurzweil of Alinea / A-klas</li>
                       <li>Smartschool – planner &amp; aanwezigheden scannen</li>
                       <li>Untis &amp; lesroosters</li>
-                      <li>Laptopproblemen (bv. geen geluid)</li>
-                      <li>TO DO-lijst examens</li>
+                      <li>Laptopproblemen (bv. geen geluid) 🎧</li>
+                      <li>TO DO-lijsten &amp; examens</li>
                     </ul>
                     <p className="pt-1.5 mt-1.5 border-t border-slate-100 text-[10px] text-slate-500">
-                      Tip: beschrijf je probleem zo concreet mogelijk, bv.:
-                      &nbsp;“Beamer in Z314 geeft geen beeld via HDMI”.
+                      Tip: beschrijf je probleem zo concreet mogelijk, bv.{" "}
+                      <span className="italic">
+                        “Beamer in Z314 geeft geen beeld via HDMI”.
+                      </span>{" "}
+                      Dan kan ik je stap voor stap helpen 💡
                     </p>
                   </div>
                 ) : (
@@ -447,13 +489,12 @@ function SupportChat() {
               className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
             />
             <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
-              Ik ben aan het nadenken… Dit kan enkele seconden duren.
+              Ik ben even aan het nadenken… Dit kan enkele seconden duren 🤖💭
             </div>
           </div>
         )}
       </div>
 
-      {/* formulier blijft hetzelfde */}
       <form onSubmit={handleSubmit} className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <input
@@ -473,14 +514,13 @@ function SupportChat() {
         </div>
 
         <p className="text-[10px] text-slate-400">
-          Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt, maak
-          een ticket aan in Topdesk.
+          Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,
+          maak een ticket aan in Topdesk. ✅
         </p>
       </form>
     </div>
   );
 }
-
 
 /* ------------ Timer voor bijscholing ------------ */
 
@@ -629,7 +669,6 @@ function ExamplesOverview() {
           </div>
         </div>
 
-        {/* Bovenste rij: tekst links, eerste foto rechts */}
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
@@ -1847,15 +1886,3 @@ export default function App() {
                 © {new Date().getFullYear()} Scholengroep Sint-Rembert · Werkgroep
                 Digitale Didactiek
               </p>
-            </div>
-          </footer>
-        </div>
-      </main>
-
-      <FloatingPlanner />
-
-      {activeOverlay === "ai" && <AiOverlay onClose={() => setActiveOverlay(null)} />}
-      {activeOverlay === "bot" && <BotOverlay onClose={() => setActiveOverlay(null)} />}
-    </div>
-  );
-}

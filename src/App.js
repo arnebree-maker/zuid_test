@@ -818,7 +818,7 @@ function ExamplesOverview() {
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-2">
-              Premium voorbeeld – AI-lesontwerp
+              Premium voorbeeld – AI-lesontwerp - Claude (betalend)
               <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
                 Nieuw · Premium
               </span>
@@ -837,8 +837,7 @@ function ExamplesOverview() {
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
               <li>Structuur van een volledige AI-ondersteunde les.</li>
-              <li>Voorbeelden van prompts die je meteen kan hergebruiken.</li>
-              <li>Visuele lay-out die je kan tonen in een bijscholing.</li>
+              <li>Een spel rond het voltooid deelwoord.</li>
             </ul>
 
             <div className="mt-3 flex flex-wrap gap-2 items-center">
@@ -851,14 +850,6 @@ function ExamplesOverview() {
                 <LinkIcon className="h-4 w-4" />
                 Open premium voorbeeld 1
               </Button>
-              <a
-                href="https://claude.ai/public/artifacts/4b1326ca-a021-47a5-9cb5-df1fad6df97d"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-semibold text-amber-800 underline decoration-2 underline-offset-2"
-              >
-                Bekijk het visuele voorbeeld van Lisa Den Baes
-              </a>
             </div>
           </div>
 
@@ -867,10 +858,6 @@ function ExamplesOverview() {
             <p>
               Premium voorbeeld uitgewerkt door{" "}
               <span className="font-semibold">Lisa Den Baes</span>.
-            </p>
-            <p className="mt-1">
-              Ideaal om te tonen in een nascholing of om collega&apos;s te
-              inspireren met een volledig uitgeschreven AI-les.
             </p>
           </div>
         </div>
@@ -884,7 +871,7 @@ function ExamplesOverview() {
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-2">
-              Premium voorbeeld – AI-leerpad / opdracht
+              Premium voorbeeld – AI-leerpad / opdracht - Claude (betalend)
               <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
                 Extra
               </span>
@@ -900,13 +887,11 @@ function ExamplesOverview() {
           <div className="space-y-2">
             <p>
               In dit tweede premium voorbeeld zie je hoe je een AI-opdracht kan
-              opbouwen als leerpad: stap voor stap, met duidelijke instructies en
-              reflectiemomenten.
+              opbouwen als leerpad: oefen de werkwoorden op verschillende niveau's.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
               <li>Leerpadstructuur die je kan vertalen naar jouw vak.</li>
-              <li>Heldere instructies voor leerlingen en leerkrachten.</li>
-              <li>Visueel sterk uitgewerkt om meteen te tonen.</li>
+              <li>Differentiëren op een leuke manier.</li>
             </ul>
 
             <div className="mt-3 flex flex-wrap gap-2 items-center">
@@ -919,14 +904,6 @@ function ExamplesOverview() {
                 <LinkIcon className="h-4 w-4" />
                 Open premium voorbeeld 2
               </Button>
-              <a
-                href="https://claude.ai/public/artifacts/e19377f2-6af1-48f2-8c25-58dec6ee8469"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-semibold text-amber-800 underline decoration-2 underline-offset-2"
-              >
-                Bekijk het tweede voorbeeld van Lisa Den Baes
-              </a>
             </div>
           </div>
 
@@ -935,10 +912,6 @@ function ExamplesOverview() {
             <p>
               Deze premium voorbeelden zijn{" "}
               <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>.
-            </p>
-            <p className="mt-1">
-              Gebruik ze als inspiratiebron en verwijs gerust naar Lisa bij
-              presentaties of interne vormingen.
             </p>
           </div>
         </div>

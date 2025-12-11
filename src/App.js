@@ -456,28 +456,23 @@ function SupportChat() {
                   : "bg-white text-slate-800 border border-slate-200 mr-auto"
               }`}
             >
-              {isIntroBotMessage ? (
-                <div className="space-y-1.5 text-[11px] leading-relaxed">
-                  <p className="font-semibold text-slate-900">
-                    Hallo! Ik ben Floris flowbot 👋
-                  </p>
-                  <p>
-                    Ik help je graag bij{" "}
-                    <span className="font-semibold">
-                      praktische ICT-vragen op campus Zuid
-                    </span>
-                    . Je kan mij onder andere aanspreken voor:
-                  </p>
-                  <ul className="list-disc pl-4 space-y-0.5">
-                    <li>📺 BookWidgets &amp; projectie (beamers / schermen)</li>
-                    <li>🧑‍💻 (Toezicht bij) Kurzweil of Alinea / A-klas</li>
-                    <li>📲 Smartschool – planner &amp; aanwezigheden scannen</li>
-                    <li>📅 Untis &amp; lesroosters</li>
-                    <li>💻 Laptopproblemen (bijv. geen geluid)</li>
-                    <li>📝 TO DO-lijsten &amp; examens</li>
-                  </ul>
-                </div>
-              ) : (
+{isIntroBotMessage ? (
+  <div className="space-y-1 text-[11px] leading-relaxed">
+    <p className="font-semibold text-slate-900">
+      Hallo! Ik ben Floris flowbot 👋
+    </p>
+    <p>
+      Ik help je met praktische ICT-vragen zoals:
+    </p>
+    <ul className="list-disc pl-4 space-y-0.5">
+      <li>📺 Projectie / beamers</li>
+      <li>🧑‍💻 Kurzweil / Alinea</li>
+      <li>📲 Smartschool</li>
+      <li>💻 Laptopproblemen</li>
+    </ul>
+  </div>
+) : (
+
                 <Linkify options={linkifyOptions}>{m.text}</Linkify>
               )}
             </div>
@@ -500,23 +495,25 @@ function SupportChat() {
     </div>
 
     {/* INPUT */}
-    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-      <div className="flex items-center gap-2">
-        <input
-          type="text"
-          className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Beschrijf kort je technisch probleem…"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-        />
-        <Button
-          type="submit"
-          variant="primary"
-          className="px-3 py-1.5 text-xs"
-        >
-          Verstuur
-        </Button>
-      </div>
+<form onSubmit={handleSubmit} className="flex flex-col gap-2">
+  <div className="flex flex-col gap-2">
+    <input
+      type="text"
+      className="w-full rounded-md border border-slate-200 px-2 py-1.5 text-xs bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      placeholder="Beschrijf kort je technisch probleem…"
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+    />
+
+    <Button
+      type="submit"
+      variant="primary"
+      className="w-full px-3 py-1.5 text-xs"
+    >
+      Verstuur
+    </Button>
+  </div>
+
 
       <p className="text-[10px] text-slate-400">
         Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,

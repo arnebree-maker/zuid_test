@@ -1666,13 +1666,6 @@ return (
           </h1>
         </div>
       </div>
-
-      <p className="text-[11px] sm:text-xs text-slate-500 mb-3">
-        Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi
-        en ander ICT-materiaal. Floris flowbot antwoordt enkel op basis van
-        het interne kennisdocument.
-      </p>
-
       <SupportChat />
     </Card>
   </div>

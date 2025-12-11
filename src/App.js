@@ -426,8 +426,8 @@ function SupportChat() {
     }
   };
 
-  return (
-  <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3 flex flex-col h-[70vh] max-h-[70vh]">
+return (
+  <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3 flex flex-col max-h-[70vh]">
     {/* BERICHTEN */}
     <div className="flex-1 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
       {messages.map((m, i) => {
@@ -496,30 +496,29 @@ function SupportChat() {
 
     {/* INPUT */}
 <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-  <div className="flex flex-col gap-2">
+  <div className="flex flex-col sm:flex-row items-stretch gap-2">
     <input
       type="text"
-      className="w-full rounded-md border border-slate-200 px-2 py-1.5 text-xs bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="flex-1 w-full rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
       placeholder="Beschrijf kort je technisch probleem…"
       value={input}
       onChange={(e) => setInput(e.target.value)}
     />
-
     <Button
       type="submit"
       variant="primary"
-      className="w-full px-3 py-1.5 text-xs"
+      className="w-full sm:w-auto px-3 py-1.5 text-xs"
     >
       Verstuur
     </Button>
   </div>
 
+  <p className="text-[10px] text-slate-400">
+    Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,
+    maak een ticket aan in Topdesk. ✅
+  </p>
+</form>
 
-      <p className="text-[10px] text-slate-400">
-        Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,
-        maak een ticket aan in Topdesk. ✅
-      </p>
-    </form>
   </div>
 );
                 }

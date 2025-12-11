@@ -525,7 +525,7 @@ function SupportChat() {
     </form>
   </div>
 );
-
+                }
 /* ------------ Timer voor bijscholing ------------ */
 
 function CountdownTimer({ targetDate }) {
@@ -1680,6 +1680,7 @@ return (
     </Card>
   </div>
 );
+  }
 
   return (
     <div className="h-screen flex flex-col bg-slate-100 text-slate-900">
@@ -1907,3 +1908,4 @@ return (
     </div>
   );
 }
+

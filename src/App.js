@@ -1643,7 +1643,15 @@ function BotOverlay({ onClose }) {
 
 export default function App() {
   const [activeOverlay, setActiveOverlay] = useState(null);
+  const [isBotEmbed, setIsBotEmbed] = useState(false);
 
+  useEffect(() => {
+    // check ?embed=bot in de URL
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("embed") === "bot") {
+      setIsBotEmbed(true);
+    }
+  }, []);
     // ✅ Speciaal geval: alleen de bot in een iframe tonen
   if (isBotEmbed) {
     return (

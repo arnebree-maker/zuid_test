@@ -38,6 +38,11 @@ const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
 const TRAINING_TARGET_ISO = "2026-01-13T16:00:00"; // Bijscholing Lovable
 
+const isBotEmbed =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("embed") === "bot";
+
+
 /* ------------ Intro video overlay ------------ */
 
 function IntroVideoOverlay() {
@@ -214,8 +219,8 @@ function BestPractices() {
               Voorbeelden die al in onze scholengroep gebruikt worden
             </h3>
             <p className="text-[11px] sm:text-xs text-slate-500">
-              Gebruik de ⭐ om aan te duiden wat jou inspireert. Later kan dit een
-              echte verzameling worden van gedeelde lesideeën.
+              Gebruik de ⭐ om aan te duiden wat jou inspireert. Later kan dit een echte
+              verzameling worden van gedeelde lesideeën.
             </p>
           </div>
         </div>
@@ -574,8 +579,7 @@ function AiToolsSection() {
             AI-tools voor in de klas
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
-            Overzicht van handige AI-tools die je als leerkracht kan
-            uitproberen.
+            Overzicht van handige AI-tools die je als leerkracht kan uitproberen.
           </p>
         </div>
       </div>
@@ -640,8 +644,8 @@ function AiToolsSection() {
       </div>
 
       <p className="text-xs sm:text-sm text-slate-600">
-        Tip: kies één tool en test die in een kleine opdracht. Laat leerlingen
-        meedenken over wat werkt en wat niet.
+        Tip: kies één tool en test die in een kleine opdracht. Laat leerlingen meedenken
+        over wat werkt en wat niet.
       </p>
     </Card>
   );
@@ -663,8 +667,7 @@ function ExamplesOverview() {
               Voorbeeld – NotebookLM
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
-              AI-samenvattingen, uitleg en audio-studio op basis van je eigen
-              bronnen.
+              AI-samenvattingen, uitleg en audio-studio op basis van je eigen bronnen.
             </p>
           </div>
         </div>
@@ -673,10 +676,9 @@ function ExamplesOverview() {
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
-              <span className="font-semibold">Wat is NotebookLM?</span>{" "}
-              NotebookLM laat je eigen documenten uploaden (PDF, Google Docs,
-              websites…) en maakt daar samenvattingen, leervragen en
-              audio-uitleg van.
+              <span className="font-semibold">Wat is NotebookLM?</span> NotebookLM laat
+              je eigen documenten uploaden (PDF, Google Docs, websites…) en maakt daar
+              samenvattingen, leervragen en audio-uitleg van.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Laat leerlingen vragen stellen over een hoofdstuk.</li>
@@ -724,10 +726,9 @@ function ExamplesOverview() {
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
-              <span className="font-semibold">Wat is Lovable?</span> Lovable is
-              een tool die op basis van tekst (prompts) een volledige
-              webapplicatie maakt. Ideaal om snel een interactieve leersite of
-              een tool voor leerlingen te bouwen.
+              <span className="font-semibold">Wat is Lovable?</span> Lovable is een tool
+              die op basis van tekst (prompts) een volledige webapplicatie maakt. Ideaal
+              om snel een interactieve leersite of een tool voor leerlingen te bouwen.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Laat AI een eerste versie van je site genereren.</li>
@@ -776,10 +777,9 @@ function ExamplesOverview() {
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
             <p>
-              <span className="font-semibold">Wat is AI Studio?</span> In Google
-              AI Studio ontwerp je eigen AI-bots en oefenchats. Je persoonlijke
-              tool-bouwer. Maak specifieke bots die leerlingen helpen met één
-              taak.
+              <span className="font-semibold">Wat is AI Studio?</span> In Google AI
+              Studio ontwerp je eigen AI-bots en oefenchats. Je persoonlijke tool-bouwer.
+              Maak specifieke bots die leerlingen helpen met één taak.
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Laat leerlingen oefenen/leren met hun taal.</li>
@@ -822,8 +822,7 @@ function ExamplesOverview() {
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              Een uitgewerkt AI-lesidee met concrete prompts, flow en visuele
-              opbouw.
+              Een uitgewerkt AI-lesidee met concrete prompts, flow en visuele opbouw.
             </p>
           </div>
         </div>
@@ -831,9 +830,8 @@ function ExamplesOverview() {
         <div className="grid gap-4 md:grid-cols-[2fr,1.2fr] items-start text-sm text-slate-700">
           <div className="space-y-2">
             <p>
-              Dit premium voorbeeld toont hoe je een hele les kan ontwerpen met
-              AI als assistent: van leerdoelen tot opdrachten en
-              reflectievragen.
+              Dit premium voorbeeld toont hoe je een hele les kan ontwerpen met AI als
+              assistent: van leerdoelen tot opdrachten en reflectievragen.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
               <li>Structuur van een volledige AI-ondersteunde les.</li>
@@ -857,11 +855,10 @@ function ExamplesOverview() {
             <p className="font-semibold mb-1">Met dank aan</p>
             <p>
               Deze premium voorbeelden zijn{" "}
-              <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>
-              .
+              <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>.
             </p>
           </div>
-        </div>
+                </div>
       </Card>
 
       {/* Premium voorbeelden (Lisa Den Baes) – 2 */}
@@ -878,8 +875,8 @@ function ExamplesOverview() {
               </span>
             </h2>
             <p className="text-xs sm:text-sm text-slate-600">
-              Nog een concreet voorbeeld van een AI-gestuurde
-              opdrachtstructuur voor leerlingen.
+              Nog een concreet voorbeeld van een AI-gestuurde opdrachtstructuur voor
+              leerlingen.
             </p>
           </div>
         </div>
@@ -888,8 +885,7 @@ function ExamplesOverview() {
           <div className="space-y-2">
             <p>
               In dit tweede premium voorbeeld zie je hoe je een AI-opdracht kan
-              opbouwen als leerpad: oefen de werkwoorden op verschillende
-              niveau&apos;s.
+              opbouwen als leerpad: oefen de werkwoorden op verschillende niveau's.
             </p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
               <li>Leerpadstructuur die je kan vertalen naar jouw vak.</li>
@@ -913,8 +909,7 @@ function ExamplesOverview() {
             <p className="font-semibold mb-1">Met dank aan</p>
             <p>
               Deze premium voorbeelden zijn{" "}
-              <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>
-              .
+              <span className="font-semibold">gebaseerd op werk van Lisa Den Baes</span>.
             </p>
           </div>
         </div>
@@ -928,9 +923,8 @@ function ExamplesOverview() {
               Meer voorbeelden & eigen materiaal
             </p>
             <p className="text-xs sm:text-sm text-slate-600">
-              In deze Drive-map vind je nog extra voorbeelden van
-              collega&apos;s. Je mag hier ook zelf je eigen AI-lessen of
-              projecten uploaden.
+              In deze Drive-map vind je nog extra voorbeelden van collega&apos;s. Je mag
+              hier ook zelf je eigen AI-lessen of projecten uploaden.
             </p>
           </div>
           <Button
@@ -1007,9 +1001,8 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
               Stap 1 – Leren prompten
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
-              In 10 minuten leer je hoe je duidelijke vragen kan stellen aan AI.
-              Daarna kan je kiezen tussen een website, een chatbot of
-              NotebookLM.
+              In 10 minuten leer je hoe je duidelijke vragen kan stellen aan AI. Daarna
+              kan je kiezen tussen een website, een chatbot of NotebookLM.
             </p>
 
             <div className="mt-3">
@@ -1030,20 +1023,20 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
             <p className="font-semibold text-slate-900">Basisprincipes:</p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
               <li>
-                <span className="font-semibold">Geef context:</span> voor welk
-                vak, welke klas, welk niveau?
+                <span className="font-semibold">Geef context:</span> voor welk vak,
+                welke klas, welk niveau?
               </li>
               <li>
-                <span className="font-semibold">Zeg wat je wil:</span>{" "}
-                samenvatting, oefening, uitleg, rubriek…
+                <span className="font-semibold">Zeg wat je wil:</span> samenvatting,
+                oefening, uitleg, rubriek…
               </li>
               <li>
-                <span className="font-semibold">Leg beperkingen vast:</span>{" "}
-                max. aantal woorden, taal, stijl.
+                <span className="font-semibold">Leg beperkingen vast:</span> max.
+                aantal woorden, taal, stijl.
               </li>
               <li>
-                <span className="font-semibold">Vraag om controle:</span> “toon
-                eerst een voorstel”, “stel 3 varianten voor”.
+                <span className="font-semibold">Vraag om controle:</span> “toon eerst
+                een voorstel”, “stel 3 varianten voor”.
               </li>
             </ul>
           </div>
@@ -1054,16 +1047,15 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
               text={basicPrompt}
             />
             <p className="text-[11px] text-slate-500">
-              Tip: laat collega&apos;s hun beste prompts delen in de Drive-map
-              en bouw zo een gezamenlijke prompt-bibliotheek.
+              Tip: laat collega&apos;s hun beste prompts delen in de Drive-map en bouw
+              zo een gezamenlijke prompt-bibliotheek.
             </p>
           </div>
         </div>
 
         <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
           <p className="text-[11px] text-slate-500">
-            Lees deze basis even door, test het in een AI-tool en klik daarna
-            verder.
+            Lees deze basis even door, test het in een AI-tool en klik daarna verder.
           </p>
           <Button
             type="button"
@@ -1089,8 +1081,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   Stap 2 – Lovable: eenvoudige leswebsite bouwen
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  In 30 minuten een eerste versie van een lessenwebsite voor je
-                  klas.
+                  In 30 minuten een eerste versie van een lessenwebsite voor je klas.
                 </p>
               </div>
             </div>
@@ -1112,14 +1103,12 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                     en log in.
                   </li>
                   <li>
-                    Klik op{" "}
-                    <span className="font-semibold">“Create new app”</span>.
+                    Klik op <span className="font-semibold">“Create new app”</span>.
                   </li>
                   <li>Plak de prompt hiernaast in het tekstvak.</li>
                   <li>Laat Lovable een eerste versie genereren.</li>
                   <li>
-                    Pas teksten, kleuren en titels aan zodat het bij jouw vak
-                    past.
+                    Pas teksten, kleuren en titels aan zodat het bij jouw vak past.
                   </li>
                   <li>Publiceer en kopieer de link voor je leerlingen.</li>
                 </ol>
@@ -1175,8 +1164,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   <li>Plak de prompt hiernaast in het instructieveld.</li>
                   <li>Test zelf enkele voorbeeldvragen.</li>
                   <li>
-                    Laat leerlingen in duo&apos;s chatten en geef hen
-                    opdrachten.
+                    Laat leerlingen in duo&apos;s chatten en geef hen opdrachten.
                   </li>
                 </ol>
               </div>
@@ -1187,8 +1175,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   text={aiStudioPrompt}
                 />
                 <p className="text-[11px] text-slate-500">
-                  Pas het niveau (A2/B1/B2) aan in de prompt, afhankelijk van je
-                  klas.
+                  Pas het niveau (A2/B1/B2) aan in de prompt, afhankelijk van je klas.
                 </p>
               </div>
             </div>
@@ -1205,8 +1192,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   Stap 4 – NotebookLM: werk met een echt hoofdstuk
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500">
-                  Upload een hoofdstuk en laat AI er vragen &amp; uitleg bij
-                  maken.
+                  Upload een hoofdstuk en laat AI er vragen & uitleg bij maken.
                 </p>
               </div>
             </div>
@@ -1231,12 +1217,10 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   <li>Upload één hoofdstuk (PDF of Google Doc).</li>
                   <li>Wacht tot NotebookLM het document heeft verwerkt.</li>
                   <li>
-                    Stel testvragen zoals “Maak 5 meerkeuzevragen over paragraaf
-                    2”.
+                    Stel testvragen zoals “Maak 5 meerkeuzevragen over paragraaf 2”.
                   </li>
                   <li>
-                    Laat leerlingen zelf examenvragen formuleren met
-                    NotebookLM.
+                    Laat leerlingen zelf examenvragen formuleren met NotebookLM.
                   </li>
                 </ol>
               </div>
@@ -1247,8 +1231,8 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
                   text={notebookLmPrompts}
                 />
                 <p className="text-[11px] text-slate-500">
-                  Toon ook eens hoe de audio-studio werkt en laat NotebookLM
-                  een korte “podcast” maken.
+                  Toon ook eens hoe de audio-studio werkt en laat NotebookLM een korte
+                  “podcast” maken.
                 </p>
               </div>
             </div>
@@ -1274,9 +1258,8 @@ function TrainingSection() {
             Lovable · AI-website bouwen
           </h3>
           <p className="text-sm text-slate-600 mt-2">
-            In 1 uur leer je hoe je met{" "}
-            <span className="font-semibold">Lovable</span> een eenvoudige
-            AI-gestuurde website maakt voor je les of project.
+            In 1 uur leer je hoe je met <span className="font-semibold">Lovable</span> een
+            eenvoudige AI-gestuurde website maakt voor je les of project.
           </p>
         </div>
       </div>
@@ -1307,9 +1290,7 @@ function TrainingSection() {
         </div>
 
         <div className="space-y-2 text-sm">
-          <p className="text-xs font-semibold text-slate-500 uppercase">
-            Je leert o.a.:
-          </p>
+          <p className="text-xs font-semibold text-slate-500 uppercase">Je leert o.a.:</p>
           <ul className="text-sm text-slate-700 space-y-1.5">
             <li>• Basis van Lovable in onderwijscontext.</li>
             <li>• Een eenvoudige les- of projectsite opzetten.</li>
@@ -1320,9 +1301,7 @@ function TrainingSection() {
 
       <div className="mt-3 grid gap-4 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <div className="border border-slate-200 rounded-xl p-3 bg-slate-50">
-          <p className="text-xs font-semibold text-slate-500 mb-1">
-            Tijd tot start
-          </p>
+          <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
           <CountdownTimer targetDate={TRAINING_TARGET_ISO} />
         </div>
         <div className="flex flex-col gap-2">
@@ -1356,8 +1335,7 @@ function PolicySection() {
             AI-richtlijnen · wat mag wel / niet?
           </h3>
           <p className="text-xs sm:text-sm text-slate-500">
-            Praktische samenvatting – volg steeds het officiële beleid van de
-            scholengroep.
+            Praktische samenvatting – volg steeds het officiële beleid van de scholengroep.
           </p>
         </div>
       </div>
@@ -1438,8 +1416,7 @@ function FloatingPlanner() {
                 Plan een moment met Glenn, Jasper of Arne
               </h3>
               <p className="text-[11px] text-slate-500 mt-0.5">
-                Handig voor vragen over Pedagogische ICT &amp; AI of een korte
-                1-op-1.
+                Handig voor vragen over Pedagogische ICT &amp; AI of een korte 1-op-1.
               </p>
             </div>
             <button
@@ -1534,7 +1511,7 @@ function AiOverlay({ onClose }) {
               AI in mijn les
             </p>
             <h2 className="text-sm sm:text-base font-semibold text-slate-900">
-              Voorbeelden, stappenplannen &amp; hulpmiddelen
+              Voorbeelden, stappenplannen & hulpmiddelen
             </h2>
           </div>
           <button
@@ -1548,8 +1525,8 @@ function AiOverlay({ onClose }) {
 
         <div className="px-4 sm:px-6 py-3 border-b border-slate-200 bg-slate-50">
           <p className="text-[11px] sm:text-xs text-slate-600">
-            Start met een voorbeeld, of doorloop stap-voor-stap hoe je AI kan
-            inzetten in jouw vak.
+            Start met een voorbeeld, of doorloop stap-voor-stap hoe je AI kan inzetten in
+            jouw vak.
           </p>
         </div>
 
@@ -1575,7 +1552,7 @@ function BotOverlay({ onClose }) {
               Technische hulp
             </p>
             <h2 className="text-sm sm:text-base font-semibold text-slate-900">
-              Floris flowbot &amp; officiële helpkanalen
+              Floris flowbot & officiële helpkanalen
             </h2>
           </div>
           <button
@@ -1612,9 +1589,9 @@ function BotOverlay({ onClose }) {
               </span>
             </div>
             <p className="text-xs sm:text-sm text-blue-50 leading-relaxed">
-              Stel je vraag over projector, Kurzweil, Smartschool, printers,
-              wifi en ander ICT-materiaal. Floris flowbot helpt je eerst zelf
-              op weg. Werkt het niet? Gebruik dan het officiële ticketsysteem.
+              Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi en
+              ander ICT-materiaal. Floris flowbot helpt je eerst zelf op weg. Werkt het
+              niet? Gebruik dan het officiële ticketsysteem.
             </p>
           </Card>
 
@@ -1630,8 +1607,7 @@ function BotOverlay({ onClose }) {
               Problemen met ICT-materiaal?
             </h4>
             <p className="text-xs sm:text-sm text-slate-600 mb-2">
-              Gebruik het officiële ticketsysteem voor storingen, defecten en
-              aanvragen.
+              Gebruik het officiële ticketsysteem voor storingen, defecten en aanvragen.
             </p>
             <Button
               as="a"
@@ -1671,8 +1647,7 @@ export default function App() {
   const now = new Date();
   const trainingDate = new Date(TRAINING_TARGET_ISO);
   const diffMs = trainingDate.getTime() - now.getTime();
-  const daysLeft =
-    diffMs > 0 ? Math.floor(diffMs / (1000 * 60 * 60 * 24)) : 0;
+  const daysLeft = diffMs > 0 ? Math.floor(diffMs / (1000 * 60 * 60 * 24)) : 0;
 
   return (
     <div className="h-screen flex flex-col bg-slate-100 text-slate-900">
@@ -1757,8 +1732,8 @@ export default function App() {
                         <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-tight">
                           Alles rond ICT &amp; AI
                           <span className="block text-sm sm:text-base md:text-lg text-slate-200 font-normal mt-1.5">
-                            Eén startpunt voor tools, voorbeelden, bijscholing
-                            en ondersteuning binnen Scholengroep Sint-Rembert.
+                            Eén startpunt voor tools, voorbeelden, bijscholing en
+                            ondersteuning binnen Scholengroep Sint-Rembert.
                           </span>
                         </h2>
                       </div>
@@ -1828,8 +1803,8 @@ export default function App() {
                   </div>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-600 mb-3">
-                  Ontdek concrete voorbeelden, prompts en stappen om AI in jouw
-                  vak te gebruiken. Lovable, AI Studio, NotebookLM en meer.
+                  Ontdek concrete voorbeelden, prompts en stappen om AI in jouw vak te
+                  gebruiken. Lovable, AI Studio, NotebookLM en meer.
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-slate-500">
                   <span>Voor leerkrachten die iets willen uitproberen.</span>
@@ -1854,14 +1829,13 @@ export default function App() {
                       Technische hulp
                     </p>
                     <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-                      Floris flowbot &amp; ICT-ondersteuning
+                      Floris flowbot & ICT-ondersteuning
                     </h3>
                   </div>
                 </div>
                 <p className="text-xs sm:text-sm text-slate-600 mb-3">
-                  Vragen over projector, Kurzweil, Smartschool, printers of
-                  wifi? Start een gesprek met Floris flowbot of ga meteen naar
-                  Topdesk.
+                  Vragen over projector, Kurzweil, Smartschool, printers of wifi? Start
+                  een gesprek met Floris flowbot of ga meteen naar Topdesk.
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-slate-500">
                   <span>Voor technische vragen of storingen.</span>
@@ -1886,8 +1860,8 @@ export default function App() {
           <footer className="mt-6 flex justify-center">
             <div className="inline-flex items-center rounded-full border border-slate-200 bg-white px-4 py-2">
               <p className="text-[11px] text-slate-500">
-                © {new Date().getFullYear()} Scholengroep Sint-Rembert ·
-                Werkgroep Digitale Didactiek
+                © {new Date().getFullYear()} Scholengroep Sint-Rembert · Werkgroep
+                Digitale Didactiek
               </p>
             </div>
           </footer>
@@ -1896,12 +1870,8 @@ export default function App() {
 
       <FloatingPlanner />
 
-      {activeOverlay === "ai" && (
-        <AiOverlay onClose={() => setActiveOverlay(null)} />
-      )}
-      {activeOverlay === "bot" && (
-        <BotOverlay onClose={() => setActiveOverlay(null)} />
-      )}
+      {activeOverlay === "ai" && <AiOverlay onClose={() => setActiveOverlay(null)} />}
+      {activeOverlay === "bot" && <BotOverlay onClose={() => setActiveOverlay(null)} />}
     </div>
   );
 }

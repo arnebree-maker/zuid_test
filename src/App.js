@@ -38,6 +38,11 @@ const BEST_PRACTICE_KEY = "sr-best-practices-likes";
 
 const TRAINING_TARGET_ISO = "2026-01-13T16:00:00"; // Bijscholing Lovable
 
+const isBotEmbed =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("embed") === "bot";
+
+
 /* ------------ Intro video overlay ------------ */
 
 function IntroVideoOverlay() {

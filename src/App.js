@@ -1650,38 +1650,36 @@ export default function App() {
   const daysLeft = diffMs > 0 ? Math.floor(diffMs / (1000 * 60 * 60 * 24)) : 0;
 // 🔹 NIEUW: speciale embed-modus enkel voor de bot (voor Smartschool / iframe)
   if (isBotEmbed) {
-    return (
-      <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
-        <div className="w-full max-w-xl">
-          <Card className="p-4 sm:p-5">
-            <div className="flex items-center gap-2 mb-3">
-              <img
-                src={BOT_ZUID_AVATAR}
-                alt="Floris flowbot"
-                className="h-8 w-8 rounded-full bg-slate-200 object-cover"
-              />
-              <div>
-                <p className="text-[11px] uppercase tracking-[0.08em] text-blue-500 font-semibold">
-                  Floris flowbot
-                </p>
-                <h1 className="text-sm sm:text-base font-semibold text-slate-900">
-                  Technische hulp · Campus Zuid
-                </h1>
-              </div>
-            </div>
-
-            <p className="text-[11px] sm:text-xs text-slate-500 mb-3">
-              Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi
-              en ander ICT-materiaal. Floris flowbot antwoordt enkel op basis van
-              het interne kennisdocument.
-            </p>
-
-            <SupportChat />
-          </Card>
+return (
+  <div className="w-full h-full min-h-screen bg-slate-100 p-2 overflow-auto">
+    <Card className="w-full h-full p-4 sm:p-5">
+      <div className="flex items-center gap-2 mb-3">
+        <img
+          src={BOT_ZUID_AVATAR}
+          alt="Floris flowbot"
+          className="h-8 w-8 rounded-full bg-slate-200 object-cover"
+        />
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.08em] text-blue-500 font-semibold">
+            Floris flowbot
+          </p>
+          <h1 className="text-sm sm:text-base font-semibold text-slate-900">
+            Technische hulp · Campus Zuid
+          </h1>
         </div>
       </div>
-    );
-  }
+
+      <p className="text-[11px] sm:text-xs text-slate-500 mb-3">
+        Stel je vraag over projector, Kurzweil, Smartschool, printers, wifi
+        en ander ICT-materiaal. Floris flowbot antwoordt enkel op basis van
+        het interne kennisdocument.
+      </p>
+
+      <SupportChat />
+    </Card>
+  </div>
+);
+
   return (
     <div className="h-screen flex flex-col bg-slate-100 text-slate-900">
       <IntroVideoOverlay />

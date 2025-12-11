@@ -427,103 +427,104 @@ function SupportChat() {
   };
 
   return (
-    <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
-      <div className="h-60 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
-        {messages.map((m, i) => {
-          const isUser = m.role === "user";
-          const isIntroBotMessage = !isUser && i === 0;
+  <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3 flex flex-col h-[70vh] max-h-[70vh]">
+    {/* BERICHTEN */}
+    <div className="flex-1 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
+      {messages.map((m, i) => {
+        const isUser = m.role === "user";
+        const isIntroBotMessage = !isUser && i === 0;
 
-          return (
+        return (
+          <div
+            key={i}
+            className={`flex items-end gap-2 ${
+              isUser ? "justify-end" : "justify-start"
+            }`}
+          >
+            {!isUser && (
+              <img
+                src={BOT_ZUID_AVATAR}
+                alt="Floris flowbot"
+                className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
+              />
+            )}
+
             <div
-              key={i}
-              className={`flex items-end gap-2 ${
-                isUser ? "justify-end" : "justify-start"
+              className={`max-w-[75%] px-2.5 py-1.5 rounded-lg whitespace-pre-wrap ${
+                isUser
+                  ? "bg-blue-600 text-white ml-auto"
+                  : "bg-white text-slate-800 border border-slate-200 mr-auto"
               }`}
             >
-              {!isUser && (
-                <img
-                  src={BOT_ZUID_AVATAR}
-                  alt="Floris flowbot"
-                  className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
-                />
+              {isIntroBotMessage ? (
+                <div className="space-y-1.5 text-[11px] leading-relaxed">
+                  <p className="font-semibold text-slate-900">
+                    Hallo! Ik ben Floris flowbot 👋
+                  </p>
+                  <p>
+                    Ik help je graag bij{" "}
+                    <span className="font-semibold">
+                      praktische ICT-vragen op campus Zuid
+                    </span>
+                    . Je kan mij onder andere aanspreken voor:
+                  </p>
+                  <ul className="list-disc pl-4 space-y-0.5">
+                    <li>📺 BookWidgets &amp; projectie (beamers / schermen)</li>
+                    <li>🧑‍💻 (Toezicht bij) Kurzweil of Alinea / A-klas</li>
+                    <li>📲 Smartschool – planner &amp; aanwezigheden scannen</li>
+                    <li>📅 Untis &amp; lesroosters</li>
+                    <li>💻 Laptopproblemen (bijv. geen geluid)</li>
+                    <li>📝 TO DO-lijsten &amp; examens</li>
+                  </ul>
+                </div>
+              ) : (
+                <Linkify options={linkifyOptions}>{m.text}</Linkify>
               )}
-
-              <div
-                className={`max-w-[75%] px-2.5 py-1.5 rounded-lg whitespace-pre-wrap ${
-                  isUser
-                    ? "bg-blue-600 text-white ml-auto"
-                    : "bg-white text-slate-800 border border-slate-200 mr-auto"
-                }`}
-              >
-                {isIntroBotMessage ? (
-                  <div className="space-y-1.5 text-[11px] leading-relaxed">
-                    <p className="font-semibold text-slate-900">
-                      Hallo! Ik ben Floris flowbot 👋
-                    </p>
-                    <p>
-                      Ik help je graag bij{" "}
-                      <span className="font-semibold">
-                        praktische ICT-vragen op campus Zuid
-                      </span>
-                      . Je kan mij onder andere aanspreken voor:
-                    </p>
-                    <ul className="list-disc pl-4 space-y-0.5">
-                      <li>📺 BookWidgets &amp; projectie (beamers / schermen)</li>
-                      <li>🧑‍💻 (Toezicht bij) Kurzweil of Alinea / A-klas</li>
-                      <li>📲 Smartschool – planner &amp; aanwezigheden scannen</li>
-                      <li>📅 Untis &amp; lesroosters</li>
-                      <li>💻 Laptopproblemen (bijv. geen geluid)</li>
-                      <li>📝 TO DO-lijsten &amp; examens</li>
-                    </ul>
-                  </div>
-                ) : (
-                  <Linkify options={linkifyOptions}>{m.text}</Linkify>
-                )}
-              </div>
-            </div>
-          );
-        })}
-
-        {loading && (
-          <div className="flex items-end gap-2 justify-start">
-            <img
-              src={BOT_ZUID_AVATAR}
-              alt="Floris flowbot"
-              className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
-            />
-            <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
-              Ik ben even aan het nadenken… Dit kan enkele seconden duren 🤖💭
             </div>
           </div>
-        )}
+        );
+      })}
+
+      {loading && (
+        <div className="flex items-end gap-2 justify-start">
+          <img
+            src={BOT_ZUID_AVATAR}
+            alt="Floris flowbot"
+            className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
+          />
+          <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
+            Ik ben even aan het nadenken… Dit kan enkele seconden duren 🤖💭
+          </div>
+        </div>
+      )}
+    </div>
+
+    {/* INPUT */}
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Beschrijf kort je technisch probleem…"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <Button
+          type="submit"
+          variant="primary"
+          className="px-3 py-1.5 text-xs"
+        >
+          Verstuur
+        </Button>
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <input
-            type="text"
-            className="flex-1 rounded-md border border-slate-200 px-2 py-1.5 text-xs sm:text-sm bg-white text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Beschrijf kort je technisch probleem…"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-          <Button
-            type="submit"
-            variant="primary"
-            className="px-3 py-1.5 text-xs"
-          >
-            Verstuur
-          </Button>
-        </div>
-
-        <p className="text-[10px] text-slate-400">
-          Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,
-          maak een ticket aan in Topdesk. ✅
-        </p>
-      </form>
-    </div>
-  );
-}
+      <p className="text-[10px] text-slate-400">
+        Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,
+        maak een ticket aan in Topdesk. ✅
+      </p>
+    </form>
+  </div>
+);
 
 /* ------------ Timer voor bijscholing ------------ */
 

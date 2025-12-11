@@ -1644,6 +1644,22 @@ function BotOverlay({ onClose }) {
 export default function App() {
   const [activeOverlay, setActiveOverlay] = useState(null);
 
+    // ✅ Speciaal geval: alleen de bot in een iframe tonen
+  if (isBotEmbed) {
+    return (
+      <div className="h-screen flex items-center justify-center bg-slate-100 text-slate-900">
+        <div className="w-full max-w-sm p-4">
+          <Card className="p-4 bg-white">
+            <p className="text-[11px] font-semibold text-slate-500 mb-1">
+              Floris flowbot
+            </p>
+            <SupportChat />
+          </Card>
+        </div>
+      </div>
+    );
+  }
+  
   const now = new Date();
   const trainingDate = new Date(TRAINING_TARGET_ISO);
   const diffMs = trainingDate.getTime() - now.getTime();

@@ -379,7 +379,11 @@ const isEmbed =
   typeof window !== "undefined" &&
   new URLSearchParams(window.location.search).get("embed") === "bot";
 
-function SupportChat() {
+export default function SupportChat({ embed = false }) {
+
+
+function SupportChat({ embed = false }) {
+
   const [messages, setMessages] = useState([
     {
       role: "bot",
@@ -434,8 +438,10 @@ function SupportChat() {
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
 <div
   className={`overflow-y-auto space-y-2 mb-3 pr-1 ${
-    isEmbed ? "h-[500px] sm:h-[600px] text-sm" : "h-60 text-xs sm:text-sm"
+    embed ? "h-[70vh] text-sm" : "h-60 text-xs sm:text-sm"
   }`}
+>
+
 >
 
         {messages.map((m, i) => {
@@ -1608,7 +1614,8 @@ function BotOverlay({ onClose }) {
             <p className="text-[11px] font-semibold text-slate-500 mb-1">
               Direct chatten met Floris flowbot
             </p>
-            <SupportChat />
+<SupportChat embed />
+
           </Card>
 
           <Card className="p-4 bg-white">
@@ -1666,18 +1673,19 @@ export default function App() {
 
 if (isBotEmbed) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100 text-slate-900">
-      <div className="w-full max-w-3xl p-4">   {/* 🔥 breedte x3 */}
-        <Card className="p-6 bg-white">      {/* 🔥 grotere padding */}
+    <div className="min-h-screen w-full bg-white text-slate-900 p-0 m-0">
+      <div className="w-full p-3 sm:p-6">
+        <Card className="w-full p-4 sm:p-6 bg-white">
           <h2 className="text-lg font-semibold text-slate-800 mb-3">
             Floris flowbot – ICT-ondersteuning
           </h2>
-          <SupportChat />
+          <SupportChat embed />
         </Card>
       </div>
     </div>
   );
 }
+
 
   
   const now = new Date();

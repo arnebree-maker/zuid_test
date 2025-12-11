@@ -375,6 +375,10 @@ const linkifyOptions = {
   className: "chat-link",
 };
 
+const isEmbed =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).get("embed") === "bot";
+
 function SupportChat() {
   const [messages, setMessages] = useState([
     {
@@ -428,7 +432,12 @@ function SupportChat() {
 
   return (
     <div className="mt-1 rounded-xl border border-slate-200 bg-slate-50 p-3">
-      <div className="h-60 overflow-y-auto space-y-2 mb-3 pr-1 text-xs sm:text-sm">
+<div
+  className={`overflow-y-auto space-y-2 mb-3 pr-1 ${
+    isEmbed ? "h-[500px] sm:h-[600px] text-sm" : "h-60 text-xs sm:text-sm"
+  }`}
+>
+
         {messages.map((m, i) => {
           const isUser = m.role === "user";
           const isIntroBotMessage = !isUser && i === 0;
@@ -1653,20 +1662,23 @@ export default function App() {
     }
   }, []);
     // ✅ Speciaal geval: alleen de bot in een iframe tonen
-  if (isBotEmbed) {
-    return (
-      <div className="h-screen flex items-center justify-center bg-slate-100 text-slate-900">
-        <div className="w-full max-w-sm p-4">
-          <Card className="p-4 bg-white">
-            <p className="text-[11px] font-semibold text-slate-500 mb-1">
-              Floris flowbot
-            </p>
-            <SupportChat />
-          </Card>
-        </div>
+// ⬇️ vervang je bestaande embed-blok hiermee:
+
+if (isBotEmbed) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-100 text-slate-900">
+      <div className="w-full max-w-3xl p-4">   {/* 🔥 breedte x3 */}
+        <Card className="p-6 bg-white">      {/* 🔥 grotere padding */}
+          <h2 className="text-lg font-semibold text-slate-800 mb-3">
+            Floris flowbot – ICT-ondersteuning
+          </h2>
+          <SupportChat />
+        </Card>
       </div>
-    );
-  }
+    </div>
+  );
+}
+
   
   const now = new Date();
   const trainingDate = new Date(TRAINING_TARGET_ISO);

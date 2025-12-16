@@ -1376,13 +1376,15 @@ function AiOverlay({ onClose }) {
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-6">
           {tab === "waarom" && <WaaromAISection />}
           {tab === "voorbeelden" && <ExamplesOverview />}
-          {tab === "aandeslag" && (
-            <>
-              <GettingStartedSection />
-              <AiToolsSection />
-              <PolicySection />
-            </>
-          )}
+{tab === "aandeslag" && (
+  <>
+    <HowPromptenImage />
+    <GettingStartedSection />
+    <AiToolsSection />
+    <PolicySection />
+  </>
+)}
+
           {tab === "inschrijven" && <TrainingSection />}
         </div>
       </div>

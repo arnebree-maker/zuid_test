@@ -78,10 +78,11 @@ const Button = ({
   href,
   variant = "primary",
   className = "",
+  disabled = false,
   ...rest
 }) => {
   const base =
-    "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-60 disabled:cursor-not-allowed";
+    "inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const variants = {
     primary: "bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500",
@@ -92,14 +93,16 @@ const Button = ({
   };
 
   const cls = `${base} ${variants[variant]} ${className}`;
-  const isLink = Tag === "a" || href;
+  const isLink = (Tag === "a" || !!href) && !disabled;
 
   const props = {
     className: cls,
-    onClick,
-    href,
+    onClick: disabled ? undefined : onClick,
+    href: isLink ? href : undefined,
     target: isLink ? "_blank" : undefined,
     rel: isLink ? "noopener noreferrer" : undefined,
+    disabled,
+    "aria-disabled": disabled ? true : undefined,
     ...rest,
   };
 
@@ -366,9 +369,7 @@ const linkifyOptions = {
 };
 
 function SupportChat() {
-  const [messages, setMessages] = useState([
-    { role: "bot", text: "INTRO_MESSAGE" },
-  ]);
+  const [messages, setMessages] = useState([{ role: "bot", text: "INTRO_MESSAGE" }]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -395,7 +396,7 @@ function SupportChat() {
       const data = await res.json();
       const reply =
         data?.reply ||
-        "Er ging iets mis bij het ophalen van een antwoord. Probeer het later nog eens. 🙈";
+        "Er ging iets mis bij het ophalen van een antwoord. Probeer later nog eens. 🙈";
 
       setMessages([...newMessages, { role: "bot", text: reply }]);
     } catch (err) {
@@ -405,7 +406,7 @@ function SupportChat() {
         {
           role: "bot",
           text:
-            "Er ging iets mis bij de verbinding met de server. Controleer je internetverbinding of probeer later opnieuw. 🖥️⚠️",
+            "Er ging iets mis bij de verbinding met de server. Controleer je internet of probeer later opnieuw. 🖥️⚠️",
         },
       ]);
     } finally {
@@ -423,9 +424,7 @@ function SupportChat() {
           return (
             <div
               key={i}
-              className={`flex items-end gap-2 ${
-                isUser ? "justify-end" : "justify-start"
-              }`}
+              className={`flex items-end gap-2 ${isUser ? "justify-end" : "justify-start"}`}
             >
               {!isUser && (
                 <img
@@ -471,7 +470,7 @@ function SupportChat() {
               className="h-7 w-7 rounded-full bg-slate-200 object-cover flex-shrink-0"
             />
             <div className="bg-white text-slate-500 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200">
-              Ik ben even aan het nadenken… Dit kan enkele seconden duren 🤖💭
+              Ik ben even aan het nadenken… 🤖💭
             </div>
           </div>
         )}
@@ -486,18 +485,13 @@ function SupportChat() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
           />
-          <Button
-            type="submit"
-            variant="primary"
-            className="w-full sm:w-auto px-3 py-1.5 text-xs"
-          >
+          <Button type="submit" variant="primary" className="w-full sm:w-auto px-3 py-1.5 text-xs">
             Verstuur
           </Button>
         </div>
 
         <p className="text-[10px] text-slate-400">
-          Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt,
-          maak een ticket aan in Topdesk. ✅
+          Deel geen gevoelige leerling- of personeelsgegevens. Als het niet lukt, maak een ticket aan in Topdesk. ✅
         </p>
       </form>
     </div>
@@ -562,30 +556,13 @@ function AiToolsSection() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-        <Button as="a" href="https://chatgpt.com/" variant="secondary">
-          ChatGPT
-        </Button>
-        <Button as="a" href="https://gemini.google.com/" variant="secondary">
-          Google Gemini
-        </Button>
-        <Button as="a" href="https://www.genial.ly/" variant="secondary">
-          Genially
-        </Button>
-        <Button as="a" href="https://notebooklm.google.com/" variant="secondary">
-          NotebookLM
-        </Button>
-        <Button as="a" href="https://gamma.app/" variant="secondary">
-          Gamma
-        </Button>
-        <Button as="a" href="https://lovable.dev/" variant="secondary">
-          Lovable
-        </Button>
-        <Button
-          as="a"
-          href="https://aistudio.google.com/"
-          variant="secondary"
-          className="sm:col-span-2"
-        >
+        <Button as="a" href="https://chatgpt.com/" variant="secondary">ChatGPT</Button>
+        <Button as="a" href="https://gemini.google.com/" variant="secondary">Google Gemini</Button>
+        <Button as="a" href="https://www.genial.ly/" variant="secondary">Genially</Button>
+        <Button as="a" href="https://notebooklm.google.com/" variant="secondary">NotebookLM</Button>
+        <Button as="a" href="https://gamma.app/" variant="secondary">Gamma</Button>
+        <Button as="a" href="https://lovable.dev/" variant="secondary">Lovable</Button>
+        <Button as="a" href="https://aistudio.google.com/" variant="secondary" className="sm:col-span-2">
           Google AI Studio
         </Button>
       </div>
@@ -597,7 +574,32 @@ function AiToolsSection() {
   );
 }
 
-/* ------------ Voorbeelden-overzicht ------------ */
+/* ------------ Waarom AI? (geen tekst, grote foto) ------------ */
+
+function WaaromAISection() {
+  return (
+    <Card className="p-6">
+      <div className="flex items-center gap-2 mb-4">
+        <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
+          <Lightbulb className="h-4 w-4" />
+        </div>
+        <h3 className="text-sm sm:text-base font-semibold text-slate-900">
+          Waarom AI?
+        </h3>
+      </div>
+
+      <div className="relative rounded-2xl border border-slate-200 overflow-hidden">
+        <img
+          src="/media/waaromAI.jpg"
+          alt="Waarom AI"
+          className="w-full h-auto object-cover"
+        />
+      </div>
+    </Card>
+  );
+}
+
+/* ------------ Voorbeelden (incl. Premium) ------------ */
 
 function ExamplesOverview() {
   return (
@@ -620,14 +622,10 @@ function ExamplesOverview() {
 
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-            <p>
-              <span className="font-semibold">Wat is NotebookLM?</span> Upload je
-              documenten en laat samenvattingen, vragen en uitleg genereren.
-            </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>Laat leerlingen vragen stellen over een hoofdstuk.</li>
-              <li>Genereer voorbeeldvragen en begripsvragen.</li>
-              <li>Gebruik audio-studio als “podcast” over de leerstof.</li>
+              <li>Genereer begripsvragen en oefenvragen.</li>
+              <li>Gebruik audio-studio als “podcast”.</li>
             </ul>
 
             <Button
@@ -669,14 +667,10 @@ function ExamplesOverview() {
 
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-            <p>
-              <span className="font-semibold">Wat is Lovable?</span> Op basis van
-              tekst (prompts) genereert Lovable een volledige webapp.
-            </p>
             <ul className="list-disc pl-5 space-y-1.5">
-              <li>Laat AI een eerste versie van je site maken.</li>
-              <li>Pas teksten en oefeningen achteraf aan.</li>
-              <li>Publiceer met één klik en deel de link.</li>
+              <li>Laat AI een eerste versie genereren.</li>
+              <li>Pas teksten en stijl achteraf aan.</li>
+              <li>Publiceer en deel de link.</li>
             </ul>
 
             <Button
@@ -719,13 +713,9 @@ function ExamplesOverview() {
 
         <div className="grid gap-5 md:grid-cols-2 items-start">
           <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-            <p>
-              <span className="font-semibold">Wat is AI Studio?</span> Ontwerp eigen
-              AI-bots en oefenchats. Maak bots per taak.
-            </p>
             <ul className="list-disc pl-5 space-y-1.5">
-              <li>Oefenchats per vak of vaardigheid.</li>
-              <li>Bouw een chatbot in een andere taal.</li>
+              <li>Oefenchats per taak of vaardigheid.</li>
+              <li>Bot per vak/leerdoel.</li>
               <li>Publiceer en deel met leerlingen.</li>
             </ul>
 
@@ -750,7 +740,47 @@ function ExamplesOverview() {
         </div>
       </Card>
 
-      {/* Meer voorbeelden in Drive */}
+      {/* Premium voorbeelden */}
+      <Card className="p-6 border-2 border-amber-300 bg-amber-50/70">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="h-9 w-9 rounded-lg bg-amber-500 flex items-center justify-center text-white">
+            <Sparkles className="h-4 w-4" />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-semibold text-slate-900 flex items-center gap-2">
+              Premium voorbeelden – Claude (betalend)
+              <span className="inline-flex items-center rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-semibold text-amber-800">
+                Premium
+              </span>
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Voorbeelden gebaseerd op werk van Lisa Den Baes.
+            </p>
+          </div>
+        </div>
+
+        <div className="space-y-2 text-sm text-slate-700">
+          <a
+            href="https://claude.ai/public/artifacts/4b1326ca-a021-47a5-9cb5-df1fad6df97d"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            Premium voorbeeld 1 – AI-lesontwerp
+          </a>
+          <br />
+          <a
+            href="https://claude.ai/public/artifacts/e19377f2-6af1-48f2-8c25-58dec6ee8469"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            Premium voorbeeld 2 – AI-leerpad / opdracht
+          </a>
+        </div>
+      </Card>
+
+      {/* Drive map */}
       <Card className="p-4">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm">
           <div>
@@ -772,68 +802,15 @@ function ExamplesOverview() {
           </Button>
         </div>
       </Card>
+
+      <BestPractices />
     </div>
   );
 }
 
-/* ------------ Waarom AI? (met jouw afbeelding) ------------ */
-
-function WaaromAISection() {
-  return (
-    <Card className="p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <div className="h-8 w-8 rounded-lg bg-blue-600 flex items-center justify-center text-white">
-          <Lightbulb className="h-4 w-4" />
-        </div>
-        <div>
-          <h3 className="text-sm sm:text-base font-semibold text-slate-900">
-            Waarom AI?
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-500">
-            Differentiatie, toegankelijkheid en meer diepgang.
-          </p>
-        </div>
-      </div>
-
-      <div className="grid gap-5 md:grid-cols-2 items-start">
-        <div className="space-y-3 text-sm text-slate-700 leading-relaxed">
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              <span className="font-semibold">Differentiatie:</span> oefeningen op maat
-              en tempo.
-            </li>
-            <li>
-              <span className="font-semibold">Toegankelijkheid:</span> uitleg wanneer
-              nodig, in eenvoudiger taal.
-            </li>
-            <li>
-              <span className="font-semibold">Diepgang:</span> minder routinewerk,
-              meer focus op “waarom?” en kritisch denken.
-            </li>
-          </ul>
-
-          <p className="text-xs text-slate-500">
-            De essentie: AI vervangt de leerkracht niet — het versterkt leerkracht én leerling.
-          </p>
-        </div>
-
-        <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
-          <img
-            src="/media/waaromAI.jpg"
-            alt="Waarom AI infographic"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-    </Card>
-  );
-}
-
-/* ------------ Getting Started – Aan de slag (met 'hoe prompten' afbeelding) ------------ */
+/* ------------ Aan de slag: ALLE stappen altijd open ------------ */
 
 function GettingStartedSection() {
-  const [unlocked, setUnlocked] = useState(false);
-
   const lovablePrompt = `Je bent een webdesigner voor een secundaire school.
 Bouw een eenvoudige, overzichtelijke website voor mijn lessen [vak] aan leerlingen van [studierichting / graad].
 
@@ -875,187 +852,83 @@ Maak 3 ideeën voor een korte klasopdracht van max. 20 minuten.
 Gebruik eenvoudige taal die past bij mijn leerlingen.`;
 
   return (
-    <div className="space-y-4">
-      {/* Jouw afbeelding "hoe prompten" bovenaan */}
-      <div className="relative rounded-2xl border border-slate-200 bg-slate-950 overflow-hidden">
+    <div className="space-y-6">
+      {/* Foto "hoe prompten" */}
+      <Card className="p-4">
         <img
           src="/media/hoe%20prompten.png"
-          alt="Hoe prompten infographic"
-          className="w-full h-full object-cover"
+          alt="Hoe prompten"
+          className="w-full rounded-xl border border-slate-200"
         />
-      </div>
+      </Card>
 
+      {/* Stap 1 */}
       <Card className="p-6">
-        <div className="flex items-center gap-3 mb-3">
-          <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
-            <Lightbulb className="h-4 w-4" />
-          </div>
-          <div>
-            <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Stap 1 – Leren prompten
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500">
-              Basisprincipes + een oefen-chat. Daarna kan je door naar Lovable, AI Studio of NotebookLM.
-            </p>
-
-            <div className="mt-3">
-              <Button
-                as="a"
-                href={LEREN_PROMPTEN_URL}
-                variant="secondary"
-                className="text-xs"
-              >
-                Open oefen-chat “Leren prompten”
-              </Button>
-            </div>
-          </div>
-        </div>
+        <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+          Stap 1 – Leren prompten
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-600 mt-1 mb-3">
+          Test de oefen-chat en neem de basisprincipes mee naar de stappen hieronder.
+        </p>
 
         <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
           <div className="space-y-2">
             <p className="font-semibold text-slate-900">Basisprincipes:</p>
             <ul className="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
-              <li>
-                <span className="font-semibold">Geef context:</span> vak, klas, niveau.
-              </li>
-              <li>
-                <span className="font-semibold">Zeg wat je wil:</span> oefening, uitleg, rubriek…
-              </li>
-              <li>
-                <span className="font-semibold">Leg grenzen vast:</span> max woorden, taal, stijl.
-              </li>
-              <li>
-                <span className="font-semibold">Vraag varianten:</span> “geef 3 opties”.
-              </li>
+              <li><span className="font-semibold">Context:</span> vak, klas, niveau.</li>
+              <li><span className="font-semibold">Doel:</span> oefening, uitleg, rubriek…</li>
+              <li><span className="font-semibold">Grenzen:</span> max woorden, taal, stijl.</li>
+              <li><span className="font-semibold">Varianten:</span> “geef 3 opties”.</li>
             </ul>
           </div>
 
           <div className="space-y-3">
             <PromptBlock
-              label="Voorbeeldprompt voor leerkrachten (algemeen)"
+              label="Voorbeeldprompt (algemeen)"
               text={basicPrompt}
             />
-            <p className="text-[11px] text-slate-500">
-              Tip: verzamel sterke prompts in de Drive-map.
-            </p>
           </div>
         </div>
 
-        <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-          <p className="text-[11px] text-slate-500">
-            Test dit even, klik daarna door naar de volgende stappen.
-          </p>
-          <Button
-            type="button"
-            variant="primary"
-            onClick={() => setUnlocked(true)}
-            className="self-start sm:self-auto text-xs"
-          >
-            Ik heb dit geprobeerd – toon de volgende stappen
+        <div className="mt-4">
+          <Button as="a" href={LEREN_PROMPTEN_URL} variant="secondary" className="text-xs">
+            Open oefen-chat “Leren prompten”
           </Button>
         </div>
       </Card>
 
-      {unlocked && (
-        <>
-          {/* Lovable */}
-          <Card className="p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
-                <Sparkles className="h-4 w-4" />
-              </div>
-              <div>
-                <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                  Stap 2 – Lovable: eenvoudige leswebsite bouwen
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500">
-                  In 30 minuten een eerste versie van een lessenwebsite.
-                </p>
-              </div>
-            </div>
+      {/* Stap 2 */}
+      <Card className="p-6">
+        <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+          Stap 2 – Lovable: eenvoudige leswebsite bouwen
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-600 mt-1 mb-3">
+          Plak de prompt in Lovable en laat een eerste versie genereren.
+        </p>
+        <PromptBlock label="Prompt voor Lovable" text={lovablePrompt} />
+      </Card>
 
-            <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
-              <div className="space-y-2">
-                <p className="font-semibold">Stappenplan:</p>
-                <ol className="list-decimal pl-5 space-y-1.5 text-xs sm:text-sm">
-                  <li>Ga naar lovable.dev en log in.</li>
-                  <li>Klik op “Create new app”.</li>
-                  <li>Plak de prompt in het tekstvak.</li>
-                  <li>Laat genereren, pas aan, publiceer.</li>
-                </ol>
-              </div>
+      {/* Stap 3 */}
+      <Card className="p-6">
+        <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+          Stap 3 – Google AI Studio: chatbot
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-600 mt-1 mb-3">
+          Bouw een eenvoudige oefen-chat (bv. Engels, feedback, drill).
+        </p>
+        <PromptBlock label="Prompt voor AI Studio" text={aiStudioPrompt} />
+      </Card>
 
-              <div className="space-y-3">
-                <PromptBlock label="Prompt om te kopiëren in Lovable" text={lovablePrompt} />
-              </div>
-            </div>
-          </Card>
-
-          {/* AI Studio */}
-          <Card className="p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-9 w-9 rounded-lg bg-blue-600 flex items-center justify-center text-white">
-                <Sparkles className="h-4 w-4" />
-              </div>
-              <div>
-                <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                  Stap 3 – Google AI Studio: chatbot Engels
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500">
-                  Maak een chatbot waarmee leerlingen Engels oefenen.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
-              <div className="space-y-2">
-                <p className="font-semibold">Stappenplan:</p>
-                <ol className="list-decimal pl-5 space-y-1.5 text-xs sm:text-sm">
-                  <li>Ga naar aistudio.google.com.</li>
-                  <li>Klik “New chat” of “New prompt”.</li>
-                  <li>Plak de prompt, test, deel.</li>
-                </ol>
-              </div>
-
-              <div className="space-y-3">
-                <PromptBlock label="Prompt voor een Engelse oefen-chatbot" text={aiStudioPrompt} />
-              </div>
-            </div>
-          </Card>
-
-          {/* NotebookLM */}
-          <Card className="p-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-9 w-9 rounded-lg bg-emerald-600 flex items-center justify-center text-white">
-                <BookOpen className="h-4 w-4" />
-              </div>
-              <div>
-                <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-                  Stap 4 – NotebookLM: werk met een echt hoofdstuk
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-500">
-                  Upload een hoofdstuk en laat AI vragen & uitleg maken.
-                </p>
-              </div>
-            </div>
-
-            <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-700">
-              <div className="space-y-2">
-                <p className="font-semibold">Stappenplan:</p>
-                <ol className="list-decimal pl-5 space-y-1.5 text-xs sm:text-sm">
-                  <li>Ga naar notebooklm.google.com.</li>
-                  <li>New notebook → upload hoofdstuk.</li>
-                  <li>Stel testvragen en laat leerlingen oefenen.</li>
-                </ol>
-              </div>
-
-              <div className="space-y-3">
-                <PromptBlock label="Voorbeelden van prompts in NotebookLM" text={notebookLmPrompts} />
-              </div>
-            </div>
-          </Card>
-        </>
-      )}
+      {/* Stap 4 */}
+      <Card className="p-6">
+        <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+          Stap 4 – NotebookLM: werk met een hoofdstuk
+        </h2>
+        <p className="text-xs sm:text-sm text-slate-600 mt-1 mb-3">
+          Upload 1 hoofdstuk en laat vragen / samenvattingen / uitleg genereren.
+        </p>
+        <PromptBlock label="Prompts voor NotebookLM" text={notebookLmPrompts} />
+      </Card>
     </div>
   );
 }
@@ -1079,43 +952,31 @@ function PolicySection() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 text-xs sm:text-sm mb-4">
+      <div className="grid gap-4 sm:grid-cols-2 text-xs sm:text-sm">
         <div className="rounded-lg border border-emerald-200 bg-emerald-50 p-3">
           <p className="font-semibold text-emerald-800 mb-1">✅ Wel doen</p>
           <ul className="space-y-1 text-emerald-900">
-            <li>• AI gebruiken voor inspiratie, herformulering en voorbeelden.</li>
-            <li>• Lesmateriaal differentiëren en verbeteren.</li>
-            <li>• Leerlingen leren kritisch kijken naar AI-output.</li>
-            <li>• Geen echte namen of gevoelige gegevens invoeren.</li>
+            <li>• AI gebruiken voor inspiratie en voorbeelden.</li>
+            <li>• Differentiëren en herformuleren.</li>
+            <li>• Leerlingen kritisch leren omgaan met output.</li>
+            <li>• Geen echte namen / gevoelige data invoeren.</li>
           </ul>
         </div>
 
         <div className="rounded-lg border border-amber-200 bg-amber-50 p-3">
           <p className="font-semibold text-amber-900 mb-1">⚠️ Voorzichtig mee</p>
           <ul className="space-y-1 text-amber-900">
-            <li>• Geen vertrouwelijke leerling- of personeelsgegevens invoeren.</li>
-            <li>• AI-output nooit ongecheckt overnemen.</li>
+            <li>• Geen vertrouwelijke leerling- of personeelsgegevens.</li>
+            <li>• Output nooit ongecheckt overnemen.</li>
             <li>• Geen accounts laten aanmaken zonder toestemming.</li>
           </ul>
         </div>
-      </div>
-
-      <p className="text-xs text-slate-600 mb-1">Meer lezen:</p>
-      <div className="flex flex-wrap gap-3 text-xs">
-        <a
-          href="https://www.ser.nl/nl/actueel/Nieuws/ChatGPT-in-het-onderwijs"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-700 underline"
-        >
-          ChatGPT in het onderwijs – SER
-        </a>
       </div>
     </Card>
   );
 }
 
-/* ------------ Bijscholing / Training ------------ */
+/* ------------ Training (inschrijven knop werkt niet) ------------ */
 
 function TrainingSection() {
   return (
@@ -1140,33 +1001,24 @@ function TrainingSection() {
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-slate-700">
             <Calendar className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Datum:</span> 13 januari 2026
-            </span>
+            <span><span className="font-semibold">Datum:</span> 13 januari 2026</span>
           </div>
           <div className="flex items-center gap-2 text-slate-700">
             <Clock className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Startuur:</span> 16u00
-            </span>
+            <span><span className="font-semibold">Startuur:</span> 16u00</span>
           </div>
           <div className="flex items-center gap-2 text-slate-700">
             <MapPin className="h-4 w-4 text-blue-500" />
-            <span>
-              <span className="font-semibold">Locatie:</span> Lokaal Z314
-            </span>
+            <span><span className="font-semibold">Locatie:</span> Lokaal Z314</span>
           </div>
-          <span className="inline-flex items-center rounded-full border border-slate-200 px-2 py-0.5 text-[11px] text-slate-600 mt-1">
-            Doelgroep: alle leerkrachten · beginners welkom
-          </span>
         </div>
 
-        <div className="space-y-2 text-sm">
+        <div className="space-y-2">
           <p className="text-xs font-semibold text-slate-500 uppercase">Je leert o.a.:</p>
           <ul className="text-sm text-slate-700 space-y-1.5">
             <li>• Basis van Lovable in onderwijscontext.</li>
             <li>• Een eenvoudige les- of projectsite opzetten.</li>
-            <li>• Voorbeelden van collega&apos;s bekijken en hergebruiken.</li>
+            <li>• Voorbeelden hergebruiken.</li>
           </ul>
         </div>
       </div>
@@ -1176,10 +1028,13 @@ function TrainingSection() {
           <p className="text-xs font-semibold text-slate-500 mb-1">Tijd tot start</p>
           <CountdownTimer targetDate={TRAINING_TARGET_ISO} />
         </div>
+
         <div className="flex flex-col gap-2">
-          <Button as="a" href="#" variant="primary" className="w-full justify-center">
-            Inschrijven voor Lovable
+          {/* Disabled knop + "Komt nog" */}
+          <Button disabled variant="primary" className="w-full justify-center">
+            Inschrijven voor Lovable <span className="text-[10px] bg-white/20 px-2 py-0.5 rounded-full">Komt nog</span>
           </Button>
+
           <Button
             as="a"
             href={DRIVE_EXAMPLES_URL}
@@ -1244,22 +1099,11 @@ function FloatingPlanner() {
           </div>
 
           <div className="space-y-2">
-            <Button
-              as="a"
-              href={TEAMS_CHAT_URL}
-              variant="primary"
-              className="w-full justify-center text-xs"
-            >
-              <span className="text-base">💬</span>
-              Start een Teams-chat
+            <Button as="a" href={TEAMS_CHAT_URL} variant="primary" className="w-full justify-center text-xs">
+              <span className="text-base">💬</span> Start een Teams-chat
             </Button>
 
-            <Button
-              as="a"
-              href={OUTLOOK_MEETING_URL}
-              variant="secondary"
-              className="w-full justify-center text-xs"
-            >
+            <Button as="a" href={OUTLOOK_MEETING_URL} variant="secondary" className="w-full justify-center text-xs">
               <Calendar className="h-3 w-3" />
               Plan via Outlook / Teams
             </Button>
@@ -1360,12 +1204,7 @@ function AiOverlay({ onClose }) {
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-4 space-y-6">
           {tab === "waarom" && <WaaromAISection />}
 
-          {tab === "voorbeelden" && (
-            <>
-              <ExamplesOverview />
-              <BestPractices />
-            </>
-          )}
+          {tab === "voorbeelden" && <ExamplesOverview />}
 
           {tab === "aandeslag" && (
             <>
@@ -1448,30 +1287,13 @@ function BotOverlay({ onClose }) {
             <p className="text-xs sm:text-sm text-slate-600 mb-2">
               Gebruik het officiële ticketsysteem voor storingen, defecten en aanvragen.
             </p>
-            <Button
-              as="a"
-              href="https://sint-rembert.topdesk.net/"
-              variant="secondary"
-            >
+            <Button as="a" href="https://sint-rembert.topdesk.net/" variant="secondary">
               Naar Topdesk
               <ChevronRight className="h-4 w-4" />
             </Button>
           </Card>
 
-          <Card className="p-4 bg-slate-50">
-            <p className="text-[11px] text-slate-500 mb-1">
-              Werkt dit venster niet goed?
-            </p>
-            <Button
-              as="a"
-              href={GEMINI_URL}
-              variant="ghost"
-              className="justify-start text-xs"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Open Floris flowbot in een nieuw tabblad
-            </Button>
-          </Card>
+          {/* ✅ “Open floris flowbot in nieuw tabblad” is bewust verwijderd */}
         </div>
       </div>
     </div>
@@ -1549,9 +1371,7 @@ export default function App() {
               <Sparkles className="h-3 w-3 text-blue-500" />
               <span className="font-semibold text-slate-800">Bijscholing Lovable</span>
               <span className="text-[10px] text-slate-500">
-                {daysLeft > 0
-                  ? `over ${daysLeft} dag${daysLeft === 1 ? "" : "en"}`
-                  : "vandaag / afgelopen"}
+                {daysLeft > 0 ? `over ${daysLeft} dag${daysLeft === 1 ? "" : "en"}` : "vandaag / afgelopen"}
               </span>
             </Button>
           </div>

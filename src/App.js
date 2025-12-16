@@ -901,6 +901,33 @@ function ExamplesOverview() {
     </div>
   );
 }
+function HowPromptenImage() {
+  return (
+    <Card className="p-6">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="h-9 w-9 rounded-lg bg-slate-900 flex items-center justify-center text-white">
+          <Lightbulb className="h-4 w-4" />
+        </div>
+        <div>
+          <h2 className="text-base sm:text-lg font-semibold text-slate-900">
+            Aan de slag
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500">
+            Hoe prompten (stappenplan)
+          </p>
+        </div>
+      </div>
+
+      <div className="relative rounded-2xl border border-slate-200 overflow-hidden">
+        <img
+          src="/media/hoe prompten.png"
+          alt="Hoe prompten"
+          className="w-full h-auto object-cover"
+        />
+      </div>
+    </Card>
+  );
+}
 
 /* ------------ Aan de slag (met originele links) ------------ */
 

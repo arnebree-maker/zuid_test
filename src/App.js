@@ -638,9 +638,6 @@ function WaaromAISection() {
           <h2 className="text-base sm:text-lg font-semibold text-slate-900">
             Waarom AI?
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500">
-            (Tekst bewust weggelaten – enkel visueel)
-          </p>
         </div>
       </div>
 
@@ -1045,7 +1042,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Stap 2 – Lovable: eenvoudige leswebsite bouwen
+              Lovable: eenvoudige leswebsite bouwen
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
               In 30 minuten een eerste versie van een lessenwebsite voor je klas.
@@ -1094,7 +1091,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Stap 3 – Google AI Studio: chatbot
+             Google AI Studio: chatbot
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
               Maak een chatbot waarmee leerlingen kunnen oefenen.
@@ -1143,7 +1140,7 @@ Gebruik eenvoudige taal die past bij mijn leerlingen.`;
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-semibold text-slate-900">
-              Stap 4 – NotebookLM: werk met een echt hoofdstuk
+              NotebookLM: werk met een echt hoofdstuk
             </h2>
             <p className="text-xs sm:text-sm text-slate-500">
               Upload een hoofdstuk en laat AI er vragen & uitleg bij maken.
